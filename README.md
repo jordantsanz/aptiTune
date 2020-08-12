@@ -76,6 +76,7 @@ Jacob Donoghue
 Kathy Cui
 Jordan Sanz
 Gia Kim
+Sathvi Korandla
 
 ## Acknowledgments
 
