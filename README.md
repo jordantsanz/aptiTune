@@ -72,8 +72,9 @@ Deployed with api on heroku, front-end on surge.sh.
 
 ## Authors
 
-
-
+Jacob Donoghue
+Kathy Cui
 Jordan Sanz
 
 ## Acknowledgments
+
