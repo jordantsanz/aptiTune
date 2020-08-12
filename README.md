@@ -71,7 +71,6 @@
 Deployed with api on heroku, front-end on surge.sh. 
 
 ## Authors
+Jacob Donoghue
 
-TODO: list of authors
-
-## Acknowledgments
+# Acknowledgments
