@@ -1,9 +1,6 @@
 # aptiTune
 
 ![Team Photo](Insert a Team Photo URL here)
-[*how?*](https://help.github.com/articles/about-readmes/#relative-links-and-image-paths-in-readme-files)
-
-TODO: short project description, some sample screenshots or mockups
 
 ## Architecture
 
@@ -64,10 +61,10 @@ TODO: short project description, some sample screenshots or mockups
 
 ## Setup
 
-yarn add react react-router-dom react-dom react-draggable
-yarn add react-redux redux redux-thunk
-yarn add express body-parser
-yarn add cors path morgan mongoose
+- yarn add react react-router-dom react-dom react-draggable
+- yarn add react-redux redux redux-thunk
+- yarn add express body-parser
+- yarn add cors path morgan mongoose
 
 ## Deployment
 
