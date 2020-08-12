@@ -1,6 +1,6 @@
 # aptiTune
 
-![Team Photo](Insert a Team Photo URL here)
+![Team Photo](teampic.JPG)
 
 ## Architecture
 
