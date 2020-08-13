@@ -77,6 +77,7 @@ Kathy Cui
 Jordan Sanz
 Sathvi Korandla
 Gia Kim
+Shane Hewitt
 
 ## Acknowledgments
 
