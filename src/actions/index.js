@@ -3,12 +3,11 @@ import axios from 'axios';
 // root url for local: change to #####-heroku.com/api
 const ROOT_URL = 'http://localhost:9090/api';
 
-/// action types
+// action types
 export const ActionTypes = {
   GET_LESSON: 'GET_LESSON',
   GET_USER_INFO: 'GET_USER_INFO',
   HELLO_WORLD: 'HELLO_WORLD',
-
   ERROR_SET: 'ERROR_SET',
 };
 

@@ -1,20 +1,14 @@
 import React from 'react';
-import {
-  BrowserRouter as Router, Route, Switch,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePageWithoutUser from './HomePageWithoutUser';
-
-const HomePage = (props) => {
-  return (
-    <div><HomePageWithoutUser /></div>
-  );
-};
+import HomePageWithUser from './HomePageWithUser';
 
 const App = (props) => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={HomePageWithoutUser} />
+        <Route path="/withuser" component={HomePageWithUser} />
       </Switch>
     </Router>
   );

@@ -5,12 +5,12 @@ import { helloWorld } from '../actions/index';
 class HomePageWithoutUser extends Component {
   constructor(props) {
     super(props);
-    console.log('mounting');
+    console.log('just so this is not useless.');
   }
 
   render() {
     return (
-      <div> Hello there. </div>
+      <div> Hello World from the HomePageWithoutUser component.</div>
     );
   }
 }
