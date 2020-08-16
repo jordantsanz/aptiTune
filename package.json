@@ -41,6 +41,9 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
     "axios": "^0.19.2",
     "jquery": "^3.5.1",
     "lodash.debounce": "^4.0.8",

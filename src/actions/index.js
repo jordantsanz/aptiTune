@@ -9,6 +9,8 @@ export const ActionTypes = {
   GET_USER_INFO: 'GET_USER_INFO',
   HELLO_WORLD: 'HELLO_WORLD',
   ERROR_SET: 'ERROR_SET',
+  AUTH_USER: 'AUTH_USER',
+  DEAUTH_USER: 'DEAUTH_USER',
 };
 
 export function helloWorld() {
