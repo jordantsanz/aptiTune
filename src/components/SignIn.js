@@ -57,7 +57,7 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div>
+      <div className="signin-background">
         {this.errorModal()}
         <h1 className="title" id="signin">Sign in here!</h1>
         <h2 className="subtitle" id="returnemail">Email:</h2>
