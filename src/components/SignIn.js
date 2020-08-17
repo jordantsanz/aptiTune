@@ -2,6 +2,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { signInUser } from '../actions/index';
 
 class SignIn extends Component {
@@ -63,6 +64,8 @@ class SignIn extends Component {
         <input onChange={this.onInputEmailChange} className="returnemail" type="input" />
         <h2 className="subtitle" id="returnpassword">Password: </h2>
         <input onChange={this.onInputPasswordChange} className="returnpassword" type="password" />
+        <div> Don&apos;t have an account yet? <NavLink to="/signup" className="log-in-link"> <div className="sign-up-link">Sign up here!</div></NavLink>
+        </div>
         <button onClick={this.submit} type="submit">Log-in</button>
       </div>
     );
