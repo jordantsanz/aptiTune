@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome, faGraduationCap, faUser, faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
-
 import { signOutUser } from '../actions/index';
 
 // ROUTES NOT CORRECT; NEED TO BE CHANGED
