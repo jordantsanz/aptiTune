@@ -20,11 +20,12 @@ class HomePageWithoutUser extends Component {
             <br />
             Let&apos;s make that happen.
           </div>
-          <NavLink to="/newaccount" className="create-account">Create account</NavLink>
+          <input className="username" />
           <input className="email" />
           <input className="password" />
+          <NavLink to="/withuser" className="create-account">Create account</NavLink>
           <div className="have-account">Already have an account? <NavLink to="/login" className="log-in">Log in here</NavLink></div>
-          <button type="submit" className="create-account">Create Account</button>
+          {/* <button type="submit" className="create-account">Create Account</button> */}
         </div>
       </div>
     );
