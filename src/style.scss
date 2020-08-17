@@ -22,6 +22,8 @@ a{
     position: absolute;
     top: 0;
     left: 0;
+
+    background-color: #FD966A;
 }
 
 
@@ -33,7 +35,74 @@ a{
 }
 
 .log-in-link{
-    color: black;
+    text-align: center;
+
+    color: #114353;
+}
+
+.log-in-link:hover {
+    color: #0e83aa;
+}
+
+/* Input */
+
+.returnemailinput {
+    position: absolute;
+    left: 31.04%;
+    right: 27.64%;
+    top: 31.62%;
+    bottom: 59.3%;
+    
+    background: #FFFFFF;
+    border: 3px solid #5A7A91;
+    box-sizing: border-box;
+    border-radius: 19px;
+    width: 40%;
+}
+
+#returnemail {
+    position: absolute;
+    left: 25%;
+    right: 27.64%;
+    top: 31.62%;
+    bottom: 59.3%;
+}
+
+#returnpassword {
+    position: absolute;
+    left: 22%;
+    right: 27.64%;
+    top: 43.27%;
+    bottom: 47.65%;
+}
+
+.returnpasswordinput {
+position: absolute;
+left: 31.04%;
+right: 27.64%;
+top: 43.27%;
+bottom: 47.65%;
+
+background: #FFFFFF;
+border: 3px solid #5A7A91;
+box-sizing: border-box;
+border-radius: 19px;
+width: 40%;
+}
+
+.linktomainpage {
+    position: absolute;
+    width: 278px;
+    height: 28px;
+    left: 600px;
+    top: 420px;
+    
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 26px;
+    text-align: center;    
 }
 
 /********************* homepage with user ***************/
@@ -60,6 +129,188 @@ a{
     align-items: center;
     margin-top: 20px;
     margin-bottom: 30px;
+}
+
+#login-button {
+    position: absolute;
+width: 276px;
+height: 72px;
+left: 605px;
+top: 520px;
+
+background: #114353;
+box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 25px;
+line-height: 160%;
+/* or 40px */
+
+text-align: center;
+
+color: #FFFFFF;
+}
+
+#login-button:hover {
+    box-shadow: 6px 12px 21px rgba(0, 0, 0, 1);
+    cursor: pointer;
+}
+
+.sign-up-link {
+    text-align: center;
+
+color: #114353;
+}
+
+.sign-up-link:hover {
+    color: #0e83aa;
+}
+
+#signin {
+    position: absolute;
+width: 327px;
+height: 63px;
+left: 577px;
+top: 100px;
+
+    font-weight: bold;
+font-size: 50px;
+    font-style: italic;
+    text-align: center;
+    color: #114353;
+}
+
+.music-is-hard {
+    position: absolute;
+    width: 442px;
+    height: 69px;
+    left: 927px;
+    top: 92px;
+    
+    font-family: Ubuntu;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 60px;
+    line-height: 69px;
+    /* identical to box height */
+    
+    letter-spacing: 0.025em;
+    
+    color: #F4FAFD;
+}
+
+.homepage-without-description {
+    position: absolute;
+width: 494px;
+height: 131px;
+left: 845px;
+top: 185px;
+
+font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 32px;
+line-height: 37px;
+text-align: right;
+
+color: #F4FAFD;
+}
+
+.email {
+    position: absolute;
+    left: 61.25%;
+    right: 4.86%;
+    top: 45.33%;
+    bottom: 47.22%;
+    
+    background: #FFFFFF;
+    border: 3px solid #5A7A91;
+    box-sizing: border-box;
+    border-radius: 19px;
+    width: 32%;
+
+}
+
+.username {
+
+    position: absolute;
+    left: 61.25%;
+    right: 4.86%;
+    top: 55.44%;
+    bottom: 37.11%;
+    
+    background: #FFFFFF;
+    border: 3px solid #5A7A91;
+    box-sizing: border-box;
+    border-radius: 19px;
+    width: 32%;
+}
+
+.password {
+    position: absolute;
+    left: 61.18%;
+    right: 4.93%;
+    top: 65%;
+    bottom: 27.56%;
+    
+    background: #FFFFFF;
+    border: 3px solid #5A7A91;
+    box-sizing: border-box;
+    border-radius: 19px;
+    width: 32%;
+
+}
+
+.have-account {
+    position: absolute;
+    left: 61.18%;
+    right: 4.93%;
+    top: 75%;
+    bottom: 25.56%;
+    font-size: 20px;
+    line-height: 23px;
+    /* identical to box height */
+    
+    text-align: center;
+    
+    color: #F7FAFF;
+    
+}
+
+.signin-background{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background: #FD966A;
+}
+
+.create-account {
+    position: absolute;
+width: 276px;
+height: 72px;
+left: 988px;
+top: 600px;
+
+background: #114353;
+box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 160%;
+/* or 32px */
+
+color: #FFFFFF;
+}
+
+.create-account:hover {
+    box-shadow: 6px 12px 21px rgba(0, 0, 0, 1);
+    cursor: pointer;
 }
 
 // navbar

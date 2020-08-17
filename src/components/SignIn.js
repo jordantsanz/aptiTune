@@ -2,6 +2,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { signInUser } from '../actions/index';
 
 class SignIn extends Component {
@@ -56,14 +57,16 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div>
+      <div className="signin-background">
         {this.errorModal()}
-        <h1 className="title" id="signin">Sign in! Just for placeholder, decorate how you like</h1>
+        <h1 className="title" id="signin">Sign in here!</h1>
         <h2 className="subtitle" id="returnemail">Email:</h2>
-        <input onChange={this.onInputEmailChange} className="returnemail" type="input" />
+        <input onChange={this.onInputEmailChange} className="returnemailinput" type="input" />
         <h2 className="subtitle" id="returnpassword">Password: </h2>
-        <input onChange={this.onInputPasswordChange} className="returnpassword" type="password" />
-        <button onClick={this.submit} type="submit">Log-in</button>
+        <input onChange={this.onInputPasswordChange} className="returnpasswordinput" type="password" />
+        <div className="linktomainpage"> Don&apos;t have an account yet? <NavLink to="/signup" className="log-in-link"> <div className="sign-up-link">Sign up here!</div></NavLink>
+        </div>
+        <button onClick={this.submit} type="submit" id="login-button">Log-in</button>
       </div>
     );
   }
