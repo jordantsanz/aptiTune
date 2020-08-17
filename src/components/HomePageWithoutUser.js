@@ -1,15 +1,68 @@
+/* eslint-disable eqeqeq */
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { helloWorld } from '../actions';
+import { signupUser } from '../actions';
 
 class HomePageWithoutUser extends Component {
   constructor(props) {
     super(props);
-    console.log('mounting');
+
+    this.state = {
+      email: '',
+      password: '',
+      username: '',
+      invalidInput: false,
+    };
   }
 
-  // authentication in this needs to be filled, links as well...but that is scary :(
+  onInputEmail = (event) => {
+    this.setState({
+      email: event.target.value,
+    });
+  }
+
+  onInputPassword = (event) => {
+    this.setState({
+      password: event.target.value,
+    });
+  }
+
+  onInputUsername = (event) => {
+    this.setState({
+      username: event.target.value,
+    });
+  }
+
+  submit = () => {
+    const user = {
+      email: this.state.email,
+      password: this.state.password,
+      username: this.state.username,
+    };
+    if (this.state.email == '' || this.state.password == '' || this.state.username == '') {
+      this.setState({
+        invalidInput: true,
+      });
+    } else {
+      console.log(user);
+      this.props.signupUser(user, this.props.history);
+    }
+  }
+
+  errorMessage = () => {
+    if (this.state.invalidInput) {
+      return (
+        <div className="errorMessage">Please fill in all of the required boxes!</div>
+      );
+    } else {
+      return (
+        <div className="blank" />
+      );
+    }
+  }
+
+  // fix link to sign-in page!!
   render() {
     return (
       <div className="background-homepage-without-user">
@@ -20,16 +73,25 @@ class HomePageWithoutUser extends Component {
             <br />
             Let&apos;s make that happen.
           </div>
-          <input className="username" />
-          <input className="email" />
-          <input className="password" />
-          <NavLink to="/withuser" className="create-account">Create account</NavLink>
-          <div className="have-account">Already have an account? <NavLink to="/login" className="log-in">Log in here</NavLink></div>
-          {/* <button type="submit" className="create-account">Create Account</button> */}
+          <input className="email" onChange={this.onInputEmail} />
+          <input className="username" onChange={this.onInputUsername} />
+          <input type="password" className="password" onChange={this.onInputPassword} />
+          <div className="have-account">Already have an account?
+            <NavLink to="/signin" className="log-in-link">
+              <div className="log-in-link">Log in here</div>
+            </NavLink>
+          </div>
+          <button onClick={this.submit} type="submit" className="create-account">Create Account</button>
+          {this.errorMessage()}
         </div>
       </div>
     );
   }
 }
 
-export default connect(null, { helloWorld })(HomePageWithoutUser);
+function mapStateToProps(reduxState) {
+  return {
+    authentication: reduxState.auth.authenticated,
+  };
+}
+export default connect(mapStateToProps, { signupUser })(HomePageWithoutUser);
