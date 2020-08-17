@@ -3,22 +3,20 @@ import { ActionTypes } from '../actions/index';
 const initialState = {
   username: '',
   badges: [],
-  lessons: {
-    completed: [],
-    toDo: [],
-  },
+  toDo: [],
+  completed: [],
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.GET_USER_INFO:
       return {
-        username: action.payload.username,
-        badges: action.payload.badges,
-        lessons: action.payload.lessons,
+        username: action.payload.username, badges: action.payload.badges, toDo: action.payload.toDoLessons, completed: action.payload.completedLessons,
       };
     default:
-      return { username: '', badges: [], lessons: [] };
+      return {
+        username: '', badges: '', toDo: '', completed: '',
+      };
   }
 };
 

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUserInfo } from '../actions';
+import { loadHomepageWithUser } from '../actions';
 // import LessonList from './LessonList';
 import NavBar from './NavBar';
 
 function mapStateToProps(reduxState) {
   return {
     currentUser: reduxState.user,
+    username: reduxState.auth.username,
   };
 }
 
@@ -14,6 +15,16 @@ class HomePageWithUser extends Component {
   constructor(props) {
     super(props);
     console.log('mounting');
+    this.state = {
+      username: '',
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      username: this.props.username,
+    });
+    this.props.loadHomepageWithUser(this.props.username);
   }
 
   // render for homepage layout
@@ -27,7 +38,7 @@ class HomePageWithUser extends Component {
               <div className="user-container">
                 <img className="user-image" alt="user" />
                 <div className="user-container-text">
-                  {/* <h1 className="user-hello">Hello {this.props.currentUser.username} </h1> */}
+                  <h1 className="user-hello">Hello, {this.state.username}! </h1>
                   <h3 className="subtitle" id="lets-learn">Let&apos;s learn music!</h3>
                 </div>
               </div>
@@ -71,4 +82,4 @@ class HomePageWithUser extends Component {
   }
 }
 
-export default connect(mapStateToProps, { getUserInfo })(HomePageWithUser);
+export default connect(mapStateToProps, { loadHomepageWithUser })(HomePageWithUser);
