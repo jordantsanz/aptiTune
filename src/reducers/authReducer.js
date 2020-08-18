@@ -12,7 +12,7 @@ const authReducer = (state = initialState, action) => {
     case ActionTypes.DEAUTH_USER:
       return { authenticated: false, username: '' };
     default:
-      return { authenticated: state.authenticated, username: '' };
+      return { authenticated: state.authenticated, username: state.username };
   }
 };
 

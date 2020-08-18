@@ -1,3 +1,4 @@
+/* eslint-disable react/no-did-update-set-state */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadHomepageWithUser } from '../actions';
@@ -15,15 +16,6 @@ class HomePageWithUser extends Component {
   constructor(props) {
     super(props);
     console.log('mounting');
-    this.state = {
-      username: '',
-    };
-  }
-
-  componentDidMount() {
-    this.setState({
-      username: this.props.username,
-    });
     this.props.loadHomepageWithUser(this.props.username);
   }
 
@@ -38,18 +30,18 @@ class HomePageWithUser extends Component {
               <div className="user-container">
                 <img className="user-image" alt="user" />
                 <div className="user-container-text">
-                  <h1 className="user-hello">Hello, {this.state.username}! </h1>
+                  <h1 className="user-hello">Hello, {this.props.currentUser.username}! </h1>
                   <h3 className="subtitle" id="lets-learn">Let&apos;s learn music!</h3>
                 </div>
               </div>
               <div className="progress-container">
                 <div className="badges-progress">
-                  <div className="number" id="badges-number"> PH </div>
+                  <div className="number" id="badges-number"> {this.props.currentUser.badges.length} </div>
                   <div className="subtitle">badges <br /> achieved </div>
                 </div>
                 <div className="line" />
                 <div className="lessons-progress">
-                  <div className="number" id="lessons-number">PH</div>
+                  <div className="number" id="lessons-number">{this.props.currentUser.completed.length} </div>
                   <div className="subtitle">lessons <br /> completed </div>
                 </div>
               </div>
