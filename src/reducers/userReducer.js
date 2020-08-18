@@ -8,6 +8,7 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case ActionTypes.GET_USER_INFO:
       return {
@@ -15,7 +16,7 @@ const userReducer = (state = initialState, action) => {
       };
     default:
       return {
-        username: '', badges: '', toDo: '', completed: '',
+        username: state.username, badges: state.badges, toDo: state.toDo, completed: state.completed,
       };
   }
 };

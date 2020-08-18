@@ -13,6 +13,7 @@ export const ActionTypes = {
   AUTH_USER: 'AUTH_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
+  LOAD_PAGE: 'LOAD_PAGE',
 };
 
 // gets a lesson given that lesson id and the current user
@@ -21,6 +22,18 @@ export function getLesson(lessonid, username) {
     axios.get(`${ROOT_URL}/${username}/${lessonid}`)
       .then((response) => {
         dispatch({ type: ActionTypes.GET_LESSON, payload: response.data });
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.ERROR_SET, payload: error });
+      });
+  };
+}
+
+export function loadPage(username, lessonid, lessonTitle, pageNumber) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/${username}/${lessonid}/${pageNumber}`, lessonTitle, pageNumber)
+      .then((response) => {
+        dispatch({ type: ActionTypes.LOAD_PAGE, payload: response.data });
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.ERROR_SET, payload: error });

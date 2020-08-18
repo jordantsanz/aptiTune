@@ -59,11 +59,9 @@ class SignIn extends Component {
     return (
       <div className="signin-background">
         {this.errorModal()}
-        <h1 className="title" id="signin">Sign in here!</h1>
-        <h2 className="subtitle" id="returnemail">Email:</h2>
-        <input onChange={this.onInputEmailChange} className="returnemailinput" type="input" />
-        <h2 className="subtitle" id="returnpassword">Password: </h2>
-        <input onChange={this.onInputPasswordChange} className="returnpasswordinput" type="password" />
+        <h1 className="title" id="log-in-title">Log-in here:</h1>
+        <input placeholder="email" onChange={this.onInputEmailChange} className="returnemailinput" type="input" />
+        <input placeholder="password" onChange={this.onInputPasswordChange} className="returnpasswordinput" type="password" />
         <div className="linktomainpage"> Don&apos;t have an account yet? <NavLink to="/signup" className="log-in-link"> <div className="sign-up-link">Sign up here!</div></NavLink>
         </div>
         <button onClick={this.submit} type="submit" id="login-button">Log-in</button>
