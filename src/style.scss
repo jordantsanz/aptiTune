@@ -1,3 +1,5 @@
+$orange: #FD966A;
+
 html, body{
     box-sizing: border-box;
     margin: 0px;
@@ -282,72 +284,6 @@ color: #FFFFFF;
 
 }
 
-
-/********************* homepage with user ***************/
-
-.homepage-with-user-mainflex{
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-.title{
-    color: #F18080;
-    font-size: 30px;
-    line-height: 137.88%;
-}
-.homepage-with-user-content{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-
-#login-button {
-
-background: #114353;
-box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
-border-radius: 34px;
-
-font-family: Montserrat;
-font-style: normal;
-font-weight: bold;
-font-size: 25px;
-line-height: 160%;
-/* or 40px */
-
-text-align: center;
-
-color: #FFFFFF;
-}
-
-#login-button:hover {
-    cursor: pointer;
-    background: #FBBE49;
-    color: #114353;
-}
-
-.sign-up-link {
-    text-align: center;
-    transition: all 200ms ease;
-    color: #114353;
-}
-
-.sign-up-link:hover {
-    color: white;
-}
-
-
-
-
-
-
 .email {
     position: absolute;
     
@@ -392,6 +328,321 @@ color: #FFFFFF;
     color: #F7FAFF;
     
 }
+
+
+/********************* homepage with user ***************/
+
+.homepage-with-user-mainflex{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.title{
+    color: #F18080;
+    font-size: 30px;
+    line-height: 137.88%;
+}
+.homepage-with-user-content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 90%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#login-button {
+
+background: #114353;
+box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 25px;
+line-height: 160%;
+/* or 40px */
+
+text-align: center;
+
+color: #FFFFFF;
+}
+
+#login-button:hover {
+    cursor: pointer;
+    background: #FBBE49;
+    color: #114353;
+}
+
+.sign-up-link {
+    text-align: center;
+    transition: all 200ms ease;
+    color: #114353;
+}
+
+.sign-up-link:hover {
+    color: white;
+}
+/*********************** badges component on homepage ***************/
+
+.badge-container::-webkit-scrollbar {
+	width: 14px;
+}
+.badge-container::-webkit-scrollbar-thumb {
+	background-clip: content-box;
+	border: 4px solid transparent;
+	border-radius: 7px;
+	box-shadow: inset 0 0 0 10px;
+}
+.badge-container::-webkit-scrollbar-button {
+	width: 0;
+	height: 0;
+	display: none;
+}
+.badge-container::-webkit-scrollbar-corner {
+	background-color: transparent;
+}
+.badge-container {
+	overflow: auto;
+	color: #00000000;
+	transition: color 0.3s;
+
+	&:hover {
+		color: #FD966A;
+	}
+    width: 33vw;
+    height: 30vh;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    margin-top: 15vh;
+    overflow-x: hidden;
+    text-align: center;
+
+}
+
+.badge-div{
+width: 20.5vw;
+height: 122.5vh;
+
+
+background: #FAE5E5;
+border-radius: 36px;
+text-align: center;
+align-items: center;
+}
+
+.badge-title{
+    font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 25px;
+line-height: 137.88%;
+/* or 34px */
+
+text-align: center;
+letter-spacing: 0.05em;
+
+color: #919191;
+}
+
+/************************* lesson list ***********************/
+
+  // transition taken from howar31 on github.com
+.lessons::-webkit-scrollbar {
+	width: 14px;
+}
+.lessons::-webkit-scrollbar-thumb {
+	background-clip: content-box;
+	border: 4px solid transparent;
+	border-radius: 7px;
+	box-shadow: inset 0 0 0 10px;
+}
+.lessons::-webkit-scrollbar-button {
+	width: 0;
+	height: 0;
+	display: none;
+}
+.lessons::-webkit-scrollbar-corner {
+	background-color: transparent;
+}
+.lessons {
+	overflow: auto;
+	color: #00000000;
+	transition: color 0.3s;
+
+	&:hover {
+		color: #FD966A;
+	}
+    width: 53vw;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    position: fixed;
+    margin-top: 20vh;
+
+}
+
+
+
+.user-hello{
+    display: flex;
+align-items: center;
+letter-spacing: 0.015em;
+
+color: #F18080;
+font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 50px;
+}
+
+#lets-learn{
+    font-size: 30px;
+line-height: 137.88%;
+/* or 41px */
+
+display: flex;
+align-items: center;
+
+color: #114353;
+font-family: Ubuntu;
+font-style: normal;
+font-weight: normal;
+}
+
+.lesson-icon{
+position: absolute;
+width: 50vw;
+height: 21.3vh;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+margin-top: 10vh;
+margin-bottom: 10vh;
+
+
+background: #FAEFE5;
+box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.25);
+border-radius: 27px;
+}
+
+.lesson-icon-top, .lesson-icon-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.lesson-icon-time-div, .lesson-icon-button{
+    margin-right: 2vw;
+}
+.lesson-icon-title, .lesson-icon-description{
+    margin-left: 2vw;
+}
+
+.lesson-icon-time-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#clock{
+    width: 19px !important;
+    color: #FD966A;
+    margin-right: .5vw;
+}
+
+.lesson-icon-time{
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 137.88%;
+/* identical to box height, or 28px */
+
+display: flex;
+align-items: center;
+
+color: #FD966A;
+}
+
+#lesson-icon-button{
+    background: #FD966A;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 160%;
+/* identical to box height, or 32px */
+
+
+color: #FFFFFF;
+width: 14.7vw;
+height: 8vh;
+margin-bottom: 1.5vh;
+margin-right: 1.5vh;
+transition: 200ms all ease;
+}
+
+#lesson-icon-button:hover{
+    background-color:  #114353;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
+}
+
+#lesson-icon-button:active{
+    font-size: 22px;
+}
+
+
+.lesson-icon-description{
+    font-family: Montserrat;
+font-style: normal;
+font-weight: normal;
+font-size: 13px;
+line-height: 137.88%;
+/* or 28px */
+
+display: flex;
+align-items: center;
+
+color: #000000;
+}
+
+.lesson-icon-title{
+    font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 25px;
+margin-top: 2vh;
+line-height: 137.88%;
+/* or 41px */
+
+display: flex;
+align-items: center;
+
+color: #F18080;
+}
+
+
+
+
 
 /**************** sign in kinda.... ****************/
 
@@ -575,7 +826,7 @@ transform: rotate(90.29deg);
     height: 60%;
     position: absolute;
     left: 13.7vw;
-    top: 43.2vh;
+    top: 40vh;
     width: 100%;
 }
 
