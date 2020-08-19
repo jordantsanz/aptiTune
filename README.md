@@ -1,24 +1,86 @@
-# Project Name
+# aptiTune
 
-![Team Photo](Insert a Team Photo URL here)
-[*how?*](https://help.github.com/articles/about-readmes/#relative-links-and-image-paths-in-readme-files)
-
-TODO: short project description, some sample screenshots or mockups
+![Team Photo](teampic.JPG)
 
 ## Architecture
 
-TODO:  descriptions of code organization and tools and libraries used
+### Front-end:
+- Technologies:
+  - React
+  - Redux
+- Information/Features:
+  - Note and staff interface for lesson modules
+  - Current lesson loaded in only; progress bar for that lesson
+  - Sound input, compresses sound and sends to server
+    - Write note for the response from server
+
+### Back-end:
+- Technologies:
+  - Database: MongoDB
+  - Routing: Express.js
+- Information/Features:
+  - Database holds each lesson module
+  - Authentication
+    - Through Google
+    - Unique username stored with each user
+      - Username serves as key, loads-in progress badges
+  - Notes and rhythm options held in database; server matches from input given from front-end
+    - Sends note output back to front-end
+  
+### React Tree: 
+- App
+  - HomePageWithNoUser
+    - Auth: log-in/sign-up
+  - HomePageWithUser
+   - LessonList
+    - Lesson
+      - InformationPage
+      - QuizPage
+        -Staff
+          -Note
+  - UserPage
+    - Badges
+  - Writing
+  
+  
+### Data Flow
+- Client calls onLoad, sends request to load info 
+- Server calls getLoadInfo, retreives info for loading home page without auth
+- Client receives loaded page, *auth*, server sends back user info with badges
+- User Loaded:
+  - User page: routed; info about badges now located in client
+  - Real time writing: tbd
+  - Lessons:
+    - Client calls getLesson(lessonID), server calls getLessonInfo() and sends back json
+    - Lesson loaded
+      - Go back: getHomePage (routing)
+      - Continue to next part of lesson (info is in client from load-in)
+      - On finish:
+        - Call updateUserInfo(lessonID), server updates user info with completed lessons
+        - Route back to homepage
 
 ## Setup
 
-TODO: how to get the project dev environment up and running, npm install etc
+- yarn add react react-router-dom react-dom react-draggable
+- yarn add react-redux redux redux-thunk
+- yarn add express body-parser
+- yarn add cors path morgan mongoose
+- yarn add @fortawesome/free-solid-svg-icons
+- yarn add @fortawesome/react-fontawesome
 
 ## Deployment
 
-TODO: how to deploy the project
+Deployed with api on heroku, front-end on surge.sh. 
+[frontend](http://aptitune.surge.sh/signup)
 
 ## Authors
 
-TODO: list of authors
+Jacob Donoghue
+Kathy Cui
+Jordan Sanz
+Sathvi Korandla
+Gia Kim
+Shane Hewitt
 
 ## Acknowledgments
+
