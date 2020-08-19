@@ -17,16 +17,16 @@ class LessonList extends Component {
   }
 
   render() {
-    console.log('lessons in lessonlist', this.props.lessons);
-    if (this.props.lesson === null || this.props.lesson === undefined) {
+    console.log('lessons in lessonlist', this.props.lesson.lessons);
+    if (this.props.lesson.essons === null || this.props.lesson.lessons === undefined) {
       return (
         <div>Loading...</div>
       );
     }
     return (
-      <div>{this.props.lessons.map((l) => {
+      <div>{this.props.lesson.lessons.map((l) => {
         return (
-          <div>
+          <div key={l.id}>
             {l.lessonid}
           </div>
         );
@@ -38,8 +38,8 @@ class LessonList extends Component {
 
 function mapStateToProps(reduxState) {
   return {
-    lessons: reduxState.lessons,
+    lesson: reduxState.lesson,
   };
 }
-
+// export default connect(mapStateToProps, null)(LessonList);
 export default connect(mapStateToProps, { getLessons })(LessonList);

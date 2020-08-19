@@ -1,16 +1,16 @@
+/* eslint-disable import/named */
 /* eslint-disable no-useless-constructor */
 /* eslint-disable react/no-did-update-set-state */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadHomepageWithUser } from '../actions';
+import { getUserInfo } from '../actions';
+// eslint-disable-next-line no-unused-vars
 import LessonList from './LessonList';
 import NavBar from './NavBar';
 
 function mapStateToProps(reduxState) {
   return {
     currentUser: reduxState.user,
-    lesson: reduxState.lesson,
-    page: reduxState.page,
     auth: reduxState.auth,
   };
 }
@@ -18,12 +18,13 @@ function mapStateToProps(reduxState) {
 class HomePageWithUser extends Component {
   constructor(props) {
     super(props);
-    console.log('auth', this.props.auth);
+    console.log('reduxState', this.props);
+    // console.log('auth', this.props.auth);
     console.log('auth.username', this.props.auth.username);
-    console.log('constructor in homepagewithusers mounting');
-    console.log('props: ', this.props);
-    const location = this.props.match.url;
-    this.props.loadHomepageWithUser(location);
+    // console.log('constructor in homepagewithusers mounting');
+    // console.log('props: ', this.props);
+    // const location = this.props.match.url;
+    this.props.getUserInfo(this.props.currentUser.username);
   }
 
   // render for homepage layout
@@ -48,7 +49,7 @@ class HomePageWithUser extends Component {
                 </div>
                 <div className="line" />
                 <div className="lessons-progress">
-                  <div className="number" id="lessons-number">{/* this.props.currentUser.completed.length */} </div>
+                  <div className="number" id="lessons-number">{/* this.props.currentUser.completed.length */}</div>
                   <div className="subtitle">lessons <br /> completed </div>
                 </div>
               </div>
@@ -80,5 +81,5 @@ class HomePageWithUser extends Component {
     );
   }
 }
-
-export default connect(mapStateToProps, { loadHomepageWithUser })(HomePageWithUser);
+// { getUserInfo }
+export default connect(mapStateToProps, { getUserInfo })(HomePageWithUser);

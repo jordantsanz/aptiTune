@@ -4,7 +4,7 @@ import HomePageWithoutUser from './HomePageWithoutUser';
 import HomePageWithUser from './HomePageWithUser';
 import PrivateRoute from './privateRoute';
 import SignIn from './SignIn';
-import Page from './Page';
+// import Page from './Page';
 
 const App = (props) => {
   return (
@@ -12,9 +12,9 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={HomePageWithoutUser} />
         <Route path="/signup" component={HomePageWithoutUser} />
-        <PrivateRoute path="/:username" component={HomePageWithUser} />
+        <PrivateRoute path="/home" component={HomePageWithUser} />
         <Route path="/signin" component={SignIn} />
-        <Route path="/page" component={Page} /> {/* fix with real routing path */}
+        {/* <Route path="/page" component={Page} /> fix with real routing path */}
       </Switch>
     </Router>
   );
