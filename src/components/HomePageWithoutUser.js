@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { signupUser } from '../actions';
+import { signupUser } from '../actions/index';
 
 class HomePageWithoutUser extends Component {
   constructor(props) {
