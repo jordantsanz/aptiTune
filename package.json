@@ -7,10 +7,10 @@
   "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server",
-    "test": "eslint src/**.js",
+    "test": "./node_modules/.bin/eslint src",
     "build": "yarn clean; NODE_ENV=production webpack --colors",
     "clean": "rimraf dist",
-    "deploy": "yarn build; surge -p dist -d jordantsanz-cs52-routerstarter.surge.sh; yarn clean"
+    "deploy": "yarn build; surge -p dist -d aptitune.surge.sh; yarn clean"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
@@ -21,7 +21,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
-    "eslint": "^7.4.0",
+    "eslint": "^7.7.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.22.0",
