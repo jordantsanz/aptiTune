@@ -8,6 +8,6 @@ script:
 deploy:
   provider: surge
   project: ./dist/
-  domain: yoursurgedomainprefix.surge.sh
+  domain: aptitune.surge.sh
   on:
     branch: master
