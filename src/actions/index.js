@@ -10,6 +10,7 @@ export const ActionTypes = {
   GET_LESSON: 'GET_LESSON',
   GET_LESSONS: 'GET_LESSONS',
   GET_USER_INFO: 'GET_USER_INFO',
+  UPDATE_USER_INFO: 'UPDATE_USER_INFO',
   HELLO_WORLD: 'HELLO_WORLD',
   ERROR_SET: 'ERROR_SET',
   AUTH_USER: 'AUTH_USER',
@@ -69,6 +70,17 @@ export function getUserInfo(username) {
     }).catch((error) => {
       dispatch({ type: ActionTypes.ERROR_SET, payload: error });
     });
+  };
+}
+
+export function updateUserInfo(username, fields) {
+  return (dispatch) => {
+    axios.put(`${ROOT_URL}/${username}`, username, fields).then((response) => {
+      dispatch({ type: ActionTypes.UPDATE_USER_INFO, payload: response.data });
+    })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.ERROR_SET, payload: error });
+      });
   };
 }
 
