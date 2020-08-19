@@ -19,7 +19,7 @@ class NavBar extends Component {
     return (
       <nav className="navbar">
         <div className="navbar-top">
-          <NavLink to="/withuser" className="homepage-link">
+          <NavLink to="/home" className="homepage-link">
             <div className="hompage-div">
               <FontAwesomeIcon icon={faHome} className="icon" id="home" alt="home-icon" />
               <div className="icon-text">home</div>
