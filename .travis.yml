@@ -5,3 +5,9 @@ install:
   - yarn --ignore-engines
 script:
   - yarn deploy
+deploy:
+  provider: surge
+  project: ./dist/
+  domain: yoursurgedomainprefix.surge.sh
+  on:
+    branch: master
