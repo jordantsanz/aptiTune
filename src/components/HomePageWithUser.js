@@ -1,10 +1,10 @@
+/* eslint-disable consistent-return */
+/* eslint-disable eqeqeq */
 /* eslint-disable import/named */
 /* eslint-disable no-useless-constructor */
-/* eslint-disable react/no-did-update-set-state */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getUserInfo } from '../actions';
-// eslint-disable-next-line no-unused-vars
 import LessonList from './LessonList';
 import NavBar from './NavBar';
 
@@ -19,12 +19,27 @@ class HomePageWithUser extends Component {
   constructor(props) {
     super(props);
     console.log('reduxState', this.props);
-    // console.log('auth', this.props.auth);
     console.log('auth.username', this.props.auth.username);
-    // console.log('constructor in homepagewithusers mounting');
-    // console.log('props: ', this.props);
-    // const location = this.props.match.url;
     this.props.getUserInfo(this.props.currentUser.username);
+  }
+
+  badgeRender = () => {
+    if (this.props.currentUser.badges.length == 0) {
+      return (
+        <div className="badge-div">
+          <div className="badge-title">none yet!</div>
+        </div>
+      );
+    } else {
+      this.props.currentUser.badges.map((badge) => {
+        return (
+          <div className="badge-div">
+            <img className="badge-image" src={badge.icon} alt="badge-icon" />
+            <div className="badge-title">{badge.name} </div>
+          </div>
+        );
+      });
+    }
   }
 
   // render for homepage layout
@@ -38,18 +53,18 @@ class HomePageWithUser extends Component {
               <div className="user-container">
                 <img className="user-image" alt="user" />
                 <div className="user-container-text">
-                  <h1 className="user-hello">Hello, {this.props.currentUser.username}! </h1>
+                  <h1 className="user-hello">Hello {this.props.currentUser.username}! </h1>
                   <h3 className="subtitle" id="lets-learn">Let&apos;s learn music!</h3>
                 </div>
               </div>
               <div className="progress-container">
                 <div className="badges-progress">
-                  <div className="number" id="badges-number"> {/* this.props.currentUser.badges.length */} </div>
+                  <div className="number" id="badges-number"> {this.props.currentUser.badges.length} </div>
                   <div className="subtitle">badges <br /> achieved </div>
                 </div>
                 <div className="line" />
                 <div className="lessons-progress">
-                  <div className="number" id="lessons-number">{/* this.props.currentUser.completed.length */}</div>
+                  <div className="number" id="lessons-number"> {this.props.currentUser.completed.length} </div>
                   <div className="subtitle">lessons <br /> completed </div>
                 </div>
               </div>
@@ -65,14 +80,7 @@ class HomePageWithUser extends Component {
               </div>
               <div className="badges-flex">
                 <h2 className="title" id="badges-title">Your Badges</h2>
-                {/* {this.props.user.badges.map((badge) => {
-                  return (
-                    <div className="badge-container">
-                      <img className="badge-image" src={badge.icon} alt="badge-icon" />
-                      <div className="badge-title">{badge.name} </div>
-                    </div>
-                  );
-                })} */}
+                <div className="badge-container">{this.badgeRender()}</div>
               </div>
             </div>
           </div>
