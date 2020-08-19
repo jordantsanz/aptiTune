@@ -71,6 +71,7 @@
 ## Deployment
 
 Deployed with api on heroku, front-end on surge.sh. 
+[frontend](http://aptitune.surge.sh/signup)
 
 ## Authors
 
