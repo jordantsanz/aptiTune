@@ -12,7 +12,7 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={HomePageWithoutUser} />
         <Route path="/signup" component={HomePageWithoutUser} />
-        <PrivateRoute path="/withuser" component={HomePageWithUser} />
+        <PrivateRoute path="/:username" component={HomePageWithUser} />
         <Route path="/signin" component={SignIn} />
         <Route path="/page" component={Page} /> {/* fix with real routing path */}
       </Switch>

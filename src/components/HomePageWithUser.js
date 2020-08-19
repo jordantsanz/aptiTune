@@ -1,22 +1,29 @@
+/* eslint-disable no-useless-constructor */
 /* eslint-disable react/no-did-update-set-state */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadHomepageWithUser } from '../actions';
-// import LessonList from './LessonList';
+import LessonList from './LessonList';
 import NavBar from './NavBar';
 
 function mapStateToProps(reduxState) {
   return {
     currentUser: reduxState.user,
-    username: reduxState.auth.username,
+    lesson: reduxState.lesson,
+    page: reduxState.page,
+    auth: reduxState.auth,
   };
 }
 
 class HomePageWithUser extends Component {
   constructor(props) {
     super(props);
-    console.log('mounting');
-    this.props.loadHomepageWithUser(this.props.username);
+    console.log('auth', this.props.auth);
+    console.log('auth.username', this.props.auth.username);
+    console.log('constructor in homepagewithusers mounting');
+    console.log('props: ', this.props);
+    const location = this.props.match.url;
+    this.props.loadHomepageWithUser(location);
   }
 
   // render for homepage layout
@@ -36,12 +43,12 @@ class HomePageWithUser extends Component {
               </div>
               <div className="progress-container">
                 <div className="badges-progress">
-                  <div className="number" id="badges-number"> {this.props.currentUser.badges.length} </div>
+                  <div className="number" id="badges-number"> {/* this.props.currentUser.badges.length */} </div>
                   <div className="subtitle">badges <br /> achieved </div>
                 </div>
                 <div className="line" />
                 <div className="lessons-progress">
-                  <div className="number" id="lessons-number">{this.props.currentUser.completed.length} </div>
+                  <div className="number" id="lessons-number">{/* this.props.currentUser.completed.length */} </div>
                   <div className="subtitle">lessons <br /> completed </div>
                 </div>
               </div>
@@ -53,7 +60,7 @@ class HomePageWithUser extends Component {
                   <h3 className="subtitle" id="lessons-all">All</h3>
                   <h3 className="subtitle" id="lessons-completed">Completed</h3>
                 </div>
-                {/* <LessonList className="lessons" user={this.props.currentUser} /> */}
+                <LessonList className="lessons" />
               </div>
               <div className="badges-flex">
                 <h2 className="title" id="badges-title">Your Badges</h2>

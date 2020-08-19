@@ -2,11 +2,13 @@
 import axios from 'axios';
 
 // root url for local: change to #####-heroku.com/api
-const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'https://aptitune-api.herokuapp.com/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 
 // action types
 export const ActionTypes = {
   GET_LESSON: 'GET_LESSON',
+  GET_LESSONS: 'GET_LESSONS',
   GET_USER_INFO: 'GET_USER_INFO',
   HELLO_WORLD: 'HELLO_WORLD',
   ERROR_SET: 'ERROR_SET',
@@ -17,11 +19,25 @@ export const ActionTypes = {
 };
 
 // gets a lesson given that lesson id and the current user
-export function getLesson(lessonid, username) {
+export function getLesson(lessonid) {
+  console.log('Calling getLesson in client');
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/${username}/${lessonid}`)
+    axios.get(`${ROOT_URL}/${lessonid}`)
       .then((response) => {
         dispatch({ type: ActionTypes.GET_LESSON, payload: response.data });
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.ERROR_SET, payload: error });
+      });
+  };
+}
+
+export function getLessons() {
+  console.log('Calling getLessons in client');
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/:username`)
+      .then((response) => {
+        dispatch({ type: ActionTypes.GET_LESSONS, payload: response.data });
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.ERROR_SET, payload: error });
@@ -43,6 +59,7 @@ export function loadPage(username, lessonid, lessonTitle, pageNumber) {
 
 // gets user info given username
 export function getUserInfo(username) {
+  console.log('getting user info in actions');
   return (dispatch) => {
     axios.get(`${ROOT_URL}/${username}`, username).then((response) => {
       dispatch({ type: ActionTypes.GET_USER_INFO, payload: response.data });
@@ -53,10 +70,12 @@ export function getUserInfo(username) {
 }
 
 export function loadHomepageWithUser(username) {
+  console.log('loading homepagewithuser, username: ', username);
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/withuser`, username, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
-      dispatch({ type: ActionTypes.GET_USER_INFO, payload: response.data });
-    })
+    axios.get(`${ROOT_URL}${username}`, { headers: { authorization: localStorage.getItem('token') } })
+      .then((response) => {
+        dispatch({ type: ActionTypes.GET_USER_INFO, payload: response.data });
+      })
       .catch((error) => {
         dispatch({ type: ActionTypes.ERROR_SET, payload: error });
       });
@@ -83,7 +102,7 @@ export function signInUser(user, history) {
       dispatch({ type: ActionTypes.AUTH_USER, payload: response.data.username });
       if (response.data.username) {
         localStorage.setItem('token', response.data.token);
-        history.push('/withuser');
+        history.push(`/${user.username}`);
       }
     })
       .catch((error) => {
@@ -92,13 +111,14 @@ export function signInUser(user, history) {
   };
 }
 export function signupUser(user, history) {
+  console.log('User in signupuser: ', user);
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signup`, user, history).then((response) => {
       dispatch({ type: ActionTypes.AUTH_USER });
       console.log(response);
       if (response.status == 200) {
         localStorage.setItem('token', response.data.token);
-        history.push('/withuser');
+        history.push(`/${user.username}`);
       }
     })
       .catch((error) => {
