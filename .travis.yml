@@ -5,9 +5,9 @@ install:
   - yarn --ignore-engines
 script:
   - yarn deploy
-deploy:
-  provider: surge
-  project: ./dist/
-  domain: aptitune.surge.sh
-  on:
-    branch: master
+# deploy:
+#   provider: surge
+#   project: ./dist/
+#   domain: aptitune.surge.sh
+#   on:
+#     branch: master
