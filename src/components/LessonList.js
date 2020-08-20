@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
-import { getLessons } from '../actions';
+import { getLessons, getLesson } from '../actions';
 
 // NEED TO STILL MAKE THE BUTTONS ON THE LESSONS GO SOMEWHERE! MODALS ON CLICK?
 class LessonList extends Component {
@@ -20,8 +20,13 @@ class LessonList extends Component {
   }
 
   // ROUTE THIS TO LESSON PAGES
-  goToLesson = () => {
-
+  goToLesson = (l) => {
+    console.log('button clicked');
+    const { history } = this.props;
+    console.log('props: ', this.props);
+    console.log('id', l._id);
+    console.log('goToLesson called with id', l._id);
+    this.props.getLesson(l._id, history);
   }
 
   render() {
@@ -45,7 +50,19 @@ class LessonList extends Component {
             <div className="lesson-icon-bottom">
               <div className="lesson-icon-description">{l.description}</div>
               <div className="button-holder" id="lesson-icon-button-holder">
-                <button type="button" className="button" id="lesson-icon-button" onClick={this.goToLesson}>Learn now!</button>
+                <button type="button"
+                  className="button"
+                  id="lesson-icon-button"
+                  onClick={() => {
+                    console.log('button clicked');
+                    const { history } = this.props;
+                    console.log('props: ', this.props);
+                    console.log('id', l._id);
+                    console.log('goToLesson called with id', l._id);
+                    this.props.getLesson(l._id, history);
+                  }}
+                >Learn now!
+                </button>
               </div>
             </div>
 
@@ -63,4 +80,4 @@ function mapStateToProps(reduxState) {
   };
 }
 // export default connect(mapStateToProps, null)(LessonList);
-export default connect(mapStateToProps, { getLessons })(LessonList);
+export default withRouter(connect(mapStateToProps, { getLessons, getLesson })(LessonList));

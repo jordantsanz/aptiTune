@@ -18,6 +18,7 @@ class ProfilePage extends Component {
       new: '',
       retype: '',
     };
+    console.log('in profile page');
   }
 
 iconRender = () => {
