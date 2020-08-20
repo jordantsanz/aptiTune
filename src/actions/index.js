@@ -20,13 +20,16 @@ export const ActionTypes = {
 };
 
 // gets a lesson given that lesson id and the current user
-export function getLesson(id, history) {
+export function getLesson(id, history, pageNumber) {
   console.log('Calling getLesson in client with id', id);
   return (dispatch) => {
     axios.get(`${ROOT_URL}/lessons/${id}`)
       .then((response) => {
         console.log('getLesson responded with response', response.data);
         dispatch({ type: ActionTypes.GET_LESSON, payload: response.data });
+        console.log('setting local storage to id and pagenum', pageNumber);
+        localStorage.setItem('lesson', id);
+        localStorage.setItem('next', pageNumber);
         history.push(`/lessons/${id}`);
       })
       .catch((error) => {
