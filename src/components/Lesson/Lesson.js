@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import NavBar from '../NavBar';
+import '../../style.scss';
 
 class Lesson extends Component {
   constructor(props) {
@@ -13,7 +15,8 @@ class Lesson extends Component {
     console.log('lesson rendering');
     return (
       <div>
-        <div>LESSON PAGE</div>
+        <NavBar className="nav" />
+        <div className="lessonHeader">LESSON PAGE</div>
         <div>{this.props.lesson.lessonid}</div>
       </div>
     );
