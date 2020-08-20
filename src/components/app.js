@@ -5,7 +5,7 @@ import HomePageWithUser from './HomePageWithUser';
 import PrivateRoute from './privateRoute';
 import SignIn from './SignIn';
 import ProfilePage from './ProfilePage';
-// import Page from './Page';
+import Page from './Page';
 
 const App = (props) => {
   return (
@@ -16,6 +16,7 @@ const App = (props) => {
         <PrivateRoute path="/home" component={HomePageWithUser} />
         <Route path="/signin" component={SignIn} />
         <PrivateRoute path="/:username" component={ProfilePage} />
+        <Route path="/lessons/:lessonid" component={Page} />
         {/* <Route path="/page" component={Page} /> fix with real routing path */}
       </Switch>
     </Router>
