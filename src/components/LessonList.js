@@ -19,16 +19,6 @@ class LessonList extends Component {
     this.props.getLessons();
   }
 
-  // ROUTE THIS TO LESSON PAGES
-  goToLesson = (l) => {
-    console.log('button clicked');
-    const { history } = this.props;
-    console.log('props: ', this.props);
-    console.log('id', l._id);
-    console.log('goToLesson called with id', l._id);
-    this.props.getLesson(l._id, history);
-  }
-
   render() {
     console.log('lessons in lessonlist', this.props.lesson.lessons);
     if (this.props.lesson.lessons === null || this.props.lesson.lessons === undefined) {
@@ -39,7 +29,7 @@ class LessonList extends Component {
     return (
       <div className="lessons">{this.props.lesson.lessons.map((l) => {
         return (
-          <div key={l.id} className="lesson-icon">
+          <div key={l._id} className="lesson-icon">
             <div className="lesson-icon-top">
               <div className="lesson-icon-title">{l.lessonid}</div>
               <div className="lesson-icon-time-div">
@@ -59,7 +49,7 @@ class LessonList extends Component {
                     console.log('props: ', this.props);
                     console.log('id', l._id);
                     console.log('goToLesson called with id', l._id);
-                    this.props.getLesson(l._id, history);
+                    this.props.getLesson(l._id, history, 0);
                   }}
                 >Learn now!
                 </button>
