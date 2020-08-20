@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { loadPage } from '../actions/index';
-import NavBar from './NavBar';
+import { loadPage } from '../../actions/index';
+import NavBar from '../NavBar';
 
 function mapStateToProps(reduxState) {
   return {
