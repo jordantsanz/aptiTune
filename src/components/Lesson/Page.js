@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { loadPage } from '../actions/index';
-import NavBar from './NavBar';
+import { loadPage } from '../../actions/index';
+import NavBar from '../NavBar';
 
 function mapStateToProps(reduxState) {
   return {
@@ -38,20 +38,20 @@ class Page extends Component {
           <div className="full-page">
             <div className="page-top">
               <div className="page-top-topthird">
-                <div className="page-top-title">Title</div> {/* fill with this.props.page.title */}
+                <div className="page-top-title">{this.props.page.page_content.page_title}</div>
                 <div className="page-top-nav">
                   {/* Arrow icon from font awesome goes here pointing left */}
                   <div className="page-top-nav-line" />
-                  <div className="page-top-nav-level">Level PH of PH </div> {/* this.props.page.pageNumber and {this.props.page.pages.length} */}
+                  <div className="page-top-nav-level">Level {this.props.page.pageNumber} of {this.props.page.length}</div>
                   <div className="page-top-nav-line" />
                   {/* Arrow icon from font awesome goes here pointing right */}
                 </div>
               </div>
-              <div className="page-top-description">Description</div> {/* fill with this.props.page.description */}
-              <div className="page-top-content">Content</div>    {/* fill with this.props.page.content */}
+              <div className="page-top-description">{this.props.page.page_content.page_description}</div> {/* fill with this.props.page.description */}
+              <div className="page-top-content">{this.props.page.page_content.content}</div>    {/* fill with this.props.page.content */}
             </div>
             <div className="page-bottom">
-              <div className="activity-div">Activity</div> {/* fill with this.props.page.activity */}
+              <div className="activity-div">{this.props.page.act_type1}</div> {/* fill with this.props.page.activity */}
               <div className="bottom-div">
                 <NavLink to="/:username">
                   <button className="button" id="next" type="button" onClick={this.getNextPage}>Next</button>
