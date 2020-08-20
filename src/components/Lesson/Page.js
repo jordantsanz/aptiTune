@@ -49,7 +49,7 @@ class Page extends Component {
             Loading...
           </div>
         );
-      } else {
+      } else if (page.activity_type === 'FlatView') {
         return (
           <div className="current-page">
             <NavBar />
@@ -60,7 +60,7 @@ class Page extends Component {
                   <div className="page-top-nav">
                     {/* Arrow icon from font awesome goes here pointing left */}
                     <div className="page-top-nav-line" />
-                    <div className="page-top-nav-level">Level {page.pageNumber} of {page.length}</div>
+                    <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {page.length}</div>
                     <div className="page-top-nav-line" />
                     {/* Arrow icon from font awesome goes here pointing right */}
                   </div>
@@ -69,8 +69,10 @@ class Page extends Component {
                 <div className="page-top-content">{page.act_type1.instructions}</div>    {/* fill with this.props.page.content */}
               </div>
               <div> Inserted flat api:</div>
-              <FlatView />
-              {/* <div className="page-bottom">
+              <div className="page-bottom">
+                <FlatView />
+              </div>
+              {/*
                 <div className="activity-div">{page.act_type1}</div> {/* fill with this.props.page.activity
                 <div className="bottom-div">
                   <NavLink to="/:username">
@@ -80,6 +82,10 @@ class Page extends Component {
               </div> */}
             </div>
           </div>
+        );
+      } else {
+        return (
+          <div>Act type not found</div>
         );
       }
     }
