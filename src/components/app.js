@@ -5,7 +5,7 @@ import HomePageWithUser from './HomePageWithUser';
 import PrivateRoute from './privateRoute';
 import SignIn from './SignIn';
 import ProfilePage from './ProfilePage';
-import Page from './Page';
+import Page from './Lesson/Page';
 // import Lesson from './Lesson/Lesson';
 
 const App = (props) => {
