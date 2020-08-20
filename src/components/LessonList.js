@@ -21,11 +21,12 @@ class LessonList extends Component {
 
   // ROUTE THIS TO LESSON PAGES
   goToLesson = (l) => {
+    console.log('button clicked');
     const { history } = this.props;
     console.log('props: ', this.props);
     console.log('id', l._id);
-    console.log('goToLesson called with idd', l._id);
-    // this.props.getLesson(l._id, history);
+    console.log('goToLesson called with id', l._id);
+    this.props.getLesson(l._id, history);
   }
 
   render() {
@@ -49,7 +50,19 @@ class LessonList extends Component {
             <div className="lesson-icon-bottom">
               <div className="lesson-icon-description">{l.description}</div>
               <div className="button-holder" id="lesson-icon-button-holder">
-                <button type="button" className="button" id="lesson-icon-button" onClick={this.goToLesson(l)}>Learn now!</button>
+                <button type="button"
+                  className="button"
+                  id="lesson-icon-button"
+                  onClick={() => {
+                    console.log('button clicked');
+                    const { history } = this.props;
+                    console.log('props: ', this.props);
+                    console.log('id', l._id);
+                    console.log('goToLesson called with id', l._id);
+                    this.props.getLesson(l._id, history);
+                  }}
+                >Learn now!
+                </button>
               </div>
             </div>
 
