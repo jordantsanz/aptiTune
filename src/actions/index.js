@@ -10,6 +10,7 @@ export const ActionTypes = {
   GET_LESSON: 'GET_LESSON',
   GET_LESSONS: 'GET_LESSONS',
   GET_USER_INFO: 'GET_USER_INFO',
+  UPDATE_USER_INFO: 'UPDATE_USER_INFO',
   HELLO_WORLD: 'HELLO_WORLD',
   ERROR_SET: 'ERROR_SET',
   AUTH_USER: 'AUTH_USER',
@@ -19,14 +20,17 @@ export const ActionTypes = {
 };
 
 // gets a lesson given that lesson id and the current user
-export function getLesson(lessonid) {
-  console.log('Calling getLesson in client');
+export function getLesson(id, history) {
+  console.log('Calling getLesson in client with id', id);
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/lessons/${lessonid}`)
+    axios.get(`${ROOT_URL}/lessons/${id}`)
       .then((response) => {
+        console.log('getLesson responded with response', response.data);
         dispatch({ type: ActionTypes.GET_LESSON, payload: response.data });
+        history.push(`/lessons/${id}`);
       })
       .catch((error) => {
+        console.log('error in getLesson client:', error);
         dispatch({ type: ActionTypes.ERROR_SET, payload: error });
       });
   };
@@ -72,9 +76,23 @@ export function getUserInfo(username) {
   };
 }
 
+export function updateUserInfo(username, fields) {
+  return (dispatch) => {
+    axios.put(`${ROOT_URL}/${username}`, username, fields).then((response) => {
+      dispatch({ type: ActionTypes.UPDATE_USER_INFO, payload: response.data });
+    })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.ERROR_SET, payload: error });
+      });
+  };
+}
+
 export function signOutUser(history) {
   return (dispatch) => {
+    // Also remove user
+    console.log('Signing out');
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     dispatch({ type: ActionTypes.DEAUTH_USER });
     history.push('/');
   };
