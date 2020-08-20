@@ -43,6 +43,7 @@ class LessonList extends Component {
                   className="button"
                   id="lesson-icon-button"
                   onClick={() => {
+                    // go to lesson
                     console.log('button clicked');
                     const { history } = this.props;
                     console.log('props: ', this.props);
