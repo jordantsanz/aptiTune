@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { getLesson } from '../../actions/index';
 import NavBar from '../NavBar';
+import FlatView from './Activities/FlatView';
 
 function mapStateToProps(reduxState) {
   return {
@@ -36,6 +37,7 @@ class Page extends Component {
     }
 
     render() {
+      // add page for rendering
       console.log('pages:', this.props.pages);
       const { pages } = this.props;
       const page = pages[0];
@@ -66,6 +68,8 @@ class Page extends Component {
                 <div className="page-top-description">{page.content.description}</div> {/* fill with this.props.page.description */}
                 <div className="page-top-content">{page.act_type1.instructions}</div>    {/* fill with this.props.page.content */}
               </div>
+              <div> Inserted flat api:</div>
+              <FlatView />
               {/* <div className="page-bottom">
                 <div className="activity-div">{page.act_type1}</div> {/* fill with this.props.page.activity
                 <div className="bottom-div">
