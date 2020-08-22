@@ -45,7 +45,7 @@ class FlatView extends Component {
       } else {
         return (
           <div className="type1">
-            <iframe title="flat" src="https://flat.io/embed/5f3c2ef49b7a0675af6ac0e7?appId=5f31d0690692f8689b6682fb" height="200" width="100%" frameBorder="0" allowFullScreen allow="midi" />
+            <iframe title="flat" src={page.activity.flatUrl} height="200" width="60%" frameBorder="0" allowFullScreen allow="midi" />
           </div>
         );
       }
