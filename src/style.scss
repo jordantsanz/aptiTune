@@ -926,11 +926,13 @@ height: 0px;
     display: flex;
     flex-direction: column;
 
-    top: 34vw;
+    /*top: 34vw;
     height: 55vh;
     left: -12.5vw;
     width: 127vw;
-    position: absolute;
+    position: absolute;*/
+    width: 100%;
+    align-items: center;
 }
 
 .bottom-div{
@@ -956,4 +958,9 @@ height: 0px;
 /******** Lesson page! *********/
 .lessonHeader{
     text-align: center;
+}
+
+.Listening{
+    width: 100%;
+    float: right;
 }
