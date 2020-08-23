@@ -11,29 +11,29 @@ function mapStateToProps(reduxState) {
   };
 }
 
-class FlatView extends Component {
+class Listening extends Component {
   constructor(props) {
     super(props);
     this.state = {
       pageNumber: 0,
+      nextPage: '',
     };
   }
 
     componentDidMount = () => {
       const id = localStorage.getItem('lesson');
-      const pageNum = parseInt(localStorage.getItem('next'), 10);
-      console.log('pageNum in flatview: ', pageNum);
+      const pageNum = localStorage.getItem('next');
       this.setState({ pageNumber: pageNum });
       const { history } = this.props;
       this.props.getLesson(id, history, pageNum + 1);
+      console.log('Component mounted in Listening');
     }
 
     render() {
       // add page for rendering
-      console.log('pages:', this.props.pages);
       const { pages } = this.props;
       const page = pages[this.state.pageNumber];
-      console.log('page in flatView', page);
+      console.log('page in listening', page);
       if (page === null || page === undefined) {
         return (
           <div>
@@ -42,12 +42,15 @@ class FlatView extends Component {
         );
       } else {
         return (
-          <div className="type1">
-            <iframe title="flat" src={page.activity.flatUrl} height="200" width="60%" frameBorder="0" allowFullScreen allow="midi" />
+          <div className="Listening">
+            <iframe title="audio-file" src={page.activity.audioUrl} />
+            <div>
+              Four answer buttons are gonna go below!
+            </div>
           </div>
         );
       }
     }
 }
 
-export default withRouter(connect(mapStateToProps, { getLesson })(FlatView));
+export default withRouter(connect(mapStateToProps, { getLesson })(Listening));
