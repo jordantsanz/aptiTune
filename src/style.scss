@@ -9,6 +9,7 @@ html, body{
     height: 100%;
     overflow-x: hidden;
     width: 100%;
+    scroll-behavior: smooth;
 }
 
 a{
@@ -56,7 +57,8 @@ line-height: 20px;
 letter-spacing: 0.025em;
 
 color: #F4FAFD;
-background-color: #FD966A;
+
+
 }
 
 .music-is-hard{
@@ -70,6 +72,7 @@ line-height: 76px;
 letter-spacing: 0.025em;
 
 color: #F4FAFD;
+margin-bottom: 15px;
 }
 
 .homepage-without-description{
@@ -83,23 +86,57 @@ margin-top: 7vh;
 
 text-align: right;
 letter-spacing: -0.005em;
-
+margin-right: 3vw;
 color: #F4FAFD;
-margin-right: 6vw;
+
+
 }
+
+
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
 
 #convinceme{
     margin-top: 4vh;
     font-family: Ubuntu;
-font-style: italic;
-font-weight: bold;
-font-size: 21px;
-line-height: 29px;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 21px;
+    line-height: 29px;
 /* identical to box height */
 
-text-align: center;
+    text-align: center;
 
-color: #FFFFFF;
+    color: #FFFFFF;
+    transition: 200ms all ease;
+}
+
+#convinceme:hover{
+    cursor: pointer;
+    color: #114353;
 }
 
 .strong{
@@ -112,7 +149,7 @@ color: #FFFFFF;
     align-items: flex-end;
     justify-content: space-around;
     margin-top: 7vh;
-    margin-right: 8vw;
+    margin-right: 4vw;
 }
 
 .voice-to-music-section{
@@ -155,7 +192,7 @@ color: #114353;
 .sign-up-section{
 position: absolute;
 width: 50vw;
-height: 65vh;
+height: 80vh;
 top: 410.38vh;
 left: 25vw;
 
@@ -210,8 +247,12 @@ color: #FFFFFF;
 #createAccountVoiceSection:hover{
     background: #FBBE49;
     color: #114353;
+    font-weight: bold;
 }
 
+#easy-description {
+    margin-bottom: 10px;
+}
 
 #easy-description, .bottom-description{
 
@@ -265,11 +306,16 @@ color: rgba(0, 0, 0, 0.5);
     width: max-content;
 }
 
+.emailSignup, .usernameSignup, .passwordSignup{
+    height: 14vh;
+    width: 40vw;
+}
+
 .already-have{
 font-family: Ubuntu;
 font-style: normal;
 font-weight: normal;
-font-size: 14px;
+font-size: 17px;
 line-height: 23px;
 width: max-content;
 /* identical to box height */
@@ -319,11 +365,20 @@ font-style: normal;
 font-weight: bold;
 font-size: 62px;
 line-height: 76px;
+margin-bottom: 15px;
 /* identical to box height */
 
 
 color: #E46161;
 
+}
+
+#voice-to-music-description {
+    margin-bottom: 10px;
+}
+
+#voice-to-music-bottom-description{
+    margin-bottom: 30px;
 }
 
 .description{
@@ -359,6 +414,7 @@ font-family: Ubuntu;
 font-style: normal;
 font-weight: bold;
 font-size: 62px;
+margin-bottom: 15px;
 line-height: 120.4%;
 /* or 79px */
 
@@ -368,11 +424,12 @@ color: #114353
 }
 
 
+
 .log-in{
 font-family: Ubuntu;
 font-style: normal;
 font-weight: bold;
-font-size: 14px;
+font-size: 17px;
 line-height: 23px;
 width: max-content;
 /* identical to box height */
@@ -385,7 +442,7 @@ color: #114353;
 
 .log-in:hover{
     color: white;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: bold;
 }
 
@@ -405,7 +462,7 @@ box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
 border-radius: 34px;
 width: 19.7vw;
 border: none;
-height: 20vh;
+height: 9vh;
 
 
 
@@ -524,11 +581,13 @@ color: #FFFFFF;
 .sign-up-link {
     text-align: center;
     transition: all 200ms ease;
+    font-weight: bold;
     color: #114353;
 }
 
 .sign-up-link:hover {
     color: white;
+    font-weight: bold;
 }
 /*********************** badges component on homepage ***************/
 
