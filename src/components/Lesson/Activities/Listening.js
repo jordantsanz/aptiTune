@@ -1,3 +1,4 @@
+/* eslint-disable react/style-prop-object */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unused-state */
@@ -49,55 +50,138 @@ class Listening extends Component {
             Sick bruh you got it! Time to move on
           </div>
         );
-      } else {
+      } else if (page.activity.listening_type === 'sheet_music') { // for sheet listening exercises
         return (
+          <div className="Listening">
+            <iframe title="audio-file" className="audio-file" src={page.activity.audioUrl} />
+            <ul className="listeningAnswers">
+              <li>
+                <button type="button"
+                  onClick={() => {
+                    if (parseInt(page.activity.correct_answer, 10) === 1) {
+                      console.log('success');
+                      this.setState({ correctClicked: true });
+                    } else {
+                      console.log('1 clicked -- Wrong answer dumbass');
+                      this.setState({ incorrectClicked: true });
+                    }
+                  }}
+                >
+                  Answer 1
+                </button>
+              </li>
+              <li>
+                <button type="button"
+                  onClick={() => {
+                    if (parseInt(page.activity.correct_answer, 10) === 2) {
+                      console.log('success');
+                      this.setState({ correctClicked: true });
+                    } else {
+                      console.log('1 clicked -- Wrong answer dumbass');
+                      this.setState({ incorrectClicked: true });
+                    }
+                  }}
+                >
+                  Answer 2
+                </button>
+              </li>
+              <li>
+                <button type="button"
+                  onClick={() => {
+                    if (parseInt(page.activity.correct_answer, 10) === 3) {
+                      console.log('success');
+                      this.setState({ correctClicked: true });
+                    } else {
+                      console.log('1 clicked -- Wrong answer dumbass');
+                      this.setState({ incorrectClicked: true });
+                    }
+                  }}
+                >
+                  Answer 3
+                </button>
+              </li>
+              <li>
+                <button type="button"
+                  onClick={() => {
+                    if (parseInt(page.activity.correct_answer, 10) === 4) {
+                      console.log('success');
+                      this.setState({ correctClicked: true });
+                    } else {
+                      console.log('1 clicked -- Wrong answer dumbass');
+                      this.setState({ incorrectClicked: true });
+                    }
+                  }}
+                >
+                  Answer 4
+                </button>
+              </li>
+            </ul>
+          </div>
+        );
+      } else {
+        return ( // for single interval listening
           <div className="Listening">
             <iframe title="audio-file" src={page.activity.audioUrl} />
             <ul className="listeningAnswers">
-              <li onClick={() => {
-                if (parseInt(page.activity.correct_answer, 10) === 1) {
-                  console.log('success');
-                  this.setState({ correctClicked: true });
-                } else {
-                  console.log('1 clicked -- Wrong answer dumbass');
-                  this.setState({ incorrectClicked: true });
-                }
-              }}
-              >
-                Answer 1
+              <li>
+                <button type="button"
+                  onClick={() => {
+                    if (parseInt(page.activity.correct_answer, 10) === 1) {
+                      console.log('success');
+                      this.setState({ correctClicked: true });
+                    } else {
+                      console.log('1 clicked -- Wrong answer dumbass');
+                      this.setState({ incorrectClicked: true });
+                    }
+                  }}
+                >
+                  Answer 1
+                </button>
               </li>
-              <li onClick={() => {
-                if (parseInt(page.activity.correct_answer, 10) === 2) {
-                  console.log('success!');
-                  this.setState({ correctClicked: true });
-                } else {
-                  console.log('2 clicked -- Wrong answer dumbass');
-                  this.setState({ incorrectClicked: true });
-                }
-              }}
-              >Answer 2
+              <li>
+                <button type="button"
+                  onClick={() => {
+                    if (parseInt(page.activity.correct_answer, 10) === 2) {
+                      console.log('success');
+                      this.setState({ correctClicked: true });
+                    } else {
+                      console.log('1 clicked -- Wrong answer dumbass');
+                      this.setState({ incorrectClicked: true });
+                    }
+                  }}
+                >
+                  Answer 2
+                </button>
               </li>
-              <li onClick={() => {
-                if (parseInt(page.activity.correct_answer, 10) === 3) {
-                  console.log('success!');
-                  this.setState({ correctClicked: true });
-                } else {
-                  console.log('3 clicked -- Wrong answer dumbass');
-                  this.setState({ incorrectClicked: true });
-                }
-              }}
-              >Answer 3
+              <li>
+                <button type="button"
+                  onClick={() => {
+                    if (parseInt(page.activity.correct_answer, 10) === 3) {
+                      console.log('success');
+                      this.setState({ correctClicked: true });
+                    } else {
+                      console.log('1 clicked -- Wrong answer dumbass');
+                      this.setState({ incorrectClicked: true });
+                    }
+                  }}
+                >
+                  Answer 3
+                </button>
               </li>
-              <li onClick={() => {
-                if (parseInt(page.activity.correct_answer, 10) === 4) {
-                  console.log('You got it!');
-                  this.setState({ correctClicked: true });
-                } else {
-                  console.log('4 clicked -- Wrong answer dumbass');
-                  this.setState({ incorrectClicked: true });
-                }
-              }}
-              >Answer 4
+              <li>
+                <button type="button"
+                  onClick={() => {
+                    if (parseInt(page.activity.correct_answer, 10) === 4) {
+                      console.log('success');
+                      this.setState({ correctClicked: true });
+                    } else {
+                      console.log('1 clicked -- Wrong answer dumbass');
+                      this.setState({ incorrectClicked: true });
+                    }
+                  }}
+                >
+                  Answer 4
+                </button>
               </li>
             </ul>
           </div>
