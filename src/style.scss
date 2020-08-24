@@ -28,7 +28,8 @@ a:hover{
     flex-direction: column;
     justify-content: center;
     width: 100vw;
-    height: 349vh;
+    height: 500vh;
+    background-size: cover;
     position: absolute;
     top: 0;
     left: 0;
@@ -44,7 +45,7 @@ position: absolute;
 width: 34.7vw;
 height: 8.4vh;
 left: 64vw;
-top: 21.3vh;
+top: 30.4vh;
 
 font-family: Ubuntu;
 font-style: italic;
@@ -58,12 +59,68 @@ color: #F4FAFD;
 background-color: #FD966A;
 }
 
+.music-is-hard{
+    font-family: Ubuntu;
+font-style: italic;
+font-weight: bold;
+font-size: 66px;
+line-height: 76px;
+/* identical to box height */
+
+letter-spacing: 0.025em;
+
+color: #F4FAFD;
+}
+
+.homepage-without-description{
+    font-family: Montserrat;
+font-style: normal;
+font-weight: normal;
+font-size: 22px;
+line-height: 130.4%;
+margin-top: 7vh;
+/* or 39px */
+
+text-align: right;
+letter-spacing: -0.005em;
+
+color: #F4FAFD;
+margin-right: 6vw;
+}
+
+#convinceme{
+    margin-top: 4vh;
+    font-family: Ubuntu;
+font-style: italic;
+font-weight: bold;
+font-size: 21px;
+line-height: 29px;
+/* identical to box height */
+
+text-align: center;
+
+color: #FFFFFF;
+}
+
+.strong{
+    font-weight: bold;
+}
+
+.signin-button-homepage{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    margin-top: 7vh;
+    margin-right: 8vw;
+}
+
 .voice-to-music-section{
 position: absolute;
 width: 50.5vw;
 height: 8.4vh;
 left: 6.5vw;
-top: 144vh;
+top: 204.48vh;
 
 font-family: Ubuntu;
 font-style: normal;
@@ -79,9 +136,9 @@ color: #E46161;
 .easy-section{
 position: absolute;
 width: 60.6vw;
-height: 8.77vh;
+height: max-content;
 left: 37.8vw;
-top: 220vh;
+top: 312.4vh;
 
 font-family: Ubuntu;
 font-style: normal;
@@ -99,7 +156,7 @@ color: #114353;
 position: absolute;
 width: 50vw;
 height: 65vh;
-top: 289vh;
+top: 410.38vh;
 left: 25vw;
 
 font-family: Ubuntu;
@@ -156,6 +213,29 @@ color: #FFFFFF;
 }
 
 
+#easy-description, .bottom-description{
+
+    font-family: Montserrat;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 120.4%;
+/* or 36px */
+
+text-align: right;
+letter-spacing: 0.005em;
+
+color: #114353;
+padding-left: 2vw;
+margin-right: 4vw;
+}
+
+.bottom-description{
+    margin-top: 6vh;
+    padding-left: 6vw;
+}
+
+
 
 /* Input */
 input{
@@ -202,6 +282,15 @@ margin-right: 10px;
 
 #createAccount{
     font-size: 40px;
+    font-family: Ubuntu;
+font-style: italic;
+font-weight: bold;
+line-height: 46px;
+/* identical to box height */
+
+text-align: center;
+
+color: #114353;
 }
 
 #loginbutton{
@@ -224,6 +313,33 @@ font-size: 20px;
     box-shadow: 2px 3px 3px 2px rgba(0, 0, 0, 0.25);
 }
 
+#voice-to-music-title{
+    font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 62px;
+line-height: 76px;
+/* identical to box height */
+
+
+color: #E46161;
+
+}
+
+.description{
+
+    
+font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 28px;
+line-height: 141.9%;
+/* or 43px */
+
+
+color: #F18080;
+}
+
 #loginbutton:active{
     color: white;
     font-size: 21px;
@@ -235,6 +351,20 @@ button{
 height: 8.5vh;
 transition: 200ms ease all;
 outline: none;
+font-weight: bold;
+}
+
+.easy-title{
+font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 62px;
+line-height: 120.4%;
+/* or 79px */
+
+letter-spacing: 0.055em;
+
+color: #114353
 }
 
 
@@ -248,26 +378,34 @@ width: max-content;
 /* identical to box height */
 
 text-align: center;
+transition: 200ms all ease;
 
 color: #114353;
+}
+
+.log-in:hover{
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 button:hover{
     cursor: pointer;
 }
 
-.createaccount:hover{
+#createaccountbutton:hover{
     background: #FBBE49;
     color: #114353;
 }
 
-.createaccount{
+#createaccountbutton{
     background: #114353;
     transition: 200ms ease all;
 box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
 border-radius: 34px;
 width: 19.7vw;
 border: none;
+height: 20vh;
 
 
 
@@ -276,13 +414,15 @@ font-style: normal;
 font-weight: bold;
 font-size: 20px;
 line-height: 160%;
-margin-bottom: 5vh;
+
 /* or 32px */
 
 
 color: #FFFFFF;
 
 }
+
+
 
 .email {
     position: absolute;
@@ -703,7 +843,7 @@ color: #FFFFFF;
     justify-content: space-between;
 
     
-    position: absolute;
+    position: fixed;
     width: 11.6vw;
     height: 100vh;
     left: -1.5vw;
@@ -965,8 +1105,40 @@ height: 0px;
     float: right;
 }
 
-iframe{
-    background-color: transparent;
-    border: none;
-    color: transparent;
+/********************** Profile page ****************/
+.profile-page-content{
+    padding-left: 13.7vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.profile-page-user-display{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.user-icon-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-icon-background{
+    position: absolute;
+width: 48vh;
+height: 48vh;
+left: 42.85vw;
+top: 5.44vh;
+border-radius: 200px;
+
+background: #F18080;
 }

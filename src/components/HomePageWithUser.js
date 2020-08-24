@@ -18,9 +18,7 @@ function mapStateToProps(reduxState) {
 class HomePageWithUser extends Component {
   constructor(props) {
     super(props);
-    console.log('reduxState', this.props);
-    console.log('auth.username', this.props.auth.username);
-    this.props.getUserInfo(this.props.currentUser.username);
+    this.props.getUserInfo();
   }
 
   badgeRender = () => {
@@ -44,6 +42,7 @@ class HomePageWithUser extends Component {
 
   // render for homepage layout
   render() {
+    console.log('this.props.currentUser: ', this.props.currentUser);
     return (
       <div className="homepage-with-user">
         <div className="homepage-with-user-mainflex">
