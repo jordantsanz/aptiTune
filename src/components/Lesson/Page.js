@@ -3,13 +3,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { getLesson } from '../../actions/index';
+import { getLesson, updateUserInfo, getUserInfo } from '../../actions/index';
 import NavBar from '../NavBar';
 import FlatView from './Activities/FlatView';
 import Listening from './Activities/Listening';
 
 function mapStateToProps(reduxState) {
   return {
+    currentUser: reduxState.user,
+    lesson: reduxState.lesson,
     pages: reduxState.lesson.pages,
   };
 }
@@ -29,6 +31,10 @@ class Page extends Component {
   }
 
     componentDidMount = () => {
+      // get userinfo
+      this.props.getUserInfo();
+
+      // get lesson info
       const id = localStorage.getItem('lesson');
       const pageNum = parseInt(localStorage.getItem('next'), 10);
       console.log('Next from localStorage', pageNum);
@@ -39,7 +45,7 @@ class Page extends Component {
     }
 
     goToNext = () => {
-      console.log('gotonext clicked');
+      console.log('GOTONEXTCALLED');
       // console.log('this.props.pages.length', this.props.pages.length);
       if (this.props.pages.length > this.state.pageNumber + 1) {
         console.log('got inside');
@@ -49,7 +55,16 @@ class Page extends Component {
         this.setState((prevState) => ({ nextPage: prevState.nextPage + 1 }));
       } else {
         // for now, redirect to home....
+        const id = localStorage.getItem('lesson');
+        let { fields } = {};
+        if (this.props.currentUser.completed === undefined || this.props.currentUser.completed === []) {
+          fields = { completedLessons: [id] };
+        } else {
+          fields = { completedLessons: this.props.currentUser.completed.concat(id) };
+        }
+        console.log('fields in goToNext: ', fields);
         const { history } = this.props;
+        this.props.updateUserInfo(fields);
         history.push('/home');
         // set user info to add
       }
@@ -58,18 +73,22 @@ class Page extends Component {
     render() {
       // add page for rendering
       // console.log('pages:', this.props.pages);
-      const { pages } = this.props;
-      const page = pages[this.state.pageNumber];
       // console.log('pageNumber:', this.state.pageNumber);
       // console.log('pages[0]', pages[this.state.pageNumber]);
       // console.log('page', page);
-      if (page === null || page === undefined) {
+      if (this.props.pages === null || this.props.pages === undefined || this.props.pages.length === 0) {
         return (
           <div>
             Loading...
           </div>
         );
-      } else if (page.activity_type === 'FlatView') {
+      }
+      console.log('this.props.pages', this.props.pages);
+      console.log('this.props.currentUser: ', this.props.currentUser);
+      // const { pages } = this.props.pages;
+      // console.log('pages:', pages);
+      const page = this.props.pages[this.state.pageNumber];
+      if (page.activity_type === 'FlatView') {
         return (
           <div className="current-page">
             <NavBar />
@@ -151,4 +170,4 @@ class Page extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps, { getLesson })(Page));
+export default withRouter(connect(mapStateToProps, { getLesson, updateUserInfo, getUserInfo })(Page));

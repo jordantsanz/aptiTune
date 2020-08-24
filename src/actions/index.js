@@ -76,13 +76,16 @@ export function getUserInfo() {
   };
 }
 
-export function updateUserInfo(username, fields) {
+export function updateUserInfo(fields) {
+  console.log('updateUserInfo called in client');
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/${username}`, username, fields).then((response) => {
+    axios.put(`${ROOT_URL}/home`, fields, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
+      console.log('updateUserInfo responded with ', response.data);
       dispatch({ type: ActionTypes.UPDATE_USER_INFO, payload: response.data });
     })
       .catch((error) => {
         dispatch({ type: ActionTypes.ERROR_SET, payload: error });
+        console.log('updateUserInfo responded with error', error);
       });
   };
 }
@@ -115,7 +118,7 @@ export function signInUser(user, history) {
       }
     })
       .catch((error) => {
-        dispatch(authError(`Sign In Failed: ${error.response.data}`));
+        dispatch(authError(`Sign In Failed: ${error}`));
       });
   };
 }
