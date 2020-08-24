@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
-import { getLessons } from '../actions';
+import { getLessons, getLesson } from '../actions';
 
-// NEED TO STILL MAKE THE BUTTONS ON THE LESSONS GO SOMEWHERE! MODALS ON CLICK?
 class LessonList extends Component {
   constructor(props) {
     super(props);
@@ -19,11 +18,6 @@ class LessonList extends Component {
     this.props.getLessons();
   }
 
-  // ROUTE THIS TO LESSON PAGES
-  goToLesson = () => {
-
-  }
-
   render() {
     console.log('lessons in lessonlist', this.props.lesson.lessons);
     if (this.props.lesson.lessons === null || this.props.lesson.lessons === undefined) {
@@ -34,7 +28,7 @@ class LessonList extends Component {
     return (
       <div className="lessons">{this.props.lesson.lessons.map((l) => {
         return (
-          <div key={l.id} className="lesson-icon">
+          <div key={l._id} className="lesson-icon">
             <div className="lesson-icon-top">
               <div className="lesson-icon-title">{l.lessonid}</div>
               <div className="lesson-icon-time-div">
@@ -45,7 +39,22 @@ class LessonList extends Component {
             <div className="lesson-icon-bottom">
               <div className="lesson-icon-description">{l.description}</div>
               <div className="button-holder" id="lesson-icon-button-holder">
-                <button type="button" className="button" id="lesson-icon-button" onClick={this.goToLesson}>Learn now!</button>
+                <button type="button"
+                  className="button"
+                  id="lesson-icon-button"
+                  onClick={() => {
+                    // go to lesson
+                    console.log('button clicked');
+                    const { history } = this.props;
+                    console.log('props: ', this.props);
+                    console.log('id', l._id);
+                    console.log('goToLesson called with id', l._id);
+                    localStorage.setItem('lesson', l._id);
+                    localStorage.setItem('next', 0);
+                    this.props.getLesson(l._id, history);
+                  }}
+                >Learn now!
+                </button>
               </div>
             </div>
 
@@ -63,4 +72,4 @@ function mapStateToProps(reduxState) {
   };
 }
 // export default connect(mapStateToProps, null)(LessonList);
-export default connect(mapStateToProps, { getLessons })(LessonList);
+export default withRouter(connect(mapStateToProps, { getLessons, getLesson })(LessonList));

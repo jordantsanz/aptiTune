@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
