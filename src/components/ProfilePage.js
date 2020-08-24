@@ -141,7 +141,7 @@ iconRender = () => {
 
   render() {
     return (
-      <div className="profile-page-continer">
+      <div className="profile-page-container">
         <NavBar />
         <div className="profile-page-content">
           <div className="profile-page-user-display">

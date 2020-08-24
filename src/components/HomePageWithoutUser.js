@@ -69,18 +69,21 @@ class HomePageWithoutUser extends Component {
         <div className="homepage-without-user-flex">
           <div className="music-is-hard-section">
             <div className="music-is-hard"> Music is hard. </div>
-            <div className="homepage-without-description"><strong> We want to change that. </strong> <br />
-              Presenting AptiTune, a new and interactive way to become the musician you&apos;ve always wanted to be.
+            <div className="homepage-without-description"><strong className="strong"> We want to change that. </strong> <br />
+              Presenting AptiTune, a new and <br /> interactive way to become the <br /> musician you&apos;ve always wanted to be.
             </div>
-            <NavLink to="/signin">
-              <button type="button" className="button" id="loginbutton">Login here</button>
-            </NavLink>
-            <div className="subtitle" id="convinceme">Need to be convinced?</div>
+            <div className="signin-button-homepage">
+              <NavLink to="/signin">
+                <button type="button" className="button" id="loginbutton">Login here</button>
+              </NavLink>
+              <div className="subtitle" id="convinceme">Need to be convinced?</div>
+            </div>
+
           </div>
           {/* absolutely no clue how to put the taylor swift words in, lol */}
           <div className="voice-to-music-section">
-            <div className="title">Voice-to-music writing</div>
-            <div className="description" id="voice-to-music-description">AptiTune uses a <strong>live voice-to-sheet-music</strong>
+            <div className="title" id="voice-to-music-title">Voice-to-music writing</div>
+            <div className="description" id="voice-to-music-description">AptiTune uses a <strong>live voice-to-sheet-music </strong>
               translator. Sing a note into your computer&apos;s
               microphone, and AptiTune writes the sheet music for you.
             </div>
@@ -96,20 +99,22 @@ class HomePageWithoutUser extends Component {
             </div>
             <div className="bottom-description">
               There&apos;s so much material, and it can be daunting. It might feel like you need a natural talent that
-              you&apos;re born with...but let us prove you wrong. <strong>Learn music with us!</strong>
+              you&apos;re born with...but let us prove you wrong. <br /> <strong>Learn music with us!</strong>
             </div>
           </div>
           {this.errorMessage()}
           <div className="sign-up-section">
-            <h1 className="title" id="createAccount">Create Account</h1>
+            <h1 className="title" id="createAccount">Create account</h1>
             <input className="emailSignup" onChange={this.onInputEmail} placeholder="email" />
             <input className="usernameSignup" onChange={this.onInputUsername} placeholder="username" />
             <input type="password" className="passwordSignup" onChange={this.onInputPassword} placeholder="password" />
             <div className="input-subtitles">
               <div className="already-have">Already have an account?</div>
-              <div className="log-in">Log in here </div>
+              <NavLink to="/signin">
+                <div className="log-in">Log in here </div>
+              </NavLink>
             </div>
-            <button onClick={this.submit} type="submit" className="createaccount">Create Account</button>
+            <button onClick={this.submit} type="submit" className="button" id="createaccountbutton">Create Account</button>
           </div>
         </div>
       </div>
