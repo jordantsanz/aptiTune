@@ -1058,6 +1058,13 @@ text-align: center;
     margin-bottom: 2px;
 }
 
+#lessons-all:hover{
+    cursor: pointer;
+}
+
+#lessons-completed:hover{
+    cursor: pointer;
+}
 /********************************** Page component ***************/
 .full-page{
     display: flex;
