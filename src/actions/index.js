@@ -64,11 +64,13 @@ export function loadPage(username, lessonid, lessonTitle, pageNumber) {
 
 // gets user info given username
 export function getUserInfo() {
+  console.log('calling getUserInfo in client\n');
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/home`).then((response) => {
+    axios.get(`${ROOT_URL}/home`, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
       console.log('Front end getUserInfo response:', response.data);
       dispatch({ type: ActionTypes.GET_USER_INFO, payload: response.data });
     }).catch((error) => {
+      console.log('error in getUserInfo\n');
       dispatch({ type: ActionTypes.ERROR_SET, payload: error });
     });
   };
@@ -109,8 +111,6 @@ export function signInUser(user, history) {
       dispatch({ type: ActionTypes.AUTH_USER, payload: response.data.username });
       if (response.data.username != null) {
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', response.data.username);
-        console.log('local storage user: ', localStorage.getItem('user'));
         history.push('/home');
       }
     })
