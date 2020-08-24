@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 // root url for local: change to #####-heroku.com/api
-const ROOT_URL = 'https://aptitune-api.herokuapp.com/api';
-// const ROOT_URL = 'http://localhost:9090/api';
+// const ROOT_URL = 'https://aptitune-api.herokuapp.com/api';
+const ROOT_URL = 'http://localhost:9090/api';
 
 // action types
 export const ActionTypes = {
@@ -59,12 +59,9 @@ export function loadPage(username, lessonid, lessonTitle, pageNumber) {
 }
 
 // gets user info given username
-export function getUserInfo(username) {
-  const user = username;
-  console.log('getting user info in actions: ', user);
-  console.log('username in getUserInfo:', user);
+export function getUserInfo() {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/home`, { params: { username: user } }).then((response) => {
+    axios.get(`${ROOT_URL}/home`).then((response) => {
       console.log('Front end getUserInfo response:', response.data);
       dispatch({ type: ActionTypes.GET_USER_INFO, payload: response.data });
     }).catch((error) => {
