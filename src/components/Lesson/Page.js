@@ -10,7 +10,6 @@ import {
 import { getLesson, updateUserInfo, getUserInfo } from '../../actions/index';
 import NavBar from '../NavBar';
 import FlatView from './Activities/FlatView';
-
 import Listening from './Activities/Listening';
 
 function mapStateToProps(reduxState) {
@@ -110,7 +109,7 @@ class Page extends Component {
                   </div>
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
-                <div className="page-top-content">{page.act_type1.instructions}</div>
+                <div className="page-top-content">{page.content.instructions}</div>
               </div>
               <div className="page-bottom">
                 <FlatView onSubmit={this.goToNext} />
