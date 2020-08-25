@@ -6,11 +6,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { getLessons, getLesson } from '../actions';
 
+function mapStateToProps(reduxState) {
+  return {
+    lesson: reduxState.lesson,
+  };
+}
+
 class LessonList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
     };
   }
 
@@ -64,12 +69,6 @@ class LessonList extends Component {
       </div>
     );
   }
-}
-
-function mapStateToProps(reduxState) {
-  return {
-    lesson: reduxState.lesson,
-  };
 }
 // export default connect(mapStateToProps, null)(LessonList);
 export default withRouter(connect(mapStateToProps, { getLessons, getLesson })(LessonList));
