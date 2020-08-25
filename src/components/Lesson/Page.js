@@ -110,13 +110,17 @@ class Page extends Component {
                   </div>
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
-                <div className="page-top-content">{page.act_type1.instructions}</div>
+                <div className="page-top-content">{page.content.instructions}</div>
               </div>
               <div className="page-bottom">
-                <FlatView />
-                <button type="button" onClick={this.goToNext}>
-                  Next
-                </button>
+                <div className="flat-holder">
+                  <FlatView />
+                </div>
+                <div className="next-button-holder">
+                  <button className="button" id="next-button" type="button" onClick={this.goToNext}>
+                    Next
+                  </button>
+                </div>
               </div>
               {/*
                 <div className="activity-div">{page.act_type1}</div> {/* fill with this.props.page.activity
