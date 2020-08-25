@@ -113,19 +113,8 @@ class Page extends Component {
                 <div className="page-top-content">{page.act_type1.instructions}</div>
               </div>
               <div className="page-bottom">
-                <FlatView />
-                <button type="button" onClick={this.goToNext}>
-                  Next
-                </button>
+                <FlatView onSubmit={this.goToNext} />
               </div>
-              {/*
-                <div className="activity-div">{page.act_type1}</div> {/* fill with this.props.page.activity
-                <div className="bottom-div">
-                  <NavLink to="/:username">
-                    <button className="button" id="next" type="button" onClick={this.getNextPage}>Next</button>
-                  </NavLink>
-                </div>
-              </div> */}
             </div>
           </div>
         );
@@ -148,21 +137,9 @@ class Page extends Component {
                 <div className="page-top-description">{page.content.description}</div>
                 <div className="page-top-content">{page.act_type1.instructions}</div>
               </div>
-              <div> Inserted flat api:</div>
               <div className="page-bottom">
-                <Listening />
-                <button type="button" onClick={this.goToNext}>
-                  Next
-                </button>
+                <Listening onSubmit={this.goToNext} />
               </div>
-              {/*
-                <div className="activity-div">{page.act_type1}</div> {/* fill with this.props.page.activity
-                <div className="bottom-div">
-                  <NavLink to="/:username">
-                    <button className="button" id="next" type="button" onClick={this.getNextPage}>Next</button>
-                  </NavLink>
-                </div>
-              </div> */}
             </div>
           </div>
         );
