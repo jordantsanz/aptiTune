@@ -1153,6 +1153,42 @@ display: flex;
 justify-content: space-around;
 }
 
+.page-bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.next-button-holder{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 74%;
+}
+
+#next-button{
+    background: #FDD46A;
+box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 30px;
+line-height: 160%;
+/* identical to box height, or 48px */
+
+
+color: #114353;
+width: 16vw;
+transition: 200ms ease all;
+}
+
+#next-button:hover{
+    color: #FDD46A;
+    background-color: #114353;
+}
+
+
 #rightarrow, #leftarrow{
     margin-top: 0px;
     width: 29px !important;
@@ -1163,6 +1199,7 @@ justify-content: space-around;
 
 #rightarrow.icon:hover, #leftarrow.icon:hover{
     color: white;
+    cursor: pointer;
 }
 
 .page-top-nav-line{

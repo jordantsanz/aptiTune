@@ -43,7 +43,7 @@ class FlatView extends Component {
       } else {
         return (
           <div className="type1">
-            <iframe title="flat" src={page.activity.flatUrl} height="200" width="60%" frameBorder="0" allowFullScreen allow="midi" />
+            <iframe title="flat" src={page.activity.flatUrl} height="200" width="300" frameBorder="0" allowFullScreen allow="midi" />
           </div>
         );
       }
