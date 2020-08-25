@@ -41,7 +41,7 @@ class NavBar extends Component {
           <NavLink to="/audiowriting" className="writing-link">
             <div className="audiowriting-div">
               <FontAwesomeIcon icon={faPen} className="icon" id="writing" alt="writing-icon" />
-              <div className="icon-text">Write</div>
+              <div className="icon-text">write</div>
             </div>
           </NavLink>
         </div>

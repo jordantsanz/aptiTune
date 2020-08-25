@@ -3,9 +3,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faAngleLeft, faAngleRight,
+} from '@fortawesome/free-solid-svg-icons';
 import { getLesson, updateUserInfo, getUserInfo } from '../../actions/index';
 import NavBar from '../NavBar';
 import FlatView from './Activities/FlatView';
+
 import Listening from './Activities/Listening';
 
 function mapStateToProps(reduxState) {
@@ -97,17 +102,16 @@ class Page extends Component {
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
                   <div className="page-top-nav">
-                    {/* Arrow icon from font awesome goes here pointing left */}
+                    <FontAwesomeIcon className="icon" icon={faAngleLeft} id="leftarrow" />
                     <div className="page-top-nav-line" />
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
                     <div className="page-top-nav-line" />
-                    {/* Arrow icon from font awesome goes here pointing right */}
+                    <FontAwesomeIcon className="icon" icon={faAngleRight} id="rightarrow" onClick={this.goToNext} />
                   </div>
                 </div>
-                <div className="page-top-description">{page.content.description}</div> {/* fill with this.props.page.description */}
-                <div className="page-top-content">{page.act_type1.instructions}</div>    {/* fill with this.props.page.content */}
+                <div className="page-top-description">{page.content.description}</div>
+                <div className="page-top-content">{page.act_type1.instructions}</div>
               </div>
-              <div> Inserted flat api:</div>
               <div className="page-bottom">
                 <FlatView />
                 <button type="button" onClick={this.goToNext}>
@@ -134,15 +138,15 @@ class Page extends Component {
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
                   <div className="page-top-nav">
-                    {/* Arrow icon from font awesome goes here pointing left */}
+                    <FontAwesomeIcon className="icon" icon={faAngleLeft} id="leftarrow" />
                     <div className="page-top-nav-line" />
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
                     <div className="page-top-nav-line" />
-                    {/* Arrow icon from font awesome goes here pointing right */}
+                    <FontAwesomeIcon className="icon" icon={faAngleRight} id="rightarrow" onClick={this.goToNext} />
                   </div>
                 </div>
-                <div className="page-top-description">{page.content.description}</div> {/* fill with this.props.page.description */}
-                <div className="page-top-content">{page.act_type1.instructions}</div>    {/* fill with this.props.page.content */}
+                <div className="page-top-description">{page.content.description}</div>
+                <div className="page-top-content">{page.act_type1.instructions}</div>
               </div>
               <div> Inserted flat api:</div>
               <div className="page-bottom">
