@@ -6,27 +6,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { getLessons, getLesson } from '../actions';
 
-// NEED TO STILL MAKE THE BUTTONS ON THE LESSONS GO SOMEWHERE! MODALS ON CLICK?
+function mapStateToProps(reduxState) {
+  return {
+    lesson: reduxState.lesson,
+  };
+}
+
 class LessonList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
     };
   }
 
   componentDidMount = () => {
     this.props.getLessons();
-  }
-
-  // ROUTE THIS TO LESSON PAGES
-  goToLesson = (l) => {
-    console.log('button clicked');
-    const { history } = this.props;
-    console.log('props: ', this.props);
-    console.log('id', l._id);
-    console.log('goToLesson called with id', l._id);
-    this.props.getLesson(l._id, history);
   }
 
   render() {
@@ -39,7 +33,7 @@ class LessonList extends Component {
     return (
       <div className="lessons">{this.props.lesson.lessons.map((l) => {
         return (
-          <div key={l.id} className="lesson-icon">
+          <div key={l._id} className="lesson-icon">
             <div className="lesson-icon-top">
               <div className="lesson-icon-title">{l.lessonid}</div>
               <div className="lesson-icon-time-div">
@@ -54,11 +48,14 @@ class LessonList extends Component {
                   className="button"
                   id="lesson-icon-button"
                   onClick={() => {
+                    // go to lesson
                     console.log('button clicked');
                     const { history } = this.props;
                     console.log('props: ', this.props);
                     console.log('id', l._id);
                     console.log('goToLesson called with id', l._id);
+                    localStorage.setItem('lesson', l._id);
+                    localStorage.setItem('next', 0);
                     this.props.getLesson(l._id, history);
                   }}
                 >Learn now!
@@ -72,12 +69,6 @@ class LessonList extends Component {
       </div>
     );
   }
-}
-
-function mapStateToProps(reduxState) {
-  return {
-    lesson: reduxState.lesson,
-  };
 }
 // export default connect(mapStateToProps, null)(LessonList);
 export default withRouter(connect(mapStateToProps, { getLessons, getLesson })(LessonList));
