@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-plusplus */
@@ -14,6 +15,7 @@ import React, { Component } from 'react';
 import Vex from 'vexflow';
 // eslint-disable-next-line import/extensions
 import { frequencies } from './frequencies.js';
+import NavBar from './NavBar';
 
 const Pitchfinder = require('pitchfinder');
 
@@ -57,12 +59,6 @@ class AudioWriting extends Component {
   setTempo = (event) => {
     this.setState({
       tempo: event.target.value,
-    });
-  }
-
-  setQuant = (event) => {
-    this.setState({
-      quantization: event.target.value,
     });
   }
 
@@ -333,36 +329,26 @@ class AudioWriting extends Component {
   render() {
     const { recording, videos } = this.state;
     return (
-      <div className="camera">
-        <input className="input" id="tempo" placeholder="input tempo here (ex. 110)" onChange={this.setTempo} />
-        <input className="input" id="quantization" placeholder="input quantization here" onChange={this.setQuant} />
-        <video
-          style={{ width: 400 }}
-          ref={(v) => {
-            this.video = v;
-          }}
-        >
-          Video stream not available.
-        </video>
-        <div>
-          {!recording && <button type="button" onClick={(e) => this.startRecording(e)}>Record</button>}
-          {recording && <button type="button" onClick={(e) => this.stopRecording(e)}>Stop</button>}
-        </div>
-        <div id="staff"> o</div>
-        <button type="button" onClick={this.makeStaff}>Make Staff</button>
-        <div>
-          <p>Key: {this.state.key}</p>
-          <p>Octave: {this.state.octave}</p>
-          <h3>Recorded videos:</h3>
-          {videos.map((videoURL, i) => (
-            <div key={`video_${i}`}>
-              <video style={{ width: 200 }} src={videoURL} autoPlay loop />
-              <div>
-                <button type="button" onClick={() => this.deleteVideo(videoURL)}>Delete</button>
-                <a href={videoURL}>Download</a>
-              </div>
-            </div>
-          ))}
+      <div className="audiowriting-main">
+        <NavBar />
+        <div className="audiowriting-content">
+          <div className="writing-header">
+            Write your own sheet music!
+          </div>
+          <input className="input" id="tempo" placeholder="input tempo here (ex. 110)" onChange={this.setTempo} />
+          <video
+            style={{ width: 400 }}
+            ref={(v) => {
+              this.video = v;
+            }}
+          >
+            Video stream not available.
+          </video>
+          <div>
+            {!recording && <button type="button" className="button" id="start-record" onClick={(e) => this.startRecording(e)}>Record</button>}
+            {recording && <button type="button" className="button" id="stop-record" onClick={(e) => this.stopRecording(e)}>Stop</button>}
+          </div>
+          <div id="staff"></div>
         </div>
       </div>
     );
