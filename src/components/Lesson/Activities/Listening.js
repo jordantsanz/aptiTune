@@ -85,7 +85,8 @@ class Listening extends Component {
       } else if (page.activity.listening_type === 'sheet_music') { // for sheet listening exercises
         return (
           <div className="Listening">
-            <iframe title="audio-file" className="audio-file" src={page.activity.audioUrl} />
+            <div className="activityInstructions">{page.activity.instructions}</div>
+            <iframe title="audio-file" className="audio-file" src={page.activity.audioUrl} style={{ opacity: '0.4' }} />
             <div className="incorrectMessage">{this.state.message}</div>
             <ul className="listeningAnswers">
               <li>
@@ -103,7 +104,7 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  Answer 1
+                  {page.activity.answers[0]}
                 </button>
               </li>
               <li>
@@ -121,7 +122,7 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  Answer 2
+                  {page.activity.answers[1]}
                 </button>
               </li>
               <li>
@@ -139,7 +140,7 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  Answer 3
+                  {page.activity.answers[2]}
                 </button>
               </li>
               <li>
@@ -157,7 +158,7 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  Answer 4
+                  {page.activity.answers[3]}
                 </button>
               </li>
             </ul>

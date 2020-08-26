@@ -35,7 +35,7 @@ class LessonList extends Component {
         return (
           <div key={l._id} className="lesson-icon">
             <div className="lesson-icon-top">
-              <div className="lesson-icon-title">{l.lessonid}</div>
+              <div className="lesson-icon-title">{l.title}</div>
               <div className="lesson-icon-time-div">
                 <FontAwesomeIcon icon={faClock} className="icon" id="clock" />
                 <div className="lesson-icon-time">10min</div>

@@ -684,13 +684,13 @@ color: #919191;
 	}
     width: 53vw;
     height: 40vh;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
     position: fixed;
     margin-top: 20vh;
-
 }
 
 
@@ -1114,13 +1114,19 @@ color: #114353;
 margin-top: 12px;
 }
 
-.page-top-description, .page-top-content, .page-top-third{
+.page-top-description, .page-top-content, .page-top-third, .suppContent{
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 50%;
 }
 
+.suppContent{
+    margin-left: 30vw;
+    margin-bottom: 10vh;
+    max-width:60%;
+    max-height:100%;
+}
 .page-top-description{
     height: 180%;
     font-family: Montserrat;
@@ -1132,8 +1138,7 @@ line-height: 137.88%;
 
 display: flex;
 align-items: flex-start;
-margin-left: 4vw;
-
+margin-left: 11.6vw;
 color: #2D2D2D;
 }
 
@@ -1265,6 +1270,10 @@ color: #FFFFFF;
     float: right;
 }
 
+.activityInstructions{
+    margin-right: 20vw;
+    margin-top: 2vh;
+}
 /********************** Profile page ****************/
 .profile-page-content{
     padding-left: 13.7vw;
@@ -1357,12 +1366,17 @@ background: #F18080;
 }
 /*******LISTENING*******/
 .Listening{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     iframe{
-        height: 100px;
-        width: 200px;
+        height: 80px;
+        width: 250px;
         border: none;
+        background: transparent;
     }
 }
+
 .listeningAnswers{
     list-style: none;
     display: flex;

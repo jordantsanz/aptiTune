@@ -63,7 +63,8 @@ class Page extends Component {
         let { fields } = {};
         if (this.props.currentUser.completed === undefined || this.props.currentUser.completed === []) {
           fields = { completedLessons: [id] };
-        } else {
+        } else if (!this.props.currentUser.completed.includes(id)) {
+          console.log('result of includes', this.props.currentUser.completed.includes(id));
           fields = { completedLessons: this.props.currentUser.completed.concat(id) };
         }
         console.log('fields in goToNext: ', fields);
@@ -76,10 +77,6 @@ class Page extends Component {
 
     render() {
       // add page for rendering
-      // console.log('pages:', this.props.pages);
-      // console.log('pageNumber:', this.state.pageNumber);
-      // console.log('pages[0]', pages[this.state.pageNumber]);
-      // console.log('page', page);
       if (this.props.pages === null || this.props.pages === undefined || this.props.pages.length === 0) {
         return (
           <div>
@@ -87,11 +84,8 @@ class Page extends Component {
           </div>
         );
       }
-      console.log('this.props.pages', this.props.pages);
-      console.log('this.props.currentUser: ', this.props.currentUser);
-      // const { pages } = this.props.pages;
-      // console.log('pages:', pages);
       const page = this.props.pages[this.state.pageNumber];
+      console.log('page:', page);
       if (page.activity_type === 'FlatView') {
         return (
           <div className="current-page">
@@ -110,6 +104,7 @@ class Page extends Component {
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
                 <div className="page-top-content">{page.content.instructions}</div>
+                <img alt=" " className="suppContent" title="supplementaryContent" src={page.content.url} />
               </div>
               <div className="page-bottom">
                 <FlatView onSubmit={this.goToNext} />
@@ -134,7 +129,7 @@ class Page extends Component {
                   </div>
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
-                <div className="page-top-content">{page.act_type1.instructions}</div>
+                <div className="page-top-content">{page.content.instructions}</div>
               </div>
               <div className="page-bottom">
                 <Listening onSubmit={this.goToNext} />
