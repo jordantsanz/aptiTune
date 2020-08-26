@@ -3,6 +3,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faAngleLeft, faAngleRight,
+} from '@fortawesome/free-solid-svg-icons';
 import { getLesson, updateUserInfo, getUserInfo } from '../../actions/index';
 import NavBar from '../NavBar';
 import FlatView from './Activities/FlatView';
@@ -59,7 +63,8 @@ class Page extends Component {
         let { fields } = {};
         if (this.props.currentUser.completed === undefined || this.props.currentUser.completed === []) {
           fields = { completedLessons: [id] };
-        } else {
+        } else if (!this.props.currentUser.completed.includes(id)) {
+          console.log('result of includes', this.props.currentUser.completed.includes(id));
           fields = { completedLessons: this.props.currentUser.completed.concat(id) };
         }
         console.log('fields in goToNext: ', fields);
@@ -72,10 +77,6 @@ class Page extends Component {
 
     render() {
       // add page for rendering
-      // console.log('pages:', this.props.pages);
-      // console.log('pageNumber:', this.state.pageNumber);
-      // console.log('pages[0]', pages[this.state.pageNumber]);
-      // console.log('page', page);
       if (this.props.pages === null || this.props.pages === undefined || this.props.pages.length === 0) {
         return (
           <div>
@@ -83,11 +84,8 @@ class Page extends Component {
           </div>
         );
       }
-      console.log('this.props.pages', this.props.pages);
-      console.log('this.props.currentUser: ', this.props.currentUser);
-      // const { pages } = this.props.pages;
-      // console.log('pages:', pages);
       const page = this.props.pages[this.state.pageNumber];
+      console.log('page:', page);
       if (page.activity_type === 'FlatView') {
         return (
           <div className="current-page">
@@ -97,31 +95,20 @@ class Page extends Component {
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
                   <div className="page-top-nav">
-                    {/* Arrow icon from font awesome goes here pointing left */}
+                    <FontAwesomeIcon className="icon" icon={faAngleLeft} id="leftarrow" />
                     <div className="page-top-nav-line" />
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
                     <div className="page-top-nav-line" />
-                    {/* Arrow icon from font awesome goes here pointing right */}
+                    <FontAwesomeIcon className="icon" icon={faAngleRight} id="rightarrow" onClick={this.goToNext} />
                   </div>
                 </div>
-                <div className="page-top-description">{page.content.description}</div> {/* fill with this.props.page.description */}
-                <div className="page-top-content">{page.act_type1.instructions}</div>    {/* fill with this.props.page.content */}
+                <div className="page-top-description">{page.content.description}</div>
+                <div className="page-top-content">{page.content.instructions}</div>
+                <img alt=" " className="suppContent" title="supplementaryContent" src={page.content.url} />
               </div>
-              <div> Inserted flat api:</div>
               <div className="page-bottom">
-                <FlatView />
-                <button type="button" onClick={this.goToNext}>
-                  Next
-                </button>
+                <FlatView onSubmit={this.goToNext} />
               </div>
-              {/*
-                <div className="activity-div">{page.act_type1}</div> {/* fill with this.props.page.activity
-                <div className="bottom-div">
-                  <NavLink to="/:username">
-                    <button className="button" id="next" type="button" onClick={this.getNextPage}>Next</button>
-                  </NavLink>
-                </div>
-              </div> */}
             </div>
           </div>
         );
@@ -134,31 +121,19 @@ class Page extends Component {
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
                   <div className="page-top-nav">
-                    {/* Arrow icon from font awesome goes here pointing left */}
+                    <FontAwesomeIcon className="icon" icon={faAngleLeft} id="leftarrow" />
                     <div className="page-top-nav-line" />
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
                     <div className="page-top-nav-line" />
-                    {/* Arrow icon from font awesome goes here pointing right */}
+                    <FontAwesomeIcon className="icon" icon={faAngleRight} id="rightarrow" onClick={this.goToNext} />
                   </div>
                 </div>
-                <div className="page-top-description">{page.content.description}</div> {/* fill with this.props.page.description */}
-                <div className="page-top-content">{page.act_type1.instructions}</div>    {/* fill with this.props.page.content */}
+                <div className="page-top-description">{page.content.description}</div>
+                <div className="page-top-content">{page.content.instructions}</div>
               </div>
-              <div> Inserted flat api:</div>
               <div className="page-bottom">
-                <Listening />
-                <button type="button" onClick={this.goToNext}>
-                  Next
-                </button>
+                <Listening onSubmit={this.goToNext} />
               </div>
-              {/*
-                <div className="activity-div">{page.act_type1}</div> {/* fill with this.props.page.activity
-                <div className="bottom-div">
-                  <NavLink to="/:username">
-                    <button className="button" id="next" type="button" onClick={this.getNextPage}>Next</button>
-                  </NavLink>
-                </div>
-              </div> */}
             </div>
           </div>
         );
