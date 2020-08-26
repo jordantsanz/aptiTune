@@ -31,7 +31,7 @@ class AudioWriting extends Component {
       octave: '',
       key: '',
       tempo: 60,
-      quantization: 1,
+      quantization: 2,
       duration: '',
       measures: '',
     };
@@ -41,7 +41,6 @@ class AudioWriting extends Component {
     const stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
     // show it to user
     this.video.srcObject = stream;
-    // this.video.play();
     // init recording
     this.mediaRecorder = new MediaRecorder(stream, {
       mimeType: videoType,
@@ -107,10 +106,9 @@ class AudioWriting extends Component {
                 const audioData = audioBuffer.getChannelData(0);
                 console.log(audioData);
                 const detectPitch = new Pitchfinder.YIN();
-                // Pitchfinder.frequencies();
                 const testing = frequencies(detectPitch, audioData, {
                   tempo: this.state.tempo, // in BPM, defaults to 120
-                  quantization: 4, // samples per beat, defaults to 4 (i.e. 16th notes)
+                  quantization: 2, // samples per beat, defaults to 4 (i.e. 16th notes)
                   sampleRate: 44100,
                 });
                 let measure = this.state.duraiton * this.state.tempo;
@@ -120,11 +118,11 @@ class AudioWriting extends Component {
                 });
                 console.log(this.state.measure);
                 console.log(testing);
-                const keys = ['c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b', 'c'];
+                const keys = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b'];
                 const c0 = 440.0 * Math.pow(2.0, -4.75);
                 let i;
                 const notes = [];
-                // now we do dat musical math; creds to https://stackoverflow.com/questions/41174545/pitch-detection-node-js?rq=1 for the actual math
+                // musical math; creds to https://stackoverflow.com/questions/41174545/pitch-detection-node-js?rq=1 for the actual math
                 // eslint-disable-next-line no-plusplus
                 for (i = 0; i < testing.length; i++) {
                   const halfStepsBelowMiddleC = Math.round(12.0 * Math.log2(testing[i] / c0));
@@ -148,14 +146,14 @@ class AudioWriting extends Component {
                   measureBeats += 1; // beats in a measure
 
                   // if all of the beats in a measure are filled
-                  if (measureBeats != 16) {
+                  if (measureBeats != 8) {
                     // if the note after the current note is the same, add 1 to the count of same notes in a row
                     while (notes[nextNote] == notes[currentNote] && nextNote < notes.length) {
                       inARow += 1;
                       nextNote += 1;
                       measureBeats += 1;
 
-                      if (measureBeats == 16) {
+                      if (measureBeats == 8) {
                         break;
                       }
                     }
@@ -164,34 +162,34 @@ class AudioWriting extends Component {
                   let length = '';
                   switch (inARow) {
                     case 1:
-                      length = '16';
-                      break;
-                    case 2:
                       length = '8';
                       break;
+                    case 2:
+                      length = 'q';
+                      break;
                     case 3:
-                      length = '8d';
+                      length = 'qd';
                       break;
                     case 4:
-                      length = 'q';
+                      length = 'h';
                       break;
                     case 5:
-                      length = 'q';
+                      length = 'h';
                       nextNote -= 1;
                       measureBeats -= 1;
                       break;
                     case 6:
-                      length = 'qd';
+                      length = 'hd';
                       break;
                     case 7:
-                      length = 'qd';
+                      length = 'hd';
                       nextNote -= 1;
                       measureBeats -= 1;
                       break;
                     case 8:
-                      length = 'h';
+                      length = 'w';
                       break;
-                    case 9:
+                    /* case 9:
                       length = 'h';
                       nextNote -= 1;
                       measureBeats -= 1;
@@ -226,7 +224,7 @@ class AudioWriting extends Component {
                       break;
                     case 16:
                       length = 'w';
-                      break;
+                      break; */
                     default:
                       break;
                   }
@@ -234,8 +232,8 @@ class AudioWriting extends Component {
                   const noteObj = new VF.StaveNote({ clef: 'treble', keys: [notes[currentNote]], duration: length });
                   singleMeasure.push(noteObj);
 
-                  // make array to hold da note
-                  if (measureBeats == 16) {
+                  // make array to hold the note
+                  if (measureBeats == 8) {
                     if (notes[currentNote] == notes[nextNote]) {
                       const tie = new VF.StaveTie({
                         first_note: notes[currentNote],
@@ -251,12 +249,10 @@ class AudioWriting extends Component {
                   }
                   inARow = 0;
                   currentNote = nextNote;
-
-                  // check for full measure, then check for tie
                 }
 
-                while (measureBeats < 16) {
-                  const rest = new VF.StaveNote({ clef: 'treble', keys: ['b/4'], duration: '16r' });
+                while (measureBeats < 8) {
+                  const rest = new VF.StaveNote({ clef: 'treble', keys: ['b/4'], duration: '8r' });
                   singleMeasure.push(rest);
                   measureBeats += 1;
                 }
@@ -283,11 +279,10 @@ class AudioWriting extends Component {
     const renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
     // Size our SVG:
-    renderer.resize(500, 500);
+    renderer.resize(500, 150);
 
     // And get a drawing context:
     const context = renderer.getContext();
-    // var ctx = new contextBuilder(options.elementId, 400, 300);
     // Create a stave at position 10, 40 of width 400 on the canvas.
     let stave = new VF.Stave(10, 40, 400);
     stave.setContext(context);
@@ -335,7 +330,7 @@ class AudioWriting extends Component {
           <div className="writing-header">
             Write your own sheet music!
           </div>
-          <input className="input" id="tempo" placeholder="input tempo here (ex. 110)" onChange={this.setTempo} />
+          <input className="input" id="tempo" placeholder="input tempo here (ex. 110) -- default is 60" onChange={this.setTempo} />
           <video
             style={{ width: 400 }}
             ref={(v) => {
