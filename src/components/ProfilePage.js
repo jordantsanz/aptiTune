@@ -163,7 +163,7 @@ iconRender = () => {
             <div className="stats-graphs" />
           </div>
           <div className="profile-page-badges-section">
-            <div className="title" id="badges-title-profile">{this.props.currentUser.username}&apos;s Badges </div>
+            <div className="title" id="badges-title-profile">Your Badges </div>
             <div className="badges-trophy-case">
               {/* need to loop through all badges here and render; check to see if badge name is in user.badges array, and color red if so; */}
             </div>
@@ -172,7 +172,7 @@ iconRender = () => {
             <div className="title" id="user-settings-title">Change Password</div>
             <div className="settings-content">
               <div className="settings-current-container">
-                <div className="subtitle" id="settings-current-title">Current</div>
+                <div className="subtitle" id="settings-current-title">current</div>
                 <input className="input" id="current-password-input" onChange={this.onInputChangeCurrentPassword} placeholder="current password" />
               </div>
               <div className="settings-new-continer">
@@ -190,30 +190,30 @@ iconRender = () => {
             </div>
           </div>
           <div className="delete-profile-container">
-            <div className="title" id="user-settings-title">Delete Account</div>
+            <div className="title" id="user-settings-title-delete">Delete Account</div>
             <div className="subtitle" id="delete-user-subtitle">
               Are you sure you want to delete your account?
               You will not be able log in or restore your account or the data you stored with us.
             </div>
             <div className="delete-modal">
               <button className="button" id="delete-user" type="button">Yes, I’m breaking up with you</button>
-              <div id="delete-user-moadl" className="modal">
+              <div id="delete-user-modal" className="modal">
                 <div className="modal-content">
                   <span className="close">&times;</span>
                   <div className="modal-content-detail">
-                    <div className="title" id="user-settings-title">We&apos;re breaking up?</div>
-                    <div className="subtitle" id="delete-user-subtitle">We&apos;re sorry to hear you’d like to delete your account with us. <br /> If you&apos;re just looking to take a break, you can always sign out of your account.  </div>
+                    <div className="title" id="user-settings-title-breakup">We&apos;re breaking up?</div>
+                    <div className="subtitle" id="delete-user-subtitle-breakup">We&apos;re sorry to hear you’d like to delete your account with us. <br /> If you&apos;re just looking to take a break, you can always sign out of your account.  </div>
                     <div className="subtitle">You will not be able to log back in or restore your account or the data you stored with us.</div>
-                    <div className="settings-current-container">
+                    <div className="settings-current-container-breakup">
                       <div className="subtitle" id="settings-current-title">email</div>
                       <input className="input" id="current-password-input" onChange={this.onInputChangeCurrentPassword} placeholder="your email" />
                     </div>
                     <div className="settings-new-continer">
-                      <div className="subtitle" id="settings-new-title">password</div>
+                      <div className="subtitle" id="settings-new-title-delete">password</div>
                       <input className="input" id="new-password-input" onChange={this.onInputChangeNewPassword} placeholder="your password" />
                     </div>
                     <div className="settings-retype-new-container">
-                      <div className="subtitle" id="settings-retype-new-title">re-type password</div>
+                      <div className="subtitle" id="settings-retype-new-title-delete">re-type password</div>
                       <input className="input" id="retype-new-password-input" onChange={this.onInputChangeRetypePassword} placeholder="re-type your password" />
                     </div>
                     <div className="delete-user-buttons">
