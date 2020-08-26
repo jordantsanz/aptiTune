@@ -5,11 +5,9 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faHome, faGraduationCap, faUser, faSignOutAlt, faPen,
+  faHome, faUser, faSignOutAlt, faPen,
 } from '@fortawesome/free-solid-svg-icons';
 import { signOutUser } from '../actions/index';
-
-// ROUTES NOT CORRECT; NEED TO BE CHANGED
 
 class NavBar extends Component {
   signOut = () => {
@@ -24,12 +22,6 @@ class NavBar extends Component {
             <div className="hompage-div">
               <FontAwesomeIcon icon={faHome} className="icon" id="home" alt="home-icon" />
               <div className="icon-text">home</div>
-            </div>
-          </NavLink>
-          <NavLink to="" className="learn-link">
-            <div className="learn-div">
-              <FontAwesomeIcon icon={faGraduationCap} className="icon" id="learn" alt="learn-icon" />
-              <div className="icon-text">learn</div>
             </div>
           </NavLink>
           <NavLink to="/:username" className="user-link">

@@ -401,8 +401,8 @@ color: #F18080;
 }
 
 button{
-    width: 25.2vw;
-    border: none;
+width: 25.2vw;
+border: none;
 height: 8.5vh;
 transition: 200ms ease all;
 outline: none;
@@ -540,8 +540,8 @@ color: #FFFFFF;
 }
 .title{
     color: #F18080;
-    font-size: 30px;
-    line-height: 137.88%;
+    font-size: 40px;
+    line-height: 77.88%;
 }
 .homepage-with-user-content{
     display: flex;
@@ -722,15 +722,14 @@ font-weight: normal;
 }
 
 .lesson-icon{
-position: absolute;
 width: 50vw;
 height: 21.3vh;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
 align-items: center;
-margin-top: 10vh;
-margin-bottom: 10vh;
+margin-top: 4vh;
+margin-bottom: 3vh;
 
 
 background: #FAEFE5;
@@ -814,7 +813,7 @@ transition: 200ms all ease;
     font-family: Montserrat;
 font-style: normal;
 font-weight: normal;
-font-size: 13px;
+font-size: 15.5px;
 line-height: 137.88%;
 /* or 28px */
 
@@ -828,7 +827,7 @@ color: #000000;
     font-family: Ubuntu;
 font-style: normal;
 font-weight: bold;
-font-size: 25px;
+font-size: 28px;
 margin-top: 2vh;
 line-height: 137.88%;
 /* or 41px */
@@ -900,7 +899,7 @@ color: #FFFFFF;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
+    z-index: 100;
     
     position: fixed;
     width: 11.6vw;
@@ -1319,14 +1318,32 @@ color: #FFFFFF;
 }
 
 .doneButton{
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    float: right;
     background-color: #FD966A;
     border-radius: 20px;
     width: 120px;
     color: white;
+    transition: 200ms ease all;
+box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+width: 19.7vw;
+border: none;
+height: 9vh;
+align-self: flex-end;
+margin-right: 14vw;
+margin-bottom: 2vh;
+
+
+
+font-family: 'Montserrat', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 160%;
+
+/* or 32px */
+
+
+color: #FFFFFF;
 }
 
 .doneButton:hover{
@@ -1367,6 +1384,18 @@ color: #FFFFFF;
     }
 }
 
+body{
+    background: transparent;
+}
+
+iframe{
+    background-color: white !important;
+
+    body{
+        background: transparent; 
+    }
+}
+
 .listeningAnswers{
     list-style: none;
     display: flex;
@@ -1376,6 +1405,18 @@ color: #FFFFFF;
         width: 40vw;
         margin: 5px 5px;
         background-color: #FDD46A;
+        border-radius: 20px;
+        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+        border-radius: 34px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 30px;
+        /* identical to box height, or 48px */
+        
+        
+        color: white;
+        transition: 200ms ease all;
     }
     button:hover {
          background-color: #114353;
@@ -1389,6 +1430,35 @@ color: #FFFFFF;
 .incorrectMessage{
     color: red;
     text-align: center;
+}
+
+.activityInstructions{
+    font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 137.88%;
+/* identical to box height, or 69px */
+
+display: flex;
+align-items: center;
+letter-spacing: 0.015em;
+
+color: #114353;
+}
+
+/*********************************** audiowriting ************************/
+.audiowriting-content{
+    margin-left: 12.5vw;
+}
+
+#start-record, #stop-record{
+
+    
+background: #114353;
+box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+
 }
 
 .user-icon-background{
@@ -1480,9 +1550,40 @@ height: 55px;
 left: -250px;
 top: 0px;
 
+
 font-family: Montserrat;
 font-style: normal;
 font-weight: bold;
+font-size: 25px;
+line-height: 160%;
+/* or 40px */
+
+text-align: center;
+
+color: #FFFFFF;
+transition: 200ms ease all;
+}
+
+#stop-record:hover, #start-record:hover{
+    cursor: pointer;
+    background: #FBBE49;
+    color: #114353;
+}
+
+.writing-header{
+    
+font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 50px;
+line-height: 137.88%;
+/* identical to box height, or 69px */
+
+display: flex;
+align-items: center;
+letter-spacing: 0.015em;
+
+color: #114353;
 font-size: 40px;
 line-height: 137.88%;
 /* or 55px */
