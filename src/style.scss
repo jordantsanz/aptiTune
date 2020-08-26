@@ -1391,10 +1391,10 @@ color: #FFFFFF;
     flex-direction: column;
     align-items: center;
     iframe{
-        height: 80px;
-        width: 250px;
+        height: 100px;
+        width: 200px;
         border: none;
-        background: transparent;
+        /* background: transparent; */ 
     }
 }
 
