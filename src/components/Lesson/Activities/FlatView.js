@@ -46,7 +46,7 @@ class FlatView extends Component {
 
       for (let i = 0; i < page.activity.answer_count; i += 1) {
         const arr = this.state.correctnessArray;
-        const answer = this.state.inputAnswers[i].trim();
+        const answer = this.state.inputAnswers[i].trim().toLowerCase();
         console.log('answer', answer);
         if (answer === page.activity.correct_answers[i]) {
           console.log(i, ' is correct');
