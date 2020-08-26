@@ -118,7 +118,7 @@ class AudioWriting extends Component {
                 });
                 console.log(this.state.measure);
                 console.log(testing);
-                const keys = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b'];
+                const keys = ['c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b', 'c'];
                 const c0 = 440.0 * Math.pow(2.0, -4.75);
                 let i;
                 const notes = [];
