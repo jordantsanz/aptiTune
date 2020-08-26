@@ -327,7 +327,7 @@ margin-right: 10px;
 }
 
 #createAccount{
-    font-size: 40px;
+    font-size: 5vw;
     font-family: Ubuntu;
 font-style: italic;
 font-weight: bold;
@@ -381,7 +381,7 @@ color: #E46161;
     margin-bottom: 30px;
 }
 
-.description{
+.description, .no-lessons-completed{
 
     
 font-family: Montserrat;
@@ -699,7 +699,11 @@ color: #919191;
     display: flex;
 align-items: center;
 letter-spacing: 0.015em;
-
+overflow: hidden;
+text-overflow: ellipsis;
+word-wrap: break-word;
+line-height: 1em; /* a */
+max-height: 3em;
 color: #F18080;
 font-family: Ubuntu;
 font-style: normal;
@@ -763,6 +767,7 @@ border-radius: 27px;
     width: 19px !important;
     color: #FD966A;
     margin-right: .5vw;
+    margin-top: 0px;
 }
 
 .lesson-icon-time{
@@ -1080,8 +1085,9 @@ text-align: center;
     flex-direction: column;
     justify-content: center;
     width: 127vw;
-    height: 55vh;
-    margin-left: -13vw;
+    height: fit-content;
+    padding-bottom: 3vh;
+    margin-left: -18vw;
     top: -9vh;
     
     background: #FDD46A;
@@ -1092,9 +1098,11 @@ text-align: center;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    margin-left: 12.5vw;
+    margin-left: 18vw;
     height: 100%;
     width: 67%;
+    margin-top: 4vh;
+    align-items: center;
 }
 
 .page-top-title{
@@ -1121,10 +1129,7 @@ margin-top: 12px;
 }
 
 .suppContent{
-    margin-left: 30vw;
-    margin-bottom: 10vh;
-    max-width:60%;
-    max-height:100%;
+    width: fit-content;
 }
 .page-top-description{
     height: 180%;
@@ -1137,8 +1142,17 @@ line-height: 137.88%;
 
 display: flex;
 align-items: flex-start;
-margin-left: 11.6vw;
+margin-left: 18vw;
 color: #2D2D2D;
+}
+
+.page-top-content-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 12.5vw;
+    width: 70%;
 }
 
 .page-top-nav{
@@ -1453,14 +1467,22 @@ color: #114353;
 }
 
 #start-record, #stop-record{
-
-    
-background: #114353;
-box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
-border-radius: 34px;
-
+    background: #FBBE49;
+    box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+    border-radius: 34px;
+    border: none;
+    color: #114353;
+    width: 25.2vw;
+    height: 8.5vh;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
 }
 
+#user-icon{
+    width: 16vw;
+}
 .user-icon-background{
     position: absolute;
 width: 48vh;
@@ -1470,14 +1492,6 @@ top: 5.44vh;
 border-radius: 200px;
 
 background: #F18080;
-}
-
-.title {
-    font-family: Montserrat;
-font-style: normal;
-font-weight: bold;
-font-size: 40px;
-line-height: 137.88%;
 }
 
 #stats-title {
@@ -1566,8 +1580,8 @@ transition: 200ms ease all;
 
 #stop-record:hover, #start-record:hover{
     cursor: pointer;
-    background: #FBBE49;
-    color: #114353;
+    background: #114353;
+    color: white;
 }
 
 .writing-header{
@@ -1584,11 +1598,6 @@ align-items: center;
 letter-spacing: 0.015em;
 
 color: #114353;
-font-size: 40px;
-line-height: 137.88%;
-/* or 55px */
-
-color: #F18080;
 
 }
 

@@ -103,8 +103,9 @@ class Page extends Component {
                   </div>
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
-                <div className="page-top-content">{page.content.instructions}</div>
-                <img alt=" " className="suppContent" title="supplementaryContent" src={page.content.url} />
+                <div className="page-top-content-container">
+                  <img alt=" " className="suppContent" title="supplementaryContent" src={page.content.url} />
+                </div>
               </div>
               <div className="page-bottom">
                 <FlatView onSubmit={this.goToNext} />

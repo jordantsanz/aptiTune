@@ -37,7 +37,7 @@ class CompletedList extends Component {
     const completed = this.props.lesson.lessons.filter((lesson) => this.props.currentUser.completed.includes(lesson._id));
     if (completed === null || completed === undefined || completed.length === 0) {
       return (
-        <div>No lessons completed</div>
+        <div className="no-lessons-completed">No lessons completed. </div>
       );
     } else {
       return (
