@@ -65,10 +65,13 @@
 - yarn add react-redux redux redux-thunk
 - yarn add express body-parser
 - yarn add cors path morgan mongoose
+- yarn add @fortawesome/free-solid-svg-icons
+- yarn add @fortawesome/react-fontawesome
 
 ## Deployment
 
 Deployed with api on heroku, front-end on surge.sh. 
+[frontend](http://aptitune.surge.sh/signup)
 
 ## Authors
 
