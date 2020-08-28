@@ -92,9 +92,7 @@ class Page extends Component {
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
                   <div className="page-top-nav">
-                    <div className="page-top-nav-line" />
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
-                    <div className="page-top-nav-line" />
                   </div>
                 </div>
                 <div className="page-top-description">{page.content.description}</div>

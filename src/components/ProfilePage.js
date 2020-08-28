@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
-import { updateUserInfo } from '../actions/index';
+import { updateUserInfo, getUserInfo } from '../actions/index';
 import NavBar from './NavBar';
 
 class ProfilePage extends Component {
@@ -25,10 +25,16 @@ class ProfilePage extends Component {
   }
 
 iconRender = () => {
+  console.log(this.props.currentUser);
+  if (this.state.icon === -1) {
+    this.setState({
+      icon: this.props.currentUser.icon,
+    });
+  }
   if (this.state.icon === 0) {
     return (
       <div className="icon-div">
-        <img clasName="user-icon" id="0" alt="user-icon" />
+        <img className="user" id="user-icon" alt="user-icon" src="https://aptitune.s3.amazonaws.com/eighth+note.png" />
       </div>
     );
   }
@@ -36,7 +42,7 @@ iconRender = () => {
   if (this.state.icon === 1) {
     return (
       <div className="icon-div">
-        <img className="user-icon" id="1" alt="user-icon" />
+        <img className="user" id="user-icon" alt="user-icon" src="https://aptitune.s3.amazonaws.com/sixteenth+note.png" />
       </div>
     );
   }
@@ -44,7 +50,7 @@ iconRender = () => {
   if (this.state.icon === 2) {
     return (
       <div className="icon-div">
-        <img className="user-icon" id="2" alt="user-icon" />
+        <img className="user" id="user-icon" alt="user-icon" src="https://aptitune.s3.amazonaws.com/half+note.png" />
       </div>
     );
   }
@@ -52,14 +58,14 @@ iconRender = () => {
   if (this.state.icon === 3) {
     return (
       <div className="icon-div">
-        <img className="user-icon" id="3" alt="user-icon" />
+        <img className="user" id="user-icon" alt="user-icon" src="https://aptitune.s3.amazonaws.com/whole+note.png" />
       </div>
     );
   }
   if (this.state.icon === 4) {
     return (
       <div className="icon-div">
-        <img className="user-icon" id="4" alt="user-icon" />
+        <img className="user" id="user-icon" alt="user-icon" src="https://aptitune.s3.amazonaws.com/whole+note.png" />
       </div>
     );
   }
@@ -264,4 +270,4 @@ function mapStateToProps(reduxState) {
   };
 }
 
-export default connect(mapStateToProps, { updateUserInfo })(ProfilePage);
+export default connect(mapStateToProps, { updateUserInfo, getUserInfo })(ProfilePage);
