@@ -86,7 +86,7 @@ class Listening extends Component {
         return (
           <div className="Listening">
             <div className="activityInstructions">{page.activity.instructions}</div>
-            <iframe title="audio-file" allowtransparency="true" className="audio-file" src={page.activity.audioUrl} style={{ opacity: '0.4', background: 'transparent' }} />
+            <audio src={page.activity.audioUrl} type="audio/m4a" title="audio-file" controls />
             <div className="incorrectMessage">{this.state.message}</div>
             <ul className="listeningAnswers">
               <li>
@@ -178,7 +178,7 @@ class Listening extends Component {
       } else {
         return ( // for single interval listening
           <div className="Listening">
-            <iframe title="audio-file" src={page.activity.audioUrl} />
+            <audio src={page.activity.audioUrl} type="audio/m4a" title="audio-file" controls />
             <ul className="listeningAnswers">
               <li>
                 <button type="button"

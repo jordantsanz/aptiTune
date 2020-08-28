@@ -3,10 +3,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faAngleLeft, faAngleRight,
-} from '@fortawesome/free-solid-svg-icons';
 import { getLesson, updateUserInfo, getUserInfo } from '../../actions/index';
 import NavBar from '../NavBar';
 import FlatView from './Activities/FlatView';
@@ -95,11 +91,9 @@ class Page extends Component {
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
                   <div className="page-top-nav">
-                    <FontAwesomeIcon className="icon" icon={faAngleLeft} id="leftarrow" />
                     <div className="page-top-nav-line" />
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
                     <div className="page-top-nav-line" />
-                    <FontAwesomeIcon className="icon" icon={faAngleRight} id="rightarrow" onClick={this.goToNext} />
                   </div>
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
@@ -122,11 +116,9 @@ class Page extends Component {
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
                   <div className="page-top-nav">
-                    <FontAwesomeIcon className="icon" icon={faAngleLeft} id="leftarrow" />
                     <div className="page-top-nav-line" />
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
                     <div className="page-top-nav-line" />
-                    <FontAwesomeIcon className="icon" icon={faAngleRight} id="rightarrow" onClick={this.goToNext} />
                   </div>
                 </div>
                 <div className="page-top-description">{page.content.description}</div>

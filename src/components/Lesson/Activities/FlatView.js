@@ -125,7 +125,9 @@ class FlatView extends Component {
         return (
           <div className="FlatView">
             <div className="activityInstructions">{page.activity.instructions}</div>
-            <iframe title="flat" className="flatApi" src={page.activity.flatUrl} frameBorder="0" allowFullScreen allow="midi" />
+            <iframe title="flat" className="flatApi" src={page.activity.flatUrl} frameBorder="0" allowFullScreen allow="midi">
+              <div className="error">If you&apos;re seeing this, turn off your ad-blocker!</div>
+            </iframe>
             <div className="flatAnswerBoxes">{
             this.state.indexArray.map((num) => {
               // console.log('a:', a);
@@ -175,9 +177,11 @@ class FlatView extends Component {
               })
               }
             </div>
-            <button type="button" className="doneButton" onClick={this.handleDone}>
-              Done
-            </button>
+            <div className="flat-button-holder">
+              <button type="button" className="doneButton" onClick={this.handleDone}>
+                Done
+              </button>
+            </div>
           </div>
         );
       }
