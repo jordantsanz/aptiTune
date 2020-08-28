@@ -8,6 +8,7 @@ import NavBar from '../NavBar';
 import FlatView from './Activities/FlatView';
 import Listening from './Activities/Listening';
 import RhythmSensor from './Activities/RhythmSensor';
+import SingNotes from './Activities/SingNotes';
 
 function mapStateToProps(reduxState) {
   return {
@@ -148,6 +149,31 @@ class Page extends Component {
               </div>
               <div className="page-bottom">
                 <RhythmSensor onSubmit={this.goToNext} />
+              </div>
+            </div>
+          </div>
+        );
+      } else if (page.activity_type === 'SingNotes') {
+        return (
+          <div className="current-page">
+            <NavBar />
+            <div className="full-page">
+              <div className="page-top">
+                <div className="page-top-topthird">
+                  <div className="page-top-title">{page.content.title}</div>
+                  <div className="page-top-nav">
+                    <div className="page-top-nav-line" />
+                    <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
+                    <div className="page-top-nav-line" />
+                  </div>
+                </div>
+                <div className="page-top-description">{page.content.description}</div>
+                <div className="page-top-content">{page.content.instructions}</div>
+              </div>
+              <div className="page-bottom">
+                <SingNotes onSubmit={this.goToNext} />
+                <div id="sheetmusic"> </div>
+                <div id="yournotes"> </div>
               </div>
             </div>
           </div>
