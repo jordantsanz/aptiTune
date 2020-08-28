@@ -77,7 +77,7 @@ class Listening extends Component {
         return (
           <div>
             Sick bruh you got it! Time to move on
-            <button type="button" className="button" id="nextButton" onClick={this.goToNext}>
+            <button type="button" className="nextButton" onClick={this.goToNext}>
               Next
             </button>
           </div>

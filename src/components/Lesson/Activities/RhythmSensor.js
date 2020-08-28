@@ -52,14 +52,16 @@ class RhythmSensor extends Component {
 
     playMetronomeClick = (number) => {
       let i = 0;
+      console.log('playing metronome every ', 1000 / parseFloat(this.state.bps), 'seconds');
       const v = setInterval(() => {
         if (i === number + 4) {
           console.log('clearing interval and checking answers');
           this.getResults();
-          setTimeout(1000);
           clearInterval(v);
         } else {
           this.state.audio.play();
+          const d = new Date();
+          console.log('playing metronome at ', d.getTime() - parseInt(this.state.seedTime, 10));
           i += 1;
           if (i < 5) {
             this.setState({ buttonColor: 'red', countDownNumber: 5 - i });
@@ -67,22 +69,23 @@ class RhythmSensor extends Component {
             this.setState({ buttonColor: 'green', countDownNumber: 'GO!' });
           }
         }
-      }, this.state.bps * 1000);
+      }, 1000 / parseFloat(this.state.bps));
     }
 
     updateTime = () => {
       const d = new Date();
       const t = d.getTime();
+      let relTime = 0;
       if (this.state.firstClick) {
         this.makeCorrectnessArray();
-        this.setState({ firstClick: false, seedTime: t + 1000, beginTapping: true });
+        this.setState({ firstClick: false, seedTime: t, beginTapping: true });
         this.playMetronomeClick(this.state.page.activity.rhythmPattern.length - 1);
       } else {
-        const relTime = t - this.state.seedTime;
+        relTime = t - this.state.seedTime;
         const temp = this.state.times;
         this.setState({ times: temp.concat([relTime]) });
       }
-      console.log('updatetime called with time ', t);
+      console.log('updatetime called with time ', relTime);
       this.setState({ time: t });
     }
 
@@ -90,21 +93,35 @@ class RhythmSensor extends Component {
       console.log('GagueCorrectness called: activity: ', this.state.page.activity);
       const ansLength = this.state.page.activity.rhythmPattern.length;
       console.log('length in mka', ansLength);
-      let correctAnswers = [0];
-      let cumulativeTime = 0;
+      // account for counting in & lag time between click and audio playing
+      let cumulativeTime = parseInt(5000 / this.state.bps, 10) + 0;
+      let correctAnswers = this.calculateTime(cumulativeTime, null);
       // build array correctAnswers with the correct times!
       for (let i = 0; i < ansLength - 1; i += 1) {
         const noteVal = parseFloat(this.state.page.activity.rhythmPattern[i], 10);
         const beatVal = parseFloat(this.state.page.activity.beatType, 10);
-        // console.log('noteVal', this.state.page.activity.rhythmPattern[i]);
-        // console.log('beatType = ', this.state.page.activity.beatType);
-        const timeValue = (beatVal / noteVal) * this.state.bps;
-        cumulativeTime = parseFloat(cumulativeTime) + timeValue;
-        // console.log('timeValue', timeValue);
-        correctAnswers = correctAnswers.concat([cumulativeTime * 1000]);
+        console.log('noteVal', this.state.page.activity.rhythmPattern[i]);
+        console.log('beatVal = ', this.state.page.activity.beatType);
+        const timeValue = (beatVal / noteVal) / this.state.bps;
+        console.log('time value: ', timeValue);
+        cumulativeTime = parseInt(parseFloat(cumulativeTime) + timeValue * 1000, 10);
+        correctAnswers = this.calculateTime(cumulativeTime, correctAnswers);
       }
       console.log('CORRECT ANSWERS:', correctAnswers);
       this.setState({ correctAnswers });
+    }
+
+    calculateTime = (cumulativeTime, correctAnswers) => {
+      console.log('cumulativeTime: ', cumulativeTime);
+      const finalTime = parseInt(cumulativeTime, 10);
+      let newAnswers = [];
+      if (correctAnswers == null) {
+        newAnswers = [finalTime];
+      } else {
+        newAnswers = correctAnswers.concat([finalTime]);
+      }
+      console.log('Finaltime: ', finalTime);
+      return newAnswers;
     }
 
     getResults = () => {
@@ -123,9 +140,10 @@ class RhythmSensor extends Component {
           break;
         }
         console.log('ans[i]', parseInt(ans[i], 10));
-        const correctAns = parseInt(ans[i], 10) + 4000;
+        const correctAns = parseInt(ans[i], 10);
         const userAns = times[i];
-        if (Math.abs(correctAns + 300 - userAns) < 200) {
+        // account for lag
+        if (Math.abs(correctAns - userAns) < 300) {
           console.log('Answer', i, ' is correct!');
         } else {
           console.log('Answer', i, 'incorrect : off by', Math.abs(correctAns - userAns), 'miliseconds');
@@ -151,38 +169,52 @@ class RhythmSensor extends Component {
       }
     }
 
+    goToNext = () => {
+      this.props.onSubmit();
+    }
+
     render() {
       // add page for rendering
       // console.log('Rendering with seedTime', this.state.seedTime);
       // console.log('TIMES:', this.state.times);
       const { pages } = this.props;
       const page = pages[this.state.pageNumber];
+      if (this.state.firstRender && page !== null && page !== undefined) {
+        const { bpm } = page.activity;
+        console.log('bpm:', bpm);
+        const bps = bpm / 60;
+        this.setState({ firstRender: false, bps, page: this.props.pages[this.state.pageNumber] });
+      }
       // console.log('page in listening', page);
       // console.log('correct answer:', page.activity.correct_answer);
-      if (page === null || page === undefined) {
+      if (this.state.page === null || this.state.page === undefined) {
         return (
           <div>
             Loading...
           </div>
         );
       }
-
-      if (this.state.firstRender) {
-        const { bpm } = page.activity;
-        console.log('bpm:', bpm);
-        const bps = bpm / 60;
-        this.setState({ firstRender: false, bps, page: this.props.pages[this.state.pageNumber] });
-      }
       console.log('rendering with correct', this.state.correct);
       if (this.state.beginTapping && !this.state.resultsReady) {
         return (
-          <button type="button" onClick={this.updateTime} style={{ color: this.state.buttonColor }}>{this.state.countDownNumber}</button>
+          <div>
+            <div>{this.state.page.activity.rhythmPattern.map((n) => {
+              return (
+                <div>1/{n} note</div>
+              );
+            })}
+            </div>
+            <button type="button" onClick={this.updateTime} style={{ color: this.state.buttonColor }}>{this.state.countDownNumber}</button>
+          </div>
         );
       }
       if (this.state.resultsReady && this.state.correct) {
         return (
           <div>
-            Congrats! You got it right!
+            Congrats! Time to move on
+            <button type="button" className="nextButton" onClick={this.goToNext}>
+              Next
+            </button>
           </div>
         );
       }
@@ -190,6 +222,12 @@ class RhythmSensor extends Component {
         return (
           <div>
             <div> Not quite, try again!</div>
+            <div>{this.state.page.activity.rhythmPattern.map((n) => {
+              return (
+                <div>1/{n} note</div>
+              );
+            })}
+            </div>
             <button type="button" onClick={this.updateTime}>Play</button>
           </div>
         );
@@ -197,9 +235,15 @@ class RhythmSensor extends Component {
         return (
           <div>
             <div>
-              <div>bpm: {this.state.bps}</div>
+              <div>bps: {this.state.bps}</div>
               <div>Seed time: {this.state.seedTime} </div>
               <div>Clicked times: {this.state.times} </div>
+            </div>
+            <div>{this.state.page.activity.rhythmPattern.map((n) => {
+              return (
+                <div>1/{n} note</div>
+              );
+            })}
             </div>
             <button type="button" onClick={this.updateTime}>Play</button>
           </div>
