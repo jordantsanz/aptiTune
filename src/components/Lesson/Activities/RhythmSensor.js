@@ -66,6 +66,9 @@ class RhythmSensor extends Component {
           if (i < 5) {
             this.setState({ buttonColor: 'red', countDownNumber: 5 - i });
           } else {
+            if (i === 5) {
+              this.showProgress();
+            }
             this.setState({ buttonColor: 'green', countDownNumber: 'GO!' });
           }
         }
@@ -143,7 +146,7 @@ class RhythmSensor extends Component {
         const correctAns = parseInt(ans[i], 10);
         const userAns = times[i];
         // account for lag
-        if (Math.abs(correctAns - userAns) < 300) {
+        if (Math.abs(correctAns - userAns) < 400) {
           console.log('Answer', i, ' is correct!');
         } else {
           console.log('Answer', i, 'incorrect : off by', Math.abs(correctAns - userAns), 'miliseconds');
@@ -167,6 +170,37 @@ class RhythmSensor extends Component {
           firstAttempt: false,
         });
       }
+    }
+
+    showProgress = () => {
+      const maxWidth = 300;
+      console.log('showing progress');
+      let i = 0;
+      const interval = this.calculateIntervalForProgress();
+      if (i === 0) {
+        i = 1;
+        const elem = document.getElementById('myBar');
+        let width = 5;
+        const id = setInterval(() => {
+          if (width >= maxWidth) {
+            clearInterval(id);
+            i = 0;
+          } else {
+            width += maxWidth / (interval / 10);
+            elem.style.width = `${width}%`;
+          }
+        }, interval / 10);
+      }
+    }
+
+    calculateIntervalForProgress = () => {
+      const beatCount = this.state.page.activity.rhythmPattern.length - 1;
+      const lastTime = parseInt(this.state.correctAnswers[beatCount], 10);
+      console.log('BeatCount: ', beatCount);
+      console.log('LastTime:', lastTime);
+      const interval = lastTime / beatCount;
+      console.log('interval:', interval);
+      return interval;
     }
 
     goToNext = () => {
@@ -205,6 +239,9 @@ class RhythmSensor extends Component {
             })}
             </div>
             <button type="button" onClick={this.updateTime} style={{ color: this.state.buttonColor }}>{this.state.countDownNumber}</button>
+            <div id="progress">
+              <div id="myBar" />
+            </div>
           </div>
         );
       }

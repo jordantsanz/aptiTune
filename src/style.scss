@@ -1505,6 +1505,18 @@ margin-bottom: 7vh;
 color: #114353;
 }
 
+/******RhythmSensor*******/
+/**** modified from code found on w3schools.com ****/
+#myBar {
+  max-width: 60vw;
+  width: 5%;
+  height: 20px;
+  background-color: #FD966A;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
+}
+
 /*********************************** audiowriting ************************/
 .audiowriting-content{
     margin-left: 12.5vw;

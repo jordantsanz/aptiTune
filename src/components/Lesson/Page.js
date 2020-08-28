@@ -181,7 +181,7 @@ class Page extends Component {
       } else {
         return (
           <div>
-            No lesson found...
+            Uh oh... this isnt a valid lesson
           </div>
         );
       }
