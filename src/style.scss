@@ -32,9 +32,9 @@ a:hover{
     height: 500vh;
     background-size: cover;
     position: absolute;
-    top: 0;
-    left: 0;
-    background-image: url('../images/signupBackground.png');
+    top: -3vh;
+    left: -.85vw;
+    background-image: url('https://aptitune.s3.amazonaws.com/home+screen.svg');
     background-color: white;
 }
 
@@ -46,7 +46,7 @@ position: absolute;
 width: 34.7vw;
 height: 8.4vh;
 left: 64vw;
-top: 30.4vh;
+top: 13.4vh;
 
 font-family: Ubuntu;
 font-style: italic;
@@ -82,6 +82,7 @@ font-weight: normal;
 font-size: 22px;
 line-height: 130.4%;
 margin-top: 7vh;
+width: 93%;
 /* or 39px */
 
 text-align: right;
@@ -307,8 +308,13 @@ color: rgba(0, 0, 0, 0.5);
 }
 
 .emailSignup, .usernameSignup, .passwordSignup{
-    height: 14vh;
+    height: 12vh;
     width: 40vw;
+    margin-bottom: 4vh;
+    font-size: 20px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.3);
+
 }
 
 .already-have{
@@ -351,6 +357,7 @@ font-family: Montserrat;
 font-style: normal;
 font-weight: bold;
 font-size: 20px;
+margin-bottom: 3vh;
 }
 
 #loginbutton:hover{
@@ -463,6 +470,7 @@ border-radius: 34px;
 width: 19.7vw;
 border: none;
 height: 9vh;
+margin-top: 3vh;
 
 
 
@@ -470,7 +478,7 @@ font-family: 'Montserrat', sans-serif;
 font-style: normal;
 font-weight: bold;
 font-size: 20px;
-line-height: 160%;
+line-height: 203%;
 
 /* or 32px */
 
@@ -1175,6 +1183,14 @@ justify-content: space-around;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: -12.5vw;
+}
+
+.flat-button-holder{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
 }
 
 .next-button-holder{
@@ -1279,13 +1295,15 @@ color: #FFFFFF;
 }
 
 .Listening{
-    width: 100%;
+    width: 87%;
     float: right;
+    margin-left: 12.5vw;
 }
 
 .activityInstructions{
     margin-right: 20vw;
     margin-top: 2vh;
+    margin-left: 12.5vw;
 }
 /********************** Profile page ****************/
 .profile-page-content{
@@ -1297,6 +1315,15 @@ color: #FFFFFF;
     width: 100%;
     height: 100%;
     position: absolute;
+}
+
+.icon-div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-page-user-display{
@@ -1343,7 +1370,7 @@ width: 19.7vw;
 border: none;
 height: 9vh;
 align-self: flex-end;
-margin-right: 14vw;
+margin-top: 2vh;
 margin-bottom: 2vh;
 
 
@@ -1365,23 +1392,32 @@ color: #FFFFFF;
 }
 /***FLATVIEW****/
 .FlatView{
-    width: 60vw;
-    height: 20vh;
+    width: 80%;
     margin: 5vh 0;
+    margin-left: 12.5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3vh;
+    margin-top: 3vh;
+    height: fit-content;
     .flatApi{
-        width: 100%;
-        height: 20vh;
+        width: 80%;
+        height: fit-content;
+        margin-bottom: 2vh;
     }
     .flatAnswerBoxes{
-        width: 80%;
+        width: 60%;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         float: right;
         margin-right: 5vw;
+        margin-left: 10vw;
         .flatAnswerBox{
             height: 40px;
             width: 40px;
+            margin-right: .1vw;
         }
     }
 }
@@ -1457,6 +1493,7 @@ line-height: 137.88%;
 display: flex;
 align-items: center;
 letter-spacing: 0.015em;
+margin-bottom: 7vh;
 
 color: #114353;
 }
@@ -1491,7 +1528,7 @@ left: 42.85vw;
 top: 5.44vh;
 border-radius: 200px;
 
-background: #F18080;
+background: rgba(241, 128, 128, .5);
 }
 
 #stats-title {
@@ -1545,6 +1582,11 @@ color: #F18080;
     top: 950px;
 
     align-items: center;
+}
+
+.user-name-container{
+    width: 100%;
+    margin-top: 14vh;
 }
 
 .delete-modal {
