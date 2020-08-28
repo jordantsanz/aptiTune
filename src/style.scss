@@ -1500,7 +1500,7 @@ background: #F18080;
     width: 333px;
     height: 30px;
     left: 250px;
-    top: 550px;
+    top: 500px;
 
 
 font-family: Montserrat;
@@ -1713,7 +1713,7 @@ border-radius: 19px;
     position: absolute;
 width: 326px;
 height: 72px;
-left: -75px;
+left: -50px;
 top: 400px;
 
 font-family: Montserrat;
@@ -1731,7 +1731,7 @@ border-radius: 24px;
     position: absolute;
 width: 326px;
 height: 72px;
-left: 275px;
+left: 300px;
 top: 400px;
 
 font-family: Montserrat;
@@ -1831,7 +1831,7 @@ color: #5A8491;
     position: absolute;
     width: 422px;
     height: 72px;
-    left: 300px;
+    left: 250px;
     top: 0px;
 
     font-family: Montserrat;
@@ -1843,23 +1843,15 @@ color: #FFFFFF;
     
     background: #F18080;
     border-radius: 24px;
-    margin: 50px;
-}
-
-.modal-content-detail {
-    position: absolute;
-    width: 410px;
-    height: 55px;
-    left: 0px;
-    top: 100px;
+    margin: 0px 0px 50px 0px;
 }
 
 #user-settings-title-breakup {
     position: absolute;
     width: 410px;
     height: 55px;
-    left: -250px;
-    top: 0px;
+    left: 50px;
+    top: 20px;
     
     font-family: Montserrat;
     font-style: normal;
@@ -1877,14 +1869,96 @@ color: #FFFFFF;
 
 #delete-user-subtitle-breakup {
     position: absolute;
-width: 1251px;
+width: 1200px;
 height: 68px;
-left: -250px;
-top: 75px;
+left: 50px;
+top: 90px;
 
 font-family: Montserrat;
 font-style: normal;
-font-weight: 500;
+font-size: 20px;
+line-height: 137.88%;
+/* or 34px */
+
+display: flex;
+align-items: center;
+
+color: #5A8491;
+}
+
+#unable-to-restore {
+    position: absolute;
+width: 1000px;
+height: 68px;
+left: 50px;
+top: 150px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 137.88%;
+/* or 34px */
+
+display: flex;
+align-items: center;
+
+color: #5A8491;
+}
+
+#current-password-input-delete {
+    position: absolute;
+    width: 595px;
+    height: 71px;
+    left: 300px;
+    top: 250px;
+
+
+background: #FFFFFF;
+border: 3px solid #5A7A91;
+box-sizing: border-box;
+border-radius: 19px;
+
+}
+
+#new-password-input-delete {
+    position: absolute;
+    width: 595px;
+    height: 71px;
+    left: 300px;
+    top: 350px;
+
+background: #FFFFFF;
+border: 3px solid #5A7A91;
+box-sizing: border-box;
+border-radius: 19px;
+
+}
+
+#retype-new-password-input-delete {
+    position: absolute;
+    width: 595px;
+    height: 71px;
+    left: 300px;
+    top: 450px;
+
+background: #FFFFFF;
+border: 3px solid #5A7A91;
+box-sizing: border-box;
+border-radius: 19px;
+
+}
+
+#settings-current-title-delete {
+    position: absolute;
+width: 96px;
+height: 34px;
+    left: 200px;
+    top: 265px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: 600;
 font-size: 25px;
 line-height: 137.88%;
 /* or 34px */
@@ -1893,4 +1967,85 @@ display: flex;
 align-items: center;
 
 color: #5A8491;
+
+}
+
+#settings-new-title-delete{
+    position: absolute;
+    width: 96px;
+    height: 34px;
+        left: 150px;
+        top: 365px;
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 137.88%;
+    /* or 34px */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #5A8491;
+}
+
+#settings-retype-new-title-delete{
+    position: absolute;
+    width: 250px;
+    height: 34px;
+        left: 50px;
+        top: 465px;
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 137.88%;
+    /* or 34px */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #5A8491;
+}
+
+#cancel-delete {
+    position: absolute;
+    width: 270px;
+    height: 72px;    
+left: 400px;
+top: 550px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 23px;
+line-height: 160%;
+color: #F18080;
+
+background: #FFFFFF;
+border: 3px solid #F18080;
+box-sizing: border-box;
+border-radius: 24px;
+}
+
+#continue-delete {
+    position: absolute;
+    width: 270px;
+    height: 72px;  
+left: 700px;
+top: 550px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 23px;
+line-height: 160%;
+color: #FFFFFF;
+
+background: #F18080;
+border: 3px solid #F18080;
+box-sizing: border-box;
+border-radius: 24px;
 }

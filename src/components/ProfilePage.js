@@ -154,8 +154,8 @@ closeModal = () => {
     const customStyles = {
       content: {
         top: '50%',
-        left: '50%',
-        right: '-400px',
+        left: '55%',
+        right: '-600px',
         bottom: '-300px',
         marginRight: '10%',
         transform: 'translate(-50%, -50%)',
@@ -223,25 +223,24 @@ closeModal = () => {
                 onRequestClose={this.closeModal}
                 style={customStyles}
               >
-                <button type="button" onClick={this.closeModal}>close</button>
+                {/* <button type="button" onClick={this.closeModal}>close</button> */}
                 <div id="delete-user-modal" className="modal">
                   <div className="modal-content">
-                    <span className="close">&times;</span>
                     <div className="modal-content-detail">
                       <div className="title" id="user-settings-title-breakup">We&apos;re breaking up?</div>
                       <div className="subtitle" id="delete-user-subtitle-breakup">We&apos;re sorry to hear you’d like to delete your account with us. <br /> If you&apos;re just looking to take a break, you can always sign out of your account.  </div>
-                      <div className="subtitle">You will not be able to log back in or restore your account or the data you stored with us.</div>
+                      <div className="subtitle" id="unable-to-restore">You will not be able to log back in or restore your account or the data you stored with us.</div>
                       <div className="settings-current-container-breakup">
                         <div className="subtitle" id="settings-current-title-delete">email</div>
-                        <input className="input" id="current-password-input" onChange={this.onInputChangeCurrentPassword} placeholder="your email" />
+                        <input className="input" id="current-password-input-delete" onChange={this.onInputChangeCurrentPassword} placeholder="your email" />
                       </div>
                       <div className="settings-new-continer">
                         <div className="subtitle" id="settings-new-title-delete">password</div>
-                        <input className="input" id="new-password-input" onChange={this.onInputChangeNewPassword} placeholder="your password" />
+                        <input className="input" id="new-password-input-delete" onChange={this.onInputChangeNewPassword} placeholder="your password" />
                       </div>
                       <div className="settings-retype-new-container">
                         <div className="subtitle" id="settings-retype-new-title-delete">re-type password</div>
-                        <input className="input" id="retype-new-password-input" onChange={this.onInputChangeRetypePassword} placeholder="re-type your password" />
+                        <input className="input" id="retype-new-password-input-delete" onChange={this.onInputChangeRetypePassword} placeholder="re-type your password" />
                       </div>
                       <div className="delete-user-buttons">
                         <button className="button" id="cancel-delete" type="button" onClick={this.closeModal}>Cancel</button>
