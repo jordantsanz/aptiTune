@@ -131,8 +131,25 @@ class Page extends Component {
         );
       } else if (page.activity_type === 'RhythmSensor') {
         return (
-          <div>
-            <RhythmSensor />
+          <div className="current-page">
+            <NavBar />
+            <div className="full-page">
+              <div className="page-top">
+                <div className="page-top-topthird">
+                  <div className="page-top-title">{page.content.title}</div>
+                  <div className="page-top-nav">
+                    <div className="page-top-nav-line" />
+                    <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
+                    <div className="page-top-nav-line" />
+                  </div>
+                </div>
+                <div className="page-top-description">{page.content.description}</div>
+                <div className="page-top-content">{page.content.instructions}</div>
+              </div>
+              <div className="page-bottom">
+                <RhythmSensor onSubmit={this.goToNext} />
+              </div>
+            </div>
           </div>
         );
       } else {
