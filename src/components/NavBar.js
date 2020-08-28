@@ -5,7 +5,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faHome, faUser, faSignOutAlt, faPen,
+  faHome, faUser, faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { signOutUser } from '../actions/index';
 
@@ -28,12 +28,6 @@ class NavBar extends Component {
             <div className="username-div">
               <FontAwesomeIcon icon={faUser} className="icon" id="user" alt="user-icon" />
               <div className="icon-text">profile</div>
-            </div>
-          </NavLink>
-          <NavLink to="/audiowriting" className="writing-link">
-            <div className="audiowriting-div">
-              <FontAwesomeIcon icon={faPen} className="icon" id="writing" alt="writing-icon" />
-              <div className="icon-text">write</div>
             </div>
           </NavLink>
         </div>
