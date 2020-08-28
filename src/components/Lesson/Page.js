@@ -7,6 +7,7 @@ import { getLesson, updateUserInfo, getUserInfo } from '../../actions/index';
 import NavBar from '../NavBar';
 import FlatView from './Activities/FlatView';
 import Listening from './Activities/Listening';
+import RhythmSensor from './Activities/RhythmSensor';
 
 function mapStateToProps(reduxState) {
   return {
@@ -130,9 +131,17 @@ class Page extends Component {
             </div>
           </div>
         );
+      } else if (page.activity_type === 'RhythmSensor') {
+        return (
+          <div>
+            <RhythmSensor />
+          </div>
+        );
       } else {
         return (
-          <div>Act type not found</div>
+          <div>
+            No lesson found...
+          </div>
         );
       }
     }
