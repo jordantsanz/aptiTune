@@ -27,6 +27,31 @@ class HomePageWithUser extends Component {
     this.props.getUserInfo();
   }
 
+  userIcon = () => {
+    let src = '';
+    console.log(this.props.currentUser);
+    switch (this.props.currentUser.icon) {
+      case 0:
+        src = 'https://aptitune.s3.amazonaws.com/eighth+note.png';
+        break;
+      case 1:
+        src = 'https://aptitune.s3.amazonaws.com/sixteenth+note.png';
+        break;
+      case 2:
+        src = 'https://aptitune.s3.amazonaws.com/half+note.png';
+        break;
+      case 3:
+        src = 'https://aptitune.s3.amazonaws.com/whole+note.png';
+        break;
+      default:
+        src = 'https://aptitune.s3.amazonaws.com/whole+note.png';
+        break;
+    }
+    return (
+      <img src={src} id="user-icon" className="user" alt="user-icon" />
+    );
+  }
+
   badgeRender = () => {
     if (this.props.currentUser.badges.length == 0) {
       return (
@@ -71,7 +96,7 @@ class HomePageWithUser extends Component {
             <div className="homepage-with-user-content">
               <div className="homepage-with-user-toprow">
                 <div className="user-container">
-                  <img className="user-image" alt="user" />
+                  <div className="user-icon-holder">{this.userIcon()}</div>
                   <div className="user-container-text">
                     <h1 className="user-hello">Hello {this.props.currentUser.username}! </h1>
                     <h3 className="subtitle" id="lets-learn">Let&apos;s learn music!</h3>
@@ -93,8 +118,8 @@ class HomePageWithUser extends Component {
                 <div className="lessons-flex">
                   <h2 className="title" id="lessons-title">Lessons</h2>
                   <div className="lessons-subtitles">
-                    <h3 className="subtitle" id="lessons-all" onClick={this.showAll}>All</h3>
-                    <h3 className="subtitle" id="lessons-completed" style={{ color: '#E46161' }}>Completed</h3>
+                    <h3 className="subtitle" id="lessons-all" style={{ color: '#E46161' }} onClick={this.showAll}>All</h3>
+                    <h3 className="subtitle" id="lessons-completed">Completed</h3>
                   </div>
                   <CompletedList className="lessons" />
                 </div>
@@ -115,7 +140,7 @@ class HomePageWithUser extends Component {
             <div className="homepage-with-user-content">
               <div className="homepage-with-user-toprow">
                 <div className="user-container">
-                  <img className="user-image" alt="user" />
+                  <div className="user-icon-holder">{this.userIcon()}</div>
                   <div className="user-container-text">
                     <h1 className="user-hello">Hello {this.props.currentUser.username}! </h1>
                     <h3 className="subtitle" id="lets-learn">Let&apos;s learn music!</h3>
@@ -137,8 +162,8 @@ class HomePageWithUser extends Component {
                 <div className="lessons-flex">
                   <h2 className="title" id="lessons-title">Lessons</h2>
                   <div className="lessons-subtitles">
-                    <h3 className="subtitle" id="lessons-all" style={{ color: '#E46161' }}>All</h3>
-                    <h3 className="subtitle" id="lessons-completed" onClick={this.showCompleted}>Completed</h3>
+                    <h3 className="subtitle" id="lessons-all">All</h3>
+                    <h3 className="subtitle" id="lessons-completed" onClick={this.showCompleted} style={{ color: '#E46161' }}>Completed</h3>
                   </div>
                   <LessonList className="lessons" />
                 </div>

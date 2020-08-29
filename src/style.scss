@@ -32,9 +32,9 @@ a:hover{
     height: 500vh;
     background-size: cover;
     position: absolute;
-    top: 0;
-    left: 0;
-    background-image: url('../images/signupBackground.png');
+    top: -3vh;
+    left: -.85vw;
+    background-image: url('https://aptitune.s3.amazonaws.com/home+screen.svg');
     background-color: white;
 }
 
@@ -46,7 +46,7 @@ position: absolute;
 width: 34.7vw;
 height: 8.4vh;
 left: 64vw;
-top: 30.4vh;
+top: 13.4vh;
 
 font-family: Ubuntu;
 font-style: italic;
@@ -82,6 +82,7 @@ font-weight: normal;
 font-size: 22px;
 line-height: 130.4%;
 margin-top: 7vh;
+width: 93%;
 /* or 39px */
 
 text-align: right;
@@ -307,8 +308,13 @@ color: rgba(0, 0, 0, 0.5);
 }
 
 .emailSignup, .usernameSignup, .passwordSignup{
-    height: 14vh;
+    height: 12vh;
     width: 40vw;
+    margin-bottom: 4vh;
+    font-size: 20px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.3);
+
 }
 
 .already-have{
@@ -327,7 +333,7 @@ margin-right: 10px;
 }
 
 #createAccount{
-    font-size: 40px;
+    font-size: 5vw;
     font-family: Ubuntu;
 font-style: italic;
 font-weight: bold;
@@ -351,6 +357,7 @@ font-family: Montserrat;
 font-style: normal;
 font-weight: bold;
 font-size: 20px;
+margin-bottom: 3vh;
 }
 
 #loginbutton:hover{
@@ -381,7 +388,7 @@ color: #E46161;
     margin-bottom: 30px;
 }
 
-.description{
+.description, .no-lessons-completed{
 
     
 font-family: Montserrat;
@@ -401,8 +408,8 @@ color: #F18080;
 }
 
 button{
-    width: 25.2vw;
-    border: none;
+width: 25.2vw;
+border: none;
 height: 8.5vh;
 transition: 200ms ease all;
 outline: none;
@@ -463,6 +470,7 @@ border-radius: 34px;
 width: 19.7vw;
 border: none;
 height: 9vh;
+margin-top: 3vh;
 
 
 
@@ -470,7 +478,7 @@ font-family: 'Montserrat', sans-serif;
 font-style: normal;
 font-weight: bold;
 font-size: 20px;
-line-height: 160%;
+line-height: 203%;
 
 /* or 32px */
 
@@ -540,8 +548,8 @@ color: #FFFFFF;
 }
 .title{
     color: #F18080;
-    font-size: 30px;
-    line-height: 137.88%;
+    font-size: 40px;
+    line-height: 77.88%;
 }
 .homepage-with-user-content{
     display: flex;
@@ -684,13 +692,13 @@ color: #919191;
 	}
     width: 53vw;
     height: 40vh;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
     position: fixed;
     margin-top: 20vh;
-
 }
 
 
@@ -699,7 +707,11 @@ color: #919191;
     display: flex;
 align-items: center;
 letter-spacing: 0.015em;
-
+overflow: hidden;
+text-overflow: ellipsis;
+word-wrap: break-word;
+line-height: 1em; /* a */
+max-height: 3em;
 color: #F18080;
 font-family: Ubuntu;
 font-style: normal;
@@ -722,15 +734,14 @@ font-weight: normal;
 }
 
 .lesson-icon{
-position: absolute;
 width: 50vw;
 height: 21.3vh;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
 align-items: center;
-margin-top: 10vh;
-margin-bottom: 10vh;
+margin-top: 4vh;
+margin-bottom: 3vh;
 
 
 background: #FAEFE5;
@@ -764,6 +775,7 @@ border-radius: 27px;
     width: 19px !important;
     color: #FD966A;
     margin-right: .5vw;
+    margin-top: 0px;
 }
 
 .lesson-icon-time{
@@ -814,7 +826,7 @@ transition: 200ms all ease;
     font-family: Montserrat;
 font-style: normal;
 font-weight: normal;
-font-size: 13px;
+font-size: 15.5px;
 line-height: 137.88%;
 /* or 28px */
 
@@ -828,7 +840,7 @@ color: #000000;
     font-family: Ubuntu;
 font-style: normal;
 font-weight: bold;
-font-size: 25px;
+font-size: 28px;
 margin-top: 2vh;
 line-height: 137.88%;
 /* or 41px */
@@ -900,7 +912,7 @@ color: #FFFFFF;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
+    z-index: 100;
     
     position: fixed;
     width: 11.6vw;
@@ -936,6 +948,7 @@ color: #FFFFFF;
     width: 39px !important;
     height: 39px !important;
     transition: 200ms all ease;
+    margin-top: 15px;
 }
 
 .hompage-div:hover .icon, .learn-div:hover .icon, .username-div:hover .icon, .logout-div:hover .icon{ 
@@ -1068,24 +1081,22 @@ text-align: center;
 /********************************** Page component ***************/
 .full-page{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     color: black;
-    position: absolute;
     width: 100%;
     height: 100%;
+    margin-left: 12vw;
 }
 
 .page-top{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: absolute;
-    position: absolute;
     width: 127vw;
-    height: 55vh;
-    left: -12.5vw;
-    top: -10vh;
-    z-index: -1;
+    height: fit-content;
+    padding-bottom: 3vh;
+    margin-left: -18vw;
+    top: -9vh;
     
     background: #FDD46A;
     border-radius: 196px;
@@ -1094,40 +1105,164 @@ text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    left: -2vw;
-    position: absolute;
-    height: 50%;
-    width: 100%;
+    align-items: flex-start;
+    margin-left: 18vw;
+    height: 100%;
+    width: 67%;
+    margin-top: 4vh;
+    align-items: center;
 }
 
-.page-top-description, .page-top-content, .page-top-third{
+.page-top-title{
+    font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 50px;
+line-height: 137.88%;
+/* identical to box height, or 69px */
+
+display: flex;
+align-items: center;
+letter-spacing: 0.015em;
+
+color: #114353;
+margin-top: 12px;
+}
+
+.page-top-description, .page-top-content, .page-top-third, .suppContent{
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 50%;
 }
 
+.suppContent{
+    width: fit-content;
+}
+.page-top-description{
+    height: 180%;
+    font-family: Montserrat;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 137.88%;
+/* or 25px */
+
+display: flex;
+align-items: flex-start;
+margin-left: 18vw;
+color: #2D2D2D;
+}
+
+.page-top-content-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 12.5vw;
+    width: 70%;
+}
+
 .page-top-nav{
-    position: absolute;
 width: 22vw;
 height: 6.2vh;
 left: 77.9vw;
 top: 5vh;
+margin-top: 12px;
 
 background: rgba(253, 150, 106, 0.7);
 border: 3px solid #FD966A;
 box-sizing: border-box;
 border-radius: 18px;
+flex-direction: row;
+display: flex;
+justify-content: space-around;
+}
+
+.page-bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: -12.5vw;
+}
+
+#sheetmusic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: -12.5vw;
+}
+
+.flat-button-holder{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.next-button-holder{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 74%;
+}
+
+#next-button{
+    background: #FDD46A;
+box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 30px;
+line-height: 160%;
+/* identical to box height, or 48px */
+
+
+color: #114353;
+width: 16vw;
+transition: 200ms ease all;
+}
+
+#next-button:hover{
+    color: #FDD46A;
+    background-color: #114353;
+}
+
+
+#rightarrow, #leftarrow{
+    margin-top: 0px;
+    width: 29px !important;
+    height: 29px !important;
+    color: rgba(0, 0, 0, 0.54);
+    transition: 200ms ease all;
+}
+
+#rightarrow.icon:hover, #leftarrow.icon:hover{
+    color: white;
+    cursor: pointer;
 }
 
 .page-top-nav-line{
     
 border: 1px solid #FFFFFF;
-transform: rotate(90deg);
-width: 2.6vw;
-height: 0px;
 }
 
+.page-top-nav-level{
+    font-family: Montserrat;
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 137.88%;
+/* identical to box height, or 32px */
+
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+
+    
+}
 .page-bottom{
     display: flex;
     flex-direction: column;
@@ -1167,10 +1302,16 @@ height: 0px;
 }
 
 .Listening{
-    width: 100%;
+    width: 87%;
     float: right;
+    margin-left: 12.5vw;
 }
 
+.activityInstructions{
+    margin-right: 20vw;
+    margin-top: 2vh;
+    margin-left: 12.5vw;
+}
 /********************** Profile page ****************/
 .profile-page-content{
     padding-left: 13.7vw;
@@ -1181,6 +1322,15 @@ height: 0px;
     width: 100%;
     height: 100%;
     position: absolute;
+}
+
+.icon-div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-page-user-display{
@@ -1198,6 +1348,221 @@ height: 0px;
     align-items: center;
 }
 
+
+/******** Different kinds of lesson components ************/
+.nextButton{
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    float: right;
+    background-color: #FD966A;
+    border-radius: 20px;
+    width: 120px;
+    color: white;
+}
+
+.nextButton:hover{
+    background-color: #114353;
+}
+
+.doneButton{
+    background-color: #FD966A;
+    border-radius: 20px;
+    width: 120px;
+    color: white;
+    transition: 200ms ease all;
+box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+width: 19.7vw;
+border: none;
+height: 9vh;
+align-self: flex-end;
+margin-top: 2vh;
+margin-bottom: 2vh;
+
+
+
+font-family: 'Montserrat', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 160%;
+
+/* or 32px */
+
+
+color: #FFFFFF;
+}
+
+.doneButton:hover{
+    background-color: #114353;
+}
+/***FLATVIEW****/
+.FlatView{
+    width: 80%;
+    margin: 5vh 0;
+    margin-left: 12.5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3vh;
+    margin-top: 3vh;
+    height: fit-content;
+    .flatApi{
+        width: 80%;
+        height: fit-content;
+        margin-bottom: 2vh;
+    }
+    .flatAnswerBoxes{
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        float: right;
+        margin-right: 5vw;
+        margin-left: 10vw;
+        .flatAnswerBox{
+            height: 40px;
+            width: 40px;
+            margin-right: .1vw;
+        }
+    }
+}
+/*******LISTENING*******/
+.Listening{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    iframe{
+        height: 100px;
+        width: 200px;
+        border: none;
+        /* background: transparent; */ 
+    }
+}
+
+body{
+    background: transparent;
+}
+
+iframe{
+    background-color: white !important;
+
+    body{
+        background: transparent; 
+    }
+}
+
+.listeningAnswers{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    button{
+        width: 40vw;
+        margin: 5px 5px;
+        background-color: #FDD46A;
+        border-radius: 20px;
+        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+        border-radius: 34px;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 30px;
+        /* identical to box height, or 48px */
+        
+        
+        color: white;
+        transition: 200ms ease all;
+    }
+    button:hover {
+         background-color: #114353;
+         color: white;
+    }
+    button:checked{
+        color: #114353;
+    }
+}
+
+.incorrectMessage{
+    color: red;
+    text-align: center;
+}
+
+.activityInstructions{
+    font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 137.88%;
+/* identical to box height, or 69px */
+
+display: flex;
+align-items: center;
+letter-spacing: 0.015em;
+margin-bottom: 7vh;
+
+color: #114353;
+}
+
+/******RhythmSensor*******/
+/**** modified from code found on w3schools.com ****/
+#progress {
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 15vw;
+    left: 100px;
+}
+
+#myBar {
+  max-width: 60vw;
+  width: 5%;
+  height: 20px;
+  background-color: #FD966A;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
+}
+
+.rhythmActivity{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.rhythmButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    button{
+        margin: 5px 5px;
+    }
+}
+/*********************************** audiowriting ************************/
+.audiowriting-content{
+    margin-left: 12.5vw;
+}
+
+#start-record, #stop-record{
+    background: #FBBE49;
+    box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+    border-radius: 34px;
+    border: none;
+    color: #114353;
+    width: 25.2vw;
+    height: 8.5vh;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#user-icon{
+    width: 16vw;
+}
 .user-icon-background{
     position: absolute;
 width: 48vh;
@@ -1205,6 +1570,635 @@ height: 48vh;
 left: 42.85vw;
 top: 5.44vh;
 border-radius: 200px;
+background: #F18080;
+}
+
+#stats-title {
+    position: absolute;
+    display: flex;
+    width: 333px;
+    height: 30px;
+    left: 250px;
+    top: 500px;
+
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 137.88%;
+/* or 55px */
+
+display: flex;
+align-items: center;
+
+color: #F18080;
+
+}
+
+#badges-title-profile {
+    position: absolute;
+    width: 317px;
+    height: 55px;
+    left: 250px;
+    top: 750px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 137.88%;
+/* or 55px */
+
+display: flex;
+align-items: center;
+
+color: #F18080;
+}
+
+.profile-page-user-settings{
+    position: absolute;
+    width: 378px;
+    height: 55px;
+    left: 500px;
+    top: 950px;
+
+    align-items: center;
+}
+
+.user-name-container{
+    width: 100%;
+    margin-top: 14vh;
+}
+
+.delete-modal {
+    position: absolute;
+    width: 378px;
+    height: 55px;
+    left: 500px;
+    top: 1700px;
+
+    align-items: center;
+}
+
+#user-settings-title{
+    position: absolute;
+    width: 378px;
+    height: 55px;
+    left: -265px;
+    top: 0px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 137.88%;
+/* or 40px */
+
+text-align: center;
+
+color: #F18080;
+transition: 200ms ease all;
+}
+
+#stop-record:hover, #start-record:hover{
+    cursor: pointer;
+    background: #114353;
+    color: white;
+}
+
+.writing-header{
+    
+font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 50px;
+line-height: 137.88%;
+/* identical to box height, or 69px */
+
+display: flex;
+align-items: center;
+letter-spacing: 0.015em;
+
+color: #114353;
+
+}
+
+#settings-current-title{
+    position: absolute;
+width: 96px;
+height: 34px;
+left: -150px;
+top: 100px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: 600;
+font-size: 25px;
+line-height: 137.88%;
+/* or 34px */
+
+display: flex;
+align-items: center;
+
+color: #5A8491;
+
+}
+
+#current-password-input {
+    position: absolute;
+    width: 595px;
+    height: 81.69px;
+    left: 0px;
+    top: 75px;
+    position: absolute;
+
+
+background: #FFFFFF;
+border: 3px solid #5A7A91;
+box-sizing: border-box;
+border-radius: 19px;
+}
+
+#settings-new-title {
+    position: absolute;
+    width: 150px;
+    height: 34px;
+    left: -115px;
+    top: 200px;
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 137.88%;
+    text-align: right;
+    /* or 34px */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #5A8491;
+    
+}
+
+#new-password-input {
+    position: absolute;
+    width: 595px;
+    height: 81.69px;
+    left: 0px;
+    top: 175px;
+    position: absolute;
+
+
+background: #FFFFFF;
+border: 3px solid #5A7A91;
+box-sizing: border-box;
+border-radius: 19px;
+}
+
+#settings-retype-new-title {
+    position: absolute;
+    width: fit-content;
+    height: 34px;
+    left: -215px;
+    top: 300px;
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 137.88%;
+    /* or 34px */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #5A8491;
+    
+}
+
+#retype-new-password-input {
+    position: absolute;
+    width: 595px;
+    height: 81.69px;
+    left: 0px;
+    top: 275px;
+    position: absolute;
+
+
+background: #FFFFFF;
+border: 3px solid #5A7A91;
+box-sizing: border-box;
+border-radius: 19px;
+}
+
+#change-password {
+    position: absolute;
+width: 326px;
+height: 72px;
+left: -50px;
+top: 400px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 23px;
+line-height: 160%;
+color: #FFFFFF;
 
 background: #F18080;
+border-radius: 24px;
+}
+
+#cancel {
+    position: absolute;
+width: 326px;
+height: 72px;
+left: 300px;
+top: 400px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 23px;
+line-height: 160%;
+color: #F18080;
+
+background: #FFFFFF;
+border: 3px solid #F18080;
+box-sizing: border-box;
+border-radius: 24px;
+}
+
+#user-settings-title-delete {
+    position: absolute;
+width: 378px;
+height: 55px;
+left: 250px;
+top: 1500px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 137.88%;
+/* or 55px */
+
+color: #F18080;
+
+}
+
+#delete-user-subtitle {
+    position: absolute;
+width: 1020px;
+height: 68px;
+left: 250px;
+top: 1600px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 25px;
+line-height: 137.88%;
+/* or 34px */
+
+display: flex;
+align-items: center;
+
+color: #5A8491;
+}
+
+#settings-retype-new-title-delete {
+    position: absolute;
+    width: fit-content;
+    height: 34px;
+    left: -300px;
+    top: 300px;
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 137.88%;
+    /* or 34px */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #5A8491;
+    
+}
+
+#settings-new-title-delete {
+    position: absolute;
+    width: fit-content;
+    height: 34px;
+    left: -200px;
+    top: 200px;
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 137.88%;
+    /* or 34px */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #5A8491;
+    
+}
+
+#delete-user {
+    position: absolute;
+    width: 422px;
+    height: 72px;
+    left: 250px;
+    top: 0px;
+
+    font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 23px;
+line-height: 160%;
+color: #FFFFFF;
+    
+    background: #F18080;
+    border-radius: 24px;
+    margin: 0px 0px 50px 0px;
+}
+
+#user-settings-title-breakup {
+    position: absolute;
+    width: 410px;
+    height: 55px;
+    left: 50px;
+    top: 20px;
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 137.88%;
+    /* or 55px */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #F18080;
+    
+}
+
+#delete-user-subtitle-breakup {
+    position: absolute;
+width: 1200px;
+height: 68px;
+left: 50px;
+top: 90px;
+
+font-family: Montserrat;
+font-style: normal;
+font-size: 20px;
+line-height: 137.88%;
+/* or 34px */
+
+display: flex;
+align-items: center;
+
+color: #5A8491;
+}
+
+#unable-to-restore {
+    position: absolute;
+width: 1000px;
+height: 68px;
+left: 50px;
+top: 150px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 137.88%;
+/* or 34px */
+
+display: flex;
+align-items: center;
+
+color: #5A8491;
+}
+
+#current-password-input-delete {
+    position: absolute;
+    width: 595px;
+    height: 71px;
+    left: 300px;
+    top: 250px;
+
+
+background: #FFFFFF;
+border: 3px solid #5A7A91;
+box-sizing: border-box;
+border-radius: 19px;
+
+}
+
+#new-password-input-delete {
+    position: absolute;
+    width: 595px;
+    height: 71px;
+    left: 300px;
+    top: 350px;
+
+background: #FFFFFF;
+border: 3px solid #5A7A91;
+box-sizing: border-box;
+border-radius: 19px;
+
+}
+
+#retype-new-password-input-delete {
+    position: absolute;
+    width: 595px;
+    height: 71px;
+    left: 300px;
+    top: 450px;
+
+background: #FFFFFF;
+border: 3px solid #5A7A91;
+box-sizing: border-box;
+border-radius: 19px;
+
+}
+
+#settings-current-title-delete {
+    position: absolute;
+width: 96px;
+height: 34px;
+    left: 200px;
+    top: 265px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: 600;
+font-size: 25px;
+line-height: 137.88%;
+/* or 34px */
+
+display: flex;
+align-items: center;
+
+color: #5A8491;
+
+}
+
+#settings-new-title-delete{
+    position: absolute;
+    width: 96px;
+    height: 34px;
+        left: 150px;
+        top: 365px;
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 137.88%;
+    /* or 34px */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #5A8491;
+}
+
+#settings-retype-new-title-delete{
+    position: absolute;
+    width: 250px;
+    height: 34px;
+        left: 50px;
+        top: 465px;
+    
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 137.88%;
+    /* or 34px */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #5A8491;
+}
+
+#cancel-delete {
+    position: absolute;
+    width: 270px;
+    height: 72px;    
+left: 400px;
+top: 550px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 23px;
+line-height: 160%;
+color: #F18080;
+
+background: #FFFFFF;
+border: 3px solid #F18080;
+box-sizing: border-box;
+border-radius: 24px;
+}
+
+#continue-delete {
+    position: absolute;
+    width: 270px;
+    height: 72px;  
+left: 700px;
+top: 550px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 23px;
+line-height: 160%;
+color: #FFFFFF;
+
+background: #F18080;
+border: 3px solid #F18080;
+box-sizing: border-box;
+border-radius: 24px;
+}
+
+#profile-page-username {
+    position: absolute;
+width: 375px;
+height: 75px;
+left: 560px;
+top: 400px;
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 34px;
+line-height: 200%;
+
+background: #F18080;
+border-radius: 24px;
+text-align: center;
+color: #FFFFFF;
+}
+
+#done-edit-username {
+    position: absolute;
+width: 75px;
+height: 75px;
+left: 950px;
+top: 400px;
+
+background: #F18080;
+border-radius: 40px;
+}
+
+#edit-username {
+    position: absolute;
+width: 75px;
+height: 75px;
+left: 950px;
+top: 400px;
+
+background: #F18080;
+border-radius: 40px;
+}
+
+#check-icon {
+    position: absolute;
+left: 25%;
+top: 0%;
+
+color: #FFFFFF;
+}
+
+#editing-icon {
+    position: absolute;
+    left: 25%;
+    top: 0%;
+    
+    color: #FFFFFF;
+}
+
+#change-username {
+    position: absolute;
+    width: 375px;
+    height: 75px;
+    left: 560px;
+    top: 400px;
+
+    border: 3px solid #5A7A91;
+box-sizing: border-box;
+border-radius: 19px;
 }

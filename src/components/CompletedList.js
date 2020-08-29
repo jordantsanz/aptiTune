@@ -37,7 +37,7 @@ class CompletedList extends Component {
     const completed = this.props.lesson.lessons.filter((lesson) => this.props.currentUser.completed.includes(lesson._id));
     if (completed === null || completed === undefined || completed.length === 0) {
       return (
-        <div>No lessons completed</div>
+        <div className="no-lessons-completed">No lessons completed. </div>
       );
     } else {
       return (
@@ -45,7 +45,7 @@ class CompletedList extends Component {
           return (
             <div key={l._id} className="lesson-icon">
               <div className="lesson-icon-top">
-                <div className="lesson-icon-title">{l.lessonid}</div>
+                <div className="lesson-icon-title">{l.title}</div>
                 <div className="lesson-icon-time-div">
                   <FontAwesomeIcon icon={faClock} className="icon" id="clock" />
                   <div className="lesson-icon-time">10min</div>

@@ -7,7 +7,7 @@ import SignIn from './SignIn';
 import ProfilePage from './ProfilePage';
 import Page from './Lesson/Page';
 // import Lesson from './Lesson/Lesson';
-// import AudioWriting from './AudioWriting';
+// import AudioLesson from './AudioLesson';
 
 const App = (props) => {
   return (
