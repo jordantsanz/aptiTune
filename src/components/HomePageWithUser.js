@@ -132,14 +132,15 @@ class HomePageWithUser extends Component {
                   <h2 className="title" id="badges-title">Your Badges</h2>
                   <div className="badge-container">
                     <div className="badge-div">{this.props.currentUser.badges.map((badge) => {
-                      console.log('rendering badges in badgeRender');
-                      if (badge.iconUrl === 'null' && this.props.currentUser.badges.length == 1) {
+                      console.log('rendering badge: ', badge);
+                      if (badge.iconUrl === '' && this.props.currentUser.badges.length == 1) {
+                        console.log('rendering: No badges yet!');
                         return (
                           <div id={badge.iconUrl}>
                             <div className="badge-title">{badge.name}</div>
                           </div>
                         );
-                      } else if (badge.iconUrl !== 'null') {
+                      } else if (badge.iconUrl !== '') {
                         return (
                           <div>
                             <div id={badge.iconUrl} className="badge-title">{badge.name}</div>
@@ -196,13 +197,13 @@ class HomePageWithUser extends Component {
                   <div className="badge-container">
                     <div className="badge-div">{this.props.currentUser.badges.map((badge) => {
                       console.log('rendering badges in badgeRender');
-                      if (badge.iconUrl === 'null' && this.props.currentUser.badges.length == 1) {
+                      if (badge.iconUrl === '' && this.props.currentUser.badges.length == 1) {
                         return (
                           <div id={badge.iconUrl}>
                             <div className="badge-title">{badge.name}</div>
                           </div>
                         );
-                      } else if (badge.iconUrl !== 'null') {
+                      } else if (badge.iconUrl !== '') {
                         return (
                           <div id={badge.iconUrl}>
                             <div className="badge-title">{badge.name}</div>
