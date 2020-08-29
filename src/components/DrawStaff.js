@@ -1,7 +1,7 @@
 /* eslint-disable new-cap */
 import Vex from 'vexflow';
 
-// IMPORTANT!! - define the id of the div where the staff will be drawn!
+// IMPORTANT!! - define the id of the div where the staff will be drawn in your render method!
 const drawStaff = (notes, divId) => {
   if (notes != null) {
     const vexnotes = notes.join(', '); // convert user's notes into string that can be rendered by vexflow
