@@ -711,7 +711,7 @@ letter-spacing: 0.015em;
 overflow: hidden;
 text-overflow: ellipsis;
 word-wrap: break-word;
-line-height: 1em; /* a */
+line-height: 1.2em; /* a */
 max-height: 3em;
 color: #F18080;
 font-family: Ubuntu;
@@ -1624,6 +1624,10 @@ color: #F18080;
     align-items: center;
 }
 
+.ReactModal__Content ReactModal__Content--after-open{
+    overflow-x: hidden;
+}
+
 #user-settings-title{
     position: absolute;
     width: 378px;
@@ -1978,7 +1982,7 @@ color: #5A8491;
     width: 595px;
     height: 71px;
     left: 300px;
-    top: 250px;
+    top: 210px;
 
 
 background: #FFFFFF;
@@ -1993,7 +1997,7 @@ border-radius: 19px;
     width: 595px;
     height: 71px;
     left: 300px;
-    top: 350px;
+    top: 300px;
 
 background: #FFFFFF;
 border: 3px solid #5A7A91;
@@ -2007,7 +2011,7 @@ border-radius: 19px;
     width: 595px;
     height: 71px;
     left: 300px;
-    top: 450px;
+    top: 390px;
 
 background: #FFFFFF;
 border: 3px solid #5A7A91;
@@ -2021,7 +2025,7 @@ border-radius: 19px;
 width: 96px;
 height: 34px;
     left: 200px;
-    top: 265px;
+    top: 225px;
 
 font-family: Montserrat;
 font-style: normal;
@@ -2042,7 +2046,7 @@ color: #5A8491;
     width: 96px;
     height: 34px;
         left: 150px;
-        top: 365px;
+        top: 315px;
     
     font-family: Montserrat;
     font-style: normal;
@@ -2062,7 +2066,7 @@ color: #5A8491;
     width: 250px;
     height: 34px;
         left: 50px;
-        top: 465px;
+        top: 405px;
     
     font-family: Montserrat;
     font-style: normal;
@@ -2082,7 +2086,7 @@ color: #5A8491;
     width: 270px;
     height: 72px;    
 left: 400px;
-top: 550px;
+top: 480px;
 
 font-family: Montserrat;
 font-style: normal;
@@ -2102,7 +2106,7 @@ border-radius: 24px;
     width: 270px;
     height: 72px;  
 left: 700px;
-top: 550px;
+top: 480px;
 
 font-family: Montserrat;
 font-style: normal;

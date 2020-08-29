@@ -165,6 +165,7 @@ closeModal = () => {
         bottom: '-300px',
         marginRight: '10%',
         transform: 'translate(-50%, -50%)',
+        overflow: 'hidden',
       },
     };
     return (

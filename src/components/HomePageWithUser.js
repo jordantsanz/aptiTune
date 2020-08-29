@@ -142,7 +142,7 @@ class HomePageWithUser extends Component {
                 <div className="user-container">
                   <div className="user-icon-holder">{this.userIcon()}</div>
                   <div className="user-container-text">
-                    <h1 className="user-hello">Hello {this.props.currentUser.username}! </h1>
+                    <h1 className="user-hello">Hello, {this.props.currentUser.username}! </h1>
                     <h3 className="subtitle" id="lets-learn">Let&apos;s learn music!</h3>
                   </div>
                 </div>
