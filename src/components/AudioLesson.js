@@ -36,8 +36,6 @@ class AudioLesson extends Component {
     this.state = {
       recording: false,
       videos: [],
-      octave: '',
-      key: '',
       tempo: 60,
       quantization: 2,
       duration: '',
