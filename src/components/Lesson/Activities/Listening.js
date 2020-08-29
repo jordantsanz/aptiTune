@@ -91,7 +91,7 @@ class Listening extends Component {
             <ul className="listeningAnswers">
               <li>
                 <button type="button"
-                  id="choiceButton"
+                  id="choiceButton1"
                   className="button"
                   style={{ background: this.state.colorA }}
                   onClick={() => {
@@ -112,7 +112,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton2"
                   style={{ background: this.state.colorB }}
                   onClick={() => {
                     this.resetColors();
@@ -132,7 +132,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton3"
                   style={{ background: this.state.colorC }}
                   onClick={() => {
                     this.resetColors();
@@ -152,7 +152,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton4"
                   style={{ background: this.state.colorD }}
                   onClick={() => {
                     this.resetColors();
@@ -183,7 +183,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton1"
                   style={{ background: this.state.colorA }}
                   onClick={() => {
                     this.resetColors();
@@ -203,7 +203,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton2"
                   style={{ background: this.state.colorB }}
                   onClick={() => {
                     this.resetColors();
@@ -223,7 +223,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton3"
                   style={{ background: this.state.colorC }}
                   onClick={() => {
                     this.resetColors();
@@ -243,7 +243,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton4"
                   style={{ background: this.state.colorD }}
                   onClick={() => {
                     this.resetColors();
