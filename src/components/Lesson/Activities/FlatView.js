@@ -34,7 +34,7 @@ class FlatView extends Component {
       console.log('pageNum in flatview: ', pageNum);
       this.setState({ pageNumber: pageNum });
       const { history } = this.props;
-      this.props.getLesson(id, history, pageNum + 1);
+      this.props.getLesson(id, history, pageNum + 1, true);
     }
 
     handleDone = () => {
@@ -114,7 +114,7 @@ class FlatView extends Component {
       if (this.state.complete) {
         return (
           <div className="FlatView">
-            <div className="finishedMessage"> Great Job you finished! Press next to move on!</div>
+            <div className="finishedMessage"> Great Job, you finished! <br /> Press next to move on!</div>
             <button type="button" className="nextButton" onClick={this.goToNext}>
               Next
             </button>
