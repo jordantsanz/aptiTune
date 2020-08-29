@@ -11,6 +11,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 // import { SingleEntryPlugin } from 'webpack';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPlay, faPause,
+} from '@fortawesome/free-solid-svg-icons';
 import { getLesson } from '../../../actions/index';
 import drawStaff from '../../DrawStaff';
 
@@ -176,7 +180,7 @@ class RhythmSensor extends Component {
     }
 
     showProgress = () => {
-      const maxWidth = 700;
+      const maxWidth = 90;
       console.log('showing progress');
       let i = 0;
       const interval = this.calculateIntervalForProgress();
@@ -192,11 +196,11 @@ class RhythmSensor extends Component {
             clearInterval(id);
             i = 0;
           } else {
-            width += incrementValue;
+            width += incrementValue / 10;
             console.log('width incremented to width:', width);
             elem.style.width = `${width}%`;
           }
-        }, interval);
+        }, interval / 10);
       }
     }
 
@@ -285,13 +289,7 @@ class RhythmSensor extends Component {
               <div>Seed time: {this.state.seedTime} </div>
               <div>Clicked times: {this.state.times} </div>
             </div>
-            <div>{this.state.page.activity.rhythmPattern.map((n) => {
-              return (
-                <div id={n}>1/{n} note</div>
-              );
-            })}
-            </div>
-            <button type="button" onClick={this.updateTime}>Play</button>
+            <button type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
           </div>
         );
       }
@@ -302,13 +300,11 @@ class RhythmSensor extends Component {
               <div id="myBar" />
             </div>
             <div className="rhythmActivity">
-              <div>{this.state.page.activity.rhythmPattern.map((n) => {
-                return (
-                  <div id={n}>1/{n} note</div>
-                );
-              })}
+              <div className="countDown">{this.state.countDownNumber}</div>
+              <div className="rhythmButtons">
+                <button type="button"><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+                <button type="button" onClick={this.updateTime} style={{ color: this.state.buttonColor }}>Click me</button>
               </div>
-              <button type="button" onClick={this.updateTime} style={{ color: this.state.buttonColor }}>{this.state.countDownNumber}</button>
             </div>
           </div>
         );
@@ -327,13 +323,8 @@ class RhythmSensor extends Component {
         return (
           <div className="rhythmActivity">
             <div> Not quite, try again!</div>
-            <div>{this.state.page.activity.rhythmPattern.map((n) => {
-              return (
-                <div id={n}>1/{n} note</div>
-              );
-            })}
-            </div>
-            <button type="button" onClick={this.updateTime}>Play</button>
+            <i className="fas fa-play" />
+            <button type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
           </div>
         );
       } else {
@@ -344,14 +335,9 @@ class RhythmSensor extends Component {
               <div>bps: {this.state.bps}</div>
               <div>Seed time: {this.state.seedTime} </div>
               <div>Clicked times: {this.state.times} </div>
+              <i className="fas fa-play" />
             </div>
-            <div>{this.state.page.activity.rhythmPattern.map((n) => {
-              return (
-                <div id={n}>1/{n} note</div>
-              );
-            })}
-            </div>
-            <button type="button" onClick={this.updateTime}>Play</button>
+            <button type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
           </div>
         );
       }
