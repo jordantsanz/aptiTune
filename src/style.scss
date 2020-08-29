@@ -1517,12 +1517,13 @@ color: #114353;
 
 #myBar {
   max-width: 60vw;
-  width: 5%;
+  width: 0;
   height: 20px;
   background-color: #FD966A;
   text-align: center; /* To center it horizontally (if you want) */
   line-height: 30px; /* To center it vertically */
   color: white;
+  border-radius: 25px;
 }
 
 .rhythmActivity{
