@@ -148,6 +148,7 @@ class Page extends Component {
                 <div className="page-top-content">{page.content.instructions}</div>
               </div>
               <div className="page-bottom">
+                <div id="rhythmScore" />
                 <RhythmSensor onSubmit={this.goToNext} />
               </div>
             </div>
