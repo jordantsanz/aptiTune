@@ -133,7 +133,7 @@ class HomePageWithUser extends Component {
                   <div className="badge-container">
                     <div className="badge-div">{this.props.currentUser.badges.map((badge) => {
                       console.log('rendering badge: ', badge);
-                      if (badge.iconUrl === '' && this.props.currentUser.badges.length == 1) {
+                      if (badge.iconUrl === '' && this.props.currentUser.badges.length === 1) {
                         console.log('rendering: No badges yet!');
                         return (
                           <div id={badge.iconUrl}>
