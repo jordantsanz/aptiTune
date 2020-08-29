@@ -32,6 +32,9 @@ class NavBar extends Component {
           </NavLink>
         </div>
         <div className="navbar-bottom">
+          <div className="icon-div">
+            <img className="logo" id="logo-icon" alt="logo-icon" src="https://aptitune.s3.amazonaws.com/Aptitune_Logo.png" />
+          </div>
           <NavLink to="/signin" className="logout-link" onClick={this.signOut}>
             <div className="logout-div">
               <FontAwesomeIcon icon={faSignOutAlt} className="icon" id="logout" alt="logout-icon" />
