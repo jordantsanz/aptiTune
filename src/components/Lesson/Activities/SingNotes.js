@@ -232,7 +232,7 @@ class SingNotes extends Component {
           </button>
         </div>
       );
-    } else if (page.activity_type === 'SingNotes') {
+    } else {
       const { recording } = this.state;
       return (
         <div className="SingNotes">
@@ -246,10 +246,6 @@ class SingNotes extends Component {
           </div>
           <div className="incorrectMessage">{this.state.message}</div>
         </div>
-      );
-    } else {
-      return (
-        <div>ya done goofed kid, idk what to tell you </div>
       );
     }
   }
