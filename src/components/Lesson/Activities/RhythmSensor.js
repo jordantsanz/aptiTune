@@ -372,7 +372,7 @@ class RhythmSensor extends Component {
       if (this.state.resultsReady && this.state.correct) {
         return (
           <div className="rhythmActivity" id="successMessage">
-            Congrats! Time to move on
+            Awesome! That was perfect!
             <button type="button" className="nextButton" id="rhythmnextbutton" onClick={this.goToNext}>
               Next
             </button>

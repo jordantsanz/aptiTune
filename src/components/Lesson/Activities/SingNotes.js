@@ -238,7 +238,7 @@ class SingNotes extends Component {
         <div className="SingNotes">
           <div className="activityInstructions">{page.activity.instructions}</div>
           {/* <div className="activityInstructions">{answer}</div> */}
-          <div>Please hold each note for more than a second to ensure that the microphone picks it up.</div>
+          <div className="activityInstructionsBelow">Please hold each note for more than a second to ensure that the microphone picks it up.</div>
           {this.firstRender()}
           <div className="recordButton">
             {!recording && <button type="button" className="button" id="start-record" onClick={(e) => this.startRecording(e)}>Record</button>}

@@ -1709,6 +1709,10 @@ margin-bottom: 7vh;
 color: #114353;
 }
 
+.activityInstructionsBelow{
+    
+}
+
 /******RhythmSensor*******/
 /**** modified from code found on w3schools.com ****/
 #progress {
@@ -2527,6 +2531,7 @@ border-radius: 24px;
     background-image: url('https://aptitune.s3.amazonaws.com/loading.svg');
     height: 100%;
     width: 100%;
+    background-size: cover;
 }
 
 .finished-lesson-top-page{
@@ -2856,6 +2861,11 @@ top: 54vh;
 
 background: #F18080;
 border-radius: 40px;
+transition: 200ms ease all;
+}
+
+#edit-username:hover{
+    background: #ec6d6d;
 }
 
 #check-icon {

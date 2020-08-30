@@ -218,7 +218,7 @@ closeModal = () => {
             <div className="user-name-container">{this.renderEdits()}</div>
           </div>
           <div className="profile-page-user-stats">
-            <div className="title" id="stats-title">User Stats</div>
+            <div className="title" id="stats-title">Your Stats</div>
             <div className="stats-graphs" />
           </div>
           <div className="profile-page-badges-section">
