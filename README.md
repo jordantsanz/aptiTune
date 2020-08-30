@@ -58,12 +58,12 @@ To set-up, simply run `yarn install`.
 
 ## Authors
 
-Jacob Donoghue
-Kathy Cui
-Jordan Sanz
-Sathvi Korandla
-Gia Kim
-Shane Hewitt
+Jacob Donoghue  
+Kathy Cui  
+Jordan Sanz  
+Sathvi Korandla  
+Gia Kim  
+Shane Hewitt  
 
 ## Acknowledgments
 
