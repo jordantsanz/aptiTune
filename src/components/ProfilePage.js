@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPen, faCheck,
+  faPen, faCheck, faArrowCircleLeft, faArrowCircleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { updateUserInfo, getUserInfo } from '../actions/index';
 import NavBar from './NavBar';
@@ -28,6 +28,34 @@ class ProfilePage extends Component {
     this.props.getUserInfo();
     console.log('in profile page');
     this.openModal = this.openModal.bind(this);
+  }
+
+  iconMoveRight = () => {
+    if (this.state.icon < 3) {
+      this.setState((prevState) => ({
+        icon: prevState.icon + 1,
+      }));
+      this.props.updateUserInfo({ icon: this.state.icon + 1 });
+    } else {
+      this.setState({
+        icon: 0,
+      });
+      this.props.updateUserInfo({ icon: 0 });
+    }
+  }
+
+  iconMoveLeft = () => {
+    if (this.state.icon > 0) {
+      this.setState((prevState) => ({
+        icon: prevState.icon - 1,
+      }));
+      this.props.updateUserInfo({ icon: this.state.icon - 1 });
+    } else {
+      this.setState({
+        icon: 3,
+      });
+      this.props.updateUserInfo({ icon: 3 });
+    }
   }
 
 iconRender = () => {
@@ -62,13 +90,6 @@ iconRender = () => {
   }
 
   if (this.state.icon === 3) {
-    return (
-      <div className="icon-div">
-        <img className="user" id="user-icon" alt="user-icon" src="https://aptitune.s3.amazonaws.com/whole+note.png" />
-      </div>
-    );
-  }
-  if (this.state.icon === 4) {
     return (
       <div className="icon-div">
         <img className="user" id="user-icon" alt="user-icon" src="https://aptitune.s3.amazonaws.com/whole+note.png" />
@@ -188,15 +209,11 @@ closeModal = () => {
         <div className="profile-page-content">
           <div className="profile-page-user-display">
             <div className="user-icon-container">
-              <div className="arrow-button-background">
-                <div className="icon" id="arrow-left" />
-              </div>
+              <FontAwesomeIcon icon={faArrowCircleLeft} className="arrow-button-background-left" onClick={this.iconMoveLeft} />
               <div className="user-icon-background">
                 {this.iconRender()}
               </div>
-              <div className="arrow-button-background">
-                <div className="icon" id="arrow-right" />
-              </div>
+              <FontAwesomeIcon icon={faArrowCircleRight} className="arrow-button-background-right" onClick={this.iconMoveRight} />
             </div>
             <div className="user-name-container">{this.renderEdits()}</div>
           </div>

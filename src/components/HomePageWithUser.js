@@ -52,7 +52,7 @@ class HomePageWithUser extends Component {
         break;
     }
     return (
-      <img src={src} id="user-icon" className="user" alt="user-icon" />
+      <img src={src} id="user-icon-homepage" className="user" alt="user-icon" />
     );
   }
 

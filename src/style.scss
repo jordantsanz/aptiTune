@@ -1480,6 +1480,8 @@ transition: 200ms ease all;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 600vw;
+    height: 100%;
 }
 
 
@@ -1866,6 +1868,9 @@ align-items: center;
 #user-icon{
     width: 16vw;
 }
+#user-icon-homepage{
+    width: 12vw;
+}
 .user-icon-background{
     position: absolute;
 width: 48vh;
@@ -1873,7 +1878,7 @@ height: 48vh;
 left: 42.85vw;
 top: 5.44vh;
 border-radius: 200px;
-background: #F18080;
+background: rgba(241, 128, 128, .8);
 }
 
 #stats-title {
@@ -1917,6 +1922,30 @@ display: flex;
 align-items: center;
 
 color: #F18080;
+}
+
+.arrow-button-background-right{
+    left: 64vw;
+    top: 28vh;
+    position: absolute;
+    width: 6vw !important;
+    height: 6vh !important;
+    color: #F18080;
+    transition: 200ms ease all;
+}
+.arrow-button-background-left{
+    left: 37.5vw;
+    top: 28vh;
+    position: absolute;
+    color: #F18080;
+    width: 6vw !important;
+    height: 6vh !important;
+    transition: 200ms ease all;
+}
+
+.arrow-button-background-left:hover, .arrow-button-background-right:hover{
+    cursor: pointer;
+    color: #ec6d6d;
 }
 
 .profile-page-user-settings{
