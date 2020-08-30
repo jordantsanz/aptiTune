@@ -2519,6 +2519,117 @@ width: 100%;
 text-align: center;
 }
 
+.finished-lesson-data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.finished-lesson-histogram {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .finished-histogram-element{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 20px;
+    }
+}
+#histo-progress{
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#correct-progress-bar-rhythm{
+    max-height: 25vh;
+    width: 60px;
+    height: 0;
+    background-color: green;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+}
+#correct-progress-bar-listening{
+    max-height: 25vh;
+    width: 60px;
+    height: 0;
+    background-color: green;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+}
+#correct-progress-bar-reading{
+  max-height: 25vh;
+  width: 60px;
+  height: 0;
+  background-color: green;
+  text-align: center; /* To center it horizontally (if you want) */
+  color: white;
+  border-radius: 25px;
+}
+#correct-progress-bar-singing{
+    max-height: 25vh;
+    width: 60px;
+    height: 0;
+    background-color: green;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+}
+// histogram content in finishedPage
+#total-progress-bar-reading{
+  max-height: 25vh;
+  min-height: 0;
+  height: 25vh;
+  width: 60px;
+  background-color: red;
+  text-align: center; /* To center it horizontally (if you want) */
+  color: white;
+  border-radius: 25px;
+  opacity: 0.5;
+}
+
+#total-progress-bar-singing{
+    max-height: 25vh;
+    min-height: 0;
+    height: 25vh;
+    width: 60px;
+    background-color: red;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+    opacity: 0.5;
+}
+
+#total-progress-bar-listening{
+    max-height: 25vh;
+    min-height: 0;
+    height: 25vh;
+    width: 60px;
+    background-color: red;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+    opacity: 0.5;
+}
+
+#total-progress-bar-rhythm{
+    max-height: 25vh;
+    min-height: 0;
+    height: 25vh;
+    width: 60px;
+    background-color: red;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+    opacity: 0.5;
+  }
+
 .finished-lesson-stats{
     display: flex;
     flex-direction: column;

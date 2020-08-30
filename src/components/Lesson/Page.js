@@ -114,9 +114,9 @@ class Page extends Component {
 
     goToNextForQuiz = () => {
       // handle errorCount
+      const history = this.props;
+      console.log('history:', history);
       if (this.state.errorCount >= 3) {
-        // show finished page
-        const history = this.props;
         // updateUserInfo with stats
         history.push('/finished');
       } else if (this.props.pages.length > this.state.pageNumber + 1) {
@@ -133,11 +133,16 @@ class Page extends Component {
         if (this.state.secondError !== null) {
           localStorage.setItem('err2', this.state.secondError);
         }
+        console.log('finished = true');
         localStorage.setItem('finished', 'true');
-        const history = this.props;
-        // updateUserInfo with stats
-        history.push('/finished');
+        console.log('history:', history);
+        this.goToFinished();
       }
+    }
+
+    goToFinished = () => {
+      const { history } = this.props;
+      history.push('/finished');
     }
 
     incrementErrorCount = () => {
