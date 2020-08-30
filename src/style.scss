@@ -226,30 +226,70 @@ color: #FFFFFF;
 }
 
 #createAccountVoiceSection{
-background: #F18080;
-box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
-border-radius: 34px;
-width: 19.7vw;
-height: 8vh;
-border: none;
+    color: #114353;
+    position: relative;
+    transition: all 0.2s ease;
+    border-radius: 34px;
+    width: 19.7vw;
+    height: 8vh;
+    border: none;
 
-font-family: Montserrat;
-font-style: normal;
-font-weight: bold;
-font-size: 20px;
-line-height: 160%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 160%;
 /* or 32px */
 
-
-color: #FFFFFF;
-
+}
+#createAccountVoiceSection:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 28px;
+  background: rgba(255, 171, 157, 0.7);
+  width: 56px;
+  height: 56px;
+  transition: all 0.3s ease;
 }
 
-#createAccountVoiceSection:hover{
-    background: #FBBE49;
-    color: #114353;
+#createAccountVoiceSection svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke:#114353;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+#createAccountVoiceSection span {
+    position: relative;
+    font-family: Montserrat;
+    font-style: normal;
     font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 0.10em;
+    vertical-align: middle;
+
 }
+#createAccountVoiceSection:hover:before {
+  width: 100%;
+  background: #ffab9d;
+}
+#createAccountVoiceSection:hover svg {
+  transform: translateX(0);
+}
+#createAccountVoiceSection:active {
+  transform: scale(0.96);
+}
+
+
+
 
 #easy-description {
     margin-bottom: 10px;
@@ -344,6 +384,29 @@ text-align: center;
 
 color: #114353;
 }
+
+#createbutton{
+    background: rgb(255, 117, 117);
+    box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+    border-radius: 34px;
+    border: none;
+    color: #114353;
+    width: 25.2vw;
+    height: 8.5vh;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 3vh;
+}
+
+#createbutton:hover{
+    color: #FBBE49;
+    background: #114353;
+    box-shadow: 2px 3px 3px 2px rgba(0, 0, 0, 0.25);
+}
+
+
 
 #loginbutton{
 background: #FBBE49;
@@ -1163,88 +1226,35 @@ color: #2D2D2D;
 }
 
 .page-top-nav{
-width: 22vw;
-height: 6.2vh;
-left: 77.9vw;
-top: 5vh;
-margin-top: 12px;
+    position: absolute;
+    width: 22vw;
+    height: 6.2vh;
+    left: 77.9vw;
+    top: 5vh;
 
-background: rgba(253, 150, 106, 0.7);
-border: 3px solid #FD966A;
-box-sizing: border-box;
-border-radius: 18px;
-flex-direction: row;
-display: flex;
-justify-content: space-around;
+    background: rgba(253, 150, 106, 0.7);
+    border: 3px solid #FD966A;
+    box-sizing: border-box;
+    border-radius: 18px;
 }
 
-.page-bottom{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: -12.5vw;
-}
-
-#sheetmusic {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: -12.5vw;
-}
-
-.flat-button-holder{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    width: 100%;
-}
-
-.next-button-holder{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    width: 74%;
-}
-
-#next-button{
-    background: #FDD46A;
-box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
-border-radius: 34px;
-font-family: Montserrat;
-font-style: normal;
-font-weight: bold;
-font-size: 30px;
-line-height: 160%;
-/* identical to box height, or 48px */
-
-
-color: #114353;
-width: 16vw;
-transition: 200ms ease all;
-}
-
-#next-button:hover{
-    color: #FDD46A;
-    background-color: #114353;
-}
-
-
-#rightarrow, #leftarrow{
-    margin-top: 0px;
-    width: 29px !important;
-    height: 29px !important;
-    color: rgba(0, 0, 0, 0.54);
-    transition: 200ms ease all;
-}
-
-#rightarrow.icon:hover, #leftarrow.icon:hover{
+.page-top-nav-level{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    align-items: center;
     color: white;
-    cursor: pointer;
+
+    position: center;
 }
 
 .page-top-nav-line{
     
-border: 1px solid #FFFFFF;
+    border: 1px solid #FFFFFF;
+    transform: rotate(90deg);
+    width: 2.6vw;
+    height: 0px;
 }
 
 .page-top-nav-level{
