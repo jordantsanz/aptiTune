@@ -35,7 +35,7 @@ class Listening extends Component {
       const pageNum = localStorage.getItem('next');
       this.setState({ pageNumber: pageNum });
       const { history } = this.props;
-      this.props.getLesson(id, history, pageNum + 1);
+      this.props.getLesson(id, history, pageNum + 1, true);
       console.log('Component mounted in Listening');
     }
 
@@ -76,9 +76,9 @@ class Listening extends Component {
         );
       } else if (this.state.complete) {
         return (
-          <div>
-            Sick bruh you got it! Time to move on
-            <button type="button" className="nextButton" onClick={this.goToNext}>
+          <div className="finishedMessage">
+            Great listening! Keep going!
+            <button type="button" className="nextButton" id="nextButton" onClick={this.goToNext}>
               Next
             </button>
           </div>

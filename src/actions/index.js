@@ -21,14 +21,16 @@ export const ActionTypes = {
 };
 
 // gets a lesson given that lesson id and the current user
-export function getLesson(id, history) {
+export function getLesson(id, history, pageNum, shouldIPush) {
   console.log('Calling getLesson in client with id', id);
   return (dispatch) => {
     axios.get(`${ROOT_URL}/lessons/${id}`)
       .then((response) => {
         console.log('getLesson responded with response', response.data);
         dispatch({ type: ActionTypes.GET_LESSON, payload: response.data });
-        history.push(`/lessons/${id}`);
+        if (shouldIPush) {
+          history.push(`/lessons/${id}`);
+        }
       })
       .catch((error) => {
         console.log('error in getLesson client:', error);
