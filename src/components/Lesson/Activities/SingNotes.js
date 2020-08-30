@@ -18,6 +18,7 @@ import { frequencies } from '../../frequencies';
 import randomNotes from '../../RandomNotes';
 
 const Pitchfinder = require('pitchfinder');
+const Tone = require('tone');
 
 const videoType = 'video/webm';
 
@@ -104,6 +105,29 @@ class SingNotes extends Component {
 
   timeout = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  playNotes = async () => {
+    const { pages } = this.props;
+    const page = pages[this.state.pageNumber];
+    await Tone.start();
+    const synth = new Tone.Synth().toDestination();
+    const now = Tone.now();
+    const notes = [];
+    // synth.triggerAttackRelease(page.activity.correct_answers[0], now);
+    // synth.triggerRelease(now);
+    for (let i = 0; i < page.activity.correct_answers.length; i += 1) {
+      const diff = 0.5 * i;
+      let note = page.activity.correct_answers[i];
+      note = note.slice(0, -2);
+      notes.push(note);
+      console.log(note);
+      console.log(diff);
+      synth.triggerAttackRelease(note, '4n', now + diff);
+    }
+    console.log(notes);
+    // synth.triggerAttackRelease('C4', '8n');
+    // synth.triggerRelease(notes, now + 4);
   }
 
   saveAudio = async () => {
@@ -232,19 +256,27 @@ class SingNotes extends Component {
           </button>
         </div>
       );
-    } else {
+    } else if (page.activity_type === 'SingNotes') {
       const { recording } = this.state;
       return (
         <div className="SingNotes">
           <div className="activityInstructions">{page.activity.instructions}</div>
-          {/* <div className="activityInstructions">{answer}</div> */}
           <div>Please hold each note for more than a second to ensure that the microphone picks it up.</div>
           {this.firstRender()}
           <div className="recordButton">
             {!recording && <button type="button" className="button" id="start-record" onClick={(e) => this.startRecording(e)}>Record</button>}
             {recording && <button type="button" className="button" id="stop-record" onClick={(e) => this.stopRecording(e)}>Stop</button>}
           </div>
+          <div className="recordButton">
+            <button type="button" className="button" id="start-record" onClick={this.playNotes}>Play Notes</button>
+          </div>
           <div className="incorrectMessage">{this.state.message}</div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="finishedMessage">
+          Please refresh the page!!
         </div>
       );
     }
