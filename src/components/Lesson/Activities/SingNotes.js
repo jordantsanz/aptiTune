@@ -31,7 +31,7 @@ class SingNotes extends Component {
     super(props);
     this.state = {
       pageNumber: 0,
-      correctClicked: false,
+      correctNotes: false,
       complete: false,
       message: '',
       answers: null,
@@ -78,6 +78,7 @@ class SingNotes extends Component {
     this.mediaRecorder.start(10);
     // say that we're recording
     this.setState({ recording: true });
+    this.setState({ message: '' });
   }
 
   stopRecording(e) {
@@ -174,9 +175,33 @@ class SingNotes extends Component {
         break;
       }
     }
+
+    console.log('notes:', notes);
     // User's notes:
-    if (notes.length === 4) {
+    if (correct) {
+      // delete any pre exisiting easy score staffs so it doesn't draw multiple
+      const staff = document.getElementById('yournotes');
+      while (staff.hasChildNodes()) {
+        staff.removeChild(staff.lastChild);
+      }
+      // draw staff with current notes from user
       drawStaff(notes, 'yournotes');
+      this.setState({ correctNotes: true });
+      this.setState({ complete: true });
+      this.setState({ message: '' });
+    } else if (notes.length === 4 && !correct) {
+      // delete any pre exisiting easy score staffs so it doesn't draw multiple
+      const staff = document.getElementById('yournotes');
+      while (staff.hasChildNodes()) {
+        staff.removeChild(staff.lastChild);
+      }
+      // draw staff with current notes from user
+      drawStaff(notes, 'yournotes');
+      this.setState({ message: 'Wrong answer, try again!' });
+    } else if (notes.length < 4) {
+      this.setState({ message: 'You sang fewer than 4 notes, try again!' });
+    } else {
+      this.setState({ message: 'You sang more than 4 notes, try again! ' });
     }
   }
 
@@ -204,9 +229,9 @@ class SingNotes extends Component {
       );
     } else if (this.state.complete) {
       return (
-        <div>
-          You got it! Click the button to go to the next lesson!
-          <button type="button" className="button" id="nextButton" onClick={this.goToNext}>
+        <div className="finishedMessage">
+          You got it! Click to go to the next lesson!
+          <button type="button" className="nextButton" onClick={this.goToNext}>
             Next
           </button>
         </div>
@@ -217,11 +242,13 @@ class SingNotes extends Component {
         <div>
           <div className="activityInstructions">{page.activity.instructions}</div>
           {/* <div className="activityInstructions">{answer}</div> */}
+          <div>Please hold each note for more than a second to ensure that the microphone picks it up.</div>
           {this.firstRender()}
           <div className="recordButton">
             {!recording && <button type="button" className="button" id="start-record" onClick={(e) => this.startRecording(e)}>Record</button>}
             {recording && <button type="button" className="button" id="stop-record" onClick={(e) => this.stopRecording(e)}>Stop</button>}
           </div>
+          <div className="incorrectMessage">{this.state.message}</div>
         </div>
       );
     } else {
