@@ -346,7 +346,7 @@ class RhythmSensor extends Component {
               <div>Seed time: {this.state.seedTime} </div>
               <div>Clicked times: {this.state.times} </div>
             </div>
-            <button type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+            <button type="button" id="play-button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
           </div>
         );
       }
