@@ -35,7 +35,7 @@ class Listening extends Component {
       const pageNum = localStorage.getItem('next');
       this.setState({ pageNumber: pageNum });
       const { history } = this.props;
-      this.props.getLesson(id, history, pageNum + 1, true);
+      this.props.getLesson(id, history, false);
       console.log('Component mounted in Listening');
     }
 
