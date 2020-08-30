@@ -90,7 +90,9 @@ class Listening extends Component {
         return (
           <div className="Listening">
             <div className="activityInstructions">{page.activity.instructions}</div>
-            <audio src={page.activity.audioUrl} type="audio/m4a" title="audio-file" controls />
+            <div id="audio">
+              <audio src={page.activity.audioUrl} type="audio/m4a" title="audio-file" controls />
+            </div>
             <div className="incorrectMessage">{this.state.message}</div>
             <ul className="listeningAnswers">
               <li>
@@ -105,7 +107,7 @@ class Listening extends Component {
                       console.log('success');
                       this.setState({ correctClicked: true });
                     } else {
-                      console.log('1 clicked -- Wrong answer dumbass');
+                      console.log('1 clicked -- Wrong answer');
                       this.setState({ correctClicked: false });
                     }
                   }}

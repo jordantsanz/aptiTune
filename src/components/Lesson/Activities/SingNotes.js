@@ -214,7 +214,7 @@ class SingNotes extends Component {
     } else if (page.activity_type === 'SingNotes') {
       const { recording } = this.state;
       return (
-        <div>
+        <div className="SingNotes">
           <div className="activityInstructions">{page.activity.instructions}</div>
           {/* <div className="activityInstructions">{answer}</div> */}
           {this.firstRender()}

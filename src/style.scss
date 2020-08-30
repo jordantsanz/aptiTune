@@ -1189,9 +1189,9 @@ text-align: center;
     display: flex;
     flex-direction: column;
     color: black;
-    width: 100%;
-    height: 100%;
-    margin-left: 12vw;
+    width: 100vw;
+    height: 100vh;
+    margin-left: 10.1vw;
 }
 
 .page-top{
@@ -1201,7 +1201,7 @@ text-align: center;
     width: 127vw;
     height: fit-content;
     padding-bottom: 3vh;
-    margin-left: -18vw;
+    margin-left: -16.5vw;
     top: -9vh;
 
     background: #FDD46A;
@@ -1292,7 +1292,9 @@ color: #2D2D2D;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: -12.5vw;
+    margin-left: -10.1vw;
+    width: 100vw;
+    align-items: center;
 }
 
 .flat-button-holder{
@@ -1376,15 +1378,6 @@ transition: 200ms ease all;
 
     
 }
-.page-bottom{
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    position: relative;
-    left:-100px;
-    width: 100vw;
-    align-items: center;
-}
 
 .bottom-div{
     top: 10.2vh;
@@ -1409,15 +1402,18 @@ transition: 200ms ease all;
     text-align: center;
 }
 
-.Listening{
-    width: 87%;
-    float: right;
+#audio {
+    width: 100%;
+}
+
+.page-bottom-content {
+    width: 100%;
 }
 
 .activityInstructions{
-    margin-right: 20vw;
+    margin-right: 5.8vw;
     margin-top: 2vh;
-    margin-left: 20vw;
+    margin-left: 5.8vw;
 }
 /********************** Profile page ****************/
 .profile-page-content{
@@ -1463,6 +1459,7 @@ transition: 200ms ease all;
     background: $orange;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
     border-radius: 34px;
+    margin-left: 5.05vw;
 
     font-family: Montserrat;
 font-style: normal;
@@ -1495,7 +1492,7 @@ height: 9vh;
 align-self: flex-end;
 margin-top: 2vh;
 margin-bottom: 2vh;
-
+margin-right: 5.8vw;
 
 
 font-family: 'Montserrat', sans-serif;
@@ -1510,9 +1507,27 @@ line-height: 160%;
 color: #FFFFFF;
 }
 
+#audio {
+    display:flex;
+    width: 100%;
+    justify-content: center;
+}
+
 .doneButton:hover{
     background-color: #114353;
 }
+.SingNotes {
+    width: 80%;
+    margin: 5vh 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3vh;
+    margin-top: 3vh;
+    height: fit-content;
+    margin-left: 15.15vw;
+}
+
 /***FLATVIEW****/
 .FlatView{
     width: 80%;
@@ -1523,6 +1538,7 @@ color: #FFFFFF;
     margin-bottom: 3vh;
     margin-top: 3vh;
     height: fit-content;
+    margin-left: 15.15vw;
     .flatApi{
         width: 80%;
         height: fit-content;
@@ -1546,10 +1562,13 @@ color: #FFFFFF;
 
 .finishedMessage{
     font-family: Ubuntu;
+    margin: 5vh 0;
+    width: 100%;
 font-style: normal;
 font-weight: bold;
 font-size: 40px;
 line-height: 160%;
+margin-left: 5.05vw;
 /* identical to box height, or 96px */
 
 
@@ -1562,8 +1581,11 @@ align-items: center;
 /*******LISTENING*******/
 .Listening{
     display: flex;
+    width: 100%;
     flex-direction: column;
+    margin: 5vh 0;
     align-items: center;
+    margin-left: 5.05vw;
     iframe{
         height: 100px;
         width: 200px;
@@ -1589,6 +1611,8 @@ iframe{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 0px;
+    justify-content: center;
     button{
         width: 40vw;
         margin: 5px 5px;
@@ -1629,7 +1653,9 @@ line-height: 137.88%;
 /* identical to box height, or 69px */
 
 display: flex;
+width: 70%;
 align-items: center;
+text-align: center;
 letter-spacing: 0.015em;
 margin-bottom: 7vh;
 
@@ -1675,7 +1701,6 @@ color: #114353;
 }
 /************SING NOTES*************/
 .recordButton {
-    margin-left: 12.5vw;
     display: flex;
     justify-content: center;
 }
