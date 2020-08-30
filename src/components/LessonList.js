@@ -56,7 +56,8 @@ class LessonList extends Component {
                     console.log('goToLesson called with id', l._id);
                     localStorage.setItem('lesson', l._id);
                     localStorage.setItem('next', 0);
-                    this.props.getLesson(l._id, history, null, true);
+                    console.log('redirecting to lesson', l);
+                    this.props.getLesson(l._id, history, true);
                   }}
                 >Learn now!
                 </button>
