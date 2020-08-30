@@ -8,9 +8,6 @@ import { connect } from 'react-redux';
 import { getLesson, getUserInfo, updateUserInfo } from '../../actions/index';
 import NavBar from '../NavBar';
 
-let earnedBadge = false;
-let theBadge = null;
-
 function mapStateToProps(reduxState) {
   return {
     currentUser: reduxState.user,
@@ -37,6 +34,8 @@ class FinishedLesson extends Component {
       finishedQuiz: false,
       processed: false,
       histogramAnimate: false,
+      earnedBadge: false,
+      giveBadgeCalled: false,
     };
   }
 
@@ -47,7 +46,6 @@ class FinishedLesson extends Component {
     localStorage.setItem('next', 0);
     const { history } = this.props;
     this.props.getLesson(id, history, false);
-    this.giveBadge();
     this.props.getUserInfo();
   }
 
@@ -58,9 +56,28 @@ class FinishedLesson extends Component {
       // animate histograms
       this.animateHistograms();
     }
+    if (this.props.currentUser !== null && this.props.currentUser !== undefined && !this.state.giveBadgeCalled) {
+      this.giveBadge();
+    }
+  }
+
+  renderBadge = () => {
+    if (this.state.earnedBadge) {
+      return (
+        <div className="finished-lesson-badge">
+          <div className="finished-lesson-badge-earned">Badge earned: {this.props.lesson.badge.name} </div>
+          <img className="badge-image" alt="badge" src={this.props.lesson.badge.iconUrl} />
+        </div>
+      );
+    } else {
+      return (
+        <div />
+      );
+    }
   }
 
   giveBadge = () => {
+    this.setState({ giveBadgeCalled: true });
     console.log('give badge func');
     // get lesson info
     let { badges } = this.props.currentUser.badges;
@@ -72,15 +89,16 @@ class FinishedLesson extends Component {
         this.props.currentUser.badges.forEach((badge) => {
           if (badge.iconUrl === this.props.lesson.badge.iconUrl) {
             isUnique = false;
+            console.log('badge is a repeat');
           }
         });
-        if (isUnique) {
+        if (isUnique && this.state.finishedQuiz) {
+          console.log('newBadge');
           badges = this.props.currentUser.badges.concat(this.props.lesson.badge);
           this.props.updateUserInfo({
             badges,
           });
-          earnedBadge = true;
-          theBadge = this.props.lesson.badge.name;
+          this.setState({ earnedBadge: true });
           console.log('updated badges');
         }
       }
@@ -387,12 +405,9 @@ class FinishedLesson extends Component {
             <div className="finished-lesson-top-page">
               <div className="finished-lesson-top-page-content">
                 <div className="finished-lesson-completed">Completed: {this.props.lesson.title} </div>
-                <div className="finished-lesson-badge">
-                  <div className="finished-lesson-badge-earned">Badge earned: {this.props.lesson.badge.name} </div>
-                  <img className="badge-image" alt="badge" src={this.props.lesson.badge.iconUrl} />
-                </div>
+                <div>{this.renderBadge()}</div>
                 <div className="finished-lesson-percent"> You got {parseFloat(this.state.numberComplete / this.state.totalQuestions) * 100} %! </div>
-                <div className="finished-lesson-description"> Nice job, {this.props.user}! </div>
+                <div className="finished-lesson-description"> Nice job, {this.props.currentUser.username}! </div>
                 <div className="finished-lesson-data">
                   <div>Your Score Breakdown</div>
                   <div>{this.visualizeData()}</div>
@@ -423,20 +438,15 @@ class FinishedLesson extends Component {
             <div className="finished-lesson-top-page">
               <div className="finished-lesson-top-page-content">
                 <div className="finished-lesson-completed">Completed: {this.props.lesson.title} </div>
-                <div className="finished-lesson-badge">
-                  <div className="finished-lesson-badge-earned">Badge earned: </div>
-                  <div className="finished-lesson-badge-earned">{this.props.lesson.badge.name}</div>
-                  <img className="badge-image" alt="badge" src={this.props.lesson.badge.iconUrl} />
-                </div>
-                <div className="finished-lesson-percent"> You got PH %! </div>
-                <div className="finished-lesson-description"> Nice job, {this.props.user}! </div>
+                <div>{this.renderBadge()}</div>
+                <div className="finished-lesson-description"> Nice job, {this.props.currentUser.username}! </div>
               </div>
             </div>
             <div className="finished-lesson-bottom-page">
               <div className="finished-lesson-bottom-page-content">
                 <div className="finished-lesson-stats">
                   <div className="finished-lesson-questions-answered">
-                    Questions answered correctly: PH
+                    Questions answered correctly: {this.props.lesson.pages.length}
                   </div>
                 </div>
                 <div className="finished-lesson-buttons">
