@@ -102,7 +102,7 @@ class Listening extends Component {
                   style={{ background: this.state.colorA }}
                   onClick={() => {
                     this.resetColors();
-                    this.setState({ colorA: '#114353' });
+                    this.setState({ colorA: 'rgba(241, 128, 128, .4)' });
                     if (parseInt(page.activity.correct_answer, 10) === 1) {
                       console.log('success');
                       this.setState({ correctClicked: true });
@@ -122,7 +122,7 @@ class Listening extends Component {
                   style={{ background: this.state.colorB }}
                   onClick={() => {
                     this.resetColors();
-                    this.setState({ colorB: '#114353' });
+                    this.setState({ colorB: 'rgba(241, 128, 128, .4)' });
                     if (parseInt(page.activity.correct_answer, 10) === 2) {
                       console.log('success');
                       this.setState({ correctClicked: true });
@@ -142,7 +142,7 @@ class Listening extends Component {
                   style={{ background: this.state.colorC }}
                   onClick={() => {
                     this.resetColors();
-                    this.setState({ colorC: '#114353' });
+                    this.setState({ colorC: 'rgba(241, 128, 128, .4)' });
                     if (parseInt(page.activity.correct_answer, 10) === 3) {
                       console.log('success');
                       this.setState({ correctClicked: true });
@@ -162,7 +162,7 @@ class Listening extends Component {
                   style={{ background: this.state.colorD }}
                   onClick={() => {
                     this.resetColors();
-                    this.setState({ colorD: '#114353' });
+                    this.setState({ colorD: 'rgba(241, 128, 128, .4)' });
                     if (parseInt(page.activity.correct_answer, 10) === 4) {
                       console.log('success');
                       this.setState({ correctClicked: true });
@@ -193,7 +193,7 @@ class Listening extends Component {
                   style={{ background: this.state.colorA }}
                   onClick={() => {
                     this.resetColors();
-                    this.setState({ colorA: '#114353' });
+                    this.setState({ colorA: 'rgba(241, 128, 128, .4)' });
                     if (parseInt(page.activity.correct_answer, 10) === 1) {
                       console.log('success');
                       this.setState({ correctClicked: true });
@@ -213,7 +213,7 @@ class Listening extends Component {
                   style={{ background: this.state.colorB }}
                   onClick={() => {
                     this.resetColors();
-                    this.setState({ colorB: '#114353' });
+                    this.setState({ colorB: 'rgba(241, 128, 128, .4)' });
                     if (parseInt(page.activity.correct_answer, 10) === 2) {
                       console.log('success');
                       this.setState({ correctClicked: true });
@@ -233,7 +233,7 @@ class Listening extends Component {
                   style={{ background: this.state.colorC }}
                   onClick={() => {
                     this.resetColors();
-                    this.setState({ colorC: '#114353' });
+                    this.setState({ colorC: 'rgba(241, 128, 128, .4)' });
                     if (parseInt(page.activity.correct_answer, 10) === 3) {
                       console.log('success');
                       this.setState({ correctClicked: true });
@@ -253,7 +253,7 @@ class Listening extends Component {
                   style={{ background: this.state.colorD }}
                   onClick={() => {
                     this.resetColors();
-                    this.setState({ colorD: '#114353' });
+                    this.setState({ colorD: 'rgba(241, 128, 128, .4)' });
                     if (parseInt(page.activity.correct_answer, 10) === 4) {
                       console.log('success');
                       this.setState({ correctClicked: true });
