@@ -80,6 +80,18 @@ const errorReducer = (state = initialState, action) => {
             messages: [...state.messages, 'Password must contain at least 1 symbol { ?, !, #, $, &, % }'],
             open: true,
           };
+        case 1007:
+          return {
+            ...state,
+            messages: [...state.messages, 'Must have input for Email.'],
+            open: true,
+          };
+        case 1008:
+          return {
+            ...state,
+            messages: [...state.messages, 'Must have input for Password.'],
+            open: true,
+          };
         default:
           return {
             ...state,

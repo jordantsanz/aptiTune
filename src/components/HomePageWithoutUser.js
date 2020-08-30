@@ -23,6 +23,7 @@ class HomePageWithoutUser extends Component {
       password: '',
       username: '',
       invalidInput: false,
+      logging: false,
     };
     this.signupsection = React.createRef();
     this.voicetomusic = React.createRef();
@@ -58,6 +59,9 @@ class HomePageWithoutUser extends Component {
       });
     } else {
       console.log(user);
+      this.setState({
+        logging: true,
+      });
       this.props.signupUser(user, this.props.history);
     }
   }
@@ -146,6 +150,18 @@ class HomePageWithoutUser extends Component {
     const validPassword = this.checkPasswordInput();
     if (validUsername === true && validEmail === true && validPassword === true) {
       this.submit();
+    }
+  }
+
+  buttonText = () => {
+    if (this.state.logging && this.props.error.open === false) {
+      return (
+        <div className="loader" />
+      );
+    } else {
+      return (
+        <button onClick={this.checkInputs} type="submit" id="createaccountbutton"> Create Account </button>
+      );
     }
   }
 
@@ -304,7 +320,8 @@ class HomePageWithoutUser extends Component {
                 <div className="log-in">Log in here </div>
               </NavLink>
             </div>
-            <button onClick={this.checkInputs} type="submit" className="button" id="createaccountbutton">Create Account</button>
+            {/* <button onClick={this.checkInputs} type="submit" className="button" id="createaccountbutton">Create Account</button> */}
+            <div className="button">{this.buttonText()}</div>
           </div>
 
         </div>
@@ -316,6 +333,7 @@ class HomePageWithoutUser extends Component {
 function mapStateToProps(reduxState) {
   return {
     authentication: reduxState.auth.authenticated,
+    error: reduxState.error,
   };
 }
 
