@@ -176,6 +176,7 @@ class FlatView extends Component {
                         console.log('num :', num, 'changed to', event.target.value);
                         this.setState({ inputAnswers: arr });
                       }}
+                      maxLength="2"
                     />
                   </div>
                 );

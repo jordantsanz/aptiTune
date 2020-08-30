@@ -38,7 +38,7 @@ class NavBar extends Component {
               <div className="icon-text">logout</div>
             </div>
           </NavLink>
-          <img id="logo-icon" alt="logo-icon" src="https://aptitune.s3.amazonaws.com/Aptitune_Logo.png" width="125" height="56" />
+          <img id="logo-icon" alt="logo-icon" src="https://aptitune.s3.amazonaws.com/Aptitune_Logo.png" width="121" height="53" />
         </div>
 
       </nav>

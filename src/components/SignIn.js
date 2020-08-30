@@ -13,8 +13,29 @@ class SignIn extends Component {
     this.state = {
       email: '',
       password: '',
-      error: false,
+      errormodalstuff: false,
+      // eslint-disable-next-line react/no-unused-state
+      logging: false,
     };
+  }
+
+  switchLogging = () => {
+    console.log('switchlogging called in signin');
+    this.setState({
+      logging: false,
+    });
+  }
+
+  buttonText = () => {
+    if (this.state.logging && this.props.error.message === null) {
+      return (
+        <div className="loader" />
+      );
+    } else {
+      return (
+        <button onClick={this.submit} type="submit" id="login-button"> Log-in </button>
+      );
+    }
   }
 
   onInputEmailChange = (event) => {
@@ -32,20 +53,24 @@ class SignIn extends Component {
   submit = () => {
     if (this.state.email == '' || this.state.password == '') {
       this.setState({
-        error: true,
+        errormodalstuff: true,
       });
     } else {
       const user = {
         email: this.state.email,
         password: this.state.password,
       };
+      this.setState({
+        // eslint-disable-next-line react/no-unused-state
+        logging: true,
+      });
 
       this.props.signInUser(user, this.props.history);
     }
   }
 
   errorModal = () => {
-    if (this.state.error) {
+    if (this.state.errormodalstuff) {
       return (
         <h1 className="error">Please fill in all inputs. </h1>
       );
@@ -59,13 +84,15 @@ class SignIn extends Component {
   render() {
     return (
       <div className="signin-background">
-        <ErrorNotification />
+        <div className="error-message" role="button" tabIndex="0" onClick={() => this.switchLogging()}>
+          <ErrorNotification />
+        </div>
         <h1 className="title" id="log-in-title">Log-in here:</h1>
         <input placeholder="email" onChange={this.onInputEmailChange} className="returnemailinput" type="input" />
         <input placeholder="password" onChange={this.onInputPasswordChange} className="returnpasswordinput" type="password" />
         <div className="linktomainpage"> Don&apos;t have an account yet? <NavLink to="/signup" className="log-in-link"> <div className="sign-up-link">Sign up here!</div></NavLink>
         </div>
-        <button onClick={this.submit} type="submit" id="login-button">Log-in</button>
+        <div className="button">{this.buttonText()} </div>
       </div>
     );
   }
@@ -74,6 +101,7 @@ class SignIn extends Component {
 function mapStateToProps(reduxState) {
   return {
     authentication: reduxState.auth.authenticated,
+    error: reduxState.error,
   };
 }
 
