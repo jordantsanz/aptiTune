@@ -44,7 +44,8 @@ class Page extends Component {
       this.setState({ pageNumber: pageNum });
       this.setState({ nextPage: pageNum + 1 });
       const { history } = this.props;
-      this.props.getLesson(id, history, pageNum, true);
+      localStorage.setItem('next', 0);
+      this.props.getLesson(id, history, true);
     }
 
     goToNext = () => {

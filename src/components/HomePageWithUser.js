@@ -62,17 +62,6 @@ class HomePageWithUser extends Component {
           <img className="badge-image" src="https://aptitune.s3.amazonaws.com/badge+art+1.png" alt="badge-icon" />
         </div>
       );
-      // }else { */
-      // console.log('rendering badges in badgeRender');
-      /* this.props.currentUser.badges.map((badge) => {
-        console.log('rendering badges in badgeRender');
-        return (
-          <div>
-            <div className="badge-title">Pitch slapper </div>
-            <img className="badge-image" src="https://aptitune.s3.amazonaws.com/badge+art+1.png" alt="badge-icon" />
-          </div>
-        );
-      }); */
     }
   }
 
@@ -103,18 +92,18 @@ class HomePageWithUser extends Component {
                 <div className="user-container">
                   <div className="user-icon-holder">{this.userIcon()}</div>
                   <div className="user-container-text">
-                    <h1 className="user-hello">Hello {this.props.currentUser.username}! </h1>
+                    <h1 className="user-hello">Hello, {this.props.currentUser.username}! </h1>
                     <h3 className="subtitle" id="lets-learn">Let&apos;s learn music!</h3>
                   </div>
                 </div>
                 <div className="progress-container">
                   <div className="badges-progress">
-                    <div className="number" id="badges-number"> {this.props.currentUser.badges.length} </div>
+                    <div className="number" id="badges-number"> {this.props.currentUser.badges.length - 1} </div>
                     <div className="subtitle">badges <br /> achieved </div>
                   </div>
                   <div className="line" />
                   <div className="lessons-progress">
-                    <div className="number" id="lessons-number"> {this.props.currentUser.completed.length - 1} </div>
+                    <div className="number" id="lessons-number"> {this.props.currentUser.completed.length} </div>
                     <div className="subtitle">lessons <br /> completed </div>
                   </div>
                 </div>

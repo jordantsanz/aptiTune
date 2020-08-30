@@ -25,16 +25,15 @@ class FinishedLesson extends Component {
 
     // get lesson info
     const id = localStorage.getItem('lesson');
-    const pageNum = parseInt(localStorage.getItem('next'), 10);
-    console.log('Next from localStorage', pageNum);
+    localStorage.setItem('next', 0);
     const { history } = this.props;
-    this.props.getLesson(id, history, null, false);
+    this.props.getLesson(id, history, false);
   }
 
   playAgain = () => {
     const id = localStorage.getItem('lesson');
     const { history } = this.props;
-    this.props.getLesson(id, history, -1, true); // i don't know how to push to start of lesson!!!
+    this.props.getLesson(id, history, true); // i don't know how to push to start of lesson!!!
   }
 
   render() {
