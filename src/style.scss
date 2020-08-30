@@ -1186,13 +1186,6 @@ justify-content: space-around;
     margin-left: -12.5vw;
 }
 
-#sheetmusic {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: -12.5vw;
-}
-
 .flat-button-holder{
     display: flex;
     flex-direction: row;
@@ -1541,6 +1534,30 @@ color: #114353;
         margin: 5px 5px;
     }
 }
+/************SING NOTES*************/
+.recordButton {
+    margin-left: 12.5vw;
+    display: flex;
+    justify-content: center;
+}
+
+#sheetmusic, #yournotes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12.5vw;
+}
+
+#message, #outcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12.5vw;
+    font-size: 20px;
+    color: #114353;
+}
+
+
 /*********************************** audiowriting ************************/
 .audiowriting-content{
     margin-left: 12.5vw;
