@@ -1161,7 +1161,7 @@ text-align: center;
     padding-bottom: 3vh;
     margin-left: -18vw;
     top: -9vh;
-    
+
     background: #FDD46A;
     border-radius: 196px;
 }
@@ -1277,19 +1277,15 @@ color: #FFFFFF;
 .page-bottom{
     display: flex;
     flex-direction: column;
-
-    /*top: 34vw;
-    height: 55vh;
-    left: -12.5vw;
-    width: 127vw;
-    position: absolute;*/
-    width: 100%;
+    height: fit-content;
+    position: relative;
+    left:-100px;
+    width: 100vw;
     align-items: center;
 }
 
 .bottom-div{
     top: 10.2vh;
-    position: absolute;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -1299,8 +1295,7 @@ color: #FFFFFF;
 
 .activity-div{
     left: -12.5vw;
-    position: absolute;
-    width: 100%;
+    width: 80%;
     text-align: center;
     top: -20vh;
     display: flex;
@@ -1315,13 +1310,12 @@ color: #FFFFFF;
 .Listening{
     width: 87%;
     float: right;
-    margin-left: 12.5vw;
 }
 
 .activityInstructions{
     margin-right: 20vw;
     margin-top: 2vh;
-    margin-left: 12.5vw;
+    margin-left: 20vw;
 }
 /********************** Profile page ****************/
 .profile-page-content{
@@ -1362,9 +1356,7 @@ color: #FFFFFF;
 
 /******** Different kinds of lesson components ************/
 .nextButton{
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
+    position: relative;
     float: right;
     background: $orange;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
@@ -1423,7 +1415,6 @@ color: #FFFFFF;
 .FlatView{
     width: 80%;
     margin: 5vh 0;
-    margin-left: 12.5vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1462,6 +1453,9 @@ line-height: 160%;
 
 color: #114353;
 text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 /*******LISTENING*******/
 .Listening{
@@ -1583,10 +1577,12 @@ color: #114353;
 }
 
 #start-record, #stop-record{
+    position: relative;
     background: #FBBE49;
     box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
     border-radius: 34px;
     border: none;
+    left: 450px;
     color: #114353;
     width: 25.2vw;
     height: 8.5vh;
