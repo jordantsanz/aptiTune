@@ -36,6 +36,7 @@ class FinishedLesson extends Component {
       histogramAnimate: false,
       earnedBadge: false,
       giveBadgeCalled: false,
+      userStatsUpdated: false,
     };
   }
 
@@ -56,8 +57,9 @@ class FinishedLesson extends Component {
       // animate histograms
       this.animateHistograms();
     }
-    if (this.props.currentUser !== null && this.props.currentUser !== undefined && !this.state.giveBadgeCalled) {
+    if (this.props.currentUser.username !== null && !this.state.giveBadgeCalled) {
       this.giveBadge();
+      this.updateUserStats();
     }
   }
 
@@ -76,14 +78,49 @@ class FinishedLesson extends Component {
     }
   }
 
+  updateUserStats = () => {
+    // 0: flatView, 1: listening, 2: rhythm, 3: noteSinging
+    const correct = this.props.currentUser.questionsCorrect;
+    const incorrect = this.props.currentUser.questionsIncorrect;
+    console.log('user', this.props.currentUser);
+    console.log('correct:', correct);
+    console.log('incorrect:', incorrect);
+    // 0 index: flatView
+    correct[0] = this.props.currentUser.questionsCorrect[0] + (this.state.flatCount - this.state.flatErrors);
+    incorrect[0] = this.props.currentUser.questionsIncorrect[0] + this.state.flatErrors;
+
+    // 1 index: listening
+    correct[1] = this.props.currentUser.questionsCorrect[1] + (this.state.listeningCount - this.state.listeningErrors);
+    incorrect[1] = this.props.currentUser.questionsIncorrect[1] + this.state.listeningErrors;
+
+    // 2 index: listening
+    correct[2] = this.props.currentUser.questionsCorrect[2] + (this.state.rhythmCount - this.state.rhythmErrors);
+    incorrect[2] = this.props.currentUser.questionsIncorrect[2] + this.state.rhythmErrors;
+
+    // 3 index: singing
+    correct[3] = this.props.currentUser.questionsCorrect[3] + (this.state.singCount - this.state.singErrors);
+    incorrect[3] = this.props.currentUser.questionsIncorrect[3] + this.state.singErrors;
+
+    // updateUserInfo
+    console.log('questionsCorrect', correct);
+    console.log('questionsIncorrect', incorrect);
+    this.props.updateUserInfo({ questionsCorrect: correct, questionsIncorrect: incorrect });
+    this.setState({ userStatsUpdated: true });
+  }
+
   giveBadge = () => {
-    this.setState({ giveBadgeCalled: true });
-    console.log('give badge func');
+    console.log('give badge func with badge', this.props.lesson.badge);
     // get lesson info
     let { badges } = this.props.currentUser.badges;
     if (this.props.lesson.badge !== undefined) {
-      if (this.props.currentUser.badges === []) {
+      this.setState({ giveBadgeCalled: true });
+      if (this.props.currentUser.badges.length === 1 && this.props.currentUser.badges[0].iconUrl === '') {
+        console.log('giving user badge!');
+        this.setState({ earnedBadge: true });
         badges = [this.props.lesson.badge];
+        this.props.updateUserInfo({
+          badges,
+        });
       } else {
         let isUnique = true;
         this.props.currentUser.badges.forEach((badge) => {
@@ -93,13 +130,12 @@ class FinishedLesson extends Component {
           }
         });
         if (isUnique && this.state.finishedQuiz) {
-          console.log('newBadge');
+          console.log('giving user badge');
           badges = this.props.currentUser.badges.concat(this.props.lesson.badge);
           this.props.updateUserInfo({
             badges,
           });
           this.setState({ earnedBadge: true });
-          console.log('updated badges');
         }
       }
     }
