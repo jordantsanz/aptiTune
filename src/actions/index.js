@@ -138,7 +138,7 @@ export function signInUser(user, history) {
       }
     })
       .catch((error) => {
-        dispatch(setError(`Sign In Failed: ${error}`));
+        dispatch(setError(error.response.status));
       });
   };
 }

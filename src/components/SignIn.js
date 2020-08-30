@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { signInUser } from '../actions/index';
+import ErrorNotification from './errorMessage';
 
 class SignIn extends Component {
   // eslint-disable-next-line no-useless-constructor
@@ -58,7 +59,7 @@ class SignIn extends Component {
   render() {
     return (
       <div className="signin-background">
-        {this.errorModal()}
+        <ErrorNotification />
         <h1 className="title" id="log-in-title">Log-in here:</h1>
         <input placeholder="email" onChange={this.onInputEmailChange} className="returnemailinput" type="input" />
         <input placeholder="password" onChange={this.onInputPasswordChange} className="returnpasswordinput" type="password" />
