@@ -7,7 +7,7 @@ function pitchConsensus(detectors, chunk) {
     .filter((value) => value != null)
     .sort((a, b) => a - b);
 
-  // In the case of one pitch, return it.
+  // In the case of one pitch, return it. LOLOLOL
   if (pitches.length === 1) {
     return pitches[0];
 

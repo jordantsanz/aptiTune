@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unused-state */
+/* please work */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
@@ -43,7 +44,7 @@ class Page extends Component {
       this.setState({ pageNumber: pageNum });
       this.setState({ nextPage: pageNum + 1 });
       const { history } = this.props;
-      this.props.getLesson(id, history, pageNum);
+      this.props.getLesson(id, history, pageNum, true);
     }
 
     goToNext = () => {
@@ -90,7 +91,7 @@ class Page extends Component {
         console.log('fields in goToNext: ', fields);
         const { history } = this.props;
         this.props.updateUserInfo(fields);
-        history.push('/home');
+        history.push('/finished');
         // set user info to add
       }
     }
@@ -138,9 +139,7 @@ class Page extends Component {
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
                   <div className="page-top-nav">
-                    <div className="page-top-nav-line" />
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
-                    <div className="page-top-nav-line" />
                   </div>
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
