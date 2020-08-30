@@ -721,14 +721,12 @@ transition: 200ms ease all;
 	&:hover {
 		color: #FD966A;
 	}
-    width: 33vw;
+    width: 35vw;
     height: 30vh;
     display: flex !important;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    position: fixed;
-    margin-top: 15vh;
+    justify-content: flex-start;
     overflow-x: hidden;
     text-align: center;
 
@@ -736,12 +734,35 @@ transition: 200ms ease all;
 
 .badge-div{
 width: 20.5vw;
-height: 122.5vh;
+height: 25.5vh;
 
 background: #FAE5E5;
 border-radius: 36px;
 text-align: center;
 align-items: center;
+margin-top: 2vh;
+transition: 200ms ease all;
+}
+
+.badge-div:hover{
+    background:#fce1e1;
+}
+
+.badge-div:hover .badge-title{
+    color: $blue;
+}
+
+.badge-title{
+    transition: 200ms ease all;
+}
+.badge-render-homepage{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .badge-title{
@@ -1164,10 +1185,8 @@ transform: rotate(90.29deg);
     margin-right: 2px;
 }
 .badges-flex{
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    
+display: flex;
+flex-direction: column;
 position: absolute;
 height: 100%;
 width: 34vw;
@@ -2565,6 +2584,16 @@ line-height: 160%;
 
 color: #114353;
 
+}
+
+.badge-earned-words{
+    color: #F18080;
+    margin-left: 1vw;
+}
+
+.badge-earned{
+    display: flex;
+    flex-direction: row;
 }
 
 #take-me-home{
