@@ -255,7 +255,9 @@ class Page extends Component {
               <div className="page-bottom">
                 <SingNotes onSubmit={this.goToNext} lessonType={this.props.lesson.lesson_type} incrementErrorCount={this.incrementErrorCount} errorCount={this.state.errorCount} />
                 <div id="sheetmusic"> </div>
+                <div id="message">This is what you sang (wait for the staff to render): </div>
                 <div id="yournotes"> </div>
+                <div id="outcome"> </div>
               </div>
             </div>
           </div>
