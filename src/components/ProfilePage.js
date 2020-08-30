@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -5,6 +6,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPen, faCheck,
+} from '@fortawesome/free-solid-svg-icons';
 import { updateUserInfo, getUserInfo } from '../actions/index';
 import NavBar from './NavBar';
 
@@ -20,6 +25,7 @@ class ProfilePage extends Component {
       retype: '',
       modalisopen: false,
     };
+    this.props.getUserInfo();
     console.log('in profile page');
     this.openModal = this.openModal.bind(this);
   }
@@ -138,19 +144,23 @@ closeModal = () => {
     if (this.state.isEditing) {
       return (
         <div className="user-name-container-inner">
-          <input className="display-name-input" type="input" onChange={this.onInputChange} />
-          <div className="icon-holder" onClick={this.stopEditing}>
-            <div className="icon" id="check" />
-          </div>
+          <input className="display-name-input" id="change-username" type="input" onChange={this.onInputChange} placeholder="new username" />
+          <button type="button" className="icon-holder" id="done-edit-username" onClick={this.stopEditing}>
+            <FontAwesomeIcon icon={faCheck} className="icon" id="editing-icon" alt="check-icon" />
+          </button>
         </div>
       );
     } else {
       return (
         <div className="user-name-container-inner">
-          <div className="user-name-display"> {this.props.currentUser.username} </div>
-          <div className="icon-holder" onClick={this.startEditing}>
-            <div className="icon" id="pencil" />
-          </div> {/* click on to edit display name */}
+          <div className="user-name-display" id="profile-page-username">{this.props.currentUser.username}</div>
+          <button type="button" className="icon-holder" id="edit-username" onClick={this.startEditing}>
+            <FontAwesomeIcon icon={faPen} className="icon" id="check-icon" alt="pen-icon" />
+
+            {/* <i className="fal fa-pencil" /> */}
+
+            {/* <div className="icon" id="pencil" /> */}
+          </button> {/* click on to edit display name */}
         </div>
       );
     }
@@ -193,7 +203,24 @@ closeModal = () => {
           <div className="profile-page-badges-section">
             <div className="title" id="badges-title-profile">Your Badges </div>
             <div className="badges-trophy-case">
-              {/* need to loop through all badges here and render; check to see if badge name is in user.badges array, and color red if so; */}
+              {this.props.currentUser.badges.map((badge) => {
+                console.log('rendering badge: ', badge);
+                if (badge.iconUrl === '' && this.props.currentUser.badges.length === 1) {
+                  console.log('rendering: No badges yet!');
+                  return (
+                    <div id={badge.iconUrl}>
+                      <div className="badge-title">{badge.name}</div>
+                    </div>
+                  );
+                } else if (badge.iconUrl !== '') {
+                  return (
+                    <div>
+                      <div id={badge.iconUrl} className="badge-title">{badge.name}</div>
+                      <img className="badge-image" src={badge.iconUrl} alt="badge-icon" />
+                    </div>
+                  );
+                }
+              })}
             </div>
           </div>
           <div className="profile-page-user-settings">

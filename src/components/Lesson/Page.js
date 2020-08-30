@@ -8,6 +8,7 @@ import NavBar from '../NavBar';
 import FlatView from './Activities/FlatView';
 import Listening from './Activities/Listening';
 import RhythmSensor from './Activities/RhythmSensor';
+import SingNotes from './Activities/SingNotes';
 
 function mapStateToProps(reduxState) {
   return {
@@ -47,7 +48,6 @@ class Page extends Component {
 
     goToNext = () => {
       console.log('GOTONEXTCALLED');
-      // console.log('this.props.pages.length', this.props.pages.length);
       if (this.props.pages.length > this.state.pageNumber + 1) {
         console.log('got inside');
         const local = parseInt(this.state.nextPage, 10);
@@ -55,15 +55,30 @@ class Page extends Component {
         this.setState((prevState) => ({ pageNumber: prevState.pageNumber + 1 }));
         this.setState((prevState) => ({ nextPage: prevState.nextPage + 1 }));
       } else {
-        // for now, redirect to home....
+        // for now, redirect to home, and add this lessonID to completed!
         const id = localStorage.getItem('lesson');
         let { fields } = {};
+        let completedLessons = this.props.currentUser.completed;
         if (this.props.currentUser.completed === undefined || this.props.currentUser.completed === []) {
-          fields = { completedLessons: [id] };
+          completedLessons = [id];
         } else if (!this.props.currentUser.completed.includes(id)) {
           console.log('result of includes', this.props.currentUser.completed.includes(id));
-          fields = { completedLessons: this.props.currentUser.completed.concat(id) };
+          completedLessons = this.props.currentUser.completed.concat(id);
         }
+
+        // give badge
+        let { badges } = this.props.currentUser.badges;
+        console.log('PROPS:', this.props);
+        console.log('LESSON', this.props.lesson);
+        console.log('BADGE:', this.props.lesson.badge);
+        if (this.props.lesson.badge !== undefined) {
+          if (this.props.currentUser.badges === []) {
+            badges = [this.props.lesson.badge];
+          } else if (!this.props.currentUser.badges.includes(this.props.lesson.badge)) {
+            badges = this.props.currentUser.badges.concat([this.props.lesson.badge]);
+          }
+        }
+        fields = { completedLessons, badges };
         console.log('fields in goToNext: ', fields);
         const { history } = this.props;
         this.props.updateUserInfo(fields);
@@ -129,14 +144,57 @@ class Page extends Component {
         );
       } else if (page.activity_type === 'RhythmSensor') {
         return (
-          <div>
-            <RhythmSensor />
+          <div className="current-page">
+            <NavBar />
+            <div className="full-page">
+              <div className="page-top">
+                <div className="page-top-topthird">
+                  <div className="page-top-title">{page.content.title}</div>
+                  <div className="page-top-nav">
+                    <div className="page-top-nav-line" />
+                    <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
+                    <div className="page-top-nav-line" />
+                  </div>
+                </div>
+                <div className="page-top-description">{page.content.description}</div>
+                <div className="page-top-content">{page.content.instructions}</div>
+              </div>
+              <div className="page-bottom">
+                <div id="rhythmScore" />
+                <RhythmSensor onSubmit={this.goToNext} />
+              </div>
+            </div>
+          </div>
+        );
+      } else if (page.activity_type === 'SingNotes') {
+        return (
+          <div className="current-page">
+            <NavBar />
+            <div className="full-page">
+              <div className="page-top">
+                <div className="page-top-topthird">
+                  <div className="page-top-title">{page.content.title}</div>
+                  <div className="page-top-nav">
+                    <div className="page-top-nav-line" />
+                    <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
+                    <div className="page-top-nav-line" />
+                  </div>
+                </div>
+                <div className="page-top-description">{page.content.description}</div>
+                <div className="page-top-content">{page.content.instructions}</div>
+              </div>
+              <div className="page-bottom">
+                <SingNotes onSubmit={this.goToNext} />
+                <div id="sheetmusic"> </div>
+                <div id="yournotes"> </div>
+              </div>
+            </div>
           </div>
         );
       } else {
         return (
           <div>
-            No lesson found...
+            Uh oh... this isnt a valid lesson
           </div>
         );
       }
