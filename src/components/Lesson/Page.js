@@ -74,8 +74,16 @@ class Page extends Component {
         if (this.props.lesson.badge !== undefined) {
           if (this.props.currentUser.badges === []) {
             badges = [this.props.lesson.badge];
-          } else if (!this.props.currentUser.badges.includes(this.props.lesson.badge)) {
-            badges = this.props.currentUser.badges.concat([this.props.lesson.badge]);
+          } else {
+            let isUnique = true;
+            this.props.currentUser.badges.forEach((badge) => {
+              if (badge.iconUrl === this.props.lesson.badge.iconUrl) {
+                isUnique = false;
+              }
+            });
+            if (isUnique) {
+              badges = this.props.currentUser.badges.concat[this.props.lesson.badge];
+            }
           }
         }
         fields = { completedLessons, badges };
