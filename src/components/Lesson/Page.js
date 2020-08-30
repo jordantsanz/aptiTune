@@ -30,6 +30,11 @@ class Page extends Component {
       exercise: '',
       activity: '',
       nextPage: '',
+      // stats specifically for quiz
+      errorCount: 0,
+      firstError: null,
+      secondError: null,
+      thirdError: null,
     };
   }
 
@@ -49,6 +54,16 @@ class Page extends Component {
     }
 
     goToNext = () => {
+      // for quiz module
+      if (this.props.lesson.lesson_type === 'quiz') {
+        this.goToNextForQuiz();
+      } else {
+        this.goToNextForLesson();
+      }
+    }
+
+    goToNextForLesson = () => {
+      // for lesson module
       console.log('GOTONEXTCALLED');
       if (this.props.pages.length > this.state.pageNumber + 1) {
         console.log('got inside');
@@ -57,7 +72,7 @@ class Page extends Component {
         this.setState((prevState) => ({ pageNumber: prevState.pageNumber + 1 }));
         this.setState((prevState) => ({ nextPage: prevState.nextPage + 1 }));
       } else {
-        // for now, redirect to home, and add this lessonID to completed!
+      // for now, redirect to home, and add this lessonID to completed!
         const id = localStorage.getItem('lesson');
         let { fields } = {};
         let completedLessons = this.props.currentUser.completed;
@@ -93,7 +108,51 @@ class Page extends Component {
         const { history } = this.props;
         this.props.updateUserInfo(fields);
         history.push('/finished');
-        // set user info to add
+      // set user info to add
+      }
+    }
+
+    goToNextForQuiz = () => {
+      // handle errorCount
+      if (this.state.errorCount >= 3) {
+        // show finished page
+        const history = this.props;
+        // updateUserInfo with stats
+        history.push('/finished');
+      } else if (this.props.pages.length > this.state.pageNumber + 1) {
+        const local = parseInt(this.state.nextPage, 10);
+        localStorage.setItem('next', local.toString());
+        this.setState((prevState) => ({ pageNumber: prevState.pageNumber + 1 }));
+        this.setState((prevState) => ({ nextPage: prevState.nextPage + 1 }));
+      } else {
+        const history = this.props;
+        // updateUserInfo with stats
+        history.push('/finished');
+      }
+    }
+
+    incrementErrorCount = () => {
+      console.log('Incrementing error count to ', this.state.errorCount + 1);
+      // keep stats on where the user messed up
+      const pageNum = this.state.pageNumber;
+      if (this.state.errorCount === 0) {
+        this.setState({ firstError: pageNum });
+        // increment errorCount
+        this.setState((prevState) => ({
+          errorCount: prevState.errorCount + 1,
+        }));
+      } else if (this.state.errorCount === 1) {
+        this.setState({ secondError: pageNum });
+        // increment errorCount
+        this.setState((prevState) => ({
+          errorCount: prevState.errorCount + 1,
+        }));
+      } else if (this.state.errorCount === 2) {
+        this.setState({ thirdError: pageNum });
+        // go to finished page
+        const { history } = this.props;
+        // updateUserInfo with stats
+        history.push('/finished');
       }
     }
 
@@ -126,7 +185,7 @@ class Page extends Component {
                 </div>
               </div>
               <div className="page-bottom">
-                <FlatView onSubmit={this.goToNext} />
+                <FlatView onSubmit={this.goToNext} lessonType={this.props.lesson.lesson_type} incrementErrorCount={this.incrementErrorCount} errorCount={this.state.errorCount} />
               </div>
             </div>
           </div>
@@ -147,7 +206,7 @@ class Page extends Component {
                 <div className="page-top-content">{page.content.instructions}</div>
               </div>
               <div className="page-bottom">
-                <Listening onSubmit={this.goToNext} />
+                <Listening onSubmit={this.goToNext} lessonType={this.props.lesson.lesson_type} incrementErrorCount={this.incrementErrorCount} errorCount={this.state.errorCount} />
               </div>
             </div>
           </div>
@@ -171,7 +230,7 @@ class Page extends Component {
               </div>
               <div className="page-bottom">
                 <div id="rhythmScore" />
-                <RhythmSensor onSubmit={this.goToNext} />
+                <RhythmSensor onSubmit={this.goToNext} lessonType={this.props.lesson.lesson_type} incrementErrorCount={this.incrementErrorCount} errorCount={this.state.errorCount} />
               </div>
             </div>
           </div>
@@ -194,7 +253,7 @@ class Page extends Component {
                 <div className="page-top-content">{page.content.instructions}</div>
               </div>
               <div className="page-bottom">
-                <SingNotes onSubmit={this.goToNext} />
+                <SingNotes onSubmit={this.goToNext} lessonType={this.props.lesson.lesson_type} incrementErrorCount={this.incrementErrorCount} errorCount={this.state.errorCount} />
                 <div id="sheetmusic"> </div>
                 <div id="yournotes"> </div>
               </div>

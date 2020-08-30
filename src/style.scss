@@ -1115,7 +1115,13 @@ transform: rotate(90.29deg);
     display: flex;
     flex-direction: row;
 }
+#lessons-quizzes{
+    margin-left: 10px;
+}
 
+#lessons-quizzes:hover{
+    cursor: pointer;
+}
 #lessons-completed{
     margin-left: 10px;
 }

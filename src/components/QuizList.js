@@ -26,7 +26,7 @@ class CompletedList extends Component {
   }
 
   render() {
-    console.log('lessons in lessonlist', this.props.lesson.lessons);
+    console.log('lessons in quizlist', this.props.lesson.lessons);
     if (this.props.lesson.lessons === null || this.props.lesson.lessons === undefined || this.props.currentUser === null || this.props.currentUser === undefined) {
       return (
         <div>Loading...</div>
@@ -34,10 +34,11 @@ class CompletedList extends Component {
     }
 
     // split up lessons into completed and incomplete
-    const completed = this.props.lesson.lessons.filter((lesson) => this.props.currentUser.completed.includes(lesson._id));
+    console.log('lessons in quizlist', this.props.lesson.lessons);
+    const completed = this.props.lesson.lessons.filter((lesson) => lesson.lesson_type === 'quiz');
     if (completed === null || completed === undefined || completed.length === 0) {
       return (
-        <div className="no-lessons-completed">No lessons completed. </div>
+        <div className="no-lessons-completed">No Quizzes. </div>
       );
     } else {
       return (
@@ -59,7 +60,7 @@ class CompletedList extends Component {
                     id="lesson-icon-button"
                     onClick={() => {
                     // go to lesson
-                      console.log('button clicked in completedList');
+                      console.log('button clicked in lessonList');
                       const { history } = this.props;
                       console.log('props: ', this.props);
                       console.log('id', l._id);
