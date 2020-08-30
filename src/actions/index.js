@@ -21,7 +21,7 @@ export const ActionTypes = {
 };
 
 // gets a lesson given that lesson id and the current user
-export function getLesson(id, history, pageNum, shouldIPush) {
+export function getLesson(id, history, shouldIPush) {
   console.log('Calling getLesson in client with id', id);
   return (dispatch) => {
     axios.get(`${ROOT_URL}/lessons/${id}`)

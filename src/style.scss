@@ -1151,7 +1151,13 @@ transform: rotate(90.29deg);
     display: flex;
     flex-direction: row;
 }
+#lessons-quizzes{
+    margin-left: 10px;
+}
 
+#lessons-quizzes:hover{
+    cursor: pointer;
+}
 #lessons-completed{
     margin-left: 30px;
 }
@@ -1197,7 +1203,7 @@ text-align: center;
     padding-bottom: 3vh;
     margin-left: -18vw;
     top: -9vh;
-    
+
     background: #FDD46A;
     border-radius: 196px;
 }
@@ -1266,6 +1272,66 @@ color: #2D2D2D;
 .page-top-nav{
     position: center;
     align-items: center;
+
+	width: 22vw;
+	height: 6.2vh;
+	left: 77.9vw;
+	top: 5vh;
+	margin-top: 12px;
+
+	background: rgba(253, 150, 106, 0.7);
+	border: 3px solid #FD966A;
+	box-sizing: border-box;
+	border-radius: 18px;
+	flex-direction: row;
+	display: flex;
+	justify-content: space-around;
+}
+
+.page-bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: -12.5vw;
+}
+
+.flat-button-holder{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.next-button-holder{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 74%;
+}
+
+#next-button{
+    background: #FDD46A;
+box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 30px;
+line-height: 160%;
+/* identical to box height, or 48px */
+
+
+color: #114353;
+width: 16vw;
+transition: 200ms ease all;
+}
+
+#next-button:hover{
+    color: #FDD46A;
+    background-color: #114353;
+}
+
+    /* position: absolute;
     width: 22vw;
     height: 6.2vh;
     left: 77.9vw;
@@ -1274,8 +1340,7 @@ color: #2D2D2D;
     background: rgba(253, 150, 106, 0.7);
     border: 3px solid #FD966A;
     box-sizing: border-box;
-    border-radius: 18px;
-}
+    border-radius: 18px; */
 
 .page-top-nav-level{
     font-family: Montserrat;
@@ -1314,19 +1379,15 @@ color: #2D2D2D;
 .page-bottom{
     display: flex;
     flex-direction: column;
-
-    /*top: 34vw;
-    height: 55vh;
-    left: -12.5vw;
-    width: 127vw;
-    position: absolute;*/
-    width: 100%;
+    height: fit-content;
+    position: relative;
+    left:-100px;
+    width: 100vw;
     align-items: center;
 }
 
 .bottom-div{
     top: 10.2vh;
-    position: absolute;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -1336,8 +1397,7 @@ color: #2D2D2D;
 
 .activity-div{
     left: -12.5vw;
-    position: absolute;
-    width: 100%;
+    width: 80%;
     text-align: center;
     top: -20vh;
     display: flex;
@@ -1352,13 +1412,12 @@ color: #2D2D2D;
 .Listening{
     width: 87%;
     float: right;
-    margin-left: 12.5vw;
 }
 
 .activityInstructions{
     margin-right: 20vw;
     margin-top: 2vh;
-    margin-left: 12.5vw;
+    margin-left: 20vw;
 }
 /********************** Profile page ****************/
 .profile-page-content{
@@ -1399,9 +1458,7 @@ color: #2D2D2D;
 
 /******** Different kinds of lesson components ************/
 .nextButton{
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
+    position: relative;
     float: right;
     background: $orange;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
@@ -1460,7 +1517,6 @@ color: #FFFFFF;
 .FlatView{
     width: 80%;
     margin: 5vh 0;
-    margin-left: 12.5vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1499,6 +1555,9 @@ line-height: 160%;
 
 color: #114353;
 text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 /*******LISTENING*******/
 .Listening{
@@ -1614,16 +1673,42 @@ color: #114353;
         margin: 5px 5px;
     }
 }
+/************SING NOTES*************/
+.recordButton {
+    margin-left: 12.5vw;
+    display: flex;
+    justify-content: center;
+}
+
+#sheetmusic, #yournotes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12.5vw;
+}
+
+#message, #outcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12.5vw;
+    font-size: 20px;
+    color: #114353;
+}
+
+
 /*********************************** audiowriting ************************/
 .audiowriting-content{
     margin-left: 12.5vw;
 }
 
 #start-record, #stop-record{
+    position: relative;
     background: #FBBE49;
     box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
     border-radius: 34px;
     border: none;
+    left: 450px;
     color: #114353;
     width: 25.2vw;
     height: 8.5vh;
@@ -2401,7 +2486,6 @@ text-align: center;
 
 color: #FFFFFF;
 }
-
 #profile-page-username {
     position: absolute;
 width: 375px;

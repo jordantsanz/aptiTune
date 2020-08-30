@@ -67,6 +67,11 @@ class FlatView extends Component {
 
       if (allCorrect) {
         this.setState({ complete: true });
+      } else if (this.props.lessonType === 'quiz') {
+        console.log('Incorrect in quiz');
+        this.props.incrementErrorCount();
+      } else {
+        console.log('incorrect with type', this.props.lessonType);
       }
     }
 

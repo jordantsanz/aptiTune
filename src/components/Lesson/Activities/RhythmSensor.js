@@ -58,7 +58,7 @@ class RhythmSensor extends Component {
       const pageNum = localStorage.getItem('next');
       this.setState({ pageNumber: pageNum });
       const { history } = this.props;
-      this.props.getLesson(id, history, pageNum + 1, true);
+      this.props.getLesson(id, history, false);
       console.log('Component mounted in Listening');
     }
 
@@ -78,7 +78,7 @@ class RhythmSensor extends Component {
       while (index < playCount) {
         const interval = ans[index];
         setTimeout(() => {
-          this.state.tapAudio.pause();
+          // this.state.tapAudio.pause();
           this.state.tapAudio.play();
           console.log('running loop ', index, 'with interval', interval);
           if (interval === ans[ans.length - 1]) {
@@ -223,6 +223,10 @@ class RhythmSensor extends Component {
           correct: false,
           firstAttempt: false,
         });
+        // deal with error for quiz
+        if (this.props.lessonType === 'quiz') {
+          this.props.incrementErrorCount();
+        }
       }
     }
 
@@ -346,7 +350,9 @@ class RhythmSensor extends Component {
               <div>Seed time: {this.state.seedTime} </div>
               <div>Clicked times: {this.state.times} </div>
             </div>
-            <button type="button" id="play-button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+            <div id="rhythm-play-button">
+              <button type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+            </div>
           </div>
         );
       }
