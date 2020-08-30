@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePageWithoutUser from './HomePageWithoutUser';

@@ -370,7 +370,7 @@ closeModal = () => {
             </div>
           </div>
           <div className="profile-page-user-settings">
-            <div className="title" id="user-settings-title">Change Password</div>
+            <div className="title" id="c">Change Password</div>
             <div className="settings-content">
               <div className="settings-current-container">
                 <div className="subtitle" id="settings-current-title">current</div>
