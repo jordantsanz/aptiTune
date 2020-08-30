@@ -5,8 +5,11 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getLesson, getUserInfo } from '../../actions/index';
+import { getLesson, getUserInfo, updateUserInfo } from '../../actions/index';
 import NavBar from '../NavBar';
+
+let earnedBadge = false;
+let theBadge = null;
 
 function mapStateToProps(reduxState) {
   return {
@@ -40,12 +43,12 @@ class FinishedLesson extends Component {
   componentDidMount = () => {
     // get userinfo
     this.props.getUserInfo();
-
-    // get lesson info
     const id = localStorage.getItem('lesson');
     localStorage.setItem('next', 0);
     const { history } = this.props;
     this.props.getLesson(id, history, false);
+    this.giveBadge();
+    this.props.getUserInfo();
   }
 
   componentDidUpdate = () => {
@@ -57,13 +60,41 @@ class FinishedLesson extends Component {
     }
   }
 
+  giveBadge = () => {
+    console.log('give badge func');
+    // get lesson info
+    let { badges } = this.props.currentUser.badges;
+    if (this.props.lesson.badge !== undefined) {
+      if (this.props.currentUser.badges === []) {
+        badges = [this.props.lesson.badge];
+      } else {
+        let isUnique = true;
+        this.props.currentUser.badges.forEach((badge) => {
+          if (badge.iconUrl === this.props.lesson.badge.iconUrl) {
+            isUnique = false;
+          }
+        });
+        if (isUnique) {
+          badges = this.props.currentUser.badges.concat(this.props.lesson.badge);
+          this.props.updateUserInfo({
+            badges,
+          });
+          earnedBadge = true;
+          theBadge = this.props.lesson.badge.name;
+          console.log('updated badges');
+        }
+      }
+    }
+  }
+
   playAgain = () => {
     const id = localStorage.getItem('lesson');
     const { history } = this.props;
-    this.props.getLesson(id, history, true); // i don't know how to push to start of lesson!!!
+    this.props.getLesson(id, history, true);
   }
 
   processResults = () => {
+    console.log('Processing results');
     if (!this.state.processed) {
       // set state values
       this.setState({ totalQuestions: this.props.pages.length });
@@ -182,9 +213,14 @@ class FinishedLesson extends Component {
   }
 
   renderRhythmBar = () => {
+    let percentCorrect = ((this.state.rhythmCount - this.state.rhythmErrors) / this.state.rhythmCount) * 100;
+    if (percentCorrect < 0) {
+      percentCorrect = 0;
+    }
     if (this.state.rhythmCount > 0) {
       return (
         <div className="finished-histogram-element">
+          <div>{percentCorrect}%</div>
           <div id="histo-progress">
             <div id="total-progress-bar-rhythm" />
             <div id="correct-progress-bar-rhythm" />
@@ -200,9 +236,14 @@ class FinishedLesson extends Component {
   }
 
   renderListeningBar = () => {
+    let percentCorrect = ((this.state.listeningCount - this.state.listeningErrors) / this.state.listeningCount) * 100;
+    if (percentCorrect < 0) {
+      percentCorrect = 0;
+    }
     if (this.state.listeningCount > 0) {
       return (
         <div className="finished-histogram-element">
+          <div>{percentCorrect}%</div>
           <div id="histo-progress">
             <div id="total-progress-bar-listening" />
             <div id="correct-progress-bar-listening" />
@@ -218,9 +259,14 @@ class FinishedLesson extends Component {
   }
 
   renderReadingBar = () => {
+    let percentCorrect = ((this.state.flatCount - this.state.flatErrors) / this.state.flatCount) * 100;
+    if (percentCorrect < 0) {
+      percentCorrect = 0;
+    }
     if (this.state.flatCount > 0) {
       return (
         <div className="finished-histogram-element">
+          <div>{percentCorrect}%</div>
           <div id="histo-progress">
             <div id="total-progress-bar-reading" />
             <div id="correct-progress-bar-reading" />
@@ -236,9 +282,14 @@ class FinishedLesson extends Component {
   }
 
   renderSingingBar = () => {
+    let percentCorrect = ((this.state.singCount - this.state.singErrors) / this.state.singCount) * 100;
+    if (percentCorrect < 0) {
+      percentCorrect = 0;
+    }
     if (this.state.singingCount > 0) {
       return (
         <div className="finished-histogram-element">
+          <div>{percentCorrect}%</div>
           <div id="histo-progress">
             <div id="total-progress-bar-singing" />
             <div id="correct-progress-bar-singing" />
@@ -299,7 +350,7 @@ class FinishedLesson extends Component {
     // const percentCorrect = parseFloat((this.state.flatCount - this.state.flatErrors) / (this.state.flatCount));
     const maxHeight = 100 * percentCorrect;
     // assume we want 2000 miliseconds to grow
-    const interval = parseFloat(3000 / 100);
+    const interval = parseFloat(5000 / 100);
     const incrementValue = parseFloat(maxHeight / interval);
     const elem1 = document.getElementById(id1);
     const elem2 = document.getElementById(id2);
@@ -400,4 +451,5 @@ class FinishedLesson extends Component {
     }
   }
 }
-export default withRouter(connect(mapStateToProps, { getLesson, getUserInfo })(FinishedLesson));
+
+export default withRouter(connect(mapStateToProps, { getLesson, getUserInfo, updateUserInfo })(FinishedLesson));

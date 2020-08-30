@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unused-state */
 /* please work */
@@ -74,7 +75,7 @@ class Page extends Component {
       } else {
       // for now, redirect to home, and add this lessonID to completed!
         const id = localStorage.getItem('lesson');
-        let { fields } = {};
+
         let completedLessons = this.props.currentUser.completed;
         if (this.props.currentUser.completed === undefined || this.props.currentUser.completed === []) {
           completedLessons = [id];
@@ -83,30 +84,19 @@ class Page extends Component {
           completedLessons = this.props.currentUser.completed.concat(id);
         }
 
-        // give badge
-        let { badges } = this.props.currentUser.badges;
+        const { badges } = this.props.currentUser.badges;
+        const fields = { completedLessons, badges };
+        console.log('fields in goToNext: ', fields);
         console.log('PROPS:', this.props);
         console.log('LESSON', this.props.lesson);
         console.log('BADGE:', this.props.lesson.badge);
-        if (this.props.lesson.badge !== undefined) {
-          if (this.props.currentUser.badges === []) {
-            badges = [this.props.lesson.badge];
-          } else {
-            let isUnique = true;
-            this.props.currentUser.badges.forEach((badge) => {
-              if (badge.iconUrl === this.props.lesson.badge.iconUrl) {
-                isUnique = false;
-              }
-            });
-            if (isUnique) {
-              badges = this.props.currentUser.badges.concat[this.props.lesson.badge];
-            }
-          }
-        }
-        fields = { completedLessons, badges };
-        console.log('fields in goToNext: ', fields);
-        const { history } = this.props;
+
+        console.log(badges);
+
         this.props.updateUserInfo(fields);
+
+        // give badge
+        const { history } = this.props;
         history.push('/finished');
       // set user info to add
       }

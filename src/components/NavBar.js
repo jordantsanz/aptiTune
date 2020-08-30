@@ -18,6 +18,7 @@ class NavBar extends Component {
     return (
       <nav className="navbar">
         <div className="navbar-top">
+          <img id="logo-icon" alt="logo-icon" src="https://aptitune.s3.amazonaws.com/Aptitune_Logo.png" width="121" height="53" />
           <NavLink to="/home" className="homepage-link">
             <div className="hompage-div">
               <FontAwesomeIcon icon={faHome} className="icon" id="home" alt="home-icon" />
@@ -38,7 +39,6 @@ class NavBar extends Component {
               <div className="icon-text">logout</div>
             </div>
           </NavLink>
-          <img id="logo-icon" alt="logo-icon" src="https://aptitune.s3.amazonaws.com/Aptitune_Logo.png" width="121" height="53" />
         </div>
 
       </nav>

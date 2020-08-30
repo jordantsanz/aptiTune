@@ -721,14 +721,12 @@ transition: 200ms ease all;
 	&:hover {
 		color: #FD966A;
 	}
-    width: 33vw;
+    width: 35vw;
     height: 30vh;
     display: flex !important;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    position: fixed;
-    margin-top: 15vh;
+    justify-content: flex-start;
     overflow-x: hidden;
     text-align: center;
 
@@ -736,12 +734,35 @@ transition: 200ms ease all;
 
 .badge-div{
 width: 20.5vw;
-height: 122.5vh;
+height: 25.5vh;
 
 background: #FAE5E5;
 border-radius: 36px;
 text-align: center;
 align-items: center;
+margin-top: 2vh;
+transition: 200ms ease all;
+}
+
+.badge-div:hover{
+    background:#fce1e1;
+}
+
+.badge-div:hover .badge-title{
+    color: $blue;
+}
+
+.badge-title{
+    transition: 200ms ease all;
+}
+.badge-render-homepage{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .badge-title{
@@ -1164,10 +1185,8 @@ transform: rotate(90.29deg);
     margin-right: 2px;
 }
 .badges-flex{
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    
+display: flex;
+flex-direction: column;
 position: absolute;
 height: 100%;
 width: 34vw;
@@ -1435,7 +1454,7 @@ transition: 200ms ease all;
     align-items: center;
     top: 0;
     width: 100%;
-    height: 100%;
+    height: 300%;
     position: absolute;
 }
 
@@ -1451,7 +1470,7 @@ transition: 200ms ease all;
 .profile-page-user-display{
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 70vh;
     align-items: center;
     justify-content: space-around;
 }
@@ -1851,10 +1870,10 @@ background: #F18080;
 #stats-title {
     position: absolute;
     display: flex;
-    width: 333px;
-    height: 30px;
-    left: 250px;
-    top: 500px;
+    width: 23.7vw;
+    height: 5.1vh;
+    left: 17.8vw;
+    top: 70.55vh;
 
 
 font-family: Montserrat;
@@ -1873,10 +1892,10 @@ color: #F18080;
 
 #badges-title-profile {
     position: absolute;
-    width: 317px;
-    height: 55px;
-    left: 250px;
-    top: 750px;
+    width: 22.6vw;
+    height: 6.1vh;
+    left: 17.85vw;
+    top: 140.3vh;
 
 font-family: Montserrat;
 font-style: normal;
@@ -1893,12 +1912,22 @@ color: #F18080;
 
 .profile-page-user-settings{
     position: absolute;
-    width: 378px;
-    height: 55px;
-    left: 500px;
-    top: 950px;
+    width: 27vw;
+    height: 6.1vh;
+    left: 35.7vw;
+    top: 210vh;
 
     align-items: center;
+}
+
+.profile-page-badges-section{
+    width: 100%;
+    height: 70vh;
+}
+
+.profile-page-user-stats{
+    width: 100%;
+    height: 70vh;
 }
 
 .user-name-container{
@@ -1906,12 +1935,19 @@ color: #F18080;
     margin-top: 14vh;
 }
 
+.user-name-display{
+    width: 26.7vw;
+    height: 8.3vh;
+    left: 38vw;
+    top: 43.4vh;
+}
+
 .delete-modal {
     position: absolute;
     width: 378px;
     height: 55px;
     left: 500px;
-    top: 1700px;
+    top: 335vh;
 
     align-items: center;
 }
@@ -1924,7 +1960,7 @@ color: #F18080;
     position: absolute;
     width: 378px;
     height: 55px;
-    left: -265px;
+    left: -18.2vw;
     top: 0px;
 
 font-family: Montserrat;
@@ -2115,7 +2151,7 @@ border-radius: 24px;
 width: 378px;
 height: 55px;
 left: 250px;
-top: 1500px;
+top: 305vh;
 
 font-family: Montserrat;
 font-style: normal;
@@ -2133,7 +2169,7 @@ color: #F18080;
 width: 1020px;
 height: 68px;
 left: 250px;
-top: 1600px;
+top: 317vh;
 
 font-family: Montserrat;
 font-style: normal;
@@ -2678,6 +2714,16 @@ color: #114353;
 
 }
 
+.badge-earned-words{
+    color: #F18080;
+    margin-left: 1vw;
+}
+
+.badge-earned{
+    display: flex;
+    flex-direction: row;
+}
+
 #take-me-home{
     
 background: #FFFFFF;
@@ -2722,10 +2768,10 @@ color: #FFFFFF;
 }
 #profile-page-username {
     position: absolute;
-width: 375px;
-height: 75px;
-left: 560px;
-top: 400px;
+width: 26.8vw;
+height: 10.3vh;
+left: 40.5vw;
+top: 54.4vh;
 
 font-family: Montserrat;
 font-style: normal;
@@ -2736,15 +2782,19 @@ line-height: 200%;
 background: #F18080;
 border-radius: 24px;
 text-align: center;
+align-items: center;
 color: #FFFFFF;
+display: flex;
+flex-direction: row;
+justify-content: center;
 }
 
 #done-edit-username {
     position: absolute;
-width: 75px;
-height: 75px;
-left: 950px;
-top: 400px;
+    width: 5.3vw;
+    height: 10.8vh;
+    left: 67.85vw;
+    top: 54vh;
 
 background: #F18080;
 border-radius: 40px;
@@ -2752,10 +2802,10 @@ border-radius: 40px;
 
 #edit-username {
     position: absolute;
-width: 75px;
-height: 75px;
-left: 950px;
-top: 400px;
+width: 5.3vw;
+height: 10.8vh;
+left: 67.85vw;
+top: 54vh;
 
 background: #F18080;
 border-radius: 40px;
@@ -2779,10 +2829,10 @@ color: #FFFFFF;
 
 #change-username {
     position: absolute;
-    width: 375px;
-    height: 75px;
-    left: 560px;
-    top: 400px;
+    width: 26.8vw;
+    height: 10.3vh;
+    left: 40.5vw;
+    top: 54.4vh;
 
     border: 3px solid #5A7A91;
     box-sizing: border-box;
