@@ -45,6 +45,9 @@ class Listening extends Component {
         this.setState({ complete: true });
       } else {
         this.setState({ message: 'Wrong answer, try again!' });
+        if (this.props.lessonType === 'quiz') {
+          this.props.incrementErrorCount();
+        }
       }
     }
 
