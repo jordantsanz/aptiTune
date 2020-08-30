@@ -196,7 +196,9 @@ class Page extends Component {
               <div className="page-bottom">
                 <SingNotes onSubmit={this.goToNext} />
                 <div id="sheetmusic"> </div>
+                <div id="message">This is what you sang (wait for the staff to render): </div>
                 <div id="yournotes"> </div>
+                <div id="outcome"> </div>
               </div>
             </div>
           </div>

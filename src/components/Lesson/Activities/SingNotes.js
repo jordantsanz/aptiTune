@@ -136,6 +136,7 @@ class SingNotes extends Component {
                   if (octave >= 2 <= 4) {
                     if (testing[i] != null && octave != 10 && octave != -Infinity && key != null) {
                       const note = `${key.toString().toUpperCase() + octave.toString()}/q`;
+                      console.log(note);
                       if (note != oldnote) {
                         notes.push(note);
                       }
@@ -161,8 +162,11 @@ class SingNotes extends Component {
     let correct = true;
     let j = 0;
     let k = 0;
-    while (this.state.answer.length != j - 1) {
-      if (this.state.answer[j] === notes[k]) {
+    const { pages } = this.props;
+    const page = pages[this.state.pageNumber];
+    while (page.activity.correct_answers.length != j - 1) {
+      console.log(page.activity.correct_answers[j]);
+      if (page.activity.correct_answers[j] === notes[k]) {
         j += 1;
         k += 1;
       } else {
@@ -170,11 +174,10 @@ class SingNotes extends Component {
         break;
       }
     }
-    console.log('!!!correct: ', correct);
-    console.log('answer: ', this.state.answer);
-    console.log('notes: ', notes);
     // User's notes:
-    drawStaff(notes, 'yournotes');
+    if (notes.length === 4) {
+      drawStaff(notes, 'yournotes');
+    }
   }
 
   firstRender = () => {
@@ -215,7 +218,7 @@ class SingNotes extends Component {
           <div className="activityInstructions">{page.activity.instructions}</div>
           {/* <div className="activityInstructions">{answer}</div> */}
           {this.firstRender()}
-          <div>
+          <div className="recordButton">
             {!recording && <button type="button" className="button" id="start-record" onClick={(e) => this.startRecording(e)}>Record</button>}
             {recording && <button type="button" className="button" id="stop-record" onClick={(e) => this.stopRecording(e)}>Stop</button>}
           </div>
@@ -223,7 +226,7 @@ class SingNotes extends Component {
       );
     } else {
       return (
-        <div>in the else statement</div>
+        <div>ya done goofed kid, idk what to tell you </div>
       );
     }
   }
