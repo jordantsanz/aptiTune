@@ -103,23 +103,12 @@ export function signOutUser(history) {
     history.push('/');
   };
 }
-// export function authError(error) {
-//   return {
-//     type: ActionTypes.AUTH_ERROR,
-//     message: error,
-//   };
-// }
 
 export function setError(error) {
   console.log('setting error in actions.');
   return (dispatch) => {
     dispatch({ type: ActionTypes.ERROR_SET, error });
   };
-  // console.log('error setting.');
-  // return {
-  //   type: ActionTypes.ERROR_SET,
-  //   error,
-  // };
 }
 
 export function hideError() {

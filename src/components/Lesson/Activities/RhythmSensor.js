@@ -350,7 +350,9 @@ class RhythmSensor extends Component {
               <div>Seed time: {this.state.seedTime} </div>
               <div>Clicked times: {this.state.times} </div>
             </div>
-            <button type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+            <div id="rhythm-play-button">
+              <button type="button" className="recordButton" id="playbutton" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+            </div>
           </div>
         );
       }
@@ -361,7 +363,7 @@ class RhythmSensor extends Component {
               <div id="myBar" />
             </div>
             <div className="rhythmActivity">
-              <div>Click the space bar to the rhythm!</div>
+              <div className="rhythmInstructions">Click the space bar to the rhythm!</div>
               <div className="countDown">{this.state.countDownNumber}</div>
             </div>
           </div>
@@ -369,9 +371,9 @@ class RhythmSensor extends Component {
       }
       if (this.state.resultsReady && this.state.correct) {
         return (
-          <div className="rhythmActivity">
+          <div className="rhythmActivity" id="successMessage">
             Congrats! Time to move on
-            <button type="button" className="nextButton" onClick={this.goToNext}>
+            <button type="button" className="nextButton" id="rhythmnextbutton" onClick={this.goToNext}>
               Next
             </button>
           </div>
@@ -379,10 +381,10 @@ class RhythmSensor extends Component {
       }
       if (!this.state.firstAttempt) {
         return (
-          <div className="rhythmActivity">
+          <div className="rhythmActivity" id="failureMessage">
             <div> Not quite, try again!</div>
-            <button type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
-            <button type="button" onClick={this.playAnswer}>Play Answer</button>
+            <button id="start-record" className="recordButton" type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+            <button id="start-record" className="recordButton" type="button" onClick={this.playAnswer}>Play Answer</button>
           </div>
         );
       } else {
@@ -392,8 +394,8 @@ class RhythmSensor extends Component {
               <div id="myBar" />
             </div>
             <div className="rhythmButtons">
-              <button type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
-              <button type="button" onClick={this.playAnswer}>Play Answer</button>
+              <button id="start-record" className="recordButton" type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+              <button id="start-record" className="recordButton" type="button" onClick={this.playAnswer}>Play Answer</button>
             </div>
           </div>
         );

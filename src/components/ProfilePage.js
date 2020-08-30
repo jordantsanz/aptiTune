@@ -96,16 +96,20 @@ closeModal = () => {
     this.setState({
       isEditing: false,
     });
-    const fields = {
-      username: this.state.username,
-      icon: this.state.icon,
-    };
-    this.props.updateUserInfo(this.props.currentUser.username, fields);
+    // const fields = {
+    //   username: this.state.username,
+    //   icon: this.state.icon,
+    // };
+    console.log('new username being sent: ', document.getElementById('change-username').value);
+    this.props.updateUserInfo({ username: document.getElementById('change-username').value });
+    this.props.getUserInfo();
   }
 
   onInputChange = (event) => {
+    console.log('this is in usernameinputchange');
+    console.log(document.getElementById('change-username').value);
     this.setState({
-      username: event.target.value,
+      username: this.props.currentUser.username,
     });
   }
 

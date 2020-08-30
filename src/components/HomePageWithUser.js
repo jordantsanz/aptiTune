@@ -264,7 +264,7 @@ class HomePageWithUser extends Component {
                       console.log('rendering badges in badgeRender');
                       if (badge.iconUrl === '' && this.props.currentUser.badges.length == 1) {
                         return (
-                          <div id={badge.iconUrl}>
+                          <div id={badge.iconUrl} key={badge.iconUrl}>
                             <div className="badge-title">{badge.name}</div>
                           </div>
                         );

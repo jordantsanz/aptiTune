@@ -1,5 +1,6 @@
 $orange: #FD966A;
 $yellow: #FBBE49;
+$blue: #114353;
 
 html, body{
     box-sizing: border-box;
@@ -627,7 +628,7 @@ color: #FFFFFF;
     margin-bottom: 30px;
 }
 
-#login-button {
+#login-button, #login-button-going {
 
 background: #114353;
 box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
@@ -643,7 +644,23 @@ line-height: 160%;
 text-align: center;
 
 color: #FFFFFF;
+transition: 200ms ease all;
 }
+
+/* w3schools, thank you */
+.loader {
+    border: 3vw solid #f3f3f3; /* Light grey */
+    border-top: 3vw solid $blue; /* Blue */
+    border-radius: 50%;
+    width: 5vw;
+    height: 5vw;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
 #login-button:hover {
     cursor: pointer;
@@ -651,11 +668,26 @@ color: #FFFFFF;
     color: #114353;
 }
 
+#login-button-going:hover{
+    cursor: pointer;
+    background: #FBBE49;
+    color: #114353;
+}
+
+.linktomainpage {
+    font-size: 22px;
+    color: white;
+}
+
+
+
 .sign-up-link {
     text-align: center;
     transition: all 200ms ease;
     font-weight: bold;
+    font-size: 22px;
     color: #114353;
+    margin-top: 5px;
 }
 
 .sign-up-link:hover {
@@ -762,7 +794,7 @@ color: #919191;
     align-items: center;
     overflow-x: hidden;
     position: fixed;
-    margin-top: 20vh;
+    margin-top: 23vh;
 }
 
 
@@ -780,7 +812,7 @@ color: #F18080;
 font-family: Ubuntu;
 font-style: normal;
 font-weight: bold;
-font-size: 50px;
+font-size: 43px;
 }
 
 #lets-learn{
@@ -926,9 +958,11 @@ color: #F18080;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('../images/signInBackground.png');
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    background-image: url('https://aptitune.s3.amazonaws.com/login+page+(2).svg');
 
 }
 
@@ -1044,6 +1078,9 @@ color: #FFFFFF;
 }
 
 .subtitle{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 27px;
     color: #114353;
 }
 
@@ -1123,7 +1160,8 @@ transform: rotate(90.29deg);
     cursor: pointer;
 }
 #lessons-completed{
-    margin-left: 10px;
+    margin-left: 17px;
+    margin-right: 2px;
 }
 .badges-flex{
     display: flex;
@@ -1153,9 +1191,9 @@ text-align: center;
     display: flex;
     flex-direction: column;
     color: black;
-    width: 100%;
-    height: 100%;
-    margin-left: 12vw;
+    width: 100vw;
+    height: 100vh;
+    margin-left: 10.1vw;
 }
 
 .page-top{
@@ -1165,9 +1203,9 @@ text-align: center;
     width: 127vw;
     height: fit-content;
     padding-bottom: 3vh;
-    margin-left: -18vw;
+    margin-left: -16.5vw;
     top: -9vh;
-    
+
     background: #FDD46A;
     border-radius: 196px;
 }
@@ -1234,6 +1272,8 @@ color: #2D2D2D;
 }
 
 .page-top-nav{
+    position: center;
+    align-items: center;
 
 	width: 22vw;
 	height: 6.2vh;
@@ -1254,7 +1294,10 @@ color: #2D2D2D;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: -12.5vw;
+    margin-left: -10.1vw;
+    width: 100vw;
+    align-items: center;
+    height: 100%;
 }
 
 .flat-button-holder{
@@ -1325,35 +1368,22 @@ transition: 200ms ease all;
 
 .page-top-nav-level{
     font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-line-height: 137.88%;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 137.88%;
 /* identical to box height, or 32px */
 
-display: flex;
-align-items: center;
+    display: flex;
+    align-items: center;
 
-color: #FFFFFF;
+    color: #FFFFFF;
 
     
-}
-.page-bottom{
-    display: flex;
-    flex-direction: column;
-
-    /*top: 34vw;
-    height: 55vh;
-    left: -12.5vw;
-    width: 127vw;
-    position: absolute;*/
-    width: 100%;
-    align-items: center;
 }
 
 .bottom-div{
     top: 10.2vh;
-    position: absolute;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -1363,8 +1393,7 @@ color: #FFFFFF;
 
 .activity-div{
     left: -12.5vw;
-    position: absolute;
-    width: 100%;
+    width: 80%;
     text-align: center;
     top: -20vh;
     display: flex;
@@ -1376,16 +1405,27 @@ color: #FFFFFF;
     text-align: center;
 }
 
-.Listening{
-    width: 87%;
-    float: right;
-    margin-left: 12.5vw;
+#audio {
+    width: 100%;
+}
+
+.page-bottom-content {
+    width: 100%;
+    height: 100%;
+}
+
+.page-bottom-content-div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .activityInstructions{
-    margin-right: 20vw;
+    margin-right: 5.8vw;
     margin-top: 2vh;
-    margin-left: 12.5vw;
+    margin-left: 5.8vw;
 }
 /********************** Profile page ****************/
 .profile-page-content{
@@ -1426,13 +1466,12 @@ color: #FFFFFF;
 
 /******** Different kinds of lesson components ************/
 .nextButton{
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
+    position: relative;
     float: right;
     background: $orange;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
     border-radius: 34px;
+    margin-left: 5.05vw;
 
     font-family: Montserrat;
 font-style: normal;
@@ -1465,7 +1504,7 @@ height: 9vh;
 align-self: flex-end;
 margin-top: 2vh;
 margin-bottom: 2vh;
-
+margin-right: 7.8vw;
 
 
 font-family: 'Montserrat', sans-serif;
@@ -1480,20 +1519,38 @@ line-height: 160%;
 color: #FFFFFF;
 }
 
+#audio {
+    display:flex;
+    width: 100%;
+    justify-content: center;
+}
+
 .doneButton:hover{
     background-color: #114353;
 }
-/***FLATVIEW****/
-.FlatView{
+.SingNotes {
     width: 80%;
     margin: 5vh 0;
-    margin-left: 12.5vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 3vh;
     margin-top: 3vh;
     height: fit-content;
+    margin-left: 10.1vw;
+}
+
+/***FLATVIEW****/
+.FlatView{
+    width: 80%;
+    margin: 5vh 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3vh;
+    margin-top: 3vh;
+    height: fit-content;
+    margin-left: 15.15vw;
     .flatApi{
         width: 80%;
         height: fit-content;
@@ -1517,21 +1574,30 @@ color: #FFFFFF;
 
 .finishedMessage{
     font-family: Ubuntu;
+    margin: 5vh 0;
+    width: 100%;
 font-style: normal;
 font-weight: bold;
 font-size: 40px;
 line-height: 160%;
+margin-left: 5.05vw;
 /* identical to box height, or 96px */
 
 
 color: #114353;
 text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 /*******LISTENING*******/
 .Listening{
     display: flex;
+    width: 100%;
     flex-direction: column;
+    margin: 5vh 0;
     align-items: center;
+    margin-left: 5.05vw;
     iframe{
         height: 100px;
         width: 200px;
@@ -1557,6 +1623,8 @@ iframe{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 0px;
+    justify-content: center;
     button{
         width: 40vw;
         margin: 5px 5px;
@@ -1597,7 +1665,9 @@ line-height: 137.88%;
 /* identical to box height, or 69px */
 
 display: flex;
+width: 70%;
 align-items: center;
+text-align: center;
 letter-spacing: 0.015em;
 margin-bottom: 7vh;
 
@@ -1613,6 +1683,82 @@ color: #114353;
     align-items: flex-start;
     margin-left: 15vw;
     left: 100px;
+}
+
+#play{
+    margin-top: 0px !important;
+}
+
+#successMessage, #failureMessage{
+    font-family: Ubuntu;
+    margin: 5vh 0;
+    width: 100%;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 160%;
+/* identical to box height, or 96px */
+
+
+color: #114353;
+text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.rhythmInstructions{
+    font-family: Ubuntu;
+    margin: 2vh 0;
+    width: 100%;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 160%;
+/* identical to box height, or 96px */
+
+
+color: #114353;
+text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.countDown{
+    font-family: Ubuntu;
+    margin: 5vh 0;
+    margin-top: 0px;
+    font-size: 75px;
+    width: 100%;
+font-style: normal;
+font-weight: bold;
+line-height: 160%;
+/* identical to box height, or 96px */
+
+
+color: $blue;
+text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+#rhythmnextbutton{
+    margin-left: 0px;
+}
+
+.rhythm-content-div-holder{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10.1vw;
+    height: 100%;
+}
+
+.rhythm-score{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 #myBar {
@@ -1631,6 +1777,7 @@ color: #114353;
     flex-direction: column;
     width: 100%;
     align-items: center;
+    height: 100%;
 }
 
 .rhythmButtons {
@@ -1643,7 +1790,6 @@ color: #114353;
 }
 /************SING NOTES*************/
 .recordButton {
-    margin-left: 12.5vw;
     display: flex;
     justify-content: center;
 }
@@ -1652,14 +1798,14 @@ color: #114353;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 12.5vw;
 }
 
 #message, #outcome {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 12.5vw;
+    text-align: center;
+    margin-left: 10.1vw;
     font-size: 20px;
     color: #114353;
 }
@@ -1670,18 +1816,23 @@ color: #114353;
     margin-left: 12.5vw;
 }
 
-#start-record, #stop-record{
+#start-record, #stop-record, #playbutton{
+    position: relative;
     background: #FBBE49;
     box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
     border-radius: 34px;
     border: none;
     color: #114353;
     width: 25.2vw;
-    height: 8.5vh;
+    height: 10.5vh;
     font-family: Montserrat;
     font-style: normal;
+    margin-top: 3vh;
     font-weight: bold;
     font-size: 20px;
+    transition: 200ms ease all;
+    align-items: center;
+    text-align: center;
 }
 
 #user-icon{
@@ -2209,6 +2360,8 @@ color: #5A8491;
     width: 100%;
     text-align: center;
     color: white;
+    left: 0;
+    right: 0;
 }
 #settings-retype-new-title-delete{
     position: absolute;
@@ -2289,6 +2442,12 @@ border-radius: 24px;
 
 #main{
     height: 100%;
+}
+
+#background-main{
+    background-image: url('https://aptitune.s3.amazonaws.com/loading.svg');
+    height: 100%;
+    width: 100%;
 }
 
 .finished-lesson-top-page{
@@ -2517,4 +2676,30 @@ color: #FFFFFF;
     border: 3px solid #5A7A91;
     box-sizing: border-box;
     border-radius: 19px;
+}
+
+#play-button {
+    position: absolute;
+    width: 375px;
+    height: 75px;
+    left: 560px;
+    top: 400px;
+    color: #F18080;
+    
+    border: 3px solid  #F18080;
+    box-sizing: border-box;
+    border-radius: 19px;
+}
+
+.error-message-div{
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 140.62%;
+/* or 28px */
+
+
+color: white;
+z-index: 4;
 }
