@@ -223,6 +223,10 @@ class RhythmSensor extends Component {
           correct: false,
           firstAttempt: false,
         });
+        // deal with error for quiz
+        if (this.props.lessonType === 'quiz') {
+          this.props.incrementErrorCount();
+        }
       }
     }
 

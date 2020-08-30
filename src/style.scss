@@ -1115,7 +1115,13 @@ transform: rotate(90.29deg);
     display: flex;
     flex-direction: row;
 }
+#lessons-quizzes{
+    margin-left: 10px;
+}
 
+#lessons-quizzes:hover{
+    cursor: pointer;
+}
 #lessons-completed{
     margin-left: 10px;
 }
@@ -1228,7 +1234,66 @@ color: #2D2D2D;
 }
 
 .page-top-nav{
-    position: absolute;
+
+	width: 22vw;
+	height: 6.2vh;
+	left: 77.9vw;
+	top: 5vh;
+	margin-top: 12px;
+
+	background: rgba(253, 150, 106, 0.7);
+	border: 3px solid #FD966A;
+	box-sizing: border-box;
+	border-radius: 18px;
+	flex-direction: row;
+	display: flex;
+	justify-content: space-around;
+}
+
+.page-bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: -12.5vw;
+}
+
+.flat-button-holder{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.next-button-holder{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 74%;
+}
+
+#next-button{
+    background: #FDD46A;
+box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 30px;
+line-height: 160%;
+/* identical to box height, or 48px */
+
+
+color: #114353;
+width: 16vw;
+transition: 200ms ease all;
+}
+
+#next-button:hover{
+    color: #FDD46A;
+    background-color: #114353;
+}
+
+    /* position: absolute;
     width: 22vw;
     height: 6.2vh;
     left: 77.9vw;
@@ -1237,8 +1302,7 @@ color: #2D2D2D;
     background: rgba(253, 150, 106, 0.7);
     border: 3px solid #FD966A;
     box-sizing: border-box;
-    border-radius: 18px;
-}
+    border-radius: 18px; */
 
 .page-top-nav-level{
     font-family: Montserrat;
@@ -1571,6 +1635,30 @@ color: #114353;
         margin: 5px 5px;
     }
 }
+/************SING NOTES*************/
+.recordButton {
+    margin-left: 12.5vw;
+    display: flex;
+    justify-content: center;
+}
+
+#sheetmusic, #yournotes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12.5vw;
+}
+
+#message, #outcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12.5vw;
+    font-size: 20px;
+    color: #114353;
+}
+
+
 /*********************************** audiowriting ************************/
 .audiowriting-content{
     margin-left: 12.5vw;

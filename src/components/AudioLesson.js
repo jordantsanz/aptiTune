@@ -274,8 +274,6 @@ class AudioLesson extends Component {
             {!recording && <button type="button" className="button" id="start-record" onClick={(e) => this.startRecording(e)}>Record</button>}
             {recording && <button type="button" className="button" id="stop-record" onClick={(e) => this.stopRecording(e)}>Stop</button>}
           </div>
-          <div id="staff1"></div>
-          <div id="staff2"></div>
         </div>
       </div>
     );
