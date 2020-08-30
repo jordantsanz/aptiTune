@@ -2114,6 +2114,14 @@ color: #5A8491;
     color: #5A8491;
 }
 
+.error-message {
+    position: fixed;
+    background: rgb(255, 0, 0);
+    top:0px;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
 #settings-retype-new-title-delete{
     position: absolute;
     width: 250px;
@@ -2419,7 +2427,8 @@ color: #FFFFFF;
     top: 400px;
 
     border: 3px solid #5A7A91;
-box-sizing: border-box;
-border-radius: 19px;
+    box-sizing: border-box;
+    border-radius: 19px;
+}
 
 }

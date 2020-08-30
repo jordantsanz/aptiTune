@@ -11,6 +11,7 @@ import { getUserInfo } from '../actions';
 import LessonList from './LessonList';
 import CompletedList from './CompletedList';
 import NavBar from './NavBar';
+import ErrorNotificaton from './errorMessage';
 
 function mapStateToProps(reduxState) {
   return {
@@ -85,6 +86,7 @@ class HomePageWithUser extends Component {
     } else if (this.state.completed) {
       return (
         <div className="homepage-with-user">
+          <ErrorNotificaton />
           <div className="homepage-with-user-mainflex">
             <NavBar className="nav" />
             <div className="homepage-with-user-content">
