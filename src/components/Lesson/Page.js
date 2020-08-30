@@ -224,17 +224,19 @@ class Page extends Component {
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
                   <div className="page-top-nav">
-                    <div className="page-top-nav-line" />
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
-                    <div className="page-top-nav-line" />
                   </div>
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
                 <div className="page-top-content">{page.content.instructions}</div>
               </div>
               <div className="page-bottom">
-                <div className="page-bottom-content" id="rhythmScore" />
-                <RhythmSensor onSubmit={this.goToNext} lessonType={this.props.lesson.lesson_type} incrementErrorCount={this.incrementErrorCount} errorCount={this.state.errorCount} />
+                <div className="page-bottom-content">
+                  <div className="rhythm-content-div-holder">
+                    <div className="rhythm-score" id="rhythmScore" />
+                    <RhythmSensor onSubmit={this.goToNext} lessonType={this.props.lesson.lesson_type} incrementErrorCount={this.incrementErrorCount} errorCount={this.state.errorCount} />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -248,16 +250,14 @@ class Page extends Component {
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
                   <div className="page-top-nav">
-                    <div className="page-top-nav-line" />
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
-                    <div className="page-top-nav-line" />
                   </div>
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
                 <div className="page-top-content">{page.content.instructions}</div>
               </div>
               <div className="page-bottom">
-                <div className="page-bottom-content">
+                <div className="page-bottom-content-div">
                   <SingNotes onSubmit={this.goToNext} lessonType={this.props.lesson.lesson_type} incrementErrorCount={this.incrementErrorCount} errorCount={this.state.errorCount} />
                   <div id="sheetmusic"> </div>
                   <div id="message">This is what you sang (wait for the staff to render): </div>

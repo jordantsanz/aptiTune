@@ -61,7 +61,6 @@ class SignIn extends Component {
         password: this.state.password,
       };
       this.setState({
-        // eslint-disable-next-line react/no-unused-state
         logging: true,
       });
 
