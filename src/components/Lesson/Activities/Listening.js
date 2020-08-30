@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { getLesson } from '../../../actions/index';
+import ListeningAnswer from './ListeningAnswer';
 
 function mapStateToProps(reduxState) {
   return {
@@ -77,7 +78,7 @@ class Listening extends Component {
         return (
           <div>
             Sick bruh you got it! Time to move on
-            <button type="button" className="button" id="nextButton" onClick={this.goToNext}>
+            <button type="button" className="nextButton" onClick={this.goToNext}>
               Next
             </button>
           </div>
@@ -86,13 +87,13 @@ class Listening extends Component {
         return (
           <div className="Listening">
             <div className="activityInstructions">{page.activity.instructions}</div>
-            <iframe title="audio-file" allowtransparency="true" className="audio-file" src={page.activity.audioUrl} style={{ opacity: '0.4', background: 'transparent' }} />
+            <audio src={page.activity.audioUrl} type="audio/m4a" title="audio-file" controls />
             <div className="incorrectMessage">{this.state.message}</div>
             <ul className="listeningAnswers">
               <li>
                 <button type="button"
-                  id="choiceButton"
-                  className="button"
+                  id="choiceButton1"
+                  className="staff-button"
                   style={{ background: this.state.colorA }}
                   onClick={() => {
                     this.resetColors();
@@ -106,13 +107,13 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  {page.activity.answers[0]}
+                  <ListeningAnswer answer={page.activity.answers[0]} id="choiceButton1" />
                 </button>
               </li>
               <li>
                 <button type="button"
-                  className="button"
-                  id="choiceButton"
+                  className="staff-button"
+                  id="choiceButton2"
                   style={{ background: this.state.colorB }}
                   onClick={() => {
                     this.resetColors();
@@ -126,13 +127,13 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  {page.activity.answers[1]}
+                  <ListeningAnswer answer={page.activity.answers[1]} id="choiceButton2" />
                 </button>
               </li>
               <li>
                 <button type="button"
-                  className="button"
-                  id="choiceButton"
+                  className="staff-button"
+                  id="choiceButton3"
                   style={{ background: this.state.colorC }}
                   onClick={() => {
                     this.resetColors();
@@ -146,13 +147,13 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  {page.activity.answers[2]}
+                  <ListeningAnswer answer={page.activity.answers[2]} id="choiceButton3" />
                 </button>
               </li>
               <li>
                 <button type="button"
-                  className="button"
-                  id="choiceButton"
+                  className="staff-button"
+                  id="choiceButton4"
                   style={{ background: this.state.colorD }}
                   onClick={() => {
                     this.resetColors();
@@ -166,7 +167,7 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  {page.activity.answers[3]}
+                  <ListeningAnswer answer={page.activity.answers[3]} id="choiceButton4" />
                 </button>
               </li>
             </ul>
@@ -178,12 +179,12 @@ class Listening extends Component {
       } else {
         return ( // for single interval listening
           <div className="Listening">
-            <iframe title="audio-file" src={page.activity.audioUrl} />
+            <audio src={page.activity.audioUrl} type="audio/m4a" title="audio-file" controls />
             <ul className="listeningAnswers">
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton1"
                   style={{ background: this.state.colorA }}
                   onClick={() => {
                     this.resetColors();
@@ -203,7 +204,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton2"
                   style={{ background: this.state.colorB }}
                   onClick={() => {
                     this.resetColors();
@@ -223,7 +224,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton3"
                   style={{ background: this.state.colorC }}
                   onClick={() => {
                     this.resetColors();
@@ -243,7 +244,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton4"
                   style={{ background: this.state.colorD }}
                   onClick={() => {
                     this.resetColors();

@@ -125,6 +125,7 @@ class HomePageWithoutUser extends Component {
               <NavLink to="/signin">
                 <button type="button" className="button" id="loginbutton">Login here</button>
               </NavLink>
+              <button type="button" className="button" id="loginbutton" onClick={this.handleScrollSignUp}>Create Account</button>
               <div className="subtitle" id="convinceme" onClick={this.handleScrollConvince}>Need to be convinced?</div>
             </div>
 
