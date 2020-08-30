@@ -1,8 +1,7 @@
 import { ActionTypes } from '../actions';
 
 const initialState = {
-  error: null,
-  message: null,
+  messages: [],
   open: false,
 };
 
@@ -12,7 +11,7 @@ const errorReducer = (state = initialState, action) => {
     case (ActionTypes.ERROR_HIDE):
       console.log('hiding error in the action case.');
       return {
-        message: null,
+        messages: [],
         open: false,
       };
     case (ActionTypes.ERROR_SET):
@@ -21,31 +20,76 @@ const errorReducer = (state = initialState, action) => {
         case 401:
           console.log('log in error.');
           return {
-            message: 'Username or Password Invalid',
+            ...state,
+            messages: [...state.messages, 'Username or Password Invalid'],
             open: true,
           };
         case 429:
           console.log('sign up error.');
           return {
-            message: 'Email already in use',
+            ...state,
+            messages: [...state.messages, 'Email already in use'],
             open: true,
           };
         case 500:
           console.log('Network Disconnected.');
           return {
-            message: 'disconnected from host.',
+            ...state,
+            messages: [...state.messages, 'disconnected from host.'],
+            open: true,
+          };
+        case 1000:
+          return {
+            ...state,
+            messages: [...state.messages, 'Username Input must be Less Than 10 Characters.'],
+            open: true,
+          };
+        case 1001:
+          return {
+            ...state,
+            messages: [...state.messages, 'Username Input must be Greater Than 4 Characters.'],
+            open: true,
+          };
+        case 1002:
+          return {
+            ...state,
+            messages: [...state.messages, 'Must have input for Username.'],
+            open: true,
+          };
+        case 1003:
+          return {
+            ...state,
+            messages: [...state.messages, 'Valid email must contain @ symbol.'],
+            open: true,
+          };
+        case 1004:
+          return {
+            ...state,
+            messages: [...state.messages, 'Email must include {.com, .org, .gov, or .edu} ending'],
+            open: true,
+          };
+        case 1005:
+          return {
+            ...state,
+            messages: [...state.messages, 'Password must be 7 characters or more.'],
+            open: true,
+          };
+        case 1006:
+          return {
+            ...state,
+            messages: [...state.messages, 'Password must contain at least 1 symbol { ?, !, #, $, &, % }'],
             open: true,
           };
         default:
           return {
-            message: 'There was an unidentified error.',
+            ...state,
+            messages: [...state.messages, 'There was an unidentified error.'],
             open: true,
           };
       }
     default:
       return {
-        error: null,
-        message: null,
+        messages: [],
         open: false,
       };
   }

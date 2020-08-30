@@ -811,7 +811,7 @@ color: #F18080;
 font-family: Ubuntu;
 font-style: normal;
 font-weight: bold;
-font-size: 50px;
+font-size: 43px;
 }
 
 #lets-learn{
@@ -2592,4 +2592,17 @@ color: #FFFFFF;
     border: 3px solid  #F18080;
     box-sizing: border-box;
     border-radius: 19px;
+}
+
+.error-message-div{
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 140.62%;
+/* or 28px */
+
+
+color: white;
+z-index: 4;
 }

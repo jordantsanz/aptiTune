@@ -120,7 +120,7 @@ class HomePageWithUser extends Component {
                 <div className="lessons-flex">
                   <h2 className="title" id="lessons-title">Lessons</h2>
                   <div className="lessons-subtitles">
-                    <h3 className="subtitle" id="lessons-all" style={{ color: '#858585' }} onClick={this.showAll}>All</h3>
+                    <h3 className="subtitle" id="lessons-all" style={{ color: '#E46161' }} onClick={this.showAll}>All</h3>
                     <h3 className="subtitle" id="lessons-completed">Completed</h3>
                     <h3 className="subtitle" id="lessons-quizzes" onClick={this.showQuizzes} style={{ color: '#E46161' }}>Quizzes</h3>
                   </div>
