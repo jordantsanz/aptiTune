@@ -134,7 +134,7 @@ class HomePageWithUser extends Component {
                       if (badge.iconUrl === '' && this.props.currentUser.badges.length === 1) {
                         console.log('rendering: No badges yet!');
                         return (
-                          <div id={badge.iconUrl}>
+                          <div key={badge.iconUrl} className="badge-render-homepage" id={badge.iconUrl}>
                             <div className="badge-title">{badge.name}</div>
                           </div>
                         );
