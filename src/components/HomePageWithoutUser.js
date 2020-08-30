@@ -125,7 +125,7 @@ class HomePageWithoutUser extends Component {
               <NavLink to="/signin">
                 <button type="button" className="button" id="loginbutton">Login here</button>
               </NavLink>
-              <button type="button" className="button" id="loginbutton" onClick={this.handleScrollSignUp}>Create Account</button>
+              <button type="button" className="button" id="createbutton" onClick={this.handleScrollSignUp}>Create Account</button>
               <div className="subtitle" id="convinceme" onClick={this.handleScrollConvince}>Need to be convinced?</div>
             </div>
 
@@ -174,14 +174,20 @@ class HomePageWithoutUser extends Component {
                   <Spring delay={100} to={{ opacity: isVisible ? 1 : 0 }}>
                     {({ opacity }) => (
 
-                      <button ref={this.voicetomusic}
-                        type="button"
-                        className="button"
-                        id="createAccountVoiceSection"
-                        onClick={this.handleScrollSignUp}
-                        style={{ ...empty, opacity }}
-                      >Create Account
-                      </button>
+                      <div id="createAccountVoiceSection">
+                        <button ref={this.voicetomusic}
+                          type="button"
+                          className="button"
+                          id="createAccountVoiceSection"
+                          onClick={this.handleScrollSignUp}
+                          style={{ ...empty, opacity }}
+                        ><span>Create Account</span>
+                          <svg width="13px" height="10px" viewBox="0 0 13 10">
+                            <path d="M1,5 L11,5" />
+                            <polyline points="8 1 12 5 8 9" />
+                          </svg>
+                        </button>
+                      </div>
                     )}
                   </Spring>
                 )}
