@@ -109,14 +109,19 @@ export function signOutUser(history) {
 // }
 
 export function setError(error) {
-  return {
-    type: ActionTypes.ERROR_SET,
-    error,
+  console.log('setting error in actions.');
+  return (dispatch) => {
+    dispatch({ type: ActionTypes.ERROR_SET, error });
   };
+  // console.log('error setting.');
+  // return {
+  //   type: ActionTypes.ERROR_SET,
+  //   error,
+  // };
 }
 
 export function hideError() {
-  // console.log('hiding error');
+  console.log('hiding error.');
   return (dispatch) => {
     dispatch({ type: ActionTypes.ERROR_HIDE });
   };
