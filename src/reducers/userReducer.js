@@ -6,8 +6,9 @@ const initialState = {
   badges: [],
   completed: [],
   icon: 0,
-  questionsCorrect: [], // 0: flatView, 1: listening, 2: rhythm, 3: singing
-  questionsIncorrect: [], // 0: flatView, 1: listening, 2: rhythm, 3: singing
+  // indexes: 0: flatView, 1: listening, 2: rhythm, 3: noteSinging
+  questionsCorrect: [],
+  questionsIncorrect: [],
 };
 
 const userReducer = (state = initialState, action) => {

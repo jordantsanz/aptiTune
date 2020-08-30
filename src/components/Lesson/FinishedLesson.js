@@ -59,6 +59,8 @@ class FinishedLesson extends Component {
     }
     if (this.props.currentUser.username !== null && !this.state.giveBadgeCalled) {
       this.giveBadge();
+    }
+    if (this.props.currentUser.username !== null && !this.state.userStatsUpdated && this.props.lesson.lesson_type === 'quiz') {
       this.updateUserStats();
     }
   }
