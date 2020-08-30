@@ -15,6 +15,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { getLesson } from '../../../actions/index';
 import drawStaff from '../../DrawStaff';
 import { frequencies } from '../../frequencies';
+import randomNotes from '../../RandomNotes';
 
 const Pitchfinder = require('pitchfinder');
 
@@ -34,6 +35,7 @@ class SingNotes extends Component {
       correctNotes: false,
       complete: false,
       message: '',
+      drawmessage: '',
       answers: null,
       firstRender: true,
       page: null,
@@ -79,6 +81,15 @@ class SingNotes extends Component {
     // say that we're recording
     this.setState({ recording: true });
     this.setState({ message: '' });
+    this.setState({ drawmessage: '' });
+    const staff = document.getElementById('yournotes');
+    while (staff.hasChildNodes()) {
+      staff.removeChild(staff.lastChild);
+    }
+    const drawmessage = document.getElementById('drawmessage');
+    while (drawmessage.hasChildNodes()) {
+      drawmessage.removeChild(drawmessage.lastChild);
+    }
   }
 
   stopRecording(e) {
@@ -118,17 +129,14 @@ class SingNotes extends Component {
                   quantization: 2, // samples per beat, defaults to 4 (i.e. 16th notes)
                   sampleRate: 44100,
                 });
-                // let measure = this.state.duraiton * this.state.tempo;
-                // measure /= (this.state.quantization * 4);
-                // this.setState({ measure });
-                // console.log(this.state.measure);
-                console.log(testing);
+
+                // now convert frequencies into keys & octaves, and make array of these notes
+                // creds to https://stackoverflow.com/questions/41174545/pitch-detection-node-js?rq=1 for the musical math
                 const keys = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b'];
                 const c0 = 440.0 * Math.pow(2.0, -4.75);
                 let i;
                 let oldnote = null;
 
-                // musical math; creds to https://stackoverflow.com/questions/41174545/pitch-detection-node-js?rq=1 for the actual math
                 // eslint-disable-next-line no-plusplus
                 for (i = 0; i < testing.length; i++) {
                   const halfStepsBelowMiddleC = Math.round(12.0 * Math.log2(testing[i] / c0));
@@ -137,12 +145,10 @@ class SingNotes extends Component {
                   if (octave >= 2 <= 4) {
                     if (testing[i] != null && octave != 10 && octave != -Infinity && key != null) {
                       const note = `${key.toString().toUpperCase() + octave.toString()}/q`;
-                      console.log(note);
                       if (note != oldnote) {
                         notes.push(note);
                       }
                       oldnote = note;
-                      console.log('octave: ', octave, 'key: ', key);
                     }
                   }
                 }
@@ -151,22 +157,18 @@ class SingNotes extends Component {
           });
       });
     console.log(done);
-    console.log('notes: ', notes);
     while (!done) {
       // eslint-disable-next-line no-await-in-loop
       await this.timeout(1000);
     }
 
-    // const answer = ['A3/q', 'B3/q', 'C4/q', 'D4/q'];
-    // visualize
-    // check
+    // Check if the notes the user sang are correct
     let correct = true;
     let j = 0;
     let k = 0;
     const { pages } = this.props;
     const page = pages[this.state.pageNumber];
     while (page.activity.correct_answers.length != j - 1) {
-      console.log(page.activity.correct_answers[j]);
       if (page.activity.correct_answers[j] === notes[k]) {
         j += 1;
         k += 1;
@@ -177,30 +179,28 @@ class SingNotes extends Component {
     }
 
     console.log('notes:', notes);
-    // User's notes:
+
+    // Output error message if user's notes are incorrect, draw staff with their notes if 4
+    // If user's notes are correct, mark level as complete
     if (correct) {
-      // delete any pre exisiting easy score staffs so it doesn't draw multiple
-      const staff = document.getElementById('yournotes');
-      while (staff.hasChildNodes()) {
-        staff.removeChild(staff.lastChild);
-      }
-      // draw staff with current notes from user
+      this.setState({ drawmessage: 'This is what you sang:' });
+      document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
       drawStaff(notes, 'yournotes');
       this.setState({ correctNotes: true });
       this.setState({ complete: true });
       this.setState({ message: '' });
     } else if (notes.length === 4 && !correct) {
-      // delete any pre exisiting easy score staffs so it doesn't draw multiple
-      const staff = document.getElementById('yournotes');
-      while (staff.hasChildNodes()) {
-        staff.removeChild(staff.lastChild);
-      }
-      // draw staff with current notes from user
+      this.setState({ drawmessage: 'This is what you sang:' });
+      document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
       drawStaff(notes, 'yournotes');
-      this.setState({ message: 'Wrong answer, try again!' });
+      this.setState({ message: 'Not the right pitches, but right number of notes!' });
     } else if (notes.length < 4) {
+      this.setState({ drawmessage: '' });
+      document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
       this.setState({ message: 'You sang fewer than 4 notes, try again!' });
     } else {
+      this.setState({ drawmessage: '' });
+      document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
       this.setState({ message: 'You sang more than 4 notes, try again! ' });
     }
   }
@@ -208,8 +208,6 @@ class SingNotes extends Component {
   firstRender = () => {
     const { pages } = this.props;
     const page = pages[this.state.pageNumber];
-    console.log(page);
-    console.log(this.state.firstRender);
     if (page !== null && page !== undefined && this.state.firstRender) {
       this.setState({ firstRender: false, page: this.props.pages[this.state.pageNumber] });
       drawStaff(page.activity.correct_answers, 'sheetmusic');
@@ -219,8 +217,6 @@ class SingNotes extends Component {
   render() {
     const { pages } = this.props;
     const page = pages[this.state.pageNumber];
-    // console.log('page in sing notes', page);
-    // console.log('correct answer:', page.activity.correct_answers);
     if (page === null || page === undefined) {
       return (
         <div>
