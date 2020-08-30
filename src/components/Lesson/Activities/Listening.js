@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { getLesson } from '../../../actions/index';
+import ListeningAnswer from './ListeningAnswer';
 
 function mapStateToProps(reduxState) {
   return {
@@ -34,7 +35,7 @@ class Listening extends Component {
       const pageNum = localStorage.getItem('next');
       this.setState({ pageNumber: pageNum });
       const { history } = this.props;
-      this.props.getLesson(id, history, pageNum + 1);
+      this.props.getLesson(id, history, false);
       console.log('Component mounted in Listening');
     }
 
@@ -75,9 +76,9 @@ class Listening extends Component {
         );
       } else if (this.state.complete) {
         return (
-          <div>
-            Sick bruh you got it! Time to move on
-            <button type="button" className="nextButton" onClick={this.goToNext}>
+          <div className="finishedMessage">
+            Great listening! Keep going!
+            <button type="button" className="nextButton" id="nextButton" onClick={this.goToNext}>
               Next
             </button>
           </div>
@@ -91,8 +92,8 @@ class Listening extends Component {
             <ul className="listeningAnswers">
               <li>
                 <button type="button"
-                  id="choiceButton"
-                  className="button"
+                  id="choiceButton1"
+                  className="staff-button"
                   style={{ background: this.state.colorA }}
                   onClick={() => {
                     this.resetColors();
@@ -106,13 +107,13 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  {page.activity.answers[0]}
+                  <ListeningAnswer answer={page.activity.answers[0]} id="choiceButton1" />
                 </button>
               </li>
               <li>
                 <button type="button"
-                  className="button"
-                  id="choiceButton"
+                  className="staff-button"
+                  id="choiceButton2"
                   style={{ background: this.state.colorB }}
                   onClick={() => {
                     this.resetColors();
@@ -126,13 +127,13 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  {page.activity.answers[1]}
+                  <ListeningAnswer answer={page.activity.answers[1]} id="choiceButton2" />
                 </button>
               </li>
               <li>
                 <button type="button"
-                  className="button"
-                  id="choiceButton"
+                  className="staff-button"
+                  id="choiceButton3"
                   style={{ background: this.state.colorC }}
                   onClick={() => {
                     this.resetColors();
@@ -146,13 +147,13 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  {page.activity.answers[2]}
+                  <ListeningAnswer answer={page.activity.answers[2]} id="choiceButton3" />
                 </button>
               </li>
               <li>
                 <button type="button"
-                  className="button"
-                  id="choiceButton"
+                  className="staff-button"
+                  id="choiceButton4"
                   style={{ background: this.state.colorD }}
                   onClick={() => {
                     this.resetColors();
@@ -166,7 +167,7 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  {page.activity.answers[3]}
+                  <ListeningAnswer answer={page.activity.answers[3]} id="choiceButton4" />
                 </button>
               </li>
             </ul>
@@ -183,7 +184,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton1"
                   style={{ background: this.state.colorA }}
                   onClick={() => {
                     this.resetColors();
@@ -203,7 +204,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton2"
                   style={{ background: this.state.colorB }}
                   onClick={() => {
                     this.resetColors();
@@ -223,7 +224,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton3"
                   style={{ background: this.state.colorC }}
                   onClick={() => {
                     this.resetColors();
@@ -243,7 +244,7 @@ class Listening extends Component {
               <li>
                 <button type="button"
                   className="button"
-                  id="choiceButton"
+                  id="choiceButton4"
                   style={{ background: this.state.colorD }}
                   onClick={() => {
                     this.resetColors();

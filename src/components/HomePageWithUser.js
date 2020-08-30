@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable consistent-return */
@@ -10,6 +11,7 @@ import { getUserInfo } from '../actions';
 import LessonList from './LessonList';
 import CompletedList from './CompletedList';
 import NavBar from './NavBar';
+import ErrorNotificaton from './errorMessage';
 
 function mapStateToProps(reduxState) {
   return {
@@ -53,21 +55,14 @@ class HomePageWithUser extends Component {
   }
 
   badgeRender = () => {
-    if (this.props.currentUser.badges.length == 0) {
+    console.log('Badge render called');
+    if (this.props.currentUser.badges.length !== 0) {
       return (
-        <div className="badge-div">
+        <div>
           <div className="badge-title">none yet!</div>
+          <img className="badge-image" src="https://aptitune.s3.amazonaws.com/badge+art+1.png" alt="badge-icon" />
         </div>
       );
-    } else {
-      this.props.currentUser.badges.map((badge) => {
-        return (
-          <div className="badge-div">
-            <img className="badge-image" src={badge.icon} alt="badge-icon" />
-            <div className="badge-title">{badge.name} </div>
-          </div>
-        );
-      });
     }
   }
 
@@ -91,6 +86,7 @@ class HomePageWithUser extends Component {
     } else if (this.state.completed) {
       return (
         <div className="homepage-with-user">
+          <ErrorNotificaton />
           <div className="homepage-with-user-mainflex">
             <NavBar className="nav" />
             <div className="homepage-with-user-content">
@@ -98,13 +94,13 @@ class HomePageWithUser extends Component {
                 <div className="user-container">
                   <div className="user-icon-holder">{this.userIcon()}</div>
                   <div className="user-container-text">
-                    <h1 className="user-hello">Hello {this.props.currentUser.username}! </h1>
+                    <h1 className="user-hello">Hello, {this.props.currentUser.username}! </h1>
                     <h3 className="subtitle" id="lets-learn">Let&apos;s learn music!</h3>
                   </div>
                 </div>
                 <div className="progress-container">
                   <div className="badges-progress">
-                    <div className="number" id="badges-number"> {this.props.currentUser.badges.length} </div>
+                    <div className="number" id="badges-number"> {this.props.currentUser.badges.length - 1} </div>
                     <div className="subtitle">badges <br /> achieved </div>
                   </div>
                   <div className="line" />
@@ -125,7 +121,27 @@ class HomePageWithUser extends Component {
                 </div>
                 <div className="badges-flex">
                   <h2 className="title" id="badges-title">Your Badges</h2>
-                  <div className="badge-container">{this.badgeRender()}</div>
+                  <div className="badge-container">
+                    <div className="badge-div">{this.props.currentUser.badges.map((badge) => {
+                      console.log('rendering badge: ', badge);
+                      if (badge.iconUrl === '' && this.props.currentUser.badges.length === 1) {
+                        console.log('rendering: No badges yet!');
+                        return (
+                          <div id={badge.iconUrl}>
+                            <div className="badge-title">{badge.name}</div>
+                          </div>
+                        );
+                      } else if (badge.iconUrl !== '') {
+                        return (
+                          <div>
+                            <div id={badge.iconUrl} className="badge-title">{badge.name}</div>
+                            <img className="badge-image" src={badge.iconUrl} alt="badge-icon" />
+                          </div>
+                        );
+                      }
+                    })}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -142,13 +158,13 @@ class HomePageWithUser extends Component {
                 <div className="user-container">
                   <div className="user-icon-holder">{this.userIcon()}</div>
                   <div className="user-container-text">
-                    <h1 className="user-hello">Hello {this.props.currentUser.username}! </h1>
+                    <h1 className="user-hello">Hello, {this.props.currentUser.username}! </h1>
                     <h3 className="subtitle" id="lets-learn">Let&apos;s learn music!</h3>
                   </div>
                 </div>
                 <div className="progress-container">
                   <div className="badges-progress">
-                    <div className="number" id="badges-number"> {this.props.currentUser.badges.length} </div>
+                    <div className="number" id="badges-number"> {this.props.currentUser.badges.length - 1 } </div>
                     <div className="subtitle">badges <br /> achieved </div>
                   </div>
                   <div className="line" />
@@ -169,7 +185,26 @@ class HomePageWithUser extends Component {
                 </div>
                 <div className="badges-flex">
                   <h2 className="title" id="badges-title">Your Badges</h2>
-                  <div className="badge-container">{this.badgeRender()}</div>
+                  <div className="badge-container">
+                    <div className="badge-div">{this.props.currentUser.badges.map((badge) => {
+                      console.log('rendering badges in badgeRender');
+                      if (badge.iconUrl === '' && this.props.currentUser.badges.length == 1) {
+                        return (
+                          <div id={badge.iconUrl}>
+                            <div className="badge-title">{badge.name}</div>
+                          </div>
+                        );
+                      } else if (badge.iconUrl !== '') {
+                        return (
+                          <div id={badge.iconUrl}>
+                            <div className="badge-title">{badge.name}</div>
+                            <img className="badge-image" src={badge.iconUrl} alt="badge-icon" />
+                          </div>
+                        );
+                      }
+                    })}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

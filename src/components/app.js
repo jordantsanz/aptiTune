@@ -5,6 +5,7 @@ import HomePageWithUser from './HomePageWithUser';
 import PrivateRoute from './privateRoute';
 import SignIn from './SignIn';
 import ProfilePage from './ProfilePage';
+import FinishedLesson from './Lesson/FinishedLesson';
 import Page from './Lesson/Page';
 // import Lesson from './Lesson/Lesson';
 // import AudioLesson from './AudioLesson';
@@ -18,6 +19,7 @@ const App = (props) => {
         <PrivateRoute path="/home" component={HomePageWithUser} />
         <Route path="/signin" component={SignIn} />
         <Route path="/lessons/:lessonid" component={Page} />
+        <PrivateRoute path="/finished" component={FinishedLesson} />
         <PrivateRoute path="/:username" component={ProfilePage} />
         {/* <Route path="/page" component={Page} /> fix with real routing path */}
       </Switch>

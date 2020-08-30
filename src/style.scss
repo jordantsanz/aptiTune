@@ -1,4 +1,5 @@
 $orange: #FD966A;
+$yellow: #FBBE49;
 
 html, body{
     box-sizing: border-box;
@@ -225,31 +226,72 @@ text-align: center;
 color: #FFFFFF;
 }
 
+// cool button code: https://codepen.io/avstorm/pen/oqKbLq
 #createAccountVoiceSection{
-background: #F18080;
-box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
-border-radius: 34px;
-width: 19.7vw;
-height: 8vh;
-border: none;
+    color: #114353;
+    position: relative;
+    transition: all 0.2s ease;
+    border-radius: 34px;
+    width: 19.7vw;
+    height: 8vh;
+    border: none;
 
-font-family: Montserrat;
-font-style: normal;
-font-weight: bold;
-font-size: 20px;
-line-height: 160%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 160%;
 /* or 32px */
 
-
-color: #FFFFFF;
-
+}
+#createAccountVoiceSection:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 28px;
+  background: rgba(255, 171, 157, 0.7);
+  width: 56px;
+  height: 56px;
+  transition: all 0.3s ease;
 }
 
-#createAccountVoiceSection:hover{
-    background: #FBBE49;
-    color: #114353;
+#createAccountVoiceSection svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke:#114353;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+#createAccountVoiceSection span {
+    position: relative;
+    font-family: Montserrat;
+    font-style: normal;
     font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 0.10em;
+    vertical-align: middle;
+
 }
+#createAccountVoiceSection:hover:before {
+  width: 100%;
+  background: #ffab9d;
+}
+#createAccountVoiceSection:hover svg {
+  transform: translateX(0);
+}
+#createAccountVoiceSection:active {
+  transform: scale(0.96);
+}
+
+
+
 
 #easy-description {
     margin-bottom: 10px;
@@ -344,6 +386,29 @@ text-align: center;
 
 color: #114353;
 }
+
+#createbutton{
+    background: rgb(255, 117, 117);
+    box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+    border-radius: 34px;
+    border: none;
+    color: #114353;
+    width: 25.2vw;
+    height: 8.5vh;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 3vh;
+}
+
+#createbutton:hover{
+    color: #FBBE49;
+    background: #114353;
+    box-shadow: 2px 3px 3px 2px rgba(0, 0, 0, 0.25);
+}
+
+
 
 #loginbutton{
 background: #FBBE49;
@@ -641,7 +706,6 @@ color: #FFFFFF;
 width: 20.5vw;
 height: 122.5vh;
 
-
 background: #FAE5E5;
 border-radius: 36px;
 text-align: center;
@@ -710,7 +774,7 @@ letter-spacing: 0.015em;
 overflow: hidden;
 text-overflow: ellipsis;
 word-wrap: break-word;
-line-height: 1em; /* a */
+line-height: 1.2em; /* a */
 max-height: 3em;
 color: #F18080;
 font-family: Ubuntu;
@@ -1164,6 +1228,7 @@ color: #2D2D2D;
 }
 
 .page-top-nav{
+
 width: 22vw;
 height: 6.2vh;
 left: 77.9vw;
@@ -1222,23 +1287,35 @@ transition: 200ms ease all;
     background-color: #114353;
 }
 
+    /* position: absolute;
+    width: 22vw;
+    height: 6.2vh;
+    left: 77.9vw;
+    top: 5vh;
 
-#rightarrow, #leftarrow{
-    margin-top: 0px;
-    width: 29px !important;
-    height: 29px !important;
-    color: rgba(0, 0, 0, 0.54);
-    transition: 200ms ease all;
+    background: rgba(253, 150, 106, 0.7);
+    border: 3px solid #FD966A;
+    box-sizing: border-box;
+    border-radius: 18px; */
 }
 
-#rightarrow.icon:hover, #leftarrow.icon:hover{
+.page-top-nav-level{
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    align-items: center;
     color: white;
-    cursor: pointer;
+
+    position: center;
 }
 
 .page-top-nav-line{
     
-border: 1px solid #FFFFFF;
+    border: 1px solid #FFFFFF;
+    transform: rotate(90deg);
+    width: 2.6vw;
+    height: 0px;
 }
 
 .page-top-nav-level{
@@ -1348,14 +1425,25 @@ color: #FFFFFF;
     bottom: 15px;
     right: 15px;
     float: right;
-    background-color: #FD966A;
-    border-radius: 20px;
-    width: 120px;
-    color: white;
+    background: $orange;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 34px;
+
+    font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 30px;
+width: 15.2vw;
+line-height: 160%;
+/* identical to box height, or 48px */
+
+
+color: white;
 }
 
 .nextButton:hover{
     background-color: #114353;
+    color: white;
 }
 
 .doneButton{
@@ -1420,6 +1508,19 @@ color: #FFFFFF;
             margin-right: .1vw;
         }
     }
+}
+
+.finishedMessage{
+    font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 160%;
+/* identical to box height, or 96px */
+
+
+color: #114353;
+text-align: center;
 }
 /*******LISTENING*******/
 .Listening{
@@ -1511,12 +1612,13 @@ color: #114353;
 
 #myBar {
   max-width: 60vw;
-  width: 5%;
+  width: 0;
   height: 20px;
   background-color: #FD966A;
   text-align: center; /* To center it horizontally (if you want) */
   line-height: 30px; /* To center it vertically */
   color: white;
+  border-radius: 25px;
 }
 
 .rhythmActivity{
@@ -1656,6 +1758,10 @@ color: #F18080;
     top: 1700px;
 
     align-items: center;
+}
+
+.ReactModal__Content ReactModal__Content--after-open{
+    overflow-x: hidden;
 }
 
 #user-settings-title{
@@ -2012,7 +2118,7 @@ color: #5A8491;
     width: 595px;
     height: 71px;
     left: 300px;
-    top: 250px;
+    top: 210px;
 
 
 background: #FFFFFF;
@@ -2027,7 +2133,7 @@ border-radius: 19px;
     width: 595px;
     height: 71px;
     left: 300px;
-    top: 350px;
+    top: 300px;
 
 background: #FFFFFF;
 border: 3px solid #5A7A91;
@@ -2041,7 +2147,7 @@ border-radius: 19px;
     width: 595px;
     height: 71px;
     left: 300px;
-    top: 450px;
+    top: 390px;
 
 background: #FFFFFF;
 border: 3px solid #5A7A91;
@@ -2055,7 +2161,7 @@ border-radius: 19px;
 width: 96px;
 height: 34px;
     left: 200px;
-    top: 265px;
+    top: 225px;
 
 font-family: Montserrat;
 font-style: normal;
@@ -2076,7 +2182,7 @@ color: #5A8491;
     width: 96px;
     height: 34px;
         left: 150px;
-        top: 365px;
+        top: 315px;
     
     font-family: Montserrat;
     font-style: normal;
@@ -2091,12 +2197,20 @@ color: #5A8491;
     color: #5A8491;
 }
 
+.error-message {
+    position: fixed;
+    background: rgb(255, 0, 0);
+    top:0px;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
 #settings-retype-new-title-delete{
     position: absolute;
     width: 250px;
     height: 34px;
         left: 50px;
-        top: 465px;
+        top: 405px;
     
     font-family: Montserrat;
     font-style: normal;
@@ -2116,7 +2230,7 @@ color: #5A8491;
     width: 270px;
     height: 72px;    
 left: 400px;
-top: 550px;
+top: 480px;
 
 font-family: Montserrat;
 font-style: normal;
@@ -2136,7 +2250,7 @@ border-radius: 24px;
     width: 270px;
     height: 72px;  
 left: 700px;
-top: 550px;
+top: 480px;
 
 font-family: Montserrat;
 font-style: normal;
@@ -2151,6 +2265,186 @@ box-sizing: border-box;
 border-radius: 24px;
 }
 
+
+/******************** Finished Lesson ********/
+.finished-lesson-main{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.finished-lesson-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: -12.5vw;
+    width: 100%;
+}
+
+#main{
+    height: 100%;
+}
+
+.finished-lesson-top-page{
+    background-color: $yellow;
+    width: 100%;
+    height: 60%;
+    margin-left: 12.5vw;
+}
+
+.finished-lesson-top-page-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-left: 6.25vw;
+}
+
+.finished-lesson-bottom-page{
+    height: 50%;
+    width: 100%;
+    margin-left: 12.5vw;
+}
+
+.finished-lesson-percent{
+font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 160%;
+/* identical to box height, or 96px */
+
+color: #114353;
+width: 100%;
+text-align: center;
+}
+
+.finished-lesson-completed{
+    font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 55px;
+line-height: 160%;
+/* identical to box height, or 96px */
+
+color: #114353;
+width: 100%;
+text-align: center;
+}
+
+.finished-lesson-badge{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.finished-lesson-description{
+    
+font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 30px;
+line-height: 160%;
+/* identical to box height, or 48px */
+
+
+color: #114353;
+width: 100%;
+text-align: center;
+}
+
+.finished-lesson-stats{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.finished-lesson-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.finished-lesson-bottom-page-content{
+    margin-left: 6.25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+}
+
+.finished-lesson-questions-answered{
+    font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 25px;
+line-height: 160%;
+/* or 51px */
+
+
+color: #114353;
+}
+
+.finished-lesson-badge-earned{
+    font-family: Ubuntu;
+font-style: normal;
+font-weight: bold;
+font-size: 32px;
+line-height: 160%;
+/* or 51px */
+
+
+color: #114353;
+
+}
+
+#take-me-home{
+    
+background: #FFFFFF;
+border: 3px solid #F18080;
+box-sizing: border-box;
+box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 160%;
+/* identical to box height, or 32px */
+
+text-align: center;
+
+color: #F18080;
+margin-right: 5vw;
+transition: 200ms ease all;
+}
+
+#take-me-home:hover, #play-again:hover{
+    background: #114353;
+    color: white;
+    border: 3px solid #114353;
+}
+
+#play-again{
+background: #F18080;
+box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+border-radius: 34px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 160%;
+/* identical to box height, or 32px */
+
+text-align: center;
+
+color: #FFFFFF;
+}
 #profile-page-username {
     position: absolute;
 width: 375px;
@@ -2216,6 +2510,6 @@ color: #FFFFFF;
     top: 400px;
 
     border: 3px solid #5A7A91;
-box-sizing: border-box;
-border-radius: 19px;
+    box-sizing: border-box;
+    border-radius: 19px;
 }

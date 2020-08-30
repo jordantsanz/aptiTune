@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unused-state */
+/* please work */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
@@ -43,12 +44,12 @@ class Page extends Component {
       this.setState({ pageNumber: pageNum });
       this.setState({ nextPage: pageNum + 1 });
       const { history } = this.props;
-      this.props.getLesson(id, history, pageNum);
+      localStorage.setItem('next', 0);
+      this.props.getLesson(id, history, true);
     }
 
     goToNext = () => {
       console.log('GOTONEXTCALLED');
-      // console.log('this.props.pages.length', this.props.pages.length);
       if (this.props.pages.length > this.state.pageNumber + 1) {
         console.log('got inside');
         const local = parseInt(this.state.nextPage, 10);
@@ -56,19 +57,42 @@ class Page extends Component {
         this.setState((prevState) => ({ pageNumber: prevState.pageNumber + 1 }));
         this.setState((prevState) => ({ nextPage: prevState.nextPage + 1 }));
       } else {
-        // for now, redirect to home....
+        // for now, redirect to home, and add this lessonID to completed!
         const id = localStorage.getItem('lesson');
         let { fields } = {};
+        let completedLessons = this.props.currentUser.completed;
         if (this.props.currentUser.completed === undefined || this.props.currentUser.completed === []) {
-          fields = { completedLessons: [id] };
+          completedLessons = [id];
         } else if (!this.props.currentUser.completed.includes(id)) {
           console.log('result of includes', this.props.currentUser.completed.includes(id));
-          fields = { completedLessons: this.props.currentUser.completed.concat(id) };
+          completedLessons = this.props.currentUser.completed.concat(id);
         }
+
+        // give badge
+        let { badges } = this.props.currentUser.badges;
+        console.log('PROPS:', this.props);
+        console.log('LESSON', this.props.lesson);
+        console.log('BADGE:', this.props.lesson.badge);
+        if (this.props.lesson.badge !== undefined) {
+          if (this.props.currentUser.badges === []) {
+            badges = [this.props.lesson.badge];
+          } else {
+            let isUnique = true;
+            this.props.currentUser.badges.forEach((badge) => {
+              if (badge.iconUrl === this.props.lesson.badge.iconUrl) {
+                isUnique = false;
+              }
+            });
+            if (isUnique) {
+              badges = this.props.currentUser.badges.concat[this.props.lesson.badge];
+            }
+          }
+        }
+        fields = { completedLessons, badges };
         console.log('fields in goToNext: ', fields);
         const { history } = this.props;
         this.props.updateUserInfo(fields);
-        history.push('/home');
+        history.push('/finished');
         // set user info to add
       }
     }
@@ -116,9 +140,7 @@ class Page extends Component {
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
                   <div className="page-top-nav">
-                    <div className="page-top-nav-line" />
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
-                    <div className="page-top-nav-line" />
                   </div>
                 </div>
                 <div className="page-top-description">{page.content.description}</div>

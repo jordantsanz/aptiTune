@@ -47,7 +47,7 @@ class SingNotes extends Component {
     const pageNum = localStorage.getItem('next');
     this.setState({ pageNumber: pageNum });
     const { history } = this.props;
-    this.props.getLesson(id, history, pageNum + 1);
+    this.props.getLesson(id, history, false);
     console.log('Component mounted in SingNotes');
     const stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
     // show it to user

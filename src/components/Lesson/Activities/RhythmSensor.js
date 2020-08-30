@@ -1,3 +1,6 @@
+/* eslint-disable no-loop-func */
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable array-callback-return */
 /* eslint-disable max-len */
 /* eslint-disable react/no-access-state-in-setstate */
@@ -37,7 +40,8 @@ class RhythmSensor extends Component {
       firstRender: true,
       bps: 0,
       page: null,
-      audio: new Audio('https://aptitune.s3.amazonaws.com/click2.wav'),
+      metronomeAudio: new Audio('https://aptitune.s3.amazonaws.com/metronomeClick.wav'),
+      tapAudio: new Audio('https://aptitune.s3.amazonaws.com/click2.wav'),
       buttonColor: 'red',
       countDownNumber: 'Ready?',
       beginTapping: false,
@@ -46,6 +50,7 @@ class RhythmSensor extends Component {
       firstAttempt: true,
       scoreArray: [],
     };
+    window.addEventListener('keydown', this.handleKeyDown);
   }
 
     componentDidMount = () => {
@@ -53,24 +58,56 @@ class RhythmSensor extends Component {
       const pageNum = localStorage.getItem('next');
       this.setState({ pageNumber: pageNum });
       const { history } = this.props;
-      this.props.getLesson(id, history, pageNum + 1);
+      this.props.getLesson(id, history, false);
       console.log('Component mounted in Listening');
     }
 
-    playMetronomeClick = (number) => {
+    componentWillUnmount = () => {
+      window.removeEventListener('keydown', this.handleKeyDown);
+    }
+
+    playAnswer = () => {
+      const ans = this.makeCorrectnessArray();
+      this.setState({ playingAnswer: true });
+      console.log('Playing answer');
+      console.log('Ans: ', ans);
+      const playCount = ans.length;
+      this.playMetronomeClick(ans.length - 1, false);
+      let index = 0;
+      // this.playMetronomeClick(this.state.page.activity.rhythmPattern.length - 1);
+      while (index < playCount) {
+        const interval = ans[index];
+        setTimeout(() => {
+          // this.state.tapAudio.pause();
+          this.state.tapAudio.play();
+          console.log('running loop ', index, 'with interval', interval);
+          if (interval === ans[ans.length - 1]) {
+            this.hideProgress();
+          }
+        }, interval);
+        index += 1;
+      }
+      console.log('exiting loop');
+    }
+
+    playMetronomeClick = (number, userAttempt) => {
+      this.initiateProgress();
       let i = 0;
       console.log('playing metronome every ', 1000 / parseFloat(this.state.bps), 'seconds');
       const v = setInterval(() => {
         if (i === number + 4) {
           console.log('clearing interval and checking answers');
-          this.getResults();
+          if (userAttempt) {
+            this.getResults();
+          }
           clearInterval(v);
         } else {
-          this.state.audio.play();
+          this.state.metronomeAudio.pause();
+          this.state.metronomeAudio.play();
           const d = new Date();
           console.log('playing metronome at ', d.getTime() - parseInt(this.state.seedTime, 10));
           i += 1;
-          if (i < 5) {
+          if (i < 5 && userAttempt) {
             this.setState({ buttonColor: 'red', countDownNumber: 5 - i });
           } else {
             if (i === 5) {
@@ -85,18 +122,27 @@ class RhythmSensor extends Component {
     updateTime = () => {
       const d = new Date();
       const t = d.getTime();
-      let relTime = 0;
+      const relTime = 0;
       if (this.state.firstClick) {
         this.makeCorrectnessArray();
         this.setState({ firstClick: false, seedTime: t, beginTapping: true });
-        this.playMetronomeClick(this.state.page.activity.rhythmPattern.length - 1);
-      } else {
-        relTime = t - this.state.seedTime;
+        this.playMetronomeClick(this.state.page.activity.rhythmPattern.length - 1, true);
+      }
+    }
+
+    handleKeyDown = () => {
+      console.log('handleKeyPress called');
+      const d = new Date();
+      const t = d.getTime();
+      if (!this.state.firstClick) {
+        this.state.tapAudio.pause();
+        this.state.tapAudio.play();
+        const relTime = t - this.state.seedTime;
         const temp = this.state.times;
         this.setState({ times: temp.concat([relTime]) });
+        console.log('updatetime called with time ', relTime);
+        this.setState({ time: t });
       }
-      console.log('updatetime called with time ', relTime);
-      this.setState({ time: t });
     }
 
     makeCorrectnessArray = () => {
@@ -119,6 +165,7 @@ class RhythmSensor extends Component {
       }
       console.log('CORRECT ANSWERS:', correctAnswers);
       this.setState({ correctAnswers });
+      return correctAnswers;
     }
 
     calculateTime = (cumulativeTime, correctAnswers) => {
@@ -154,7 +201,7 @@ class RhythmSensor extends Component {
         const userAns = times[i];
         // account for lag
         if (Math.abs(correctAns - userAns) < 400) {
-          console.log('Answer', i, ' is correct!');
+          console.log('Answer', i, ' is correct! -- off by ', Math.abs(correctAns - userAns), 'miliseconds');
         } else {
           console.log('Answer', i, 'incorrect : off by', Math.abs(correctAns - userAns), 'miliseconds');
           console.log('User ans: ', userAns, 'correct ans: ', correctAns);
@@ -179,6 +226,17 @@ class RhythmSensor extends Component {
       }
     }
 
+    hideProgress = () => {
+      const elem = document.getElementById('myBar');
+      elem.style.width = '0%';
+    }
+
+    initiateProgress = () => {
+      console.log('initiating progress');
+      const elem = document.getElementById('myBar');
+      elem.style.width = '2%';
+    }
+
     showProgress = () => {
       const maxWidth = 90;
       console.log('showing progress');
@@ -197,7 +255,7 @@ class RhythmSensor extends Component {
             i = 0;
           } else {
             width += incrementValue / 10;
-            console.log('width incremented to width:', width);
+            // console.log('width incremented to width:', width);
             elem.style.width = `${width}%`;
           }
         }, interval / 10);
@@ -277,7 +335,6 @@ class RhythmSensor extends Component {
           </div>
         );
       }
-
       if (this.state.scoreArray != null) {
         const array = this.state.scoreArray;
         this.nullScoreArray();
@@ -300,11 +357,8 @@ class RhythmSensor extends Component {
               <div id="myBar" />
             </div>
             <div className="rhythmActivity">
+              <div>Click the space bar to the rhythm!</div>
               <div className="countDown">{this.state.countDownNumber}</div>
-              <div className="rhythmButtons">
-                <button type="button"><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
-                <button type="button" onClick={this.updateTime} style={{ color: this.state.buttonColor }}>Click me</button>
-              </div>
             </div>
           </div>
         );
@@ -323,21 +377,20 @@ class RhythmSensor extends Component {
         return (
           <div className="rhythmActivity">
             <div> Not quite, try again!</div>
-            <i className="fas fa-play" />
             <button type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+            <button type="button" onClick={this.playAnswer}>Play Answer</button>
           </div>
         );
       } else {
-        // console.log('rendering with score: ', score);
         return (
-          <div className="rhythmActivity">
-            <div>
-              <div>bps: {this.state.bps}</div>
-              <div>Seed time: {this.state.seedTime} </div>
-              <div>Clicked times: {this.state.times} </div>
-              <i className="fas fa-play" />
+          <div className="rhythmActivity" onKeyDown={this.handleKeyPress} tabIndex="0">
+            <div id="progress">
+              <div id="myBar" />
             </div>
-            <button type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+            <div className="rhythmButtons">
+              <button type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+              <button type="button" onClick={this.playAnswer}>Play Answer</button>
+            </div>
           </div>
         );
       }

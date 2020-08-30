@@ -17,17 +17,20 @@ export const ActionTypes = {
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
   LOAD_PAGE: 'LOAD_PAGE',
+  ERROR_HIDE: 'ERROR_HIDE',
 };
 
 // gets a lesson given that lesson id and the current user
-export function getLesson(id, history) {
+export function getLesson(id, history, shouldIPush) {
   console.log('Calling getLesson in client with id', id);
   return (dispatch) => {
     axios.get(`${ROOT_URL}/lessons/${id}`)
       .then((response) => {
         console.log('getLesson responded with response', response.data);
         dispatch({ type: ActionTypes.GET_LESSON, payload: response.data });
-        history.push(`/lessons/${id}`);
+        if (shouldIPush) {
+          history.push(`/lessons/${id}`);
+        }
       })
       .catch((error) => {
         console.log('error in getLesson client:', error);
@@ -100,10 +103,29 @@ export function signOutUser(history) {
     history.push('/');
   };
 }
-export function authError(error) {
-  return {
-    type: ActionTypes.AUTH_ERROR,
-    message: error,
+// export function authError(error) {
+//   return {
+//     type: ActionTypes.AUTH_ERROR,
+//     message: error,
+//   };
+// }
+
+export function setError(error) {
+  console.log('setting error in actions.');
+  return (dispatch) => {
+    dispatch({ type: ActionTypes.ERROR_SET, error });
+  };
+  // console.log('error setting.');
+  // return {
+  //   type: ActionTypes.ERROR_SET,
+  //   error,
+  // };
+}
+
+export function hideError() {
+  console.log('hiding error.');
+  return (dispatch) => {
+    dispatch({ type: ActionTypes.ERROR_HIDE });
   };
 }
 
@@ -118,7 +140,7 @@ export function signInUser(user, history) {
       }
     })
       .catch((error) => {
-        dispatch(authError(`Sign In Failed: ${error}`));
+        dispatch(setError(error.response.status));
       });
   };
 }
@@ -134,8 +156,8 @@ export function signupUser(user, history) {
       }
     })
       .catch((error) => {
-        console.log(error);
-        dispatch(authError(error));
+        console.log('error in signing up:', error.response.status);
+        dispatch(setError(error.response.status));
       });
   };
 }

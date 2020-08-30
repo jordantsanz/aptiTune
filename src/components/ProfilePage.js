@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -24,6 +25,7 @@ class ProfilePage extends Component {
       retype: '',
       modalisopen: false,
     };
+    this.props.getUserInfo();
     console.log('in profile page');
     this.openModal = this.openModal.bind(this);
   }
@@ -173,6 +175,7 @@ closeModal = () => {
         bottom: '-300px',
         marginRight: '10%',
         transform: 'translate(-50%, -50%)',
+        overflow: 'hidden',
       },
     };
     return (
@@ -200,7 +203,24 @@ closeModal = () => {
           <div className="profile-page-badges-section">
             <div className="title" id="badges-title-profile">Your Badges </div>
             <div className="badges-trophy-case">
-              {/* need to loop through all badges here and render; check to see if badge name is in user.badges array, and color red if so; */}
+              {this.props.currentUser.badges.map((badge) => {
+                console.log('rendering badge: ', badge);
+                if (badge.iconUrl === '' && this.props.currentUser.badges.length === 1) {
+                  console.log('rendering: No badges yet!');
+                  return (
+                    <div id={badge.iconUrl}>
+                      <div className="badge-title">{badge.name}</div>
+                    </div>
+                  );
+                } else if (badge.iconUrl !== '') {
+                  return (
+                    <div>
+                      <div id={badge.iconUrl} className="badge-title">{badge.name}</div>
+                      <img className="badge-image" src={badge.iconUrl} alt="badge-icon" />
+                    </div>
+                  );
+                }
+              })}
             </div>
           </div>
           <div className="profile-page-user-settings">
