@@ -16,6 +16,7 @@ import Vex from 'vexflow';
 // eslint-disable-next-line import/extensions
 import { frequencies } from './frequencies.js';
 import NavBar from './NavBar';
+import ErrorNotification from './errorMessage';
 
 const Pitchfinder = require('pitchfinder');
 
@@ -325,6 +326,7 @@ class AudioWriting extends Component {
     const { recording, videos } = this.state;
     return (
       <div className="audiowriting-main">
+        <ErrorNotification />
         <NavBar />
         <div className="audiowriting-content">
           <div className="writing-header">

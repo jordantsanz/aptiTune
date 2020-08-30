@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import VisbilitySensor from 'react-visibility-sensor';
 import { Spring } from 'react-spring/renderprops';
 import { signupUser } from '../actions/index';
+import ErrorNotification from './errorMessage';
 
 const empty = {
 };
@@ -113,6 +114,7 @@ class HomePageWithoutUser extends Component {
   render() {
     return (
       <div className="background-homepage-without-user">
+        <ErrorNotification />
         <div className="homepage-without-user-flex">
           <div className="music-is-hard-section">
             <div className="music-is-hard"> Music is hard. </div>
@@ -227,10 +229,11 @@ class HomePageWithoutUser extends Component {
                 </Spring>
               )}
             </VisbilitySensor>
-
           </div>
 
-          {this.errorMessage()}
+          <div className="error-message">
+            {this.errorMessage()}
+          </div>
           <div className="sign-up-section" ref={this.signupsection}>
             <h1 className="title" id="createAccount">Create account</h1>
             <div className="signup-placeholder">
