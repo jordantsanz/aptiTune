@@ -6,6 +6,7 @@ const initialState = {
   badges: [],
   completed: [],
   icon: 0,
+  // indexes: 0: flatView, 1: listening, 2: rhythm, 3: noteSinging
   questionsCorrect: [],
   questionsIncorrect: [],
 };
