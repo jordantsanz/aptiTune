@@ -125,6 +125,15 @@ class Page extends Component {
         this.setState((prevState) => ({ pageNumber: prevState.pageNumber + 1 }));
         this.setState((prevState) => ({ nextPage: prevState.nextPage + 1 }));
       } else {
+        // handle successfully completed quiz
+        localStorage.setItem('errorCount', this.state.errorCount);
+        if (this.state.firstError !== null) {
+          localStorage.setItem('err1', this.state.firstError);
+        }
+        if (this.state.secondError !== null) {
+          localStorage.setItem('err2', this.state.secondError);
+        }
+        localStorage.setItem('finished', 'true');
         const history = this.props;
         // updateUserInfo with stats
         history.push('/finished');
@@ -149,7 +158,11 @@ class Page extends Component {
         }));
       } else if (this.state.errorCount === 2) {
         this.setState({ thirdError: pageNum });
+        localStorage.setItem('err1', this.state.firstError);
+        localStorage.setItem('err2', this.state.secondError);
+        localStorage.setItem('err3', pageNum);
         // go to finished page
+        localStorage.setItem('finished', 'false');
         const { history } = this.props;
         // updateUserInfo with stats
         history.push('/finished');
