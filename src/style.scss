@@ -1,6 +1,7 @@
 $orange: #FD966A;
 $yellow: #FBBE49;
 $blue: #114353;
+$pink: #F18080;
 
 html, body{
     box-sizing: border-box;
@@ -12,6 +13,10 @@ html, body{
     overflow-x: hidden;
     width: 100%;
     scroll-behavior: smooth;
+}
+
+*:focus {
+    outline: none;
 }
 
 a{
@@ -2709,6 +2714,10 @@ text-align: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.staff-button{
+    height: fit-content;
 }
 
 .finished-lesson-buttons{
