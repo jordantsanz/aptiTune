@@ -2725,7 +2725,7 @@ border-radius: 24px;
 .finished-lesson-top-page{
     background-color: $yellow;
     width: 100%;
-    height: 60%;
+    height: 95%;
     margin-left: 12.5vw;
 }
 
@@ -2739,7 +2739,7 @@ border-radius: 24px;
 }
 
 .finished-lesson-bottom-page{
-    height: 50%;
+    height: 30%;
     width: 100%;
     margin-left: 12.5vw;
 }
@@ -2806,11 +2806,23 @@ text-align: center;
     align-items: center;
     .finished-histogram-element{
         display: flex;
+        width: 10vw;
         flex-direction: column;
         align-items: center;
-        margin: 0 20px;
+        font-family: Ubuntu;
+        font-size: 18px;
+        color: $blue;
     }
 }
+#score-breakdown{
+    font-family: Ubuntu;
+    color: $blue;
+    font-weight: bold;
+    font-size: 23px;
+    margin-top: 3vh;
+    margin-bottom: 1vh;
+}
+
 #histo-progress{
     height: 25vh;
     display: flex;
@@ -2818,41 +2830,54 @@ text-align: center;
     align-items: flex-end;
 }
 
+#correct-progress-bar-rhythm:hover, #correct-progress-bar-listening:hover, #correct-progress-bar-reading:hover, #correct-progress-bar-sightreading:hover{
+     background-color: rgb(16, 150, 16); 
+}
+
+
 #correct-progress-bar-rhythm{
     max-height: 25vh;
-    width: 60px;
+    width: 4.28vw;
     height: 0;
     background-color: green;
     text-align: center; /* To center it horizontally (if you want) */
     color: white;
     border-radius: 25px;
+    transition: 200ms ease all;
+
 }
 #correct-progress-bar-listening{
     max-height: 25vh;
-    width: 60px;
+    width: 4.28vw;
     height: 0;
     background-color: green;
     text-align: center; /* To center it horizontally (if you want) */
     color: white;
     border-radius: 25px;
+    transition: 200ms ease all;
+
 }
 #correct-progress-bar-reading{
   max-height: 25vh;
-  width: 60px;
+  width: 4.28vw;
   height: 0;
   background-color: green;
   text-align: center; /* To center it horizontally (if you want) */
   color: white;
   border-radius: 25px;
+  transition: 200ms ease all;
+
 }
 #correct-progress-bar-singing{
     max-height: 25vh;
-    width: 60px;
+    width: 4.28vw;
     height: 0;
     background-color: green;
     text-align: center; /* To center it horizontally (if you want) */
     color: white;
     border-radius: 25px;
+    transition: 200ms ease all;
+
 }
 // histogram content in finishedPage
 #total-progress-bar-reading{
@@ -2860,7 +2885,7 @@ text-align: center;
   min-height: 0;
   height: 25vh;
   width: 60px;
-  background-color: red;
+  background-color: transparent;
   text-align: center; /* To center it horizontally (if you want) */
   color: white;
   border-radius: 25px;
@@ -2872,7 +2897,7 @@ text-align: center;
     min-height: 0;
     height: 25vh;
     width: 60px;
-    background-color: red;
+    background-color: transparent;
     text-align: center; /* To center it horizontally (if you want) */
     color: white;
     border-radius: 25px;
@@ -2884,7 +2909,7 @@ text-align: center;
     min-height: 0;
     height: 25vh;
     width: 60px;
-    background-color: red;
+    background-color: transparent;
     text-align: center; /* To center it horizontally (if you want) */
     color: white;
     border-radius: 25px;
@@ -2896,7 +2921,7 @@ text-align: center;
     min-height: 0;
     height: 25vh;
     width: 60px;
-    background-color: red;
+    background-color: transparent;
     text-align: center; /* To center it horizontally (if you want) */
     color: white;
     border-radius: 25px;
