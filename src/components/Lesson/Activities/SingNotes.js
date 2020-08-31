@@ -218,12 +218,12 @@ class SingNotes extends Component {
     if (correct) {
       this.setState({ drawmessage: 'This is what you sang:' });
       document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
-      drawStaff(page.activity.correct_answers, 'yournotes');
+      drawStaff('treble', page.activity.correct_answers, 'yournotes');
       this.setState({ correctNotes: true, complete: true, message: '' });
     } else if (notes.length === 4 && !correct) {
       this.setState({ drawmessage: 'This is what you sang:' });
       document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
-      drawStaff(notes, 'yournotes');
+      drawStaff('treble', notes, 'yournotes');
       this.setState({ message: 'Not the right pitches, but right number of notes!' });
     } else if (notes.length < 4) {
       this.setState({ drawmessage: '' });
@@ -246,7 +246,7 @@ class SingNotes extends Component {
     const page = pages[this.state.pageNumber];
     if (page !== null && page !== undefined && this.state.firstRender) {
       this.setState({ firstRender: false, page: this.props.pages[this.state.pageNumber] });
-      drawStaff(page.activity.correct_answers, 'sheetmusic');
+      drawStaff('treble', page.activity.correct_answers, 'sheetmusic');
     }
   }
 
