@@ -6,16 +6,12 @@
 /* eslint-disable react/no-unused-state */
 /* eslint-disable no-undef */
 /* eslint-disable new-cap */
-
-// take in array of notes, then create staff and display the notes on it
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { getLesson } from '../../../actions/index';
 import drawStaff from '../../DrawStaff';
 import { frequencies } from '../../frequencies';
-import randomNotes from '../../RandomNotes';
 
 const Pitchfinder = require('pitchfinder');
 const Tone = require('tone');
@@ -27,6 +23,8 @@ function mapStateToProps(reduxState) {
     pages: reduxState.lesson.pages,
   };
 }
+
+let stream = null;
 
 class SingNotes extends Component {
   constructor(props) {
@@ -52,7 +50,7 @@ class SingNotes extends Component {
     const { history } = this.props;
     this.props.getLesson(id, history, false);
     console.log('Component mounted in SingNotes');
-    const stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
+    stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
     // show it to user
     // this.video.srcObject = stream;
     // init recording
@@ -110,24 +108,17 @@ class SingNotes extends Component {
   playNotes = async () => {
     const { pages } = this.props;
     const page = pages[this.state.pageNumber];
+
     await Tone.start();
     const synth = new Tone.Synth().toDestination();
     const now = Tone.now();
-    const notes = [];
-    // synth.triggerAttackRelease(page.activity.correct_answers[0], now);
-    // synth.triggerRelease(now);
+
     for (let i = 0; i < page.activity.correct_answers.length; i += 1) {
       const diff = 0.5 * i;
       let note = page.activity.correct_answers[i];
       note = note.slice(0, -2);
-      notes.push(note);
-      console.log(note);
-      console.log(diff);
       synth.triggerAttackRelease(note, '4n', now + diff);
     }
-    console.log(notes);
-    // synth.triggerAttackRelease('C4', '8n');
-    // synth.triggerRelease(notes, now + 4);
   }
 
   saveAudio = async () => {
@@ -143,8 +134,6 @@ class SingNotes extends Component {
           .then((arrayBuffer) => {
             audioContext.decodeAudioData(arrayBuffer)
               .then((audioBuffer) => {
-                // this.setState({ duration: audioBuffer.duration });
-                // console.log(this.state.duration);
                 const audioData = audioBuffer.getChannelData(0);
                 console.log(audioData);
                 const detectPitch = new Pitchfinder.YIN();
@@ -166,10 +155,25 @@ class SingNotes extends Component {
                   const halfStepsBelowMiddleC = Math.round(12.0 * Math.log2(testing[i] / c0));
                   const octave = Math.floor(halfStepsBelowMiddleC / 12.0);
                   const key = keys[Math.floor(halfStepsBelowMiddleC % 12)];
-                  if (octave >= 2 <= 4) {
-                    if (testing[i] != null && octave != 10 && octave != -Infinity && key != null) {
+                  // if octave 2 or 3, add 2 to the octave
+                  if (octave === 2 || octave === 3) {
+                    if (testing[i] != null && octave <= 3 && octave != -Infinity && key != null) {
+                      console.log('inside octave 2 or 3', octave);
+                      const newoctave = octave + 2;
+                      // console.log('new octave', newoctave);
+                      const note = `${key.toString().toUpperCase() + newoctave.toString()}/q`;
+                      console.log(note);
+                      if (note != oldnote) {
+                        console.log('inside 23 push');
+                        notes.push(note);
+                      }
+                      oldnote = note;
+                    }
+                  } else if (octave >= 4 <= 6) {
+                    if (testing[i] != null && octave <= 6 && octave != -Infinity && key != null) {
                       const note = `${key.toString().toUpperCase() + octave.toString()}/q`;
                       if (note != oldnote) {
+                        console.log('inside 4to6 push');
                         notes.push(note);
                       }
                       oldnote = note;
@@ -192,7 +196,11 @@ class SingNotes extends Component {
     let k = 0;
     const { pages } = this.props;
     const page = pages[this.state.pageNumber];
+    console.log(page.activity.correct_answers);
+    console.log(notes);
     while (page.activity.correct_answers.length != j - 1) {
+      const correctNote = page.activity.correct_answers[j].slice(0, -3);
+      const userNote = notes[k];
       if (page.activity.correct_answers[j] === notes[k]) {
         j += 1;
         k += 1;
@@ -210,9 +218,7 @@ class SingNotes extends Component {
       this.setState({ drawmessage: 'This is what you sang:' });
       document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
       drawStaff(notes, 'yournotes');
-      this.setState({ correctNotes: true });
-      this.setState({ complete: true });
-      this.setState({ message: '' });
+      this.setState({ correctNotes: true, complete: true, message: '' });
     } else if (notes.length === 4 && !correct) {
       this.setState({ drawmessage: 'This is what you sang:' });
       document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
@@ -226,6 +232,11 @@ class SingNotes extends Component {
       this.setState({ drawmessage: '' });
       document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
       this.setState({ message: 'You sang more than 4 notes, try again! ' });
+    }
+
+    if (this.state.complete) {
+      stream.getTracks() // get all tracks from the MediaStream
+        .forEach((track) => track.stop());
     }
   }
 
