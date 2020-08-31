@@ -38,7 +38,7 @@ class LessonList extends Component {
               <div className="lesson-icon-title">{l.title}</div>
               <div className="lesson-icon-time-div">
                 <FontAwesomeIcon icon={faClock} className="icon" id="clock" />
-                <div className="lesson-icon-time">10min</div>
+                <div className="lesson-icon-time">{l.time}min</div>
               </div>
             </div>
             <div className="lesson-icon-bottom">
