@@ -23,7 +23,6 @@ class HomePageWithoutUser extends Component {
       password: '',
       username: '',
       invalidInput: false,
-      logging: false,
     };
     this.signupsection = React.createRef();
     this.voicetomusic = React.createRef();
@@ -59,9 +58,6 @@ class HomePageWithoutUser extends Component {
       });
     } else {
       console.log(user);
-      this.setState({
-        logging: true,
-      });
       this.props.signupUser(user, this.props.history);
     }
   }
@@ -135,7 +131,7 @@ class HomePageWithoutUser extends Component {
       this.props.setError(1005);
       isValid = false;
     }
-    if (!attemptedPassword.includes('?') && !attemptedPassword.includes('!') && !attemptedPassword.includes('$') && !attemptedPassword.includes('&') && !attemptedPassword.includes('%') && !attemptedPassword.includes('#')) {
+    if (!attemptedPassword.includes('?') && !attemptedPassword.includes('!') && !attemptedPassword.includes('$') && !attemptedPassword.includes('&') && !attemptedPassword.includes('%')) {
       this.props.setError(1006);
       isValid = false;
     }
@@ -150,18 +146,6 @@ class HomePageWithoutUser extends Component {
     const validPassword = this.checkPasswordInput();
     if (validUsername === true && validEmail === true && validPassword === true) {
       this.submit();
-    }
-  }
-
-  buttonText = () => {
-    if (this.state.logging && this.props.error.open === false) {
-      return (
-        <div className="loader" />
-      );
-    } else {
-      return (
-        <button onClick={this.checkInputs} type="submit" id="createaccountbutton"> Create Account </button>
-      );
     }
   }
 
@@ -332,7 +316,6 @@ class HomePageWithoutUser extends Component {
 function mapStateToProps(reduxState) {
   return {
     authentication: reduxState.auth.authenticated,
-    error: reduxState.error,
   };
 }
 

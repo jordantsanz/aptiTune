@@ -25,6 +25,7 @@ class FlatView extends Component {
       incorrect: 'red',
       doneClicked: false,
       complete: false,
+      reload: false,
     };
   }
 
@@ -35,6 +36,27 @@ class FlatView extends Component {
       this.setState({ pageNumber: pageNum });
       const { history } = this.props;
       this.props.getLesson(id, history, pageNum + 1, true);
+    }
+
+    componentDidUpdate = () => {
+      const { pages } = this.props;
+      const page = pages[this.state.pageNumber];
+      console.log('page in flatView', page);
+      if (this.state.firstTime && page !== null && page !== undefined) {
+        this.initializeStateArrays(page);
+      }
+      if (this.state.reload && page !== null && page !== undefined) {
+        console.log('updating for new page');
+        const id = localStorage.getItem('lesson');
+        const pageNum = parseInt(localStorage.getItem('next'), 10);
+        console.log('pageNum in flatview round 2: ', pageNum);
+        const page1 = this.props.pages[pageNum];
+        this.initializeStateArrays(page1);
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({ pageNumber: pageNum, reload: false });
+        const { history } = this.props;
+        this.props.getLesson(id, history, pageNum, true);
+      }
     }
 
     handleDone = () => {
@@ -79,6 +101,7 @@ class FlatView extends Component {
       let arr1 = [];
       let arr2 = [];
       let arr3 = [];
+      console.log('page in initializestatearrays', page);
       for (let i = 0; i < page.activity.answer_count; i += 1) {
         const tempArr1 = arr1.concat([i]);
         arr1 = tempArr1;
@@ -95,6 +118,18 @@ class FlatView extends Component {
 
     goToNext = () => {
       this.props.onSubmit();
+      this.setState({
+        pageNumber: 0,
+        inputAnswers: [],
+        indexArray: [],
+        correctnessArray: [],
+        firstTime: true,
+        correct: 'green',
+        incorrect: 'red',
+        doneClicked: false,
+        complete: false,
+        reload: true,
+      });
     }
 
     render() {
@@ -110,10 +145,6 @@ class FlatView extends Component {
             Loading...
           </div>
         );
-      }
-      // initialize answer count array
-      if (this.state.firstTime) {
-        this.initializeStateArrays(page);
       }
 
       if (this.state.complete) {
