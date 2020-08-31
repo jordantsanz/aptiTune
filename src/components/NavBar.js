@@ -7,24 +7,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome, faUser, faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import { signOutUser } from '../actions/index';
+import { signOutUser, getUserInfo } from '../actions/index';
 
 class NavBar extends Component {
   signOut = () => {
     this.props.signOutUser(this.props.history);
   };
 
+  getInfo = () => {
+    this.props.getUserInfo();
+  }
+
   render() {
     return (
       <nav className="navbar">
         <div className="navbar-top">
-          <NavLink to="/home" className="homepage-link">
+          <img id="logo-icon" alt="logo-icon" src="https://aptitune.s3.amazonaws.com/Aptitune_Logo.png" width="121" height="53" />
+          <NavLink to="/home" className="homepage-link" onClick={this.getInfo}>
             <div className="hompage-div">
               <FontAwesomeIcon icon={faHome} className="icon" id="home" alt="home-icon" />
               <div className="icon-text">home</div>
             </div>
           </NavLink>
-          <NavLink to="/:username" className="user-link">
+          <NavLink to="/:username" className="user-link" onClick={this.getInfo}>
             <div className="username-div">
               <FontAwesomeIcon icon={faUser} className="icon" id="user" alt="user-icon" />
               <div className="icon-text">profile</div>
@@ -38,7 +43,6 @@ class NavBar extends Component {
               <div className="icon-text">logout</div>
             </div>
           </NavLink>
-          <img id="logo-icon" alt="logo-icon" src="https://aptitune.s3.amazonaws.com/Aptitune_Logo.png" width="121" height="53" />
         </div>
 
       </nav>
@@ -49,7 +53,8 @@ class NavBar extends Component {
 function mapStateToProps(reduxState) {
   return {
     authentication: reduxState.auth.authenticated,
+    user: reduxState.user,
   };
 }
 
-export default withRouter(connect(mapStateToProps, { signOutUser })(NavBar));
+export default withRouter(connect(mapStateToProps, { signOutUser, getUserInfo })(NavBar));

@@ -1,6 +1,12 @@
 $orange: #FD966A;
 $yellow: #FBBE49;
 $blue: #114353;
+$pink: #F18080;
+
+$orangehover:#f7a785; 
+$yellowhover: #fac86b;
+$bluehover: #1b5d74;
+$pinkhover: #ee9b9b;
 
 html, body{
     box-sizing: border-box;
@@ -12,6 +18,10 @@ html, body{
     overflow-x: hidden;
     width: 100%;
     scroll-behavior: smooth;
+}
+
+*:focus {
+    outline: none;
 }
 
 a{
@@ -647,6 +657,7 @@ color: #FFFFFF;
 transition: 200ms ease all;
 }
 
+/* w3schools, thank you */
 .loader {
     border: 3vw solid #f3f3f3; /* Light grey */
     border-top: 3vw solid $blue; /* Blue */
@@ -720,14 +731,12 @@ transition: 200ms ease all;
 	&:hover {
 		color: #FD966A;
 	}
-    width: 33vw;
+    width: 35vw;
     height: 30vh;
     display: flex !important;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    position: fixed;
-    margin-top: 15vh;
+    justify-content: flex-start;
     overflow-x: hidden;
     text-align: center;
 
@@ -735,12 +744,35 @@ transition: 200ms ease all;
 
 .badge-div{
 width: 20.5vw;
-height: 122.5vh;
+height: 25.5vh;
 
 background: #FAE5E5;
 border-radius: 36px;
 text-align: center;
 align-items: center;
+margin-top: 2vh;
+transition: 200ms ease all;
+}
+
+.badge-div:hover{
+    background:#fce1e1;
+}
+
+.badge-div:hover .badge-title{
+    color: $blue;
+}
+
+.badge-title{
+    transition: 200ms ease all;
+}
+.badge-render-homepage{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .badge-title{
@@ -793,7 +825,7 @@ color: #919191;
     align-items: center;
     overflow-x: hidden;
     position: fixed;
-    margin-top: 20vh;
+    margin-top: 23vh;
 }
 
 
@@ -811,7 +843,7 @@ color: #F18080;
 font-family: Ubuntu;
 font-style: normal;
 font-weight: bold;
-font-size: 50px;
+font-size: 43px;
 }
 
 #lets-learn{
@@ -1163,10 +1195,8 @@ transform: rotate(90.29deg);
     margin-right: 2px;
 }
 .badges-flex{
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    
+display: flex;
+flex-direction: column;
 position: absolute;
 height: 100%;
 width: 34vw;
@@ -1236,6 +1266,10 @@ color: #114353;
 margin-top: 12px;
 }
 
+.page-top-quiz-x{
+    font-size: 50px;
+    color: red; 
+}
 .page-top-description, .page-top-content, .page-top-third, .suppContent{
     display: flex;
     flex-direction: row;
@@ -1269,6 +1303,9 @@ color: #2D2D2D;
     margin-left: 12.5vw;
     width: 70%;
 }
+#logo-icon{
+    margin-left: 7px;
+}
 
 .page-top-nav{
     position: center;
@@ -1296,6 +1333,7 @@ color: #2D2D2D;
     margin-left: -10.1vw;
     width: 100vw;
     align-items: center;
+    height: 100%;
 }
 
 .flat-button-holder{
@@ -1409,6 +1447,15 @@ transition: 200ms ease all;
 
 .page-bottom-content {
     width: 100%;
+    height: 100%;
+}
+
+.page-bottom-content-div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .activityInstructions{
@@ -1424,8 +1471,7 @@ transition: 200ms ease all;
     align-items: center;
     top: 0;
     width: 100%;
-    height: 100%;
-    position: absolute;
+    height: 300%;
 }
 
 .icon-div{
@@ -1439,8 +1485,9 @@ transition: 200ms ease all;
 
 .profile-page-user-display{
     display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: 70vh;
     align-items: center;
     justify-content: space-around;
 }
@@ -1450,6 +1497,8 @@ transition: 200ms ease all;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 600vw;
+    height: 100%;
 }
 
 
@@ -1479,6 +1528,18 @@ color: white;
     color: white;
 }
 
+.doughnuts{
+    display: flex;
+    position: absolute;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.doughnut-holder{
+    margin-left: 3vw;
+}
+
 .doneButton{
     background-color: #FD966A;
     border-radius: 20px;
@@ -1493,7 +1554,7 @@ height: 9vh;
 align-self: flex-end;
 margin-top: 2vh;
 margin-bottom: 2vh;
-margin-right: 5.8vw;
+margin-right: 7.8vw;
 
 
 font-family: 'Montserrat', sans-serif;
@@ -1526,7 +1587,7 @@ color: #FFFFFF;
     margin-bottom: 3vh;
     margin-top: 3vh;
     height: fit-content;
-    margin-left: 15.15vw;
+    margin-left: 10.1vw;
 }
 
 /***FLATVIEW****/
@@ -1643,6 +1704,15 @@ iframe{
 .incorrectMessage{
     color: red;
     text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.drawMessage {
+    color: #114353;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
 }
 
 .activityInstructions{
@@ -1663,6 +1733,23 @@ margin-bottom: 7vh;
 color: #114353;
 }
 
+.activityInstructionsBelow{
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 137.88%;
+    /* identical to box height, or 69px */
+    
+    display: flex;
+    width: 70%;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.015em;
+    
+    color: #114353;
+}
+
 /******RhythmSensor*******/
 /**** modified from code found on w3schools.com ****/
 #progress {
@@ -1672,6 +1759,82 @@ color: #114353;
     align-items: flex-start;
     margin-left: 15vw;
     left: 100px;
+}
+
+#play{
+    margin-top: 0px !important;
+}
+
+#successMessage, #failureMessage{
+    font-family: Ubuntu;
+    margin: 5vh 0;
+    width: 100%;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 160%;
+/* identical to box height, or 96px */
+
+
+color: #114353;
+text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.rhythmInstructions{
+    font-family: Ubuntu;
+    margin: 2vh 0;
+    width: 100%;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 160%;
+/* identical to box height, or 96px */
+
+
+color: #114353;
+text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.countDown{
+    font-family: Ubuntu;
+    margin: 5vh 0;
+    margin-top: 0px;
+    font-size: 75px;
+    width: 100%;
+font-style: normal;
+font-weight: bold;
+line-height: 160%;
+/* identical to box height, or 96px */
+
+
+color: $blue;
+text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+#rhythmnextbutton{
+    margin-left: 0px;
+}
+
+.rhythm-content-div-holder{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10.1vw;
+    height: 100%;
+}
+
+.rhythm-score{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 #myBar {
@@ -1690,6 +1853,7 @@ color: #114353;
     flex-direction: column;
     width: 100%;
     align-items: center;
+    height: 100%;
 }
 
 .rhythmButtons {
@@ -1710,14 +1874,14 @@ color: #114353;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 12.5vw;
 }
 
 #message, #outcome {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 12.5vw;
+    text-align: center;
+    margin-left: 10.1vw;
     font-size: 20px;
     color: #114353;
 }
@@ -1728,24 +1892,30 @@ color: #114353;
     margin-left: 12.5vw;
 }
 
-#start-record, #stop-record{
+#start-record, #stop-record, #playbutton{
     position: relative;
     background: #FBBE49;
     box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
     border-radius: 34px;
     border: none;
-    left: 450px;
     color: #114353;
     width: 25.2vw;
-    height: 8.5vh;
+    height: 10.5vh;
     font-family: Montserrat;
     font-style: normal;
+    margin-top: 3vh;
     font-weight: bold;
     font-size: 20px;
+    transition: 200ms ease all;
+    align-items: center;
+    text-align: center;
 }
 
 #user-icon{
     width: 16vw;
+}
+#user-icon-homepage{
+    width: 12vw;
 }
 .user-icon-background{
     position: absolute;
@@ -1754,16 +1924,16 @@ height: 48vh;
 left: 42.85vw;
 top: 5.44vh;
 border-radius: 200px;
-background: #F18080;
+background: rgba(241, 128, 128, .8);
 }
 
 #stats-title {
     position: absolute;
     display: flex;
-    width: 333px;
-    height: 30px;
-    left: 250px;
-    top: 500px;
+    width: 23.7vw;
+    height: 5.1vh;
+    left: 17.8vw;
+    top: 70.55vh;
 
 
 font-family: Montserrat;
@@ -1773,7 +1943,7 @@ font-size: 40px;
 line-height: 137.88%;
 /* or 55px */
 
-display: flex;
+
 align-items: center;
 
 color: #F18080;
@@ -1782,10 +1952,10 @@ color: #F18080;
 
 #badges-title-profile {
     position: absolute;
-    width: 317px;
-    height: 55px;
-    left: 250px;
-    top: 750px;
+    width: 22.6vw;
+    height: 6.1vh;
+    left: 17.85vw;
+    top: 140.3vh;
 
 font-family: Montserrat;
 font-style: normal;
@@ -1800,14 +1970,46 @@ align-items: center;
 color: #F18080;
 }
 
-.profile-page-user-settings{
+.arrow-button-background-right{
+    left: 64vw;
+    top: 28vh;
     position: absolute;
-    width: 378px;
-    height: 55px;
-    left: 500px;
-    top: 950px;
+    width: 6vw !important;
+    height: 6vh !important;
+    color: #F18080;
+    transition: 200ms ease all;
+}
+.arrow-button-background-left{
+    left: 37.5vw;
+    top: 28vh;
+    position: absolute;
+    color: #F18080;
+    width: 6vw !important;
+    height: 6vh !important;
+    transition: 200ms ease all;
+}
 
+.arrow-button-background-left:hover, .arrow-button-background-right:hover{
+    cursor: pointer;
+    color: #ec6d6d;
+}
+
+.profile-page-user-settings{
+    display: flex;
+    flex-direction: column;
+    width: 27vw;
+    height: 6.1vh;
     align-items: center;
+}
+
+.profile-page-badges-section{
+    width: 100%;
+    height: 70vh;
+}
+
+.profile-page-user-stats{
+    width: 100%;
+    height: 70vh;
 }
 
 .user-name-container{
@@ -1815,12 +2017,19 @@ color: #F18080;
     margin-top: 14vh;
 }
 
+.user-name-display{
+    width: 26.7vw;
+    height: 8.3vh;
+    left: 38vw;
+    top: 43.4vh;
+}
+
 .delete-modal {
     position: absolute;
     width: 378px;
     height: 55px;
     left: 500px;
-    top: 1700px;
+    top: 335vh;
 
     align-items: center;
 }
@@ -1833,20 +2042,20 @@ color: #F18080;
     position: absolute;
     width: 378px;
     height: 55px;
-    left: -265px;
-    top: 0px;
+    display: flex;
+    align-items: center;
 
-font-family: Montserrat;
-font-style: normal;
-font-weight: bold;
-font-size: 40px;
-line-height: 137.88%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 137.88%;
 /* or 40px */
 
-text-align: center;
+    text-align: center;
 
-color: #F18080;
-transition: 200ms ease all;
+    color: #F18080;
+    transition: 200ms ease all;
 }
 
 #stop-record:hover, #start-record:hover{
@@ -2024,7 +2233,7 @@ border-radius: 24px;
 width: 378px;
 height: 55px;
 left: 250px;
-top: 1500px;
+top: 305vh;
 
 font-family: Montserrat;
 font-style: normal;
@@ -2042,7 +2251,7 @@ color: #F18080;
 width: 1020px;
 height: 68px;
 left: 250px;
-top: 1600px;
+top: 317vh;
 
 font-family: Montserrat;
 font-style: normal;
@@ -2353,6 +2562,13 @@ border-radius: 24px;
     height: 100%;
 }
 
+#background-main{
+    background-image: url('https://aptitune.s3.amazonaws.com/loading.svg');
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+}
+
 .finished-lesson-top-page{
     background-color: $yellow;
     width: 100%;
@@ -2422,11 +2638,126 @@ width: 100%;
 text-align: center;
 }
 
+.finished-lesson-data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.finished-lesson-histogram {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .finished-histogram-element{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 20px;
+    }
+}
+#histo-progress{
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#correct-progress-bar-rhythm{
+    max-height: 25vh;
+    width: 60px;
+    height: 0;
+    background-color: green;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+}
+#correct-progress-bar-listening{
+    max-height: 25vh;
+    width: 60px;
+    height: 0;
+    background-color: green;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+}
+#correct-progress-bar-reading{
+  max-height: 25vh;
+  width: 60px;
+  height: 0;
+  background-color: green;
+  text-align: center; /* To center it horizontally (if you want) */
+  color: white;
+  border-radius: 25px;
+}
+#correct-progress-bar-singing{
+    max-height: 25vh;
+    width: 60px;
+    height: 0;
+    background-color: green;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+}
+// histogram content in finishedPage
+#total-progress-bar-reading{
+  max-height: 25vh;
+  min-height: 0;
+  height: 25vh;
+  width: 60px;
+  background-color: red;
+  text-align: center; /* To center it horizontally (if you want) */
+  color: white;
+  border-radius: 25px;
+  opacity: 0.5;
+}
+
+#total-progress-bar-singing{
+    max-height: 25vh;
+    min-height: 0;
+    height: 25vh;
+    width: 60px;
+    background-color: red;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+    opacity: 0.5;
+}
+
+#total-progress-bar-listening{
+    max-height: 25vh;
+    min-height: 0;
+    height: 25vh;
+    width: 60px;
+    background-color: red;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+    opacity: 0.5;
+}
+
+#total-progress-bar-rhythm{
+    max-height: 25vh;
+    min-height: 0;
+    height: 25vh;
+    width: 60px;
+    background-color: red;
+    text-align: center; /* To center it horizontally (if you want) */
+    color: white;
+    border-radius: 25px;
+    opacity: 0.5;
+  }
+
 .finished-lesson-stats{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.staff-button{
+    height: fit-content;
 }
 
 .finished-lesson-buttons{
@@ -2468,6 +2799,16 @@ line-height: 160%;
 
 color: #114353;
 
+}
+
+.badge-earned-words{
+    color: #F18080;
+    margin-left: 1vw;
+}
+
+.badge-earned{
+    display: flex;
+    flex-direction: row;
 }
 
 #take-me-home{
@@ -2514,10 +2855,10 @@ color: #FFFFFF;
 }
 #profile-page-username {
     position: absolute;
-width: 375px;
-height: 75px;
-left: 560px;
-top: 400px;
+width: 26.8vw;
+height: 10.3vh;
+left: 40.5vw;
+top: 54.4vh;
 
 font-family: Montserrat;
 font-style: normal;
@@ -2528,15 +2869,19 @@ line-height: 200%;
 background: #F18080;
 border-radius: 24px;
 text-align: center;
+align-items: center;
 color: #FFFFFF;
+display: flex;
+flex-direction: row;
+justify-content: center;
 }
 
 #done-edit-username {
     position: absolute;
-width: 75px;
-height: 75px;
-left: 950px;
-top: 400px;
+    width: 5.3vw;
+    height: 10.8vh;
+    left: 67.85vw;
+    top: 54vh;
 
 background: #F18080;
 border-radius: 40px;
@@ -2544,13 +2889,18 @@ border-radius: 40px;
 
 #edit-username {
     position: absolute;
-width: 75px;
-height: 75px;
-left: 950px;
-top: 400px;
+width: 5.3vw;
+height: 10.8vh;
+left: 67.85vw;
+top: 54vh;
 
 background: #F18080;
 border-radius: 40px;
+transition: 200ms ease all;
+}
+
+#edit-username:hover{
+    background: #ec6d6d;
 }
 
 #check-icon {
@@ -2571,10 +2921,10 @@ color: #FFFFFF;
 
 #change-username {
     position: absolute;
-    width: 375px;
-    height: 75px;
-    left: 560px;
-    top: 400px;
+    width: 26.8vw;
+    height: 10.3vh;
+    left: 40.5vw;
+    top: 54.4vh;
 
     border: 3px solid #5A7A91;
     box-sizing: border-box;
@@ -2592,4 +2942,17 @@ color: #FFFFFF;
     border: 3px solid  #F18080;
     box-sizing: border-box;
     border-radius: 19px;
+}
+
+.error-message-div{
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 140.62%;
+/* or 28px */
+
+
+color: white;
+z-index: 4;
 }

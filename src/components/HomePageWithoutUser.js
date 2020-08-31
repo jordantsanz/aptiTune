@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import VisbilitySensor from 'react-visibility-sensor';
 import { Spring } from 'react-spring/renderprops';
-import { signupUser } from '../actions/index';
+import { signupUser, setError, hideError } from '../actions/index';
 import ErrorNotification from './errorMessage';
 
 const empty = {
@@ -23,6 +23,7 @@ class HomePageWithoutUser extends Component {
       password: '',
       username: '',
       invalidInput: false,
+      logging: false,
     };
     this.signupsection = React.createRef();
     this.voicetomusic = React.createRef();
@@ -58,6 +59,9 @@ class HomePageWithoutUser extends Component {
       });
     } else {
       console.log(user);
+      this.setState({
+        logging: true,
+      });
       this.props.signupUser(user, this.props.history);
     }
   }
@@ -89,6 +93,75 @@ class HomePageWithoutUser extends Component {
         behavior: 'smooth',
         block: 'nearest',
       });
+    }
+  }
+
+  checkUserNameInput = () => {
+    const attemptedUsername = document.getElementById('username-signup').value;
+    const usernameLength = attemptedUsername.length;
+    let isValid = true;
+    if (usernameLength == 0) {
+      this.props.setError(1002);
+      isValid = false;
+    }
+    if (usernameLength < 4) {
+      this.props.setError(1001);
+      isValid = false;
+    }
+    if (usernameLength > 10) {
+      this.props.setError(1000);
+      isValid = false;
+    }
+    return isValid;
+  }
+
+  checkEmailInput = () => {
+    const attemptedEmail = document.getElementById('email-signup').value;
+    let isValid = true;
+    if (!attemptedEmail.includes('@')) {
+      this.props.setError(1003);
+      isValid = false;
+    }
+    if (!attemptedEmail.includes('.com') && !attemptedEmail.includes('.gov') && !attemptedEmail.includes('.edu') && !attemptedEmail.includes('.org')) {
+      this.props.setError(1004);
+    }
+    return isValid;
+  }
+
+  checkPasswordInput = () => {
+    const attemptedPassword = document.getElementById('password-signup').value;
+    let isValid = true;
+    if (attemptedPassword.length < 7) {
+      this.props.setError(1005);
+      isValid = false;
+    }
+    if (!attemptedPassword.includes('?') && !attemptedPassword.includes('!') && !attemptedPassword.includes('$') && !attemptedPassword.includes('&') && !attemptedPassword.includes('%') && !attemptedPassword.includes('#')) {
+      this.props.setError(1006);
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
+  checkInputs = () => {
+    this.props.hideError();
+    const validUsername = this.checkUserNameInput();
+    const validEmail = this.checkEmailInput();
+    const validPassword = this.checkPasswordInput();
+    if (validUsername === true && validEmail === true && validPassword === true) {
+      this.submit();
+    }
+  }
+
+  buttonText = () => {
+    if (this.state.logging && this.props.error.open === false) {
+      return (
+        <div className="loader" />
+      );
+    } else {
+      return (
+        <button onClick={this.checkInputs} type="submit" id="createaccountbutton"> Create Account </button>
+      );
     }
   }
 
@@ -237,9 +310,9 @@ class HomePageWithoutUser extends Component {
           <div className="sign-up-section" ref={this.signupsection}>
             <h1 className="title" id="createAccount">Create account</h1>
             <div className="signup-placeholder">
-              <input className="emailSignup" onChange={this.onInputEmail} placeholder="email" />
-              <input className="usernameSignup" onChange={this.onInputUsername} placeholder="username" />
-              <input type="password" className="passwordSignup" onChange={this.onInputPassword} placeholder="password" />
+              <input id="email-signup" className="emailSignup" onChange={this.onInputEmail} placeholder="email" />
+              <input id="username-signup" className="usernameSignup" onChange={this.onInputUsername} placeholder="username" />
+              <input id="password-signup" type="password" className="passwordSignup" onChange={this.onInputPassword} placeholder="password" />
             </div>
             <div className="input-subtitles">
               <div className="already-have">Already have an account?</div>
@@ -247,7 +320,8 @@ class HomePageWithoutUser extends Component {
                 <div className="log-in">Log in here </div>
               </NavLink>
             </div>
-            <button onClick={this.submit} type="submit" className="button" id="createaccountbutton">Create Account</button>
+            {/* <button onClick={this.checkInputs} type="submit" className="button" id="createaccountbutton">Create Account</button> */}
+            <div className="button">{this.buttonText()}</div>
           </div>
 
         </div>
@@ -259,7 +333,8 @@ class HomePageWithoutUser extends Component {
 function mapStateToProps(reduxState) {
   return {
     authentication: reduxState.auth.authenticated,
+    error: reduxState.error,
   };
 }
 
-export default connect(mapStateToProps, { signupUser })(HomePageWithoutUser);
+export default connect(mapStateToProps, { signupUser, setError, hideError })(HomePageWithoutUser);
