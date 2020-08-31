@@ -60,7 +60,7 @@ class FinishedLesson extends Component {
     if (this.props.currentUser.username !== null && !this.state.giveBadgeCalled) {
       this.giveBadge();
     }
-    if (this.props.currentUser.username !== null && !this.state.userStatsUpdated && this.props.lesson.lesson_type === 'quiz') {
+    if (this.props.currentUser.username !== null && !this.state.userStatsUpdated && this.props.lesson.lesson_type === 'quiz' && this.state.processed) {
       this.updateUserStats();
     }
   }
@@ -88,6 +88,7 @@ class FinishedLesson extends Component {
     console.log('correct:', correct);
     console.log('incorrect:', incorrect);
     // 0 index: flatView
+    console.log('this.state.flatCount', this.state.flatCount);
     correct[0] = this.props.currentUser.questionsCorrect[0] + (this.state.flatCount - this.state.flatErrors);
     incorrect[0] = this.props.currentUser.questionsIncorrect[0] + this.state.flatErrors;
 
