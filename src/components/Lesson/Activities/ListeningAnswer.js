@@ -54,7 +54,7 @@ class ListeningAnswer extends Component {
       this.setFirstRenderToFalse();
       return (
         <div>
-          {drawStaff(this.state.scoreArray, this.props.id)}
+          {drawStaff('treble', this.state.scoreArray, this.props.id)}
         </div>
       );
     } else {
