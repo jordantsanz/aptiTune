@@ -190,6 +190,20 @@ class Page extends Component {
       }
     }
 
+    renderImage = () => {
+      const page = this.props.pages[this.state.pageNumber];
+      console.log('page', page);
+      if (page.content_type === 'image' && page !== undefined && page !== null) {
+        return (
+          <img alt=" " className="suppContent" title="supplementaryContent" src={page.content.url} />
+        );
+      } else {
+        return (
+          <div />
+        );
+      }
+    }
+
     render() {
       // add page for rendering
       if (this.props.pages === null || this.props.pages === undefined || this.props.pages.length === 0) {
@@ -216,7 +230,7 @@ class Page extends Component {
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
                 <div className="page-top-content-container">
-                  <img alt=" " className="suppContent" title="supplementaryContent" src={page.content.url} />
+                  {this.renderImage()}
                 </div>
               </div>
               <div className="page-bottom">
@@ -242,6 +256,9 @@ class Page extends Component {
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
                 <div className="page-top-content">{page.content.instructions}</div>
+                <div className="page-top-content-container">
+                  {this.renderImage()}
+                </div>
               </div>
               <div className="page-bottom">
                 <div className="page-bottom-content">
@@ -266,6 +283,9 @@ class Page extends Component {
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
                 <div className="page-top-content">{page.content.instructions}</div>
+                <div className="page-top-content-container">
+                  {this.renderImage()}
+                </div>
               </div>
               <div className="page-bottom">
                 <div className="page-bottom-content">
@@ -293,6 +313,9 @@ class Page extends Component {
                 </div>
                 <div className="page-top-description">{page.content.description}</div>
                 <div className="page-top-content">{page.content.instructions}</div>
+                <div className="page-top-content-container">
+                  {this.renderImage()}
+                </div>
               </div>
               <div className="page-bottom">
                 <div className="page-bottom-content-div">

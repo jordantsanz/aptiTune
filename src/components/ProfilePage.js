@@ -467,6 +467,8 @@ closeModal = () => {
             <div className="badges-trophy-case">
               {this.props.currentUser.badges.map((badge) => {
                 console.log('rendering badge: ', badge);
+                console.log('badge.name:', badge.name);
+                console.log('badge.iconUrl', badge.iconUrl);
                 if (badge.iconUrl === '' && this.props.currentUser.badges.length === 1) {
                   console.log('rendering: No badges yet!');
                   return (
@@ -474,7 +476,7 @@ closeModal = () => {
                       <div className="badge-title-nobadgesyet" key={badge.name}>{badge.name}</div>
                     </div>
                   );
-                } else if (badge.iconUrl !== '') {
+                } else if (badge.iconUrl !== '' && badge.name !== 'No badges yet!' && badge.name !== undefined) {
                   return (
                     <div className="badge-trophy">
                       <div id={badge.iconUrl} className="badge-title">{badge.name}</div>
