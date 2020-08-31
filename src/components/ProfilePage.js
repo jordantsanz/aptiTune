@@ -120,10 +120,6 @@ closeModal = () => {
     this.setState({
       isEditing: false,
     });
-    // const fields = {
-    //   username: this.state.username,
-    //   icon: this.state.icon,
-    // };
     console.log('new username being sent: ', document.getElementById('change-username').value);
     this.props.updateUserInfo({ username: document.getElementById('change-username').value });
     this.props.getUserInfo();
@@ -167,15 +163,6 @@ closeModal = () => {
     } else { // some function call here to reset password...not sure how to do this in backend
     }
   }
-
-  // findData = () => {
-  //   const totals = [];
-  //   for (let index = 0; index < 4; index++) {
-  //     totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
-  //   }
-
-  //   return totals;
-  // }
 
   makeTotalDoughnut = () => {
     // const totals = [];
