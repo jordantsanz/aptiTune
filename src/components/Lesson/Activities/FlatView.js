@@ -165,7 +165,6 @@ class FlatView extends Component {
             <iframe title="flat" className="flatApi" src={page.activity.flatUrl} frameBorder="0" allowFullScreen allow="midi" />
             <div className="flatAnswerBoxes">{
               this.state.indexArray.map((num) => {
-                // console.log('a:', a);
                 return (
                   <div key={num}>
                     <input className="flatAnswerBox"
