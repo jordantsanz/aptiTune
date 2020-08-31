@@ -146,10 +146,6 @@ class FlatView extends Component {
           </div>
         );
       }
-      // initialize answer count array
-      /* if (this.state.firstTime) {
-        this.initializeStateArrays(page);
-      } */
 
       if (this.state.complete) {
         return (
