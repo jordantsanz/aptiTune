@@ -9,6 +9,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPlay,
+} from '@fortawesome/free-solid-svg-icons';
 import { getLesson } from '../../../actions/index';
 import drawStaff from '../../DrawStaff';
 import { frequencies } from '../../frequencies';
@@ -281,7 +285,7 @@ class SingNotes extends Component {
             {recording && <button type="button" className="button" id="stop-record" onClick={(e) => this.stopRecording(e)}>Stop</button>}
           </div>
           <div className="recordButton">
-            <button type="button" className="button" id="start-record" onClick={this.playNotes}>Play Notes</button>
+            <button type="button" className="button" id="playAudio" onClick={this.playNotes}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /> &nbsp; Play Notes</button>
           </div>
           <div className="incorrectMessage">{this.state.message}</div>
         </div>
