@@ -29,7 +29,7 @@ class NavBar extends Component {
               <div className="icon-text">home</div>
             </div>
           </NavLink>
-          <NavLink to="/:username" className="user-link" onClick={this.getInfo}>
+          <NavLink to="/profile" className="user-link" onClick={this.getInfo}>
             <div className="username-div">
               <FontAwesomeIcon icon={faUser} className="icon" id="user" alt="user-icon" />
               <div className="icon-text">profile</div>

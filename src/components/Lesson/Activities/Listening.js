@@ -27,6 +27,7 @@ class Listening extends Component {
       colorC: '#FDD46A',
       colorD: '#FDD46A',
       message: '',
+      reload: false,
     };
   }
 
@@ -37,6 +38,18 @@ class Listening extends Component {
       const { history } = this.props;
       this.props.getLesson(id, history, false);
       console.log('Component mounted in Listening');
+    }
+
+    componentDidUpdate = () => {
+      if (this.state.reload) {
+        const id = localStorage.getItem('lesson');
+        const pageNum = localStorage.getItem('next');
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({ pageNumber: pageNum, reload: false });
+        const { history } = this.props;
+        this.props.getLesson(id, history, false);
+        console.log('Component mounted in Listening');
+      }
     }
 
     handleDone = () => {
@@ -62,6 +75,17 @@ class Listening extends Component {
 
     goToNext = () => {
       this.props.onSubmit();
+      this.setState({
+        pageNumber: 0,
+        correctClicked: false,
+        complete: false,
+        colorA: '#FDD46A',
+        colorB: '#FDD46A',
+        colorC: '#FDD46A',
+        colorD: '#FDD46A',
+        message: '',
+        reload: true,
+      });
     }
 
     render() {
