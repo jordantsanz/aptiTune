@@ -405,7 +405,7 @@ class RhythmSensor extends Component {
         this.nullScoreArray();
         return (
           <div className="rhythmActivity">
-            <div>{drawStaff(this.state.scoreArray, 'rhythmScore')}</div>
+            <div>{drawStaff('treble', this.state.scoreArray, 'rhythmScore')}</div>
             <div id="rhythm-play-button">
               <button type="button" className="recordButton" id="playbutton" onClick={this.startPlay}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
             </div>
