@@ -1669,23 +1669,18 @@ color: #FFFFFF;
     margin-top: 3vh;
     height: fit-content;
     margin-left: 15.15vw;
-    .flatApi{
-        width: 80%;
-        height: fit-content;
-        margin-bottom: 2vh;
-    }
     .flatAnswerBoxes{
-        width: 60%;
+        width: 420px;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         float: right;
         margin-right: 5vw;
-        margin-left: 10vw;
+        margin-left: 8vw;
         .flatAnswerBox{
             height: 40px;
             width: 40px;
-            margin-right: .1vw;
+            margin-right: .05vw;
         }
     }
 }

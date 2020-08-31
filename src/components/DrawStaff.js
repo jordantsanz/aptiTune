@@ -3,6 +3,7 @@ import Vex from 'vexflow';
 
 // IMPORTANT!! - define the id of the div where the staff will be drawn in your render method!
 const drawStaff = (clef, notes, divId) => {
+  console.log('DRAWSTAFF CALLED');
   if (notes != null && (clef === 'treble' || clef === 'bass')) {
     const vexnotes = notes.join(', '); // convert user's notes into string that can be rendered by vexflow
     const vf = new Vex.Flow.Factory({
