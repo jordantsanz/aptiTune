@@ -370,7 +370,7 @@ closeModal = () => {
               })}
             </div>
           </div>
-          <div className="delete-profile-container">
+          {/* <div className="delete-profile-container">
             <div className="title" id="user-settings-title-delete">Delete Account</div>
             <div className="subtitle" id="delete-user-subtitle">
               Are you sure you want to delete your account?
@@ -383,7 +383,6 @@ closeModal = () => {
                 onRequestClose={this.closeModal}
                 style={customStyles}
               >
-                {/* <button type="button" onClick={this.closeModal}>close</button> */}
                 <div id="delete-user-modal" className="modal">
                   <div className="modal-content">
                     <div className="modal-content-detail">
@@ -411,7 +410,7 @@ closeModal = () => {
                 </div>
               </Modal>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );
