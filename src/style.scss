@@ -1113,6 +1113,21 @@ color: #FFFFFF;
     align-items: center;
 }
 
+#logo-icon {
+    margin-left: 7px;
+}
+@media only screen and (max-width: 1200px){
+    #logo-icon {
+        width: 75px;
+        height: 36px;
+    }
+}
+@media only screen and (max-width: 900px){
+    #logo-icon {
+        width: 61px;
+        height: 31px;
+    }
+}
 .icon{
     width: 39px !important;
     height: 39px !important;
