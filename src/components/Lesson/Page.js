@@ -297,9 +297,13 @@ class Page extends Component {
               <div className="page-bottom">
                 <div className="page-bottom-content-div">
                   <SingNotes onSubmit={this.goToNext} lessonType={this.props.lesson.lesson_type} incrementErrorCount={this.incrementErrorCount} errorCount={this.state.errorCount} />
-                  <div id="sheetmusic"> </div>
+                  <div className="sheetmusic-holder">
+                    <div id="sheetmusic"> </div>
+                  </div>
                   <div id="drawmessage" className="drawMessage"> </div>
-                  <div id="yournotes"> </div>
+                  <div className="sheetmusic-holder">
+                    <div id="yournotes"> </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -41,12 +41,26 @@ a:hover{
     flex-direction: column;
     justify-content: center;
     width: 108vw;
-    height: 500vh;
+    height: 446vh;
     background-size: cover;
     position: absolute;
     top: -3vh;
     left: -.85vw;
-    background-image: url('https://aptitune.s3.amazonaws.com/home+screen+(4).svg');
+    background-color: white;
+    overflow-y: hidden;
+}
+
+.inner-background-homepage-without-user{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 108vw;
+    height: 543vh;
+    background-size: cover;
+    position: absolute;
+    top: -3vh;
+    left: -.85vw;
+    background-image: url('https://aptitune.s3.amazonaws.com/home+screen+(5).svg');
     background-color: white;
 }
 
@@ -170,7 +184,7 @@ position: absolute;
 width: 50.5vw;
 height: 8.4vh;
 left: 6.5vw;
-top: 160.48vh;
+top: 190.48vh;
 
 font-family: Ubuntu;
 font-style: normal;
@@ -188,7 +202,7 @@ position: absolute;
 width: 60.6vw;
 height: max-content;
 left: 37.8vw;
-top: 230.4vh;
+top: 280.4vh;
 
 font-family: Ubuntu;
 font-style: normal;
@@ -206,7 +220,7 @@ color: #114353;
 position: absolute;
 width: 50vw;
 height: 80vh;
-top: 380.38vh;
+top: 355.38vh;
 left: 25vw;
 
 font-family: Ubuntu;
@@ -754,11 +768,11 @@ margin-top: 2vh;
 transition: 200ms ease all;
 }
 
-.badge-div:hover, .badge-trophy:hover{
+.badge-div:hover, .badge-trophy:hover, .badge-render-homepage:hover{
     background:#fce1e1;
 }
 
-.badge-div:hover .badge-title, .badge-trophy:hover .badge-title{
+.badge-div:hover .badge-title, .badge-render-homepage .badge-title, .badge-trophy:hover .badge-title{
     color: $blue;
 }
 
@@ -773,6 +787,9 @@ transition: 200ms ease all;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: #FAE5E5;
+border-radius: 36px;
+margin-top: 2vh;
 }
 
 .badge-title{
@@ -787,6 +804,23 @@ text-align: center;
 letter-spacing: 0.05em;
 
 color: #919191;
+}
+
+.badge-title-nobadgesyet{
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 137.88%;
+    /* or 34px */
+    
+    text-align: center;
+    letter-spacing: 0.05em;
+    
+    color: #919191;
+    position: absolute;
+    left: 5vw;
+    top: 6vh;
 }
 
 /************************* lesson list ***********************/
@@ -1505,7 +1539,7 @@ transition: 200ms ease all;
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
-    top: 85vh;
+    top: 78vh;
     margin-left: -5.05vw;
 }
 
@@ -1750,12 +1784,12 @@ color: #114353;
     font-family: Ubuntu;
     font-style: normal;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 19px;
     line-height: 137.88%;
     /* identical to box height, or 69px */
     
     display: flex;
-    width: 70%;
+    width: 40%;
     align-items: center;
     text-align: center;
     letter-spacing: 0.015em;
@@ -1887,6 +1921,8 @@ align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    margin-left: 7vw;
 }
 
 #message, #outcome {
@@ -1983,6 +2019,20 @@ color: #F18080;
 
 }
 
+.doughnut-title-new-nodata{
+    color: $blue;
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 26px;
+    text-align: center;
+    height: 5vh;
+    position: absolute;
+    top: 80vh;
+    left: 17.8vw;
+}
+
 #badges-title-profile {
     position: absolute;
     width: 22.6vw;
@@ -2006,7 +2056,7 @@ color: #F18080;
 .arrow-button-background-right{
     left: 59vw;
     top: 28vh;
-    margin-left: 70px;
+    margin-left: 5vw;
     position: absolute;
     width: 6vw !important;
     height: 6vh !important;
@@ -2677,6 +2727,7 @@ text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 
 .finished-lesson-description{

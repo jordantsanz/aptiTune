@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-plusplus */
 /* eslint-disable array-callback-return */
@@ -186,158 +187,219 @@ closeModal = () => {
   }
 
   makeTotalDoughnut = () => {
-    const totals = [];
-    for (let index = 0; index < 4; index++) {
-      totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
+    const haveData = [];
+    for (let i = 0; i < 4; i++) {
+      if (this.props.currentUser.questionsCorrect[i] == 0 && this.props.currentUser.questionsIncorrect[i] == 0) {
+        haveData[i] = 1;
+      } else {
+        haveData[i] = 0;
+      }
     }
-    const labelset = ['Sightreading',
-      'Listening',
-      'Rhythm',
-      'Singing',
-    ];
-    const data = {
-      labels: labelset,
-      datasets: [{
-        data: totals,
-        backgroundColor: [
-          '#FD966A',
-          '#FBBE49',
-          '#114353',
-          '#F18080',
-        ],
-        hoverBackgroundColor: [
-          '#f7a785',
-          '#fac86b',
-          '#1b5d74',
-          '#ee9b9b',
-        ],
-      }],
-    };
+    let notAllZero = false;
+    for (let j = 0; j < 4; j++) {
+      if (haveData[j] == 0) {
+        notAllZero = true;
+      }
+    }
 
-    const data2 = {
-      labels: labelset,
-      datasets: [{
-        data: this.props.currentUser.questionsCorrect,
-        backgroundColor: [
-          '#FD966A',
-          '#FBBE49',
-          '#114353',
-          '#F18080',
-        ],
-        hoverBackgroundColor: [
-          '#f7a785',
-          '#fac86b',
-          '#1b5d74',
-          '#ee9b9b',
-        ],
-      }],
-    };
+    if (notAllZero) {
+      const totals = [];
+      for (let index = 0; index < 4; index++) {
+        totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
+      }
+      const labelset = ['Sightreading',
+        'Listening',
+        'Rhythm',
+        'Singing',
+      ];
+      const data = {
+        labels: labelset,
+        datasets: [{
+          data: totals,
+          backgroundColor: [
+            '#FD966A',
+            '#FBBE49',
+            '#114353',
+            '#F18080',
+          ],
+          hoverBackgroundColor: [
+            '#f7a785',
+            '#fac86b',
+            '#1b5d74',
+            '#ee9b9b',
+          ],
+        }],
+      };
 
-    return (
-      <div className="doughnuts">
+      const data2 = {
+        labels: labelset,
+        datasets: [{
+          data: this.props.currentUser.questionsCorrect,
+          backgroundColor: [
+            '#FD966A',
+            '#FBBE49',
+            '#114353',
+            '#F18080',
+          ],
+          hoverBackgroundColor: [
+            '#f7a785',
+            '#fac86b',
+            '#1b5d74',
+            '#ee9b9b',
+          ],
+        }],
+      };
 
-        <div className="doughnut-holder">
-          <div className="doughnut-title-holder">
-            <h1 className="doughnut-title-new"> Questions correct: </h1>
+      return (
+        <div className="doughnuts">
+
+          <div className="doughnut-holder">
+            <div className="doughnut-title-holder">
+              <h1 className="doughnut-title-new"> Questions correct: </h1>
+            </div>
+            <div className="doughnut-div-holder">
+              <Doughnut className="questionscorrect"
+                data={data2}
+                width={600}
+                height={300}
+                options={{ maintainAspectRatio: false }}
+              />
+            </div>
           </div>
-          <div className="doughnut-div-holder">
-            <Doughnut className="questionscorrect"
-              data={data2}
-              width={600}
-              height={300}
-              options={{ maintainAspectRatio: false }}
-            />
+          <div className="doughnut-holder">
+            <div className="doughnut-title-holder">
+              <h1 className="doughnut-title-new"> Questions answered: </h1>
+            </div>
+            <div className="doughnut-div-holder">
+              <Doughnut className="questionsanswered"
+                data={data}
+                width={600}
+                height={300}
+                options={{ maintainAspectRatio: false }}
+              />
+            </div>
           </div>
         </div>
-        <div className="doughnut-holder">
-          <div className="doughnut-title-holder">
-            <h1 className="doughnut-title-new"> Questions answered: </h1>
-          </div>
-          <div className="doughnut-div-holder">
-            <Doughnut className="questionsanswered"
-              data={data}
-              width={600}
-              height={300}
-              options={{ maintainAspectRatio: false }}
-            />
-          </div>
-        </div>
-      </div>
 
-    );
+      );
+    } else {
+      return (
+        <div className="doughnut-title-new-nodata">Come back when you&apos;ve practiced a bit more!</div>
+      );
+    }
   }
 
   strengthFinder = () => {
-    const averages = [];
-    for (let index = 0; index < 4; index++) {
-      averages[index] = this.props.currentUser.questionsCorrect[index] / (this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index]);
-    }
-    let max = averages[0];
-    let maxIndex = 0;
-    for (let index2 = 0; index2 < 4; index2++) {
-      if (averages[index2] > max) {
-        max = averages[index2];
-        maxIndex = index2;
+    const haveData = [];
+    for (let i = 0; i < 4; i++) {
+      if (this.props.currentUser.questionsCorrect[i] == 0 && this.props.currentUser.questionsIncorrect[i] == 0) {
+        haveData[i] = 1;
+      } else {
+        haveData[i] = 0;
       }
     }
-    switch (maxIndex) {
-      case 0:
-        return (
-          <div className="strength">Your strength is Sightreading! Awesome!</div>
-        );
-      case 1:
-        return (
-          <div className="strength">Your strength is Listening! Awesome!</div>
-        );
-      case 2:
-        return (
-          <div className="strength">Your strength is Rhythm! Awesome!</div>
-        );
-      case 3:
-        return (
-          <div className="strength">Your strength is Pitch-matching! Awesome!</div>
-        );
-      default:
-        return (
-          <div className="strength">Practice more to find out your strengths!</div>
-        );
+    let notAllZero = false;
+    for (let j = 0; j < 4; j++) {
+      if (haveData[j] == 0) {
+        notAllZero = true;
+      }
+    }
+    if (notAllZero) {
+      const averages = [];
+      for (let index = 0; index < 4; index++) {
+        averages[index] = this.props.currentUser.questionsCorrect[index] / (this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index]);
+      }
+      let max = averages[0];
+      let maxIndex = 0;
+      for (let index2 = 0; index2 < 4; index2++) {
+        if (averages[index2] > max) {
+          max = averages[index2];
+          maxIndex = index2;
+        }
+      }
+      switch (maxIndex) {
+        case 0:
+          return (
+            <div className="strength">Your strength is Sightreading! Awesome!</div>
+          );
+        case 1:
+          return (
+            <div className="strength">Your strength is Listening! Awesome!</div>
+          );
+        case 2:
+          return (
+            <div className="strength">Your strength is Rhythm! Awesome!</div>
+          );
+        case 3:
+          return (
+            <div className="strength">Your strength is Pitch-matching! Awesome!</div>
+          );
+        default:
+          return (
+            <div className="strength">Practice more to find out your strengths!</div>
+          );
+      }
+    } else {
+      return (
+        <div className="blank" />
+      );
     }
   }
 
   weaknessFinder = () => {
-    const averages = [];
-    for (let index = 0; index < 4; index++) {
-      averages[index] = this.props.currentUser.questionsCorrect[index] / (this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index]);
-    }
-    let min = averages[0];
-    let minIndex = 0;
-    for (let index2 = 0; index2 < 4; index2++) {
-      if (averages[index2] < min) {
-        min = averages[index2];
-        minIndex = index2;
+    const haveData = [];
+    for (let i = 0; i < 4; i++) {
+      if (this.props.currentUser.questionsCorrect[i] == 0 && this.props.currentUser.questionsIncorrect[i] == 0) {
+        haveData[i] = 1;
+      } else {
+        haveData[i] = 0;
       }
     }
-    switch (minIndex) {
-      case 0:
-        return (
-          <div className="weakness">Try practicing with Sightreading.</div>
-        );
-      case 1:
-        return (
-          <div className="weakness">Try practicing with Listening. </div>
-        );
-      case 2:
-        return (
-          <div className="weakness">Try practicing with Rhythm.  </div>
-        );
-      case 3:
-        return (
-          <div className="weakness">Try practicing with Pitch-matching. </div>
-        );
-      default:
-        return (
-          <div className="weakness" />
-        );
+    let notAllZero = false;
+    for (let j = 0; j < 4; j++) {
+      if (haveData[j] == 0) {
+        notAllZero = true;
+      }
+    }
+    if (notAllZero) {
+      const averages = [];
+      for (let index = 0; index < 4; index++) {
+        averages[index] = this.props.currentUser.questionsCorrect[index] / (this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index]);
+      }
+      let min = averages[0];
+      let minIndex = 0;
+      for (let index2 = 0; index2 < 4; index2++) {
+        if (averages[index2] < min) {
+          min = averages[index2];
+          minIndex = index2;
+        }
+      }
+      switch (minIndex) {
+        case 0:
+          return (
+            <div className="weakness">Try practicing with Sightreading.</div>
+          );
+        case 1:
+          return (
+            <div className="weakness">Try practicing with Listening. </div>
+          );
+        case 2:
+          return (
+            <div className="weakness">Try practicing with Rhythm.  </div>
+          );
+        case 3:
+          return (
+            <div className="weakness">Try practicing with Pitch-matching. </div>
+          );
+        default:
+          return (
+            <div className="weakness" />
+          );
+      }
+    } else {
+      return (
+        <div className="blank" />
+      );
     }
   }
 
@@ -409,7 +471,7 @@ closeModal = () => {
                   console.log('rendering: No badges yet!');
                   return (
                     <div id={badge.iconUrl}>
-                      <div className="badge-title" key={badge.name}>{badge.name}</div>
+                      <div className="badge-title-nobadgesyet" key={badge.name}>{badge.name}</div>
                     </div>
                   );
                 } else if (badge.iconUrl !== '') {
