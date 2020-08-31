@@ -46,6 +46,7 @@ class ListeningAnswer extends Component {
   render() {
     console.log('scoreArrayIn listeningAnswer', this.state.scoreArray);
     console.log('props.id in listeningAnswer: ', this.props.id);
+    console.log('cleftype', this.props.cleftype);
     if (this.state.scoreArray.length === 0) {
       this.createScoreArray();
       console.log('score array empty');
@@ -54,7 +55,7 @@ class ListeningAnswer extends Component {
       this.setFirstRenderToFalse();
       return (
         <div>
-          {drawStaff('treble', this.state.scoreArray, this.props.id)}
+          {drawStaff(this.props.cleftype, this.state.scoreArray, this.props.id)}
         </div>
       );
     } else {
