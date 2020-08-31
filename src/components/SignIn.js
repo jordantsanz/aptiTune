@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { signInUser } from '../actions/index';
+import { signInUser, setError } from '../actions/index';
 import ErrorNotification from './errorMessage';
 
 class SignIn extends Component {
@@ -19,21 +19,14 @@ class SignIn extends Component {
     };
   }
 
-  switchLogging = () => {
-    console.log('switchlogging called in signin');
-    this.setState({
-      logging: false,
-    });
-  }
-
   buttonText = () => {
-    if (this.state.logging && this.props.error.message === null) {
+    if (this.state.logging && this.props.error.open === false) {
       return (
         <div className="loader" />
       );
     } else {
       return (
-        <button onClick={this.submit} type="submit" id="login-button"> Log-in </button>
+        <button onClick={this.checkInputs} type="submit" id="login-button"> Log-in </button>
       );
     }
   }
@@ -49,6 +42,37 @@ class SignIn extends Component {
       password: event.target.value,
     });
   };
+
+  checkEmailInput = () => {
+    let isValid = true;
+    const attemptedEmail = document.getElementById('email-signin').value;
+    console.log('attemptedemail', attemptedEmail);
+    if (attemptedEmail.length === 0) {
+      this.props.setError(1007);
+      isValid = false;
+    }
+    return isValid;
+  }
+
+  checkPasswordInput = () => {
+    let isValid = true;
+    const attemptedPassword = document.getElementById('password-signin').value;
+    console.log('attempted password', attemptedPassword);
+    if (attemptedPassword.length === 0) {
+      this.props.setError(1008);
+      isValid = false;
+    }
+    return isValid;
+  }
+
+  checkInputs = () => {
+    const emailValid = this.checkEmailInput();
+    const passValid = this.checkPasswordInput();
+
+    if (emailValid && passValid) {
+      this.submit();
+    }
+  }
 
   submit = () => {
     if (this.state.email == '' || this.state.password == '') {
@@ -83,12 +107,10 @@ class SignIn extends Component {
   render() {
     return (
       <div className="signin-background">
-        <div className="error-message" role="button" tabIndex="0" onClick={() => this.switchLogging()}>
-          <ErrorNotification />
-        </div>
+        <ErrorNotification />
         <h1 className="title" id="log-in-title">Log-in here:</h1>
-        <input placeholder="email" onChange={this.onInputEmailChange} className="returnemailinput" type="input" />
-        <input placeholder="password" onChange={this.onInputPasswordChange} className="returnpasswordinput" type="password" />
+        <input placeholder="email" onChange={this.onInputEmailChange} className="returnemailinput" id="email-signin" type="input" />
+        <input placeholder="password" onChange={this.onInputPasswordChange} className="returnpasswordinput" id="password-signin" type="password" />
         <div className="linktomainpage"> Don&apos;t have an account yet? <NavLink to="/signup" className="log-in-link"> <div className="sign-up-link">Sign up here!</div></NavLink>
         </div>
         <div className="button">{this.buttonText()} </div>
@@ -104,4 +126,4 @@ function mapStateToProps(reduxState) {
   };
 }
 
-export default connect(mapStateToProps, { signInUser })(SignIn);
+export default connect(mapStateToProps, { signInUser, setError })(SignIn);
