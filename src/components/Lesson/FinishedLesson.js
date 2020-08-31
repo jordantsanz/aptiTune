@@ -447,7 +447,7 @@ class FinishedLesson extends Component {
                 <div className="finished-lesson-percent"> You got through {parseInt((this.state.numberComplete / this.state.totalQuestions) * 100, 10)} % of the quiz! </div>
                 <div className="finished-lesson-description"> Nice job, {this.props.currentUser.username}! </div>
                 <div className="finished-lesson-data">
-                  <div>Your Score Breakdown</div>
+                  <div id="score-breakdown">Your Score Breakdown</div>
                   <div>{this.visualizeData()}</div>
                 </div>
               </div>
