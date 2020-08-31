@@ -252,21 +252,23 @@ class FinishedLesson extends Component {
     let singErrors = 0;
     console.log('page', page);
     console.log('pages', pages);
-    if (page.activity_type === 'FlatView') {
-      flatErrors += 1;
-    } else if (page.activity_type === 'Listening') {
-      listeningErrors += 1;
-    } else if (page.activity_type === 'RhythmSensor') {
-      rhythmErrors += 1;
-    } else if (page.activity_type === 'SingNotes') {
-      singErrors += 1;
+    if (page !== undefined && page !== null) {
+      if (page.activity_type === 'FlatView') {
+        flatErrors += 1;
+      } else if (page.activity_type === 'Listening') {
+        listeningErrors += 1;
+      } else if (page.activity_type === 'RhythmSensor') {
+        rhythmErrors += 1;
+      } else if (page.activity_type === 'SingNotes') {
+        singErrors += 1;
+      }
+      this.setState((prevState) => ({
+        flatErrors: prevState.flatErrors + flatErrors,
+        listeningErrors: prevState.listeningErrors + listeningErrors,
+        rhythmErrors: prevState.rhythmErrors + rhythmErrors,
+        singErrors: prevState.singErrors + singErrors,
+      }));
     }
-    this.setState((prevState) => ({
-      flatErrors: prevState.flatErrors + flatErrors,
-      listeningErrors: prevState.listeningErrors + listeningErrors,
-      rhythmErrors: prevState.rhythmErrors + rhythmErrors,
-      singErrors: prevState.singErrors + singErrors,
-    }));
   }
 
   renderRhythmBar = () => {
@@ -419,8 +421,12 @@ class FinishedLesson extends Component {
         // console.log('in setInterval, with height', height1);
         height1 += incrementValue;
         height2 -= incrementValue;
-        elem1.style.height = `${height1}%`;
-        elem2.style.height = `${height2}%`;
+        if (elem1 !== undefined && elem1 !== null) {
+          elem1.style.height = `${height1}%`;
+        }
+        if (elem2 !== undefined && elem2 !== null) {
+          elem2.style.height = `${height2}%`;
+        }
       } else {
         clearInterval(int);
       }
