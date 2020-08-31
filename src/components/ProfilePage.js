@@ -13,8 +13,11 @@ import {
   faPen, faCheck, faArrowCircleLeft, faArrowCircleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { Doughnut } from 'react-chartjs-2';
-import { updateUserInfo, getUserInfo } from '../actions/index';
+import {
+  updateUserInfo, getUserInfo, setError, hideError,
+} from '../actions/index';
 import NavBar from './NavBar';
+import ErrorNotification from './errorMessage';
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -101,6 +104,35 @@ iconRender = () => {
   }
 }
 
+checkUserNameInput = () => {
+  const attemptedUsername = document.getElementById('change-username').value;
+  const usernameLength = attemptedUsername.length;
+  let isValid = true;
+  if (usernameLength === 0) {
+    this.props.setError(1002);
+    isValid = false;
+  }
+  if (usernameLength < 4) {
+    this.props.setError(1001);
+    isValid = false;
+  }
+  if (usernameLength > 10) {
+    this.props.setError(1000);
+    isValid = false;
+  }
+  console.log('is valid', isValid);
+  if (isValid) {
+    if (this.props.error.open === true) {
+      this.props.hideError();
+    }
+    this.setState({
+      isEditing: false,
+    });
+    this.props.updateUserInfo({ username: document.getElementById('change-username').value });
+    this.props.getUserInfo();
+  }
+}
+
 openModal = () => {
   this.setState({ modalisopen: true });
 }
@@ -113,16 +145,6 @@ closeModal = () => {
     this.setState({
       isEditing: true,
     });
-  }
-
-  stopEditing = () => {
-    // this.props.update
-    this.setState({
-      isEditing: false,
-    });
-    console.log('new username being sent: ', document.getElementById('change-username').value);
-    this.props.updateUserInfo({ username: document.getElementById('change-username').value });
-    this.props.getUserInfo();
   }
 
   onInputChange = (event) => {
@@ -160,15 +182,10 @@ closeModal = () => {
       this.setState({
         passwordResetStatus: 'newAndRetype',
       });
-    } else { // some function call here to reset password...not sure how to do this in backend
     }
   }
 
   makeTotalDoughnut = () => {
-    // const totals = [];
-    // for (let index = 0; index < 4; index++) {
-    //   totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
-    // }
     const labelset = ['Fill-in-the-Blank',
       'Listening',
       'Rhythm',
@@ -277,7 +294,7 @@ closeModal = () => {
       return (
         <div className="user-name-container-inner">
           <input className="display-name-input" id="change-username" type="input" onChange={this.onInputChange} placeholder="new username" />
-          <button type="button" className="icon-holder" id="done-edit-username" onClick={this.stopEditing}>
+          <button type="button" className="icon-holder" id="done-edit-username" onClick={this.checkUserNameInput}>
             <FontAwesomeIcon icon={faCheck} className="icon" id="editing-icon" alt="check-icon" />
           </button>
         </div>
@@ -288,11 +305,7 @@ closeModal = () => {
           <div className="user-name-display" id="profile-page-username">{this.props.currentUser.username}</div>
           <button type="button" className="icon-holder" id="edit-username" onClick={this.startEditing}>
             <FontAwesomeIcon icon={faPen} className="icon" id="check-icon" alt="pen-icon" />
-
-            {/* <i className="fal fa-pencil" /> */}
-
-            {/* <div className="icon" id="pencil" /> */}
-          </button> {/* click on to edit display name */}
+          </button>
         </div>
       );
     }
@@ -312,6 +325,7 @@ closeModal = () => {
     };
     return (
       <div className="profile-page-container">
+        <ErrorNotification />
         <NavBar />
         <div className="profile-page-content">
           <div className="profile-page-user-display">
@@ -342,7 +356,7 @@ closeModal = () => {
                   console.log('rendering: No badges yet!');
                   return (
                     <div id={badge.iconUrl}>
-                      <div className="badge-title">{badge.name}</div>
+                      <div className="badge-title" key={badge.name}>{badge.name}</div>
                     </div>
                   );
                 } else if (badge.iconUrl !== '') {
@@ -356,28 +370,7 @@ closeModal = () => {
               })}
             </div>
           </div>
-          <div className="profile-page-user-settings">
-            <div className="title" id="user-settings-title">Change Password</div>
-            <div className="settings-content">
-              <div className="settings-current-container">
-                <div className="subtitle" id="settings-current-title">current</div>
-                <input className="input" id="current-password-input" onChange={this.onInputChangeCurrentPassword} placeholder="current password" />
-              </div>
-              <div className="settings-new-continer">
-                <div className="subtitle" id="settings-new-title">new</div>
-                <input className="input" id="new-password-input" onChange={this.onInputChangeNewPassword} placeholder="new password" />
-              </div>
-              <div className="settings-retype-new-container">
-                <div className="subtitle" id="settings-retype-new-title">re-type new</div>
-                <input className="input" id="retype-new-password-input" onChange={this.onInputChangeRetypePassword} placeholder="re-type new password" />
-              </div>
-            </div>
-            <div className="settings-buttons">
-              <button className="button" id="change-password" type="button" onClick={this.changePasswordSubmit}>Change Password</button>
-              <button className="button" id="cancel" type="button">Cancel</button>
-            </div>
-          </div>
-          <div className="delete-profile-container">
+          {/* <div className="delete-profile-container">
             <div className="title" id="user-settings-title-delete">Delete Account</div>
             <div className="subtitle" id="delete-user-subtitle">
               Are you sure you want to delete your account?
@@ -390,7 +383,6 @@ closeModal = () => {
                 onRequestClose={this.closeModal}
                 style={customStyles}
               >
-                {/* <button type="button" onClick={this.closeModal}>close</button> */}
                 <div id="delete-user-modal" className="modal">
                   <div className="modal-content">
                     <div className="modal-content-detail">
@@ -418,7 +410,7 @@ closeModal = () => {
                 </div>
               </Modal>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );
@@ -428,7 +420,10 @@ closeModal = () => {
 function mapStateToProps(reduxState) {
   return {
     currentUser: reduxState.user,
+    error: reduxState.error,
   };
 }
 
-export default connect(mapStateToProps, { updateUserInfo, getUserInfo })(ProfilePage);
+export default connect(mapStateToProps, {
+  updateUserInfo, getUserInfo, setError, hideError,
+})(ProfilePage);
