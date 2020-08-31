@@ -59,6 +59,7 @@ To set-up, simply run `yarn install`.
 ## Gifs
 ![Rhythm exercise](https://media.giphy.com/media/H4mtTSaukfnGIC2VSh/giphy.gif)
 ![Listening/sightreading](https://media.giphy.com/media/WoFi5a269o9ihyCGLT/giphy.gif)
+![Homepage](homepage.gif)
 ## Authors
 
 Jacob Donoghue  
