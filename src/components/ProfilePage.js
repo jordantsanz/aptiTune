@@ -13,8 +13,11 @@ import {
   faPen, faCheck, faArrowCircleLeft, faArrowCircleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { Doughnut } from 'react-chartjs-2';
-import { updateUserInfo, getUserInfo } from '../actions/index';
+import {
+  updateUserInfo, getUserInfo, setError, hideError,
+} from '../actions/index';
 import NavBar from './NavBar';
+import ErrorNotification from './errorMessage';
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -101,6 +104,33 @@ iconRender = () => {
   }
 }
 
+checkUserNameInput = () => {
+  this.props.hideError();
+  const attemptedUsername = document.getElementById('change-username').value;
+  const usernameLength = attemptedUsername.length;
+  let isValid = true;
+  if (usernameLength === 0) {
+    this.props.setError(1002);
+    isValid = false;
+  }
+  if (usernameLength < 4) {
+    this.props.setError(1001);
+    isValid = false;
+  }
+  if (usernameLength > 10) {
+    this.props.setError(1000);
+    isValid = false;
+  }
+  if (isValid) {
+    this.setState({
+      isEditing: false,
+    });
+    this.props.updateUserInfo({ username: document.getElementById('change-username').value });
+    this.props.getUserInfo();
+  }
+  return isValid;
+}
+
 openModal = () => {
   this.setState({ modalisopen: true });
 }
@@ -116,7 +146,6 @@ closeModal = () => {
   }
 
   stopEditing = () => {
-    // this.props.update
     this.setState({
       isEditing: false,
     });
@@ -165,10 +194,6 @@ closeModal = () => {
   }
 
   makeTotalDoughnut = () => {
-    // const totals = [];
-    // for (let index = 0; index < 4; index++) {
-    //   totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
-    // }
     const labelset = ['Fill-in-the-Blank',
       'Listening',
       'Rhythm',
@@ -277,7 +302,7 @@ closeModal = () => {
       return (
         <div className="user-name-container-inner">
           <input className="display-name-input" id="change-username" type="input" onChange={this.onInputChange} placeholder="new username" />
-          <button type="button" className="icon-holder" id="done-edit-username" onClick={this.stopEditing}>
+          <button type="button" className="icon-holder" id="done-edit-username" onClick={this.checkUserNameInput}>
             <FontAwesomeIcon icon={faCheck} className="icon" id="editing-icon" alt="check-icon" />
           </button>
         </div>
@@ -312,6 +337,7 @@ closeModal = () => {
     };
     return (
       <div className="profile-page-container">
+        <ErrorNotification />
         <NavBar />
         <div className="profile-page-content">
           <div className="profile-page-user-display">
@@ -342,7 +368,7 @@ closeModal = () => {
                   console.log('rendering: No badges yet!');
                   return (
                     <div id={badge.iconUrl}>
-                      <div className="badge-title">{badge.name}</div>
+                      <div className="badge-title" key={badge.name}>{badge.name}</div>
                     </div>
                   );
                 } else if (badge.iconUrl !== '') {
@@ -431,4 +457,6 @@ function mapStateToProps(reduxState) {
   };
 }
 
-export default connect(mapStateToProps, { updateUserInfo, getUserInfo })(ProfilePage);
+export default connect(mapStateToProps, {
+  updateUserInfo, getUserInfo, setError, hideError,
+})(ProfilePage);
