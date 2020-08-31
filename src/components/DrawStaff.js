@@ -6,7 +6,7 @@ const drawStaff = (notes, divId) => {
   if (notes != null) {
     const vexnotes = notes.join(', '); // convert user's notes into string that can be rendered by vexflow
     const vf = new Vex.Flow.Factory({
-      renderer: { elementId: divId, width: 500, height: 200 },
+      renderer: { elementId: divId, width: 500, height: 170 },
     });
 
     const score = vf.EasyScore();
