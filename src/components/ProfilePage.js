@@ -105,7 +105,6 @@ iconRender = () => {
 }
 
 checkUserNameInput = () => {
-  this.props.hideError();
   const attemptedUsername = document.getElementById('change-username').value;
   const usernameLength = attemptedUsername.length;
   let isValid = true;
@@ -121,14 +120,17 @@ checkUserNameInput = () => {
     this.props.setError(1000);
     isValid = false;
   }
+  console.log('is valid', isValid);
   if (isValid) {
+    if (this.props.error.open === true) {
+      this.props.hideError();
+    }
     this.setState({
       isEditing: false,
     });
     this.props.updateUserInfo({ username: document.getElementById('change-username').value });
     this.props.getUserInfo();
   }
-  return isValid;
 }
 
 openModal = () => {
@@ -143,15 +145,6 @@ closeModal = () => {
     this.setState({
       isEditing: true,
     });
-  }
-
-  stopEditing = () => {
-    this.setState({
-      isEditing: false,
-    });
-    console.log('new username being sent: ', document.getElementById('change-username').value);
-    this.props.updateUserInfo({ username: document.getElementById('change-username').value });
-    this.props.getUserInfo();
   }
 
   onInputChange = (event) => {
@@ -189,7 +182,6 @@ closeModal = () => {
       this.setState({
         passwordResetStatus: 'newAndRetype',
       });
-    } else { // some function call here to reset password...not sure how to do this in backend
     }
   }
 
@@ -313,11 +305,7 @@ closeModal = () => {
           <div className="user-name-display" id="profile-page-username">{this.props.currentUser.username}</div>
           <button type="button" className="icon-holder" id="edit-username" onClick={this.startEditing}>
             <FontAwesomeIcon icon={faPen} className="icon" id="check-icon" alt="pen-icon" />
-
-            {/* <i className="fal fa-pencil" /> */}
-
-            {/* <div className="icon" id="pencil" /> */}
-          </button> {/* click on to edit display name */}
+          </button>
         </div>
       );
     }
@@ -382,27 +370,6 @@ closeModal = () => {
               })}
             </div>
           </div>
-          <div className="profile-page-user-settings">
-            <div className="title" id="user-settings-title">Change Password</div>
-            <div className="settings-content">
-              <div className="settings-current-container">
-                <div className="subtitle" id="settings-current-title">current</div>
-                <input className="input" id="current-password-input" onChange={this.onInputChangeCurrentPassword} placeholder="current password" />
-              </div>
-              <div className="settings-new-continer">
-                <div className="subtitle" id="settings-new-title">new</div>
-                <input className="input" id="new-password-input" onChange={this.onInputChangeNewPassword} placeholder="new password" />
-              </div>
-              <div className="settings-retype-new-container">
-                <div className="subtitle" id="settings-retype-new-title">re-type new</div>
-                <input className="input" id="retype-new-password-input" onChange={this.onInputChangeRetypePassword} placeholder="re-type new password" />
-              </div>
-            </div>
-            <div className="settings-buttons">
-              <button className="button" id="change-password" type="button" onClick={this.changePasswordSubmit}>Change Password</button>
-              <button className="button" id="cancel" type="button">Cancel</button>
-            </div>
-          </div>
           <div className="delete-profile-container">
             <div className="title" id="user-settings-title-delete">Delete Account</div>
             <div className="subtitle" id="delete-user-subtitle">
@@ -454,6 +421,7 @@ closeModal = () => {
 function mapStateToProps(reduxState) {
   return {
     currentUser: reduxState.user,
+    error: reduxState.error,
   };
 }
 

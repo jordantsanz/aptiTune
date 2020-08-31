@@ -31,6 +31,12 @@ const errorReducer = (state = initialState, action) => {
             messages: [...state.messages, 'Email already in use'],
             open: true,
           };
+        case 455:
+          return {
+            ...state,
+            messages: [...state.messages, 'Username Taken'],
+            open: true,
+          };
         case 500:
           console.log('Network Disconnected.');
           return {
