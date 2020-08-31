@@ -748,9 +748,10 @@ transition: 200ms ease all;
 	transition: color 0.3s;
 
 	&:hover {
-		color: #FD966A;
+		color: $pink;
 	}
-    width: 35vw;
+    width: 27vw;
+    padding-left: 3.5vw;
     height: 30vh;
     display: flex !important;
     flex-direction: column;
@@ -854,7 +855,7 @@ color: #919191;
 	transition: color 0.3s;
 
 	&:hover {
-		color: #FD966A;
+		color: $pink;
 	}
     width: 53vw;
     height: 40vh;
