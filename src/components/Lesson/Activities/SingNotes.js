@@ -195,7 +195,7 @@ class SingNotes extends Component {
     console.log(page.activity.correct_answers);
     console.log(notes);
     while (j < page.activity.correct_answers.length) {
-      if (page.activity.correct_answers[j] !== undefined) {
+      if (page.activity.correct_answers[j] !== undefined && notes[k] !== undefined) {
         const correctNote = page.activity.correct_answers[j].slice(0, -3);
         const userNote = notes[k].slice(0, -3);
         if (correctNote === userNote) {
@@ -206,6 +206,7 @@ class SingNotes extends Component {
           break;
         }
       } else {
+        correct = false;
         break;
       }
     }
