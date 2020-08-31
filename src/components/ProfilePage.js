@@ -182,7 +182,7 @@ closeModal = () => {
     // for (let index = 0; index < 4; index++) {
     //   totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
     // }
-    const labelset = ['Fill-in-the-Blank',
+    const labelset = ['Sightreading',
       'Listening',
       'Rhythm',
       'Singing',
@@ -264,7 +264,7 @@ closeModal = () => {
     switch (maxIndex) {
       case 0:
         return (
-          <div className="strength">Your strength is: Fill-in-the-Blank!</div>
+          <div className="strength">Your strength is: Sightreading!</div>
         );
       case 1:
         return (
@@ -370,7 +370,7 @@ closeModal = () => {
             </div>
           </div>
           <div className="profile-page-user-settings">
-            <div className="title" id="c">Change Password</div>
+            <div className="title" id="changepw">Change Password</div>
             <div className="settings-content">
               <div className="settings-current-container">
                 <div className="subtitle" id="settings-current-title">current</div>

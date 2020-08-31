@@ -1914,56 +1914,50 @@ align-items: center;
     width: 12vw;
 }
 .user-icon-background{
-    position: absolute;
-width: 48vh;
-height: 48vh;
-left: 42.85vw;
-top: 5.44vh;
-border-radius: 200px;
-background: rgba(241, 128, 128, .8);
+    display: flex;
+    align-items: center;
+    width: 48vh;
+    height: 48vh;
+    
+    border-radius: 200px;
+    background:#FAEFE5;
+    border: 6px solid  #F18080;
 }
 
 #stats-title {
-    position: absolute;
+    align-items: flex-start;
     display: flex;
     width: 23.7vw;
     height: 5.1vh;
-    left: 17.8vw;
-    top: 70.55vh;
 
 
-font-family: Montserrat;
-font-style: normal;
-font-weight: bold;
-font-size: 40px;
-line-height: 137.88%;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 137.88%;
 /* or 55px */
 
 
-align-items: center;
-
-color: #F18080;
+    color: #F18080;
 
 }
 
 #badges-title-profile {
-    position: absolute;
     width: 22.6vw;
     height: 6.1vh;
-    left: 17.85vw;
-    top: 140.3vh;
 
-font-family: Montserrat;
-font-style: normal;
-font-weight: bold;
-font-size: 40px;
-line-height: 137.88%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 137.88%;
 /* or 55px */
 
-display: flex;
-align-items: center;
-
-color: #F18080;
+    display: flex;
+    align-content: flex-start;
+    color: #F18080;
 }
 
 .arrow-button-background-right{
@@ -1976,9 +1970,8 @@ color: #F18080;
     transition: 200ms ease all;
 }
 .arrow-button-background-left{
-    left: 37.5vw;
-    top: 28vh;
-    position: absolute;
+    display: flex;
+    align-items: center;
     color: #F18080;
     width: 6vw !important;
     height: 6vh !important;
@@ -1995,7 +1988,11 @@ color: #F18080;
     flex-direction: column;
     width: 27vw;
     height: 6.1vh;
-    align-items: center;
+}
+
+#changepw {
+    display: flex;
+    align-items: flex-start;
 }
 
 .profile-page-badges-section{
@@ -2006,6 +2003,8 @@ color: #F18080;
 .profile-page-user-stats{
     width: 100%;
     height: 70vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .user-name-container{
@@ -2038,8 +2037,8 @@ color: #F18080;
     width: 378px;
     height: 55px;
     display: flex;
-    align-items: center;
-    
+    align-items: flex-start;
+
 
     font-family: Montserrat;
     font-style: normal;
@@ -2078,11 +2077,10 @@ color: #114353;
 }
 
 #settings-current-title{
-    position: absolute;
+
 width: 96px;
 height: 34px;
-left: -150px;
-top: 100px;
+
 
 font-family: Montserrat;
 font-style: normal;
@@ -2099,13 +2097,10 @@ color: #5A8491;
 }
 
 #current-password-input {
-    position: absolute;
     width: 595px;
     height: 81.69px;
     left: 0px;
     top: 75px;
-    position: absolute;
-
 
 background: #FFFFFF;
 border: 3px solid #5A7A91;
