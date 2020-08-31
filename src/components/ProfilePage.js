@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-plusplus */
 /* eslint-disable array-callback-return */
@@ -186,6 +187,17 @@ closeModal = () => {
   }
 
   makeTotalDoughnut = () => {
+    let zeroes = true;
+    for (let index = 0; index < 4; index++) {
+      if (this.props.currentUser.questionsCorrect[index] != 0 || this.props.currentUser.questionsIncorrect[index] != 0) {
+        zeroes = false;
+      }
+    }
+    if (zeroes) {
+      return (
+        <div className="getmore">Practice more to have some stuff here!</div>
+      );
+    }
     const totals = [];
     for (let index = 0; index < 4; index++) {
       totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
