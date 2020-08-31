@@ -6,6 +6,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPlay,
+} from '@fortawesome/free-solid-svg-icons';
 import { getLesson } from '../../../actions/index';
 import ListeningAnswer from './ListeningAnswer';
 
@@ -133,7 +137,7 @@ class Listening extends Component {
           <div className="Listening">
             <div className="activityInstructions">{page.activity.instructions}</div>
             <div className="recordButton">
-              <button type="button" className="button" id="start-record" onClick={this.playNotes}>Play Audio</button>
+              <button type="button" className="button" id="playAudio" onClick={this.playNotes}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /> &nbsp; Play Audio</button>
             </div>
             {/* <div id="audio">
               <audio src={page.activity.audioUrl} type="audio/m4a" title="audio-file" controls />

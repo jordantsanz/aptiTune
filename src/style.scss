@@ -1769,6 +1769,27 @@ iframe{
     }
 }
 
+#playAudio {
+    position: relative;
+    background: #FBBE49;
+    box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+    border-radius: 34px;
+    border: none;
+    color: #114353;
+    width: 25.2vw;
+    height: 10.5vh;
+    font-family: Montserrat;
+    font-style: normal;
+    margin-top: 3vh;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 200ms ease all;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .incorrectMessage{
     color: red;
     text-align: center;
@@ -1937,6 +1958,8 @@ align-items: center;
 .recordButton {
     display: flex;
     justify-content: center;
+    align-content: center;
+    text-align: center;
 }
 
 #sheetmusic, #yournotes {
