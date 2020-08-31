@@ -12,18 +12,19 @@ const drawStaff = (clef, notes, divId) => {
 
     const score = vf.EasyScore();
     const system = vf.System();
-    let stemDirection = 'up';
     if (clef === 'treble') {
-      stemDirection = 'up';
+      system.addStave({
+        voices: [
+          score.voice(score.notes(vexnotes, { stem: 'up' })),
+        ],
+      }).addClef(clef).addTimeSignature('4/4');
     } else if (clef === 'bass') {
-      stemDirection = 'down';
+      system.addStave({
+        voices: [
+          score.voice(score.notes(vexnotes, { clef: 'bass', stem: 'down' })),
+        ],
+      }).addClef(clef).addTimeSignature('4/4');
     }
-
-    system.addStave({
-      voices: [
-        score.voice(score.notes(vexnotes, { stem: stemDirection })),
-      ],
-    }).addClef(clef).addTimeSignature('4/4'); // default is 4/4 time, but we can change that and pass it in as a variable if needed!
     console.log('drawing');
     vf.draw();
   }
