@@ -70,7 +70,7 @@ class HomePageWithoutUser extends Component {
       );
     } else {
       return (
-        <button onClick={this.checkInputs} type="submit" id="login-button"> Log-in </button>
+        <button onClick={this.checkInputs} type="submit" id="login-button"> Create </button>
       );
     }
   }
