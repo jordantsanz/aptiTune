@@ -56,10 +56,17 @@ class RhythmSensor extends Component {
     componentDidMount = () => {
       const id = localStorage.getItem('lesson');
       const pageNum = localStorage.getItem('next');
+      console.log('pageNum: ', pageNum);
       this.setState({ pageNumber: pageNum });
       const { history } = this.props;
       this.props.getLesson(id, history, false);
-      console.log('Component mounted in Listening');
+      console.log('Component mounted in Rhythmsensor');
+    }
+
+    componentDidUpdate() {
+      if (this.state.firstRender) {
+        this.firstRender();
+      }
     }
 
     componentWillUnmount = () => {
@@ -88,6 +95,7 @@ class RhythmSensor extends Component {
         index += 1;
       }
       console.log('exiting loop');
+      this.setState({ playAnswer: false });
     }
 
     playMetronomeClick = (number, userAttempt) => {
@@ -134,7 +142,7 @@ class RhythmSensor extends Component {
       console.log('handleKeyPress called');
       const d = new Date();
       const t = d.getTime();
-      if (!this.state.firstClick) {
+      if (!this.state.firstClick && !this.state.playAnswer) {
         this.state.tapAudio.pause();
         this.state.tapAudio.play();
         const relTime = t - this.state.seedTime;
@@ -292,6 +300,8 @@ class RhythmSensor extends Component {
       const { pages } = this.props;
       const page = pages[this.state.pageNumber];
       let array = [];
+      console.log('page in rhythmSensor', page);
+      console.log('page.activity', page.activity);
       page.activity.rhythmPattern.map((note) => {
         if (note === '1') {
           array = array.concat(['G4/w']);
@@ -313,7 +323,7 @@ class RhythmSensor extends Component {
     firstRender = () => {
       const { pages } = this.props;
       const page = pages[this.state.pageNumber];
-      if (page !== null && page !== undefined) {
+      if (page !== null && page !== undefined && page.activity_type === 'RhythmSensor') {
         const { bpm } = page.activity;
         console.log('bpm:', bpm);
         const bps = bpm / 60;
@@ -329,9 +339,6 @@ class RhythmSensor extends Component {
     render() {
       // console.log('page in listening', page);
       // console.log('correct answer:', page.activity.correct_answer);
-      if (this.state.firstRender) {
-        this.firstRender();
-      }
       if (this.state.page === null || this.state.page === undefined) {
         return (
           <div className="rhythmActivity">
@@ -372,7 +379,7 @@ class RhythmSensor extends Component {
       if (this.state.resultsReady && this.state.correct) {
         return (
           <div className="rhythmActivity" id="successMessage">
-            Congrats! Time to move on
+            Awesome! That was perfect!
             <button type="button" className="nextButton" id="rhythmnextbutton" onClick={this.goToNext}>
               Next
             </button>
