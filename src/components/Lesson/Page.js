@@ -164,6 +164,33 @@ class Page extends Component {
       }
     }
 
+    renderX = () => {
+      if (this.props.lesson.lesson_type === 'quiz') {
+        console.log('renderx called with errorCount', this.state.errorCount);
+        if (this.state.errorCount === 0) {
+          return (
+            <div />
+          );
+        } else if (this.state.errorCount === 1) {
+          return (
+            <div>X</div>
+          );
+        } else if (this.state.errorCount === 2) {
+          return (
+            <div>X X</div>
+          );
+        } else {
+          return (
+            <div>X X X</div>
+          );
+        }
+      } else {
+        return (
+          <div />
+        );
+      }
+    }
+
     render() {
       // add page for rendering
       if (this.props.pages === null || this.props.pages === undefined || this.props.pages.length === 0) {
@@ -183,6 +210,7 @@ class Page extends Component {
               <div className="page-top">
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
+                  <div className="page-top-quiz-x">{this.renderX()}</div>
                   <div className="page-top-nav">
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
                   </div>
@@ -208,6 +236,7 @@ class Page extends Component {
               <div className="page-top">
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
+                  <div className="page-top-quiz-x">{this.renderX()}</div>
                   <div className="page-top-nav">
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
                   </div>
@@ -231,6 +260,7 @@ class Page extends Component {
               <div className="page-top">
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
+                  <div className="page-top-quiz-x">{this.renderX()}</div>
                   <div className="page-top-nav">
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
                   </div>
@@ -257,6 +287,7 @@ class Page extends Component {
               <div className="page-top">
                 <div className="page-top-topthird">
                   <div className="page-top-title">{page.content.title}</div>
+                  <div className="page-top-quiz-x">{this.renderX()}</div>
                   <div className="page-top-nav">
                     <div className="page-top-nav-level">Level {this.state.pageNumber + 1} of {this.props.pages.length}</div>
                   </div>
