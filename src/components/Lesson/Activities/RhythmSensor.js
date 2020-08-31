@@ -1,3 +1,4 @@
+/* eslint-disable react/no-did-update-set-state */
 /* eslint-disable no-loop-func */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -49,6 +50,7 @@ class RhythmSensor extends Component {
       correct: false,
       firstAttempt: true,
       scoreArray: [],
+      reload: false,
     };
     window.addEventListener('keydown', this.handleKeyDown);
   }
@@ -64,7 +66,18 @@ class RhythmSensor extends Component {
     }
 
     componentDidUpdate() {
+      console.log('componentDidUpdate called');
+      if (this.state.reload) {
+        const id = localStorage.getItem('lesson');
+        const pageNum = localStorage.getItem('next');
+        console.log('pageNum: ', pageNum);
+        this.setState({ pageNumber: pageNum, reload: false });
+        const { history } = this.props;
+        this.props.getLesson(id, history, false);
+        console.log('Component remounted in Rhythmsensor');
+      }
       if (this.state.firstRender) {
+        console.log('in firstRedner');
         this.firstRender();
       }
     }
@@ -238,6 +251,7 @@ class RhythmSensor extends Component {
           correct: false,
           firstAttempt: false,
           firstClick: true,
+          reload: true,
         });
         // deal with error for quiz
         if (this.props.lessonType === 'quiz') {
@@ -304,6 +318,30 @@ class RhythmSensor extends Component {
 
     goToNext = () => {
       this.props.onSubmit();
+      this.setState({
+        pageNumber: 0,
+        correctClicked: false,
+        times: [],
+        correctAnswers: [],
+        firstClick: true,
+        seedTime: 0,
+        firstRender: true,
+        bps: 0,
+        page: null,
+        buttonColor: 'red',
+        countDownNumber: 'Ready?',
+        beginTapping: false,
+        resultsReady: false,
+        correct: false,
+        firstAttempt: true,
+        scoreArray: [],
+        reload: true,
+      });
+      // remove old staff
+      const staff = document.getElementById('rhythmScore');
+      while (staff.hasChildNodes()) {
+        staff.removeChild(staff.lastChild);
+      }
     }
 
     createScoreArray = () => {
@@ -331,14 +369,20 @@ class RhythmSensor extends Component {
     }
 
     firstRender = () => {
+      console.log('firstRenderCalled');
       const { pages } = this.props;
       const page = pages[this.state.pageNumber];
+      const next = parseInt(localStorage.getItem('next'), 10);
+      console.log('page:', page);
+      console.log('pages', pages);
       if (page !== null && page !== undefined && page.activity_type === 'RhythmSensor') {
         const { bpm } = page.activity;
         // console.log('bpm:', bpm);
         const bps = bpm / 60;
         this.setState({ firstRender: false, bps, page: this.props.pages[this.state.pageNumber] });
         this.createScoreArray();
+      } else {
+        console.log('failed conditions of firstRender');
       }
     }
 
