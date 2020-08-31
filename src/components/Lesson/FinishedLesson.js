@@ -444,7 +444,7 @@ class FinishedLesson extends Component {
               <div className="finished-lesson-top-page-content">
                 <div className="finished-lesson-completed">Completed: {this.props.lesson.title} </div>
                 <div>{this.renderBadge()}</div>
-                <div className="finished-lesson-percent"> You got {parseFloat(this.state.numberComplete / this.state.totalQuestions) * 100} %! </div>
+                <div className="finished-lesson-percent"> You got through {parseInt((this.state.numberComplete / this.state.totalQuestions) * 100, 10)} % of the quiz! </div>
                 <div className="finished-lesson-description"> Nice job, {this.props.currentUser.username}! </div>
                 <div className="finished-lesson-data">
                   <div>Your Score Breakdown</div>
@@ -455,9 +455,7 @@ class FinishedLesson extends Component {
             <div className="finished-lesson-bottom-page">
               <div className="finished-lesson-bottom-page-content">
                 <div className="finished-lesson-stats">
-                  <div className="finished-lesson-questions-answered">
-                    Questions answered correctly: {this.state.numberComplete}
-                  </div>
+                  <div className="finished-lesson-questions-answered" />
                 </div>
                 <div className="finished-lesson-buttons">
                   <NavLink to="/home"><button className="button" id="take-me-home" type="button"> Take me home </button></NavLink>

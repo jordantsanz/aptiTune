@@ -127,13 +127,15 @@ class RhythmSensor extends Component {
       }, 1000 / parseFloat(this.state.bps));
     }
 
-    updateTime = () => {
+    startPlay = () => {
       const d = new Date();
       const t = d.getTime();
       const relTime = 0;
       if (this.state.firstClick) {
         this.makeCorrectnessArray();
-        this.setState({ firstClick: false, seedTime: t, beginTapping: true });
+        this.setState({
+          firstClick: false, seedTime: t, beginTapping: true, times: [],
+        });
         this.playMetronomeClick(this.state.page.activity.rhythmPattern.length - 1, true);
       }
     }
@@ -196,8 +198,13 @@ class RhythmSensor extends Component {
       console.log('lengthAns: ', lengthAns);
       const { times } = this.state;
       const timesLength = times.length;
-      console.log('length: ', timesLength);
+      console.log('times input by user ', times);
+
       let correct = true;
+      // check all answers
+      if (lengthAns !== timesLength) {
+        correct = false;
+      }
       for (let i = 0; i < lengthAns; i += 1) {
         console.log('in loop ', i);
         if (i === timesLength - 1 && i !== lengthAns - 1) {
@@ -208,7 +215,7 @@ class RhythmSensor extends Component {
         const correctAns = parseInt(ans[i], 10);
         const userAns = times[i];
         // account for lag
-        if (Math.abs(correctAns - userAns) < 400) {
+        if (Math.abs(correctAns - userAns) < 100) {
           console.log('Answer', i, ' is correct! -- off by ', Math.abs(correctAns - userAns), 'miliseconds');
         } else {
           console.log('Answer', i, 'incorrect : off by', Math.abs(correctAns - userAns), 'miliseconds');
@@ -230,6 +237,7 @@ class RhythmSensor extends Component {
           resultsReady: false,
           correct: false,
           firstAttempt: false,
+          firstClick: true,
         });
         // deal with error for quiz
         if (this.props.lessonType === 'quiz') {
@@ -241,11 +249,12 @@ class RhythmSensor extends Component {
     hideProgress = () => {
       const elem = document.getElementById('myBar');
       elem.style.width = '0%';
+      console.log('progress hidden');
     }
 
     initiateProgress = () => {
-      console.log('initiating progress');
       const elem = document.getElementById('myBar');
+      console.log('initiating progress with elem', elem);
       elem.style.width = '2%';
     }
 
@@ -352,13 +361,8 @@ class RhythmSensor extends Component {
         return (
           <div className="rhythmActivity">
             <div>{drawStaff(this.state.scoreArray, 'rhythmScore')}</div>
-            <div>
-              <div>bps: {this.state.bps}</div>
-              <div>Seed time: {this.state.seedTime} </div>
-              <div>Clicked times: {this.state.times} </div>
-            </div>
             <div id="rhythm-play-button">
-              <button type="button" className="recordButton" id="playbutton" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+              <button type="button" className="recordButton" id="playbutton" onClick={this.startPlay}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
             </div>
           </div>
         );
@@ -389,8 +393,11 @@ class RhythmSensor extends Component {
       if (!this.state.firstAttempt) {
         return (
           <div className="rhythmActivity" id="failureMessage">
+            <div id="progress">
+              <div id="myBar" />
+            </div>
             <div> Not quite, try again!</div>
-            <button id="start-record" className="recordButton" type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+            <button id="start-record" className="recordButton" type="button" onClick={this.startPlay}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
             <button id="start-record" className="recordButton" type="button" onClick={this.playAnswer}>Play Answer</button>
           </div>
         );
@@ -401,7 +408,7 @@ class RhythmSensor extends Component {
               <div id="myBar" />
             </div>
             <div className="rhythmButtons">
-              <button id="start-record" className="recordButton" type="button" onClick={this.updateTime}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
+              <button id="start-record" className="recordButton" type="button" onClick={this.startPlay}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /></button>
               <button id="start-record" className="recordButton" type="button" onClick={this.playAnswer}>Play Answer</button>
             </div>
           </div>
