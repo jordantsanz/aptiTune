@@ -13,8 +13,11 @@ import {
   faPen, faCheck, faArrowCircleLeft, faArrowCircleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { Doughnut } from 'react-chartjs-2';
-import { updateUserInfo, getUserInfo } from '../actions/index';
+import {
+  updateUserInfo, getUserInfo, setError, hideError,
+} from '../actions/index';
 import NavBar from './NavBar';
+import ErrorNotification from './errorMessage';
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -101,6 +104,35 @@ iconRender = () => {
   }
 }
 
+checkUserNameInput = () => {
+  const attemptedUsername = document.getElementById('change-username').value;
+  const usernameLength = attemptedUsername.length;
+  let isValid = true;
+  if (usernameLength === 0) {
+    this.props.setError(1002);
+    isValid = false;
+  }
+  if (usernameLength < 4) {
+    this.props.setError(1001);
+    isValid = false;
+  }
+  if (usernameLength > 10) {
+    this.props.setError(1000);
+    isValid = false;
+  }
+  console.log('is valid', isValid);
+  if (isValid) {
+    if (this.props.error.open === true) {
+      this.props.hideError();
+    }
+    this.setState({
+      isEditing: false,
+    });
+    this.props.updateUserInfo({ username: document.getElementById('change-username').value });
+    this.props.getUserInfo();
+  }
+}
+
 openModal = () => {
   this.setState({ modalisopen: true });
 }
@@ -113,20 +145,6 @@ closeModal = () => {
     this.setState({
       isEditing: true,
     });
-  }
-
-  stopEditing = () => {
-    // this.props.update
-    this.setState({
-      isEditing: false,
-    });
-    // const fields = {
-    //   username: this.state.username,
-    //   icon: this.state.icon,
-    // };
-    console.log('new username being sent: ', document.getElementById('change-username').value);
-    this.props.updateUserInfo({ username: document.getElementById('change-username').value });
-    this.props.getUserInfo();
   }
 
   onInputChange = (event) => {
@@ -164,18 +182,8 @@ closeModal = () => {
       this.setState({
         passwordResetStatus: 'newAndRetype',
       });
-    } else { // some function call here to reset password...not sure how to do this in backend
     }
   }
-
-  // findData = () => {
-  //   const totals = [];
-  //   for (let index = 0; index < 4; index++) {
-  //     totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
-  //   }
-
-  //   return totals;
-  // }
 
   makeTotalDoughnut = () => {
     const totals = [];
@@ -338,7 +346,7 @@ closeModal = () => {
       return (
         <div className="user-name-container-inner">
           <input className="display-name-input" id="change-username" type="input" onChange={this.onInputChange} placeholder="new username" />
-          <button type="button" className="icon-holder" id="done-edit-username" onClick={this.stopEditing}>
+          <button type="button" className="icon-holder" id="done-edit-username" onClick={this.checkUserNameInput}>
             <FontAwesomeIcon icon={faCheck} className="icon" id="editing-icon" alt="check-icon" />
           </button>
         </div>
@@ -349,11 +357,7 @@ closeModal = () => {
           <div className="user-name-display" id="profile-page-username">{this.props.currentUser.username}</div>
           <button type="button" className="icon-holder" id="edit-username" onClick={this.startEditing}>
             <FontAwesomeIcon icon={faPen} className="icon" id="check-icon" alt="pen-icon" />
-
-            {/* <i className="fal fa-pencil" /> */}
-
-            {/* <div className="icon" id="pencil" /> */}
-          </button> {/* click on to edit display name */}
+          </button>
         </div>
       );
     }
@@ -373,6 +377,7 @@ closeModal = () => {
     };
     return (
       <div className="profile-page-container">
+        <ErrorNotification />
         <NavBar />
         <div className="profile-page-content">
           <div className="profile-page-user-display">
@@ -404,7 +409,7 @@ closeModal = () => {
                   console.log('rendering: No badges yet!');
                   return (
                     <div id={badge.iconUrl}>
-                      <div className="badge-title">{badge.name}</div>
+                      <div className="badge-title" key={badge.name}>{badge.name}</div>
                     </div>
                   );
                 } else if (badge.iconUrl !== '') {
@@ -418,13 +423,48 @@ closeModal = () => {
               })}
             </div>
           </div>
-          <div className="delete-profile-container">
+          {/* <div className="delete-profile-container">
             <div className="title" id="user-settings-title-delete">Delete Account</div>
             <div className="subtitle" id="delete-user-subtitle">
               Are you sure you want to delete your account?
               You will not be able log in or restore your account or the data you stored with us.
             </div>
           </div>
+            <div className="delete-modal">
+              <button className="button" id="delete-user" type="button" onClick={this.openModal}>Yes, I’m breaking up with you</button>
+              <Modal
+                isOpen={this.state.modalisopen}
+                onRequestClose={this.closeModal}
+                style={customStyles}
+              >
+                <div id="delete-user-modal" className="modal">
+                  <div className="modal-content">
+                    <div className="modal-content-detail">
+                      <div className="title" id="user-settings-title-breakup">We&apos;re breaking up?</div>
+                      <div className="subtitle" id="delete-user-subtitle-breakup">We&apos;re sorry to hear you’d like to delete your account with us. <br /> If you&apos;re just looking to take a break, you can always sign out of your account.  </div>
+                      <div className="subtitle" id="unable-to-restore">You will not be able to log back in or restore your account or the data you stored with us.</div>
+                      <div className="settings-current-container-breakup">
+                        <div className="subtitle" id="settings-current-title-delete">email</div>
+                        <input className="input" id="current-password-input-delete" onChange={this.onInputChangeCurrentPassword} placeholder="your email" />
+                      </div>
+                      <div className="settings-new-continer">
+                        <div className="subtitle" id="settings-new-title-delete">password</div>
+                        <input className="input" id="new-password-input-delete" onChange={this.onInputChangeNewPassword} placeholder="your password" />
+                      </div>
+                      <div className="settings-retype-new-container">
+                        <div className="subtitle" id="settings-retype-new-title-delete">re-type password</div>
+                        <input className="input" id="retype-new-password-input-delete" onChange={this.onInputChangeRetypePassword} placeholder="re-type your password" />
+                      </div>
+                      <div className="delete-user-buttons">
+                        <button className="button" id="cancel-delete" type="button" onClick={this.closeModal}>Cancel</button>
+                        <button className="button" id="continue-delete" type="button">Continue</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Modal>
+            </div>
+          </div> */}
         </div>
       </div>
     );
@@ -434,7 +474,10 @@ closeModal = () => {
 function mapStateToProps(reduxState) {
   return {
     currentUser: reduxState.user,
+    error: reduxState.error,
   };
 }
 
-export default connect(mapStateToProps, { updateUserInfo, getUserInfo })(ProfilePage);
+export default connect(mapStateToProps, {
+  updateUserInfo, getUserInfo, setError, hideError,
+})(ProfilePage);

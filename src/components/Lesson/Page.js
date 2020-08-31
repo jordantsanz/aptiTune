@@ -55,7 +55,6 @@ class Page extends Component {
     }
 
     goToNext = () => {
-      // for quiz module
       if (this.props.lesson.lesson_type === 'quiz') {
         this.goToNextForQuiz();
       } else {

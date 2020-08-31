@@ -20,6 +20,20 @@ export const ActionTypes = {
   ERROR_HIDE: 'ERROR_HIDE',
 };
 
+export function setError(error) {
+  console.log('setting error in actions.');
+  return (dispatch) => {
+    dispatch({ type: ActionTypes.ERROR_SET, error });
+  };
+}
+
+export function hideError() {
+  console.log('hiding error.');
+  return (dispatch) => {
+    dispatch({ type: ActionTypes.ERROR_HIDE });
+  };
+}
+
 // gets a lesson given that lesson id and the current user
 export function getLesson(id, history, shouldIPush) {
   console.log('Calling getLesson in client with id', id);
@@ -35,6 +49,7 @@ export function getLesson(id, history, shouldIPush) {
       .catch((error) => {
         console.log('error in getLesson client:', error);
         dispatch({ type: ActionTypes.ERROR_SET, payload: error });
+        dispatch(setError(error.response.status));
       });
   };
 }
@@ -48,7 +63,7 @@ export function getLessons() {
       })
       .catch((error) => {
         console.log('server responded with error:', error);
-        dispatch({ type: ActionTypes.ERROR_SET, payload: error });
+        dispatch(setError(error.response.status));
       });
   };
 }
@@ -60,7 +75,7 @@ export function loadPage(username, lessonid, lessonTitle, pageNumber) {
         dispatch({ type: ActionTypes.LOAD_PAGE, payload: response.data });
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.ERROR_SET, payload: error });
+        dispatch(setError(error.response.status));
       });
   };
 }
@@ -74,7 +89,7 @@ export function getUserInfo() {
       dispatch({ type: ActionTypes.GET_USER_INFO, payload: response.data });
     }).catch((error) => {
       console.log('error in getUserInfo\n');
-      dispatch({ type: ActionTypes.ERROR_SET, payload: error });
+      dispatch(setError(error.response.status));
     });
   };
 }
@@ -87,8 +102,7 @@ export function updateUserInfo(fields) {
       dispatch({ type: ActionTypes.UPDATE_USER_INFO, payload: response.data });
     })
       .catch((error) => {
-        dispatch({ type: ActionTypes.ERROR_SET, payload: error });
-        console.log('updateUserInfo responded with error', error);
+        dispatch(setError(error.response.status));
       });
   };
 }
@@ -101,20 +115,6 @@ export function signOutUser(history) {
     localStorage.removeItem('user');
     dispatch({ type: ActionTypes.DEAUTH_USER });
     history.push('/');
-  };
-}
-
-export function setError(error) {
-  console.log('setting error in actions.');
-  return (dispatch) => {
-    dispatch({ type: ActionTypes.ERROR_SET, error });
-  };
-}
-
-export function hideError() {
-  console.log('hiding error.');
-  return (dispatch) => {
-    dispatch({ type: ActionTypes.ERROR_HIDE });
   };
 }
 
