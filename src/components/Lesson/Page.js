@@ -300,7 +300,7 @@ class Page extends Component {
                   <div className="sheetmusic-holder">
                     <div id="sheetmusic"> </div>
                   </div>
-                  <div id="drawmessage" className="drawMessage"> </div>
+                  <div id="drawmessage"> </div>
                   <div className="sheetmusic-holder">
                     <div id="yournotes"> </div>
                   </div>

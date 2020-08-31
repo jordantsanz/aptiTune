@@ -158,13 +158,10 @@ class SingNotes extends Component {
                   // if octave 2 or 3, add 2 to the octave
                   if (octave === 2 || octave === 3) {
                     if (testing[i] != null && octave <= 3 && octave != -Infinity && key != null) {
-                      console.log('inside octave 2 or 3', octave);
                       const newoctave = octave + 2;
                       // console.log('new octave', newoctave);
                       const note = `${key.toString().toUpperCase() + newoctave.toString()}/q`;
-                      console.log(note);
                       if (note != oldnote) {
-                        console.log('inside 23 push');
                         notes.push(note);
                       }
                       oldnote = note;
@@ -173,7 +170,6 @@ class SingNotes extends Component {
                     if (testing[i] != null && octave <= 6 && octave != -Infinity && key != null) {
                       const note = `${key.toString().toUpperCase() + octave.toString()}/q`;
                       if (note != oldnote) {
-                        console.log('inside 4to6 push');
                         notes.push(note);
                       }
                       oldnote = note;
@@ -198,14 +194,18 @@ class SingNotes extends Component {
     const page = pages[this.state.pageNumber];
     console.log(page.activity.correct_answers);
     console.log(notes);
-    while (page.activity.correct_answers.length != j - 1) {
-      const correctNote = page.activity.correct_answers[j].slice(0, -3);
-      const userNote = notes[k];
-      if (page.activity.correct_answers[j] === notes[k]) {
-        j += 1;
-        k += 1;
+    while (j < page.activity.correct_answers.length) {
+      if (page.activity.correct_answers[j] !== undefined) {
+        const correctNote = page.activity.correct_answers[j].slice(0, -3);
+        const userNote = notes[k].slice(0, -3);
+        if (correctNote === userNote) {
+          j += 1;
+          k += 1;
+        } else {
+          correct = false;
+          break;
+        }
       } else {
-        correct = false;
         break;
       }
     }
@@ -217,7 +217,7 @@ class SingNotes extends Component {
     if (correct) {
       this.setState({ drawmessage: 'This is what you sang:' });
       document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
-      drawStaff(notes, 'yournotes');
+      drawStaff(page.activity.correct_answers, 'yournotes');
       this.setState({ correctNotes: true, complete: true, message: '' });
     } else if (notes.length === 4 && !correct) {
       this.setState({ drawmessage: 'This is what you sang:' });
