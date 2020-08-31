@@ -234,6 +234,7 @@ class Page extends Component {
                 </div>
               </div>
               <div className="page-bottom">
+                <div className="flat-score" id="flatScore" />
                 <div className="page-bottom-content">
                   <FlatView onSubmit={this.goToNext} lessonType={this.props.lesson.lesson_type} incrementErrorCount={this.incrementErrorCount} errorCount={this.state.errorCount} />
                 </div>

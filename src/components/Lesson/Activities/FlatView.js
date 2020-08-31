@@ -3,8 +3,15 @@
 /* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPlay,
+} from '@fortawesome/free-solid-svg-icons';
 import { getLesson } from '../../../actions/index';
+import FlatStaff from './FlatStaff';
+
+const Tone = require('tone');
 
 function mapStateToProps(reduxState) {
   return {
@@ -17,6 +24,7 @@ class FlatView extends Component {
     super(props);
     this.state = {
       pageNumber: 0,
+      staffNotes: [],
       inputAnswers: [],
       indexArray: [],
       correctnessArray: [],
@@ -26,6 +34,7 @@ class FlatView extends Component {
       doneClicked: false,
       complete: false,
       reload: false,
+      renderStaff: false,
     };
   }
 
@@ -44,6 +53,7 @@ class FlatView extends Component {
       console.log('page in flatView', page);
       if (this.state.firstTime && page !== null && page !== undefined) {
         this.initializeStateArrays(page);
+        this.prepStaffNotes();
       }
       if (this.state.reload && page !== null && page !== undefined) {
         console.log('updating for new page');
@@ -56,6 +66,35 @@ class FlatView extends Component {
         this.setState({ pageNumber: pageNum, reload: false });
         const { history } = this.props;
         this.props.getLesson(id, history, pageNum, true);
+      }
+    }
+
+    prepStaffNotes = () => {
+      let staffNotes = [];
+      const { pages } = this.props;
+      const page = pages[this.state.pageNumber];
+      if (page !== undefined && page !== null) {
+        // eslint-disable-next-line array-callback-return
+        page.activity.correct_answers.map((note) => {
+          const n = note.toUpperCase();
+          if (n === 'F' || n === 'G' || n === 'A' || n === 'B') {
+            if (page.activity.cleftype === 'treble') {
+              const staffNote = `${n}4/8`;
+              staffNotes = staffNotes.concat([staffNote]);
+            } else {
+              const staffNote = `${n}2/8`;
+              staffNotes = staffNotes.concat([staffNote]);
+            }
+          } else if (page.activity.cleftype === 'treble') {
+            const staffNote = `${n}5/8`;
+            staffNotes = staffNotes.concat([staffNote]);
+          } else {
+            const staffNote = `${n}3/8`;
+            staffNotes = staffNotes.concat([staffNote]);
+          }
+        });
+        this.setState({ staffNotes, renderStaff: true });
+        console.log('staff prepped: ', staffNotes);
       }
     }
 
@@ -129,7 +168,41 @@ class FlatView extends Component {
         doneClicked: false,
         complete: false,
         reload: true,
+        staffNotes: [],
       });
+      const staff = document.getElementById('flatScore');
+      while (staff.hasChildNodes()) {
+        staff.removeChild(staff.lastChild);
+      }
+    }
+
+    playNotes = async () => {
+      const { pages } = this.props;
+      const page = pages[this.state.pageNumber];
+      await Tone.start();
+      const synth = new Tone.Synth().toDestination();
+      const now = Tone.now();
+      const answerNotes = page.activity.correct_answers;
+      console.log(answerNotes);
+
+      for (let i = 0; i < answerNotes.length; i += 1) {
+        const diff = 0.5 * i;
+        const note = answerNotes[i].toUpperCase();
+        let newNote = null;
+        if (note === 'F' || note === 'G' || note === 'A' || note === 'B') {
+          if (page.activity.cleftype === 'treble') {
+            newNote = `${note}4`;
+          } else { // bass clef
+            newNote = `${note}2`;
+          }
+        } else if (page.activity.cleftype === 'treble') {
+          newNote = `${note}5`;
+        } else { // bass clef
+          newNote = `${note}3`;
+        }
+        console.log(newNote);
+        synth.triggerAttackRelease(newNote, '8n', now + diff);
+      }
     }
 
     render() {
@@ -146,7 +219,6 @@ class FlatView extends Component {
           </div>
         );
       }
-
       if (this.state.complete) {
         return (
           <div className="FlatView">
@@ -161,9 +233,9 @@ class FlatView extends Component {
         return (
           <div className="FlatView">
             <div className="activityInstructions">{page.activity.instructions}</div>
-            <iframe title="flat" className="flatApi" src={page.activity.flatUrl} frameBorder="0" allowFullScreen allow="midi">
-              <div className="error">If you&apos;re seeing this, turn off your ad-blocker!</div>
-            </iframe>
+            <div id="flatStaff">
+              <FlatStaff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" />
+            </div>
             <div className="flatAnswerBoxes">{
             this.state.indexArray.map((num) => {
               // console.log('a:', a);
@@ -193,7 +265,12 @@ class FlatView extends Component {
         return (
           <div className="FlatView">
             <div className="activityInstructions">{page.activity.instructions}</div>
-            <iframe title="flat" className="flatApi" src={page.activity.flatUrl} frameBorder="0" allowFullScreen allow="midi" />
+            <div className="recordButton">
+              <button type="button" className="button" id="playAudio" onClick={this.playNotes}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /> &nbsp; Play Audio</button>
+            </div>
+            <div id="flatStaff">
+              <FlatStaff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" />
+            </div>
             <div className="flatAnswerBoxes">{
               this.state.indexArray.map((num) => {
                 return (

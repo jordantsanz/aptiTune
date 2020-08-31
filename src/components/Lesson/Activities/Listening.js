@@ -176,7 +176,7 @@ class Listening extends Component {
                       console.log('success');
                       this.setState({ correctClicked: true });
                     } else {
-                      console.log('1 clicked -- Wrong answer dumbass');
+                      console.log('1 clicked -- Wrong answer');
                       this.setState({ correctClicked: false });
                     }
                   }}
@@ -196,7 +196,7 @@ class Listening extends Component {
                       console.log('success');
                       this.setState({ correctClicked: true });
                     } else {
-                      console.log('1 clicked -- Wrong answer dumbass');
+                      console.log('1 clicked -- Wrong answer');
                       this.setState({ correctClicked: false });
                     }
                   }}
@@ -216,7 +216,7 @@ class Listening extends Component {
                       console.log('success');
                       this.setState({ correctClicked: true });
                     } else {
-                      console.log('1 clicked -- Wrong answer dumbass');
+                      console.log('1 clicked -- Wrong answer');
                       this.setState({ correctClicked: false });
                     }
                   }}
@@ -247,7 +247,7 @@ class Listening extends Component {
                       console.log('success');
                       this.setState({ correctClicked: true });
                     } else {
-                      console.log('1 clicked -- Wrong answer dumbass');
+                      console.log('1 clicked -- Wrong answer');
                       this.setState({ correctClicked: false });
                     }
                   }}
@@ -267,7 +267,7 @@ class Listening extends Component {
                       console.log('success');
                       this.setState({ correctClicked: true });
                     } else {
-                      console.log('1 clicked -- Wrong answer dumbass');
+                      console.log('1 clicked -- Wrong answer');
                       this.setState({ correctClicked: false });
                     }
                   }}
@@ -287,7 +287,7 @@ class Listening extends Component {
                       console.log('success');
                       this.setState({ correctClicked: true });
                     } else {
-                      console.log('1 clicked -- Wrong answer dumbass');
+                      console.log('1 clicked -- Wrong answer');
                       this.setState({ correctClicked: false });
                     }
                   }}
@@ -307,7 +307,7 @@ class Listening extends Component {
                       console.log('success');
                       this.setState({ correctClicked: true });
                     } else {
-                      console.log('1 clicked -- Wrong answer dumbass');
+                      console.log('1 clicked -- Wrong answer');
                       this.setState({ correctClicked: false });
                     }
                   }}
