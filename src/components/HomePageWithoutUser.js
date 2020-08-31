@@ -320,7 +320,6 @@ class HomePageWithoutUser extends Component {
                 <div className="log-in">Log in here </div>
               </NavLink>
             </div>
-            {/* <button onClick={this.checkInputs} type="submit" className="button" id="createaccountbutton">Create Account</button> */}
             <div className="button">{this.buttonText()}</div>
           </div>
 
