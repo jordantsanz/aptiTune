@@ -36,7 +36,7 @@ class FlatStaff extends Component {
       this.setFirstRenderToFalse();
       return (
         <div>
-          {drawStaff('treble', this.props.answer, this.props.id)}
+          {drawStaff(this.props.cleftype, this.props.answer, this.props.id)}
         </div>
       );
     } else {

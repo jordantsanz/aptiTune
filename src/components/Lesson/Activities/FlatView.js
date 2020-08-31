@@ -73,10 +73,18 @@ class FlatView extends Component {
         page.activity.correct_answers.map((note) => {
           const n = note.toUpperCase();
           if (n === 'F' || n === 'G' || n === 'A' || n === 'B') {
-            const staffNote = `${n}4/8`;
+            if (page.activity.cleftype === 'treble') {
+              const staffNote = `${n}4/8`;
+              staffNotes = staffNotes.concat([staffNote]);
+            } else {
+              const staffNote = `${n}2/8`;
+              staffNotes = staffNotes.concat([staffNote]);
+            }
+          } else if (page.activity.cleftype === 'treble') {
+            const staffNote = `${n}5/8`;
             staffNotes = staffNotes.concat([staffNote]);
           } else {
-            const staffNote = `${n}5/8`;
+            const staffNote = `${n}3/8`;
             staffNotes = staffNotes.concat([staffNote]);
           }
         });
@@ -192,7 +200,7 @@ class FlatView extends Component {
           <div className="FlatView">
             <div className="activityInstructions">{page.activity.instructions}</div>
             <div id="flatStaff">
-              <FlatStaff answer={this.state.staffNotes} id="flatStaff" />
+              <FlatStaff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" />
             </div>
             <div className="flatAnswerBoxes">{
             this.state.indexArray.map((num) => {
@@ -224,7 +232,7 @@ class FlatView extends Component {
           <div className="FlatView">
             <div className="activityInstructions">{page.activity.instructions}</div>
             <div id="flatStaff">
-              <FlatStaff answer={this.state.staffNotes} id="flatStaff" />
+              <FlatStaff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" />
             </div>
             <div className="flatAnswerBoxes">{
               this.state.indexArray.map((num) => {
