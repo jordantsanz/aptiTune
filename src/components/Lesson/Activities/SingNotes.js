@@ -288,7 +288,7 @@ class SingNotes extends Component {
     } else {
       return (
         <div className="finishedMessage">
-          Please refresh the page!!
+          Please refresh the page!
         </div>
       );
     }

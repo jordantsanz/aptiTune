@@ -41,7 +41,21 @@ a:hover{
     flex-direction: column;
     justify-content: center;
     width: 108vw;
-    height: 500vh;
+    height: 446vh;
+    background-size: cover;
+    position: absolute;
+    top: -3vh;
+    left: -.85vw;
+    background-color: white;
+    overflow-y: hidden;
+}
+
+.inner-background-homepage-without-user{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 108vw;
+    height: 543vh;
     background-size: cover;
     position: absolute;
     top: -3vh;
@@ -754,11 +768,11 @@ margin-top: 2vh;
 transition: 200ms ease all;
 }
 
-.badge-div:hover, .badge-trophy:hover{
+.badge-div:hover, .badge-trophy:hover, .badge-render-homepage:hover{
     background:#fce1e1;
 }
 
-.badge-div:hover .badge-title, .badge-trophy:hover .badge-title{
+.badge-div:hover .badge-title, .badge-render-homepage .badge-title, .badge-trophy:hover .badge-title{
     color: $blue;
 }
 
@@ -773,6 +787,9 @@ transition: 200ms ease all;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: #FAE5E5;
+border-radius: 36px;
+margin-top: 2vh;
 }
 
 .badge-title{
@@ -787,6 +804,23 @@ text-align: center;
 letter-spacing: 0.05em;
 
 color: #919191;
+}
+
+.badge-title-nobadgesyet{
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 137.88%;
+    /* or 34px */
+    
+    text-align: center;
+    letter-spacing: 0.05em;
+    
+    color: #919191;
+    position: absolute;
+    left: 5vw;
+    top: 6vh;
 }
 
 /************************* lesson list ***********************/
@@ -1750,12 +1784,12 @@ color: #114353;
     font-family: Ubuntu;
     font-style: normal;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 19px;
     line-height: 137.88%;
     /* identical to box height, or 69px */
     
     display: flex;
-    width: 70%;
+    width: 40%;
     align-items: center;
     text-align: center;
     letter-spacing: 0.015em;
@@ -1887,6 +1921,8 @@ align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    margin-left: 7vw;
 }
 
 #message, #outcome {
@@ -1981,6 +2017,20 @@ color: #F18080;
     color: $orange;
     font-size: 32px;
 
+}
+
+.doughnut-title-new-nodata{
+    color: $blue;
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 26px;
+    text-align: center;
+    height: 5vh;
+    position: absolute;
+    top: 80vh;
+    left: 17.8vw;
 }
 
 #badges-title-profile {
@@ -2677,6 +2727,7 @@ text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 
 .finished-lesson-description{

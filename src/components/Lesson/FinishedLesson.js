@@ -119,7 +119,7 @@ class FinishedLesson extends Component {
       if (this.props.currentUser.badges.length === 1 && this.props.currentUser.badges[0].iconUrl === '') {
         console.log('giving user badge!');
         this.setState({ earnedBadge: true });
-        badges = [this.props.lesson.badge];
+        badges = this.props.currentUser.badges.concat(this.props.lesson.badge); // need to do this so homepage calculates correctly?
         this.props.updateUserInfo({
           badges,
         });
@@ -131,7 +131,7 @@ class FinishedLesson extends Component {
             console.log('badge is a repeat');
           }
         });
-        if (isUnique && this.state.finishedQuiz) {
+        if (isUnique && (this.props.lesson.lesson_type !== 'quiz' || this.state.finishedQuiz)) { // put this in so that you get a badge for other lessons
           console.log('giving user badge');
           badges = this.props.currentUser.badges.concat(this.props.lesson.badge);
           this.props.updateUserInfo({
