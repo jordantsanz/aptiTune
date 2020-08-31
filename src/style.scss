@@ -1961,9 +1961,8 @@ align-items: center;
 }
 
 .arrow-button-background-right{
-    left: 64vw;
-    top: 28vh;
-    position: absolute;
+    display: flex;
+    align-items: center;
     width: 6vw !important;
     height: 6vh !important;
     color: #F18080;
