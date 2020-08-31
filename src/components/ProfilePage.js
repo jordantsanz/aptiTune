@@ -13,8 +13,11 @@ import {
   faPen, faCheck, faArrowCircleLeft, faArrowCircleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { Doughnut } from 'react-chartjs-2';
-import { updateUserInfo, getUserInfo } from '../actions/index';
+import {
+  updateUserInfo, getUserInfo, setError, hideError,
+} from '../actions/index';
 import NavBar from './NavBar';
+import ErrorNotification from './errorMessage';
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -87,7 +90,7 @@ iconRender = () => {
   if (this.state.icon === 2) {
     return (
       <div className="icon-div">
-        <img className="user" id="user-icon" alt="user-icon" src="https://aptitune.s3.amazonaws.com/half+note.png" />
+        <img className="user" id="user-icon" alt="user-icon" src="https://aptitune.s3.amazonaws.com/half+note.png" width="163.74px" height="248.22px" />
       </div>
     );
   }
@@ -98,6 +101,35 @@ iconRender = () => {
         <img className="user" id="user-icon" alt="user-icon" src="https://aptitune.s3.amazonaws.com/whole+note.png" />
       </div>
     );
+  }
+}
+
+checkUserNameInput = () => {
+  const attemptedUsername = document.getElementById('change-username').value;
+  const usernameLength = attemptedUsername.length;
+  let isValid = true;
+  if (usernameLength === 0) {
+    this.props.setError(1002);
+    isValid = false;
+  }
+  if (usernameLength < 4) {
+    this.props.setError(1001);
+    isValid = false;
+  }
+  if (usernameLength > 10) {
+    this.props.setError(1000);
+    isValid = false;
+  }
+  console.log('is valid', isValid);
+  if (isValid) {
+    if (this.props.error.open === true) {
+      this.props.hideError();
+    }
+    this.setState({
+      isEditing: false,
+    });
+    this.props.updateUserInfo({ username: document.getElementById('change-username').value });
+    this.props.getUserInfo();
   }
 }
 
@@ -113,16 +145,6 @@ closeModal = () => {
     this.setState({
       isEditing: true,
     });
-  }
-
-  stopEditing = () => {
-    // this.props.update
-    this.setState({
-      isEditing: false,
-    });
-    console.log('new username being sent: ', document.getElementById('change-username').value);
-    this.props.updateUserInfo({ username: document.getElementById('change-username').value });
-    this.props.getUserInfo();
   }
 
   onInputChange = (event) => {
@@ -160,16 +182,15 @@ closeModal = () => {
       this.setState({
         passwordResetStatus: 'newAndRetype',
       });
-    } else { // some function call here to reset password...not sure how to do this in backend
     }
   }
 
   makeTotalDoughnut = () => {
-    // const totals = [];
-    // for (let index = 0; index < 4; index++) {
-    //   totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
-    // }
-    const labelset = ['Fill-in-the-Blank',
+    const totals = [];
+    for (let index = 0; index < 4; index++) {
+      totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
+    }
+    const labelset = ['Sightreading',
       'Listening',
       'Rhythm',
       'Singing',
@@ -177,7 +198,7 @@ closeModal = () => {
     const data = {
       labels: labelset,
       datasets: [{
-        data: [2, 3, 4, 5],
+        data: totals,
         backgroundColor: [
           '#FD966A',
           '#FBBE49',
@@ -196,7 +217,7 @@ closeModal = () => {
     const data2 = {
       labels: labelset,
       datasets: [{
-        data: [2, 3, 4, 5],
+        data: this.props.currentUser.questionsCorrect,
         backgroundColor: [
           '#FD966A',
           '#FBBE49',
@@ -214,21 +235,32 @@ closeModal = () => {
 
     return (
       <div className="doughnuts">
+
         <div className="doughnut-holder">
-          <Doughnut className="questionscorrect"
-            data={data2}
-            width={300}
-            height={150}
-            options={{ maintainAspectRatio: false }}
-          />
+          <div className="doughnut-title-holder">
+            <h1 className="doughnut-title-new"> Questions correct: </h1>
+          </div>
+          <div className="doughnut-div-holder">
+            <Doughnut className="questionscorrect"
+              data={data2}
+              width={600}
+              height={300}
+              options={{ maintainAspectRatio: false }}
+            />
+          </div>
         </div>
         <div className="doughnut-holder">
-          <Doughnut className="totalquestions"
-            data={data}
-            width={300}
-            height={150}
-            options={{ maintainAspectRatio: false }}
-          />
+          <div className="doughnut-title-holder">
+            <h1 className="doughnut-title-new"> Questions answered: </h1>
+          </div>
+          <div className="doughnut-div-holder">
+            <Doughnut className="questionsanswered"
+              data={data}
+              width={600}
+              height={300}
+              options={{ maintainAspectRatio: false }}
+            />
+          </div>
         </div>
       </div>
 
@@ -251,23 +283,60 @@ closeModal = () => {
     switch (maxIndex) {
       case 0:
         return (
-          <div className="strength">Your strength is: Fill-in-the-Blank!</div>
+          <div className="strength">Your strength is Sightreading! Awesome!</div>
         );
       case 1:
         return (
-          <div className="strength">Your strength is: Listening!</div>
+          <div className="strength">Your strength is Listening! Awesome!</div>
         );
       case 2:
         return (
-          <div className="strength">Your strength is: Rhythm!</div>
+          <div className="strength">Your strength is Rhythm! Awesome!</div>
         );
       case 3:
         return (
-          <div className="strength">Your strength is: Singing!</div>
+          <div className="strength">Your strength is Pitch-matching! Awesome!</div>
         );
       default:
         return (
-          <div className="strength">Collect some more data to find your strength!</div>
+          <div className="strength">Practice more to find out your strengths!</div>
+        );
+    }
+  }
+
+  weaknessFinder = () => {
+    const averages = [];
+    for (let index = 0; index < 4; index++) {
+      averages[index] = this.props.currentUser.questionsCorrect[index] / (this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index]);
+    }
+    let min = averages[0];
+    let minIndex = 0;
+    for (let index2 = 0; index2 < 4; index2++) {
+      if (averages[index2] < min) {
+        min = averages[index2];
+        minIndex = index2;
+      }
+    }
+    switch (minIndex) {
+      case 0:
+        return (
+          <div className="weakness">Try practicing with Sightreading.</div>
+        );
+      case 1:
+        return (
+          <div className="weakness">Try practicing with Listening. </div>
+        );
+      case 2:
+        return (
+          <div className="weakness">Try practicing with Rhythm.  </div>
+        );
+      case 3:
+        return (
+          <div className="weakness">Try practicing with Pitch-matching. </div>
+        );
+      default:
+        return (
+          <div className="weakness" />
         );
     }
   }
@@ -277,7 +346,7 @@ closeModal = () => {
       return (
         <div className="user-name-container-inner">
           <input className="display-name-input" id="change-username" type="input" onChange={this.onInputChange} placeholder="new username" />
-          <button type="button" className="icon-holder" id="done-edit-username" onClick={this.stopEditing}>
+          <button type="button" className="icon-holder" id="done-edit-username" onClick={this.checkUserNameInput}>
             <FontAwesomeIcon icon={faCheck} className="icon" id="editing-icon" alt="check-icon" />
           </button>
         </div>
@@ -288,11 +357,7 @@ closeModal = () => {
           <div className="user-name-display" id="profile-page-username">{this.props.currentUser.username}</div>
           <button type="button" className="icon-holder" id="edit-username" onClick={this.startEditing}>
             <FontAwesomeIcon icon={faPen} className="icon" id="check-icon" alt="pen-icon" />
-
-            {/* <i className="fal fa-pencil" /> */}
-
-            {/* <div className="icon" id="pencil" /> */}
-          </button> {/* click on to edit display name */}
+          </button>
         </div>
       );
     }
@@ -312,6 +377,7 @@ closeModal = () => {
     };
     return (
       <div className="profile-page-container">
+        <ErrorNotification />
         <NavBar />
         <div className="profile-page-content">
           <div className="profile-page-user-display">
@@ -328,10 +394,11 @@ closeModal = () => {
             <div className="title" id="stats-title">Your Stats</div>
             <div className="stats-graphs">
               <div className="questions-correct-title">
-                <h1 className="Questions correct">Questions answered: </h1>
                 <div className="doughnut">{this.makeTotalDoughnut()} </div>
               </div>
             </div>
+            <div className="strength-holder">{this.strengthFinder()} </div>
+            <div className="weakness-holder">{this.weaknessFinder()} </div>
           </div>
           <div className="profile-page-badges-section">
             <div className="title" id="badges-title-profile">Your Badges </div>
@@ -342,12 +409,12 @@ closeModal = () => {
                   console.log('rendering: No badges yet!');
                   return (
                     <div id={badge.iconUrl}>
-                      <div className="badge-title">{badge.name}</div>
+                      <div className="badge-title" key={badge.name}>{badge.name}</div>
                     </div>
                   );
                 } else if (badge.iconUrl !== '') {
                   return (
-                    <div>
+                    <div className="badge-trophy">
                       <div id={badge.iconUrl} className="badge-title">{badge.name}</div>
                       <img className="badge-image" src={badge.iconUrl} alt="badge-icon" />
                     </div>
@@ -356,33 +423,13 @@ closeModal = () => {
               })}
             </div>
           </div>
-          <div className="profile-page-user-settings">
-            <div className="title" id="user-settings-title">Change Password</div>
-            <div className="settings-content">
-              <div className="settings-current-container">
-                <div className="subtitle" id="settings-current-title">current</div>
-                <input className="input" id="current-password-input" onChange={this.onInputChangeCurrentPassword} placeholder="current password" />
-              </div>
-              <div className="settings-new-continer">
-                <div className="subtitle" id="settings-new-title">new</div>
-                <input className="input" id="new-password-input" onChange={this.onInputChangeNewPassword} placeholder="new password" />
-              </div>
-              <div className="settings-retype-new-container">
-                <div className="subtitle" id="settings-retype-new-title">re-type new</div>
-                <input className="input" id="retype-new-password-input" onChange={this.onInputChangeRetypePassword} placeholder="re-type new password" />
-              </div>
-            </div>
-            <div className="settings-buttons">
-              <button className="button" id="change-password" type="button" onClick={this.changePasswordSubmit}>Change Password</button>
-              <button className="button" id="cancel" type="button">Cancel</button>
-            </div>
-          </div>
-          <div className="delete-profile-container">
+          {/* <div className="delete-profile-container">
             <div className="title" id="user-settings-title-delete">Delete Account</div>
             <div className="subtitle" id="delete-user-subtitle">
               Are you sure you want to delete your account?
               You will not be able log in or restore your account or the data you stored with us.
             </div>
+          </div>
             <div className="delete-modal">
               <button className="button" id="delete-user" type="button" onClick={this.openModal}>Yes, I’m breaking up with you</button>
               <Modal
@@ -390,7 +437,6 @@ closeModal = () => {
                 onRequestClose={this.closeModal}
                 style={customStyles}
               >
-                {/* <button type="button" onClick={this.closeModal}>close</button> */}
                 <div id="delete-user-modal" className="modal">
                   <div className="modal-content">
                     <div className="modal-content-detail">
@@ -418,7 +464,7 @@ closeModal = () => {
                 </div>
               </Modal>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );
@@ -428,7 +474,10 @@ closeModal = () => {
 function mapStateToProps(reduxState) {
   return {
     currentUser: reduxState.user,
+    error: reduxState.error,
   };
 }
 
-export default connect(mapStateToProps, { updateUserInfo, getUserInfo })(ProfilePage);
+export default connect(mapStateToProps, {
+  updateUserInfo, getUserInfo, setError, hideError,
+})(ProfilePage);
