@@ -74,28 +74,30 @@ class RhythmSensor extends Component {
     }
 
     playAnswer = () => {
-      const ans = this.makeCorrectnessArray();
-      this.setState({ playingAnswer: true });
-      console.log('Playing answer');
-      console.log('Ans: ', ans);
-      const playCount = ans.length;
-      this.playMetronomeClick(ans.length - 1, false);
-      let index = 0;
-      // this.playMetronomeClick(this.state.page.activity.rhythmPattern.length - 1);
-      while (index < playCount) {
-        const interval = ans[index];
-        setTimeout(() => {
+      console.log('Playanswer called with this.state.playAnswer', this.state.playAnswer);
+      if (!this.state.playingAnswer) {
+        const ans = this.makeCorrectnessArray();
+        this.setState({ playingAnswer: true });
+        console.log('Playing answer');
+        console.log('Ans: ', ans);
+        const playCount = ans.length;
+        this.playMetronomeClick(ans.length - 1, false);
+        let index = 0;
+        // this.playMetronomeClick(this.state.page.activity.rhythmPattern.length - 1);
+        while (index < playCount) {
+          const interval = ans[index];
+          setTimeout(() => {
           // this.state.tapAudio.pause();
-          this.state.tapAudio.play();
-          console.log('running loop ', index, 'with interval', interval);
-          if (interval === ans[ans.length - 1]) {
-            this.hideProgress();
-          }
-        }, interval);
-        index += 1;
+            this.state.tapAudio.play();
+            console.log('running loop ', index, 'with interval', interval);
+            if (interval === ans[ans.length - 1]) {
+              this.hideProgress();
+            }
+          }, interval);
+          index += 1;
+        }
+        console.log('exiting loop');
       }
-      console.log('exiting loop');
-      this.setState({ playAnswer: false });
     }
 
     playMetronomeClick = (number, userAttempt) => {
@@ -113,7 +115,7 @@ class RhythmSensor extends Component {
           this.state.metronomeAudio.pause();
           this.state.metronomeAudio.play();
           const d = new Date();
-          console.log('playing metronome at ', d.getTime() - parseInt(this.state.seedTime, 10));
+          // console.log('playing metronome at ', d.getTime() - parseInt(this.state.seedTime, 10));
           i += 1;
           if (i < 5 && userAttempt) {
             this.setState({ buttonColor: 'red', countDownNumber: 5 - i });
@@ -144,7 +146,8 @@ class RhythmSensor extends Component {
       console.log('handleKeyPress called');
       const d = new Date();
       const t = d.getTime();
-      if (!this.state.firstClick && !this.state.playAnswer) {
+      // if (!this.state.firstClick && !this.state.playAnswer) {
+      if (this.state.beginTapping) {
         this.state.tapAudio.pause();
         this.state.tapAudio.play();
         const relTime = t - this.state.seedTime;
@@ -250,6 +253,7 @@ class RhythmSensor extends Component {
       const elem = document.getElementById('myBar');
       elem.style.width = '0%';
       console.log('progress hidden');
+      this.setState({ playingAnswer: false });
     }
 
     initiateProgress = () => {
