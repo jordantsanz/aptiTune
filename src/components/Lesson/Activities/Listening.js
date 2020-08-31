@@ -161,7 +161,7 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  <ListeningAnswer answer={page.activity.answers[0]} id="choiceButton1" />
+                  <ListeningAnswer cleftype={page.activity.cleftype} answer={page.activity.answers[0]} id="choiceButton1" />
                 </button>
               </li>
               <li>
@@ -181,7 +181,7 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  <ListeningAnswer answer={page.activity.answers[1]} id="choiceButton2" />
+                  <ListeningAnswer cleftype={page.activity.cleftype} answer={page.activity.answers[1]} id="choiceButton2" />
                 </button>
               </li>
               <li>
@@ -201,7 +201,7 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  <ListeningAnswer answer={page.activity.answers[2]} id="choiceButton3" />
+                  <ListeningAnswer cleftype={page.activity.cleftype} answer={page.activity.answers[2]} id="choiceButton3" />
                 </button>
               </li>
               <li>
@@ -221,7 +221,7 @@ class Listening extends Component {
                     }
                   }}
                 >
-                  <ListeningAnswer answer={page.activity.answers[3]} id="choiceButton4" />
+                  <ListeningAnswer cleftype={page.activity.cleftype} answer={page.activity.answers[3]} id="choiceButton4" />
                 </button>
               </li>
             </ul>
