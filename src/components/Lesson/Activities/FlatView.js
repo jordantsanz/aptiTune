@@ -3,10 +3,15 @@
 /* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPlay,
+} from '@fortawesome/free-solid-svg-icons';
 import { getLesson } from '../../../actions/index';
-import drawStaff from '../../DrawStaff';
 import FlatStaff from './FlatStaff';
+
+const Tone = require('tone');
 
 function mapStateToProps(reduxState) {
   return {
@@ -171,6 +176,35 @@ class FlatView extends Component {
       }
     }
 
+    playNotes = async () => {
+      const { pages } = this.props;
+      const page = pages[this.state.pageNumber];
+      await Tone.start();
+      const synth = new Tone.Synth().toDestination();
+      const now = Tone.now();
+      const answerNotes = page.activity.correct_answers;
+      console.log(answerNotes);
+
+      for (let i = 0; i < answerNotes.length; i += 1) {
+        const diff = 0.5 * i;
+        const note = answerNotes[i].toUpperCase();
+        let newNote = null;
+        if (note === 'F' || note === 'G' || note === 'A' || note === 'B') {
+          if (page.activity.cleftype === 'treble') {
+            newNote = `${note}4`;
+          } else { // bass clef
+            newNote = `${note}2`;
+          }
+        } else if (page.activity.cleftype === 'treble') {
+          newNote = `${note}5`;
+        } else { // bass clef
+          newNote = `${note}3`;
+        }
+        console.log(newNote);
+        synth.triggerAttackRelease(newNote, '8n', now + diff);
+      }
+    }
+
     render() {
       // add page for rendering
       console.log('pages:', this.props.pages);
@@ -231,6 +265,9 @@ class FlatView extends Component {
         return (
           <div className="FlatView">
             <div className="activityInstructions">{page.activity.instructions}</div>
+            <div className="recordButton">
+              <button type="button" className="button" id="playAudio" onClick={this.playNotes}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /> &nbsp; Play Audio</button>
+            </div>
             <div id="flatStaff">
               <FlatStaff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" />
             </div>
