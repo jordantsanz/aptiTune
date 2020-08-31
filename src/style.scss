@@ -667,6 +667,7 @@ line-height: 160%;
 /* or 40px */
 
 text-align: center;
+margin-bottom: 20px;
 
 color: #FFFFFF;
 transition: 200ms ease all;
@@ -702,6 +703,8 @@ transition: 200ms ease all;
 .linktomainpage {
     font-size: 22px;
     color: white;
+    display: flex;
+    flex-direction: row;
 }
 
 
@@ -712,7 +715,8 @@ transition: 200ms ease all;
     font-weight: bold;
     font-size: 22px;
     color: #114353;
-    margin-top: 5px;
+    margin-left: 13px;
+    margin-bottom: -20px;
 }
 
 .sign-up-link:hover {
@@ -1035,8 +1039,9 @@ color: #F18080;
 .returnemailinput, .returnpasswordinput{
     width: 57vw;
     height: 12vh;
+
     
-font-family: Montserrat;
+    font-family: Montserrat;
 font-style: normal;
 font-weight: normal;
 font-size: 20px;
@@ -1108,6 +1113,21 @@ color: #FFFFFF;
     align-items: center;
 }
 
+#logo-icon {
+    margin-left: 7px;
+}
+@media only screen and (max-width: 1200px){
+    #logo-icon {
+        width: 75px;
+        height: 36px;
+    }
+}
+@media only screen and (max-width: 900px){
+    #logo-icon {
+        width: 61px;
+        height: 31px;
+    }
+}
 .icon{
     width: 39px !important;
     height: 39px !important;
@@ -1749,6 +1769,27 @@ iframe{
     }
 }
 
+#playAudio {
+    position: relative;
+    background: #FBBE49;
+    box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.25);
+    border-radius: 34px;
+    border: none;
+    color: #114353;
+    width: 25.2vw;
+    height: 10.5vh;
+    font-family: Montserrat;
+    font-style: normal;
+    margin-top: 3vh;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 200ms ease all;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .incorrectMessage{
     color: red;
     text-align: center;
@@ -1917,6 +1958,8 @@ align-items: center;
 .recordButton {
     display: flex;
     justify-content: center;
+    align-content: center;
+    text-align: center;
 }
 
 #sheetmusic, #yournotes {
@@ -2031,6 +2074,7 @@ color: #F18080;
     text-align: center;
     height: 5vh;
     position: absolute;
+    color: #919191;
     top: 80vh;
     left: 17.8vw;
 }
@@ -2058,7 +2102,7 @@ color: #F18080;
 .arrow-button-background-right{
     left: 59vw;
     top: 28vh;
-    margin-left: 5vw;
+    margin-left: 8vw;
     position: absolute;
     width: 6vw !important;
     height: 6vh !important;
@@ -2099,6 +2143,7 @@ color: #F18080;
     width: 70%;
     position: absolute;
     top: 180vh;
+    font-family: Montserrat;
     display: flex;
     flex-wrap: wrap;
 }
