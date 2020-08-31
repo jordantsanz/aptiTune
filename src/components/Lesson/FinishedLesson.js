@@ -95,7 +95,7 @@ class FinishedLesson extends Component {
     correct[1] = this.props.currentUser.questionsCorrect[1] + (this.state.listeningCount - this.state.listeningErrors);
     incorrect[1] = this.props.currentUser.questionsIncorrect[1] + this.state.listeningErrors;
 
-    // 2 index: listening
+    // 2 index: rhythm
     correct[2] = this.props.currentUser.questionsCorrect[2] + (this.state.rhythmCount - this.state.rhythmErrors);
     incorrect[2] = this.props.currentUser.questionsIncorrect[2] + this.state.rhythmErrors;
 

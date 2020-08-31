@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-plusplus */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable max-len */
@@ -10,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPen, faCheck, faArrowCircleLeft, faArrowCircleRight,
 } from '@fortawesome/free-solid-svg-icons';
+import { Doughnut } from 'react-chartjs-2';
 import { updateUserInfo, getUserInfo } from '../actions/index';
 import NavBar from './NavBar';
 
@@ -165,6 +168,123 @@ closeModal = () => {
     }
   }
 
+  // findData = () => {
+  //   const totals = [];
+  //   for (let index = 0; index < 4; index++) {
+  //     totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
+  //   }
+
+  //   return totals;
+  // }
+
+  makeTotalDoughnut = () => {
+    // const totals = [];
+    // for (let index = 0; index < 4; index++) {
+    //   totals[index] = this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index];
+    // }
+    const labelset = ['Fill-in-the-Blank',
+      'Listening',
+      'Rhythm',
+      'Singing',
+    ];
+    const data = {
+      labels: labelset,
+      datasets: [{
+        data: [2, 3, 4, 5],
+        backgroundColor: [
+          '#FD966A',
+          '#FBBE49',
+          '#114353',
+          '#F18080',
+        ],
+        hoverBackgroundColor: [
+          '#f7a785',
+          '#fac86b',
+          '#1b5d74',
+          '#ee9b9b',
+        ],
+      }],
+    };
+
+    const data2 = {
+      labels: labelset,
+      datasets: [{
+        data: [2, 3, 4, 5],
+        backgroundColor: [
+          '#FD966A',
+          '#FBBE49',
+          '#114353',
+          '#F18080',
+        ],
+        hoverBackgroundColor: [
+          '#f7a785',
+          '#fac86b',
+          '#1b5d74',
+          '#ee9b9b',
+        ],
+      }],
+    };
+
+    return (
+      <div className="doughnuts">
+        <div className="doughnut-holder">
+          <Doughnut className="questionscorrect"
+            data={data2}
+            width={300}
+            height={150}
+            options={{ maintainAspectRatio: false }}
+          />
+        </div>
+        <div className="doughnut-holder">
+          <Doughnut className="totalquestions"
+            data={data}
+            width={300}
+            height={150}
+            options={{ maintainAspectRatio: false }}
+          />
+        </div>
+      </div>
+
+    );
+  }
+
+  strengthFinder = () => {
+    const averages = [];
+    for (let index = 0; index < 4; index++) {
+      averages[index] = this.props.currentUser.questionsCorrect[index] / (this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index]);
+    }
+    let max = averages[0];
+    let maxIndex = 0;
+    for (let index2 = 0; index2 < 4; index2++) {
+      if (averages[index2] > max) {
+        max = averages[index2];
+        maxIndex = index2;
+      }
+    }
+    switch (maxIndex) {
+      case 0:
+        return (
+          <div className="strength">Your strength is: Fill-in-the-Blank!</div>
+        );
+      case 1:
+        return (
+          <div className="strength">Your strength is: Listening!</div>
+        );
+      case 2:
+        return (
+          <div className="strength">Your strength is: Rhythm!</div>
+        );
+      case 3:
+        return (
+          <div className="strength">Your strength is: Singing!</div>
+        );
+      default:
+        return (
+          <div className="strength">Collect some more data to find your strength!</div>
+        );
+    }
+  }
+
   renderEdits() {
     if (this.state.isEditing) {
       return (
@@ -218,8 +338,13 @@ closeModal = () => {
             <div className="user-name-container">{this.renderEdits()}</div>
           </div>
           <div className="profile-page-user-stats">
-            <div className="title" id="stats-title">User Stats</div>
-            <div className="stats-graphs" />
+            <div className="title" id="stats-title">Your Stats</div>
+            <div className="stats-graphs">
+              <div className="questions-correct-title">
+                <h1 className="Questions correct">Questions answered: </h1>
+                <div className="doughnut">{this.makeTotalDoughnut()} </div>
+              </div>
+            </div>
           </div>
           <div className="profile-page-badges-section">
             <div className="title" id="badges-title-profile">Your Badges </div>

@@ -3,6 +3,11 @@ $yellow: #FBBE49;
 $blue: #114353;
 $pink: #F18080;
 
+$orangehover:#f7a785; 
+$yellowhover: #fac86b;
+$bluehover: #1b5d74;
+$pinkhover: #ee9b9b;
+
 html, body{
     box-sizing: border-box;
     margin: 0px;
@@ -1298,6 +1303,9 @@ color: #2D2D2D;
     margin-left: 12.5vw;
     width: 70%;
 }
+#logo-icon{
+    margin-left: 7px;
+}
 
 .page-top-nav{
     position: center;
@@ -1464,7 +1472,6 @@ transition: 200ms ease all;
     top: 0;
     width: 100%;
     height: 300%;
-    position: absolute;
 }
 
 .icon-div{
@@ -1478,6 +1485,7 @@ transition: 200ms ease all;
 
 .profile-page-user-display{
     display: flex;
+    flex-direction: column;
     width: 100%;
     height: 70vh;
     align-items: center;
@@ -1518,6 +1526,18 @@ color: white;
 .nextButton:hover{
     background-color: #114353;
     color: white;
+}
+
+.doughnuts{
+    display: flex;
+    position: absolute;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.doughnut-holder{
+    margin-left: 3vw;
 }
 
 .doneButton{
@@ -1713,6 +1733,23 @@ margin-bottom: 7vh;
 color: #114353;
 }
 
+.activityInstructionsBelow{
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 137.88%;
+    /* identical to box height, or 69px */
+    
+    display: flex;
+    width: 70%;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.015em;
+    
+    color: #114353;
+}
+
 /******RhythmSensor*******/
 /**** modified from code found on w3schools.com ****/
 #progress {
@@ -1906,7 +1943,7 @@ font-size: 40px;
 line-height: 137.88%;
 /* or 55px */
 
-display: flex;
+
 align-items: center;
 
 color: #F18080;
@@ -1958,12 +1995,10 @@ color: #F18080;
 }
 
 .profile-page-user-settings{
-    position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 27vw;
     height: 6.1vh;
-    left: 35.7vw;
-    top: 210vh;
-
     align-items: center;
 }
 
@@ -2007,20 +2042,20 @@ color: #F18080;
     position: absolute;
     width: 378px;
     height: 55px;
-    left: -18.2vw;
-    top: 0px;
+    display: flex;
+    align-items: center;
 
-font-family: Montserrat;
-font-style: normal;
-font-weight: bold;
-font-size: 40px;
-line-height: 137.88%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 137.88%;
 /* or 40px */
 
-text-align: center;
+    text-align: center;
 
-color: #F18080;
-transition: 200ms ease all;
+    color: #F18080;
+    transition: 200ms ease all;
 }
 
 #stop-record:hover, #start-record:hover{
@@ -2531,6 +2566,7 @@ border-radius: 24px;
     background-image: url('https://aptitune.s3.amazonaws.com/loading.svg');
     height: 100%;
     width: 100%;
+    background-size: cover;
 }
 
 .finished-lesson-top-page{
@@ -2860,6 +2896,11 @@ top: 54vh;
 
 background: #F18080;
 border-radius: 40px;
+transition: 200ms ease all;
+}
+
+#edit-username:hover{
+    background: #ec6d6d;
 }
 
 #check-icon {
