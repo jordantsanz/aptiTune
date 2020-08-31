@@ -9,6 +9,8 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { getLesson } from '../../../actions/index';
 import ListeningAnswer from './ListeningAnswer';
 
+const Tone = require('tone');
+
 function mapStateToProps(reduxState) {
   return {
     pages: reduxState.lesson.pages,
@@ -88,6 +90,22 @@ class Listening extends Component {
       });
     }
 
+    playNotes = async () => {
+      const { pages } = this.props;
+      const page = pages[this.state.pageNumber];
+      await Tone.start();
+      const synth = new Tone.Synth().toDestination();
+      const now = Tone.now();
+      const correctIdx = parseInt(page.activity.correct_answer, 10) - 1;
+      const answerNotes = page.activity.answers[correctIdx];
+
+      for (let i = 0; i < answerNotes.length; i += 1) {
+        const diff = 0.5 * i;
+        const note = answerNotes[i];
+        synth.triggerAttackRelease(note, '4n', now + diff);
+      }
+    }
+
     render() {
       // add page for rendering
       const { pages } = this.props;
@@ -114,9 +132,12 @@ class Listening extends Component {
         return (
           <div className="Listening">
             <div className="activityInstructions">{page.activity.instructions}</div>
-            <div id="audio">
-              <audio src={page.activity.audioUrl} type="audio/m4a" title="audio-file" controls />
+            <div className="recordButton">
+              <button type="button" className="button" id="start-record" onClick={this.playNotes}>Play Audio</button>
             </div>
+            {/* <div id="audio">
+              <audio src={page.activity.audioUrl} type="audio/m4a" title="audio-file" controls />
+            </div> */}
             <div className="incorrectMessage">{this.state.message}</div>
             <ul className="listeningAnswers">
               <li>
