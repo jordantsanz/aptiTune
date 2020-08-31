@@ -667,6 +667,7 @@ line-height: 160%;
 /* or 40px */
 
 text-align: center;
+margin-bottom: 20px;
 
 color: #FFFFFF;
 transition: 200ms ease all;
@@ -702,6 +703,8 @@ transition: 200ms ease all;
 .linktomainpage {
     font-size: 22px;
     color: white;
+    display: flex;
+    flex-direction: row;
 }
 
 
@@ -712,7 +715,8 @@ transition: 200ms ease all;
     font-weight: bold;
     font-size: 22px;
     color: #114353;
-    margin-top: 5px;
+    margin-left: 13px;
+    margin-bottom: -20px;
 }
 
 .sign-up-link:hover {
@@ -1035,8 +1039,9 @@ color: #F18080;
 .returnemailinput, .returnpasswordinput{
     width: 57vw;
     height: 12vh;
+
     
-font-family: Montserrat;
+    font-family: Montserrat;
 font-style: normal;
 font-weight: normal;
 font-size: 20px;
