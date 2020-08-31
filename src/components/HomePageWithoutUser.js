@@ -23,6 +23,7 @@ class HomePageWithoutUser extends Component {
       password: '',
       username: '',
       invalidInput: false,
+      logging: false,
     };
     this.signupsection = React.createRef();
     this.voicetomusic = React.createRef();
@@ -59,6 +60,18 @@ class HomePageWithoutUser extends Component {
     } else {
       console.log(user);
       this.props.signupUser(user, this.props.history);
+    }
+  }
+
+  buttonText = () => {
+    if (this.state.logging && this.props.error.open === false) {
+      return (
+        <div className="loader" />
+      );
+    } else {
+      return (
+        <button onClick={this.checkInputs} type="submit" id="login-button"> Log-in </button>
+      );
     }
   }
 
@@ -124,6 +137,12 @@ class HomePageWithoutUser extends Component {
     return isValid;
   }
 
+  switchLogging = () => {
+    this.setState({
+      logging: false,
+    });
+  }
+
   checkPasswordInput = () => {
     const attemptedPassword = document.getElementById('password-signup').value;
     let isValid = true;
@@ -171,7 +190,7 @@ class HomePageWithoutUser extends Component {
   render() {
     return (
       <div className="background-homepage-without-user">
-        <ErrorNotification />
+        <ErrorNotification onClick={this.switchLogging} />
         <div className="homepage-without-user-flex">
           <div className="music-is-hard-section">
             <div className="music-is-hard"> Music is hard. </div>
