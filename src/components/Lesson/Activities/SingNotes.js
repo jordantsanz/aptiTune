@@ -1,3 +1,4 @@
+/* eslint-disable react/no-did-update-set-state */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-restricted-properties */
 /* eslint-disable react/sort-comp */
@@ -42,6 +43,7 @@ class SingNotes extends Component {
       answers: null,
       firstRender: true,
       page: null,
+      reload: false,
       recording: false,
       videos: [],
     };
@@ -71,8 +73,35 @@ class SingNotes extends Component {
     };
   }
 
+  componentDidUpdate() {
+    if (this.state.firstRender && !this.state.reload) {
+      this.firstRender(this.state.pageNumber);
+    }
+    if (this.state.reload) {
+      const id = localStorage.getItem('lesson');
+      const pageNum = localStorage.getItem('next');
+      console.log(pageNum);
+      this.setState({ pageNumber: pageNum, reload: false });
+      const { history } = this.props;
+      this.props.getLesson(id, history, false);
+      this.firstRender(pageNum);
+    }
+  }
+
   goToNext = () => {
     this.props.onSubmit();
+    this.setState({
+      pageNumber: 0,
+      firstRender: true,
+      page: null,
+      correct: false,
+      reload: true,
+    });
+    const staff = document.getElementById('sheetmusic');
+    console.log(staff);
+    while (staff.hasChildNodes()) {
+      staff.removeChild(staff.lastChild);
+    }
   }
 
   startRecording(e) {
@@ -239,21 +268,28 @@ class SingNotes extends Component {
       this.setState({ message: 'You sang more than 4 notes, try again! ' });
     }
 
+    if (!correct) {
+      this.setState({
+        correct: false,
+        reload: false,
+      });
+    }
+
     if (this.state.complete) {
       stream.getTracks() // get all tracks from the MediaStream
         .forEach((track) => track.stop());
-    } else if (this.props.lessonType === 'quiz') {
-      this.props.incrementErrorCount();
     }
   }
 
   firstRender = () => {
     const { pages } = this.props;
     const page = pages[this.state.pageNumber];
-    if (page !== null && page !== undefined && this.state.firstRender) {
+    const check = document.getElementById('sheetmusic');
+    if (check !== null && page !== null && page !== undefined && this.state.firstRender) {
       this.setState({ firstRender: false, page: this.props.pages[this.state.pageNumber] });
       drawStaff(page.activity.cleftype, page.activity.correct_answers, 'sheetmusic');
     }
+    return <div className="blank" />;
   }
 
   render() {
