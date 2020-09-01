@@ -51,8 +51,6 @@ class SingNotes extends Component {
     this.props.getLesson(id, history, false);
     console.log('Component mounted in SingNotes');
     stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
-    // show it to user
-    // this.video.srcObject = stream;
     // init recording
     this.mediaRecorder = new MediaRecorder(stream, {
       mimeType: videoType,
@@ -81,8 +79,6 @@ class SingNotes extends Component {
       this.firstRender(pageNum);
 
       stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
-      // show it to user
-      // this.video.srcObject = stream;
       // init recording
       this.mediaRecorder = new MediaRecorder(stream, {
         mimeType: videoType,
@@ -209,6 +205,7 @@ class SingNotes extends Component {
                   const halfStepsBelowMiddleC = Math.round(12.0 * Math.log2(testing[i] / c0));
                   const octave = Math.floor(halfStepsBelowMiddleC / 12.0);
                   const key = keys[Math.floor(halfStepsBelowMiddleC % 12)];
+
                   // if octave 2 or 3, add 2 to the octave
                   if (octave === 2 || octave === 3) {
                     if (testing[i] != null && octave <= 3 && octave != -Infinity && key != null) {
@@ -246,12 +243,17 @@ class SingNotes extends Component {
     let k = 0;
     const { pages } = this.props;
     const page = pages[this.state.pageNumber];
-    console.log(page.activity.correct_answers);
-    console.log(notes);
+
     while (j < page.activity.correct_answers.length) {
       if (page.activity.correct_answers[j] !== undefined && notes[k] !== undefined) {
         const correctNote = page.activity.correct_answers[j].slice(0, -3);
-        const userNote = notes[k].slice(0, -3);
+        let userNote = notes[k].slice(0, -3);
+
+        // we're nice and count sharps as correct
+        if (userNote.length === 2 && userNote[1] === '#') {
+          userNote = userNote.slice(0, -1);
+        }
+
         if (correctNote === userNote) {
           j += 1;
           k += 1;
@@ -264,8 +266,6 @@ class SingNotes extends Component {
         break;
       }
     }
-
-    console.log('notes:', notes);
 
     // Output error message if user's notes are incorrect, draw staff with their notes if 4
     // If user's notes are correct, mark level as complete
