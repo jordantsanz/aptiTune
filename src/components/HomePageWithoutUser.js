@@ -211,7 +211,7 @@ class HomePageWithoutUser extends Component {
                   {({ isVisible }) => (
                     <Spring delay={10} to={{ opacity: isVisible ? 1 : 0 }}>
                       {({ opacity }) => (
-                        <div style={{ ...empty, opacity }} className="title" id="voice-to-music-title">Voice-to-music writing</div>
+                        <div style={{ ...empty, opacity }} className="title" id="voice-to-music-title">Engaging Interactive Lessons</div>
                       )}
                     </Spring>
                   )}
@@ -221,9 +221,8 @@ class HomePageWithoutUser extends Component {
                     <Spring delay={100} to={{ opacity: isVisible ? 1 : 0 }}>
                       {({ opacity }) => (
 
-                        <div style={{ ...empty, opacity }} className="description" id="voice-to-music-description">AptiTune uses a <strong>live voice-to-sheet-music </strong>
-                          translator. Sing a note into your computer&apos;s
-                          microphone, and AptiTune writes the sheet music for you.
+                        <div style={{ ...empty, opacity }} className="description" id="voice-to-music-description">Learn rhythm and pitch through our  <strong>exciting interactive lessons, </strong>
+                          and check your progress real-time with <strong>personalized progress statistics.</strong>
                         </div>
                       )}
                     </Spring>
@@ -235,7 +234,7 @@ class HomePageWithoutUser extends Component {
                       {({ opacity }) => (
 
                         <div style={{ ...empty, opacity }} className="description" id="voice-to-music-bottom-description">
-                          You learn by creating. <strong>It&apos;s that simple.</strong>
+                          <strong>You&apos;ll be the next Taylor Swift in no time!</strong>
                         </div>
                       )}
                     </Spring>

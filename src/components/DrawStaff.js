@@ -21,7 +21,7 @@ const drawStaff = (clef, notes, divId) => {
     } else if (clef === 'bass') {
       system.addStave({
         voices: [
-          score.voice(score.notes(vexnotes, { clef: 'bass', stem: 'down' })),
+          score.voice(score.notes(vexnotes, { clef: 'bass', stem: 'up' })),
         ],
       }).addClef(clef).addTimeSignature('4/4');
     }
