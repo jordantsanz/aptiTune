@@ -41,7 +41,7 @@ a:hover{
     flex-direction: column;
     justify-content: center;
     width: 108vw;
-    height: 446vh;
+    height: 455vh;
     background-size: cover;
     position: absolute;
     top: -3vh;
@@ -670,7 +670,7 @@ line-height: 160%;
 /* or 40px */
 
 text-align: center;
-margin-bottom: 20px;
+margin-bottom: 3vh;
 
 color: #FFFFFF;
 transition: 200ms ease all;
@@ -684,6 +684,7 @@ transition: 200ms ease all;
     width: 5vw;
     height: 5vw;
     animation: spin 1s linear infinite;
+    margin-bottom: 3vh;
   }
   
   @keyframes spin {
