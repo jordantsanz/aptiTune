@@ -242,6 +242,8 @@ class SingNotes extends Component {
     if (this.state.complete) {
       stream.getTracks() // get all tracks from the MediaStream
         .forEach((track) => track.stop());
+    } else if (this.props.lessonType === 'quiz') {
+      this.props.incrementErrorCount();
     }
   }
 
