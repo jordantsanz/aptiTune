@@ -27,7 +27,6 @@ function mapStateToProps(reduxState) {
     pages: reduxState.lesson.pages,
   };
 }
-
 class RhythmSensor extends Component {
   constructor(props) {
     super(props);
@@ -51,6 +50,7 @@ class RhythmSensor extends Component {
       firstAttempt: true,
       scoreArray: [],
       reload: false,
+      next: 1,
     };
     window.addEventListener('keydown', this.handleKeyDown);
   }
@@ -59,7 +59,8 @@ class RhythmSensor extends Component {
       const id = localStorage.getItem('lesson');
       const pageNum = localStorage.getItem('next');
       console.log('pageNum: ', pageNum);
-      this.setState({ pageNumber: pageNum });
+      this.setState({ pageNumber: pageNum, next: pageNum + 1 });
+      console.log('next ', this.state.next);
       const { history } = this.props;
       this.props.getLesson(id, history, false);
       console.log('Component mounted in Rhythmsensor');
@@ -67,6 +68,10 @@ class RhythmSensor extends Component {
 
     componentDidUpdate() {
       console.log('componentDidUpdate called');
+      if (this.state.firstRender && !this.state.reload) {
+        console.log('in firstRedner');
+        this.firstRender(this.state.pageNumber);
+      }
       if (this.state.reload) {
         const id = localStorage.getItem('lesson');
         const pageNum = localStorage.getItem('next');
@@ -75,10 +80,7 @@ class RhythmSensor extends Component {
         const { history } = this.props;
         this.props.getLesson(id, history, false);
         console.log('Component remounted in Rhythmsensor');
-      }
-      if (this.state.firstRender) {
-        console.log('in firstRedner');
-        this.firstRender();
+        this.firstRender(pageNum);
       }
     }
 
@@ -107,6 +109,8 @@ class RhythmSensor extends Component {
           index += 1;
         }
         // console.log('exiting loop');
+      } else {
+        console.log('will not make correctness array');
       }
     }
 
@@ -169,6 +173,7 @@ class RhythmSensor extends Component {
     }
 
     makeCorrectnessArray = () => {
+      console.log('MAKING CORRECTNESS ARRAY for pagenum', this.state.pageNumber, 'and page', this.state.page);
       // console.log('GagueCorrectness called: activity: ', this.state.page.activity);
       const ansLength = this.state.page.activity.rhythmPattern.length;
       // console.log('length in mka', ansLength);
@@ -212,7 +217,6 @@ class RhythmSensor extends Component {
       const { times } = this.state;
       const timesLength = times.length;
       // console.log('times input by user ', times);
-
       let correct = true;
       // check all answers
       if (lengthAns !== timesLength) {
@@ -251,7 +255,7 @@ class RhythmSensor extends Component {
           correct: false,
           firstAttempt: false,
           firstClick: true,
-          reload: true,
+          reload: false,
         });
         // deal with error for quiz
         if (this.props.lessonType === 'quiz') {
@@ -317,6 +321,7 @@ class RhythmSensor extends Component {
     }
 
     goToNext = () => {
+      console.log('gotonext called');
       this.props.onSubmit();
       this.setState({
         pageNumber: 0,
@@ -336,17 +341,23 @@ class RhythmSensor extends Component {
         firstAttempt: true,
         scoreArray: [],
         reload: true,
+        playingAnswer: false,
       });
       // remove old staff
+      this.removeStaff();
+    }
+
+    removeStaff = () => {
       const staff = document.getElementById('rhythmScore');
       while (staff.hasChildNodes()) {
         staff.removeChild(staff.lastChild);
       }
     }
 
-    createScoreArray = () => {
+    createScoreArray = (pageNum) => {
+      console.log('createScoreArray called');
       const { pages } = this.props;
-      const page = pages[this.state.pageNumber];
+      const page = pages[pageNum];
       let array = [];
       // console.log('page in rhythmSensor', page);
       // console.log('page.activity', page.activity);
@@ -363,15 +374,16 @@ class RhythmSensor extends Component {
           array = array.concat(['G4/8']);
         }
       });
-      // console.log('scoreArray:', array);
+      console.log('scoreArray for pagenum', pageNum, array);
       this.setState({ scoreArray: array });
       return array;
     }
 
-    firstRender = () => {
-      console.log('firstRenderCalled');
+    firstRender = (pageNum) => {
+      console.log('firstRenderCalled with pagenumber', pageNum);
       const { pages } = this.props;
-      const page = pages[this.state.pageNumber];
+      const page = pages[pageNum];
+      console.log('page in firstrender', page);
       const next = parseInt(localStorage.getItem('next'), 10);
       console.log('page:', page);
       console.log('pages', pages);
@@ -379,8 +391,8 @@ class RhythmSensor extends Component {
         const { bpm } = page.activity;
         // console.log('bpm:', bpm);
         const bps = bpm / 60;
-        this.setState({ firstRender: false, bps, page: this.props.pages[this.state.pageNumber] });
-        this.createScoreArray();
+        this.setState({ firstRender: false, bps, page });
+        this.createScoreArray(pageNum);
       } else {
         console.log('failed conditions of firstRender');
       }
@@ -461,5 +473,4 @@ class RhythmSensor extends Component {
       }
     }
 }
-
 export default withRouter(connect(mapStateToProps, { getLesson })(RhythmSensor));

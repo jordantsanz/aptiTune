@@ -12,7 +12,7 @@ import {
   faPlay,
 } from '@fortawesome/free-solid-svg-icons';
 import { getLesson } from '../../../actions/index';
-import FlatStaff from './FlatStaff';
+import Staff from './Staff';
 
 const Tone = require('tone');
 
@@ -38,6 +38,7 @@ class FlatView extends Component {
       complete: false,
       reload: false,
       renderStaff: false,
+      firstStaffRender: true,
     };
   }
 
@@ -197,6 +198,10 @@ class FlatView extends Component {
       }
     }
 
+    nullScoreArray = () => {
+      this.setState({ staffNotes: [], firstStaffRender: false });
+    }
+
     playNotes = async () => {
       const { pages } = this.props;
       const page = pages[this.state.pageNumber];
@@ -255,7 +260,7 @@ class FlatView extends Component {
           <div className="FlatView">
             <div className="activityInstructions">{page.activity.instructions}</div>
             <div id="flatStaff">
-              <FlatStaff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" />
+              <Staff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" nullScoreArray={this.nullScoreArray} />
             </div>
             <div className="flatAnswerBoxes">{
             this.state.indexArray.map((num) => {
@@ -290,7 +295,7 @@ class FlatView extends Component {
               <button type="button" className="button" id="playAudio" onClick={this.playNotes}><FontAwesomeIcon icon={faPlay} className="icon" id="play" alt="play-icon" /> &nbsp; Play Audio</button>
             </div>
             <div id="flatStaff">
-              <FlatStaff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" />
+              <Staff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" nullScoreArray={this.nullScoreArray} />
             </div>
             <div className="flatAnswerBoxes">{
               this.state.indexArray.map((num) => {
