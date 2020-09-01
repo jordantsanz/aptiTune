@@ -199,9 +199,9 @@ color: #E46161;
 
 .easy-section{
 position: absolute;
-width: 60.6vw;
+width: 58.6vw;
 height: max-content;
-left: 37.8vw;
+left: 43.8vw;
 top: 270.4vh;
 
 font-family: Ubuntu;
@@ -275,10 +275,10 @@ color: #FFFFFF;
   top: 0;
   left: 0;
   display: block;
-  border-radius: 28px;
+  border-radius: 34px;
   background: rgba(255, 171, 157, 0.7);
-  width: 56px;
-  height: 56px;
+  width: 8vh;
+  height: 8vh;
   transition: all 0.3s ease;
 }
 
@@ -512,6 +512,8 @@ font-family: Ubuntu;
 font-style: normal;
 font-weight: bold;
 font-size: 62px;
+text-align: right;
+margin-right: 4vw;
 
 margin-bottom: 15px;
 line-height: 120.4%;
