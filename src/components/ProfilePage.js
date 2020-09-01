@@ -197,7 +197,7 @@ closeModal = () => {
         const fields = {
           questionsCorrect: this.props.currentUser.questionsCorrect,
         };
-        this.updateUserInfo(fields);
+        this.props.updateUserInfo(fields);
       } else {
         haveData[i] = 0;
       }
