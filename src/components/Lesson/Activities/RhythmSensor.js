@@ -173,7 +173,7 @@ class RhythmSensor extends Component {
     }
 
     makeCorrectnessArray = () => {
-      console.log('MAKING CORRECTNESS ARRAY for pagenum', this.state.pageNumber);
+      console.log('MAKING CORRECTNESS ARRAY for pagenum', this.state.pageNumber, 'and page', this.state.page);
       // console.log('GagueCorrectness called: activity: ', this.state.page.activity);
       const ansLength = this.state.page.activity.rhythmPattern.length;
       // console.log('length in mka', ansLength);
@@ -383,6 +383,7 @@ class RhythmSensor extends Component {
       console.log('firstRenderCalled with pagenumber', pageNum);
       const { pages } = this.props;
       const page = pages[pageNum];
+      console.log('page in firstrender', page);
       const next = parseInt(localStorage.getItem('next'), 10);
       console.log('page:', page);
       console.log('pages', pages);
@@ -390,7 +391,7 @@ class RhythmSensor extends Component {
         const { bpm } = page.activity;
         // console.log('bpm:', bpm);
         const bps = bpm / 60;
-        this.setState({ firstRender: false, bps, page: this.props.pages[this.state.pageNumber] });
+        this.setState({ firstRender: false, bps, page });
         this.createScoreArray(pageNum);
       } else {
         console.log('failed conditions of firstRender');
