@@ -197,7 +197,7 @@ closeModal = () => {
         const fields = {
           questionsCorrect: this.props.currentUser.questionsCorrect,
         };
-        this.updateUserInfo(fields);
+        this.props.updateUserInfo(fields);
       } else {
         haveData[i] = 0;
       }
@@ -371,7 +371,11 @@ closeModal = () => {
     if (notAllZero) {
       const averages = [];
       for (let index = 0; index < 4; index++) {
-        averages[index] = this.props.currentUser.questionsCorrect[index] / (this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index]);
+        if (this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index] !== 0) {
+          averages[index] = this.props.currentUser.questionsCorrect[index] / (this.props.currentUser.questionsCorrect[index] + this.props.currentUser.questionsIncorrect[index]);
+        } else {
+          averages[index] = 0;
+        }
       }
       let min = averages[0];
       let minIndex = 0;
