@@ -210,20 +210,7 @@ class FlatView extends Component {
       for (let i = 0; i < answerNotes.length; i += 1) {
         const diff = 0.5 * i;
         const note = answerNotes[i].toUpperCase();
-        let newNote = null;
-        if (note === 'F' || note === 'G' || note === 'A' || note === 'B') {
-          if (page.activity.cleftype === 'treble') {
-            newNote = `${note}4`;
-          } else { // bass clef
-            newNote = `${note}2`;
-          }
-        } else if (page.activity.cleftype === 'treble') {
-          newNote = `${note}5`;
-        } else { // bass clef
-          newNote = `${note}3`;
-        }
-        console.log(newNote);
-        synth.triggerAttackRelease(newNote, '8n', now + diff);
+        synth.triggerAttackRelease(note, '8n', now + diff);
       }
     }
 
