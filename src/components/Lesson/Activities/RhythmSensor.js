@@ -419,7 +419,7 @@ class RhythmSensor extends Component {
               <div id="myBar" />
             </div>
             <div className="rhythmActivity">
-              <div className="rhythmInstructions">Click the space bar to the rhythm!</div>
+              <div className="rhythmInstructions">Press the space bar to the rhythm!</div>
               <div className="countDown">{this.state.countDownNumber}</div>
             </div>
           </div>
