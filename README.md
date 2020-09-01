@@ -21,8 +21,10 @@ Currently, *AptiTune* has 4 lessons. Pitch I and II both teach about the notes o
 *AptiTune* is a react-redux based web-app, built using the react.js framework. It has both a front-end and back-end component, and pulls from images stored in AWS. It is built with a series of components, styled with sass. Features on the front-end include the structuring for the sign-in and sign-up pages, as well as the profile, home, and lesson pages. The front-end also holds information about the current lesson, including every one of its pages and the content and activities on each page. 
 
 Lessons in *AptiTune* feature many different packages. 
-The fill-in-the-blank lesson uses the *flat.io* API, pulling created sheet music to show the user.
+The sightreading lesson uses the *flat.io* API, pulling created sheet music to show the user.
 The pitch matching lesson uses many different packages and APIs. It first takes in media from the user using the *WebAudioAPI*. Then, it converts this audio into a WAV file with the *wav-decoder* package. It takes this and uses the *pitchFinder* package to determine the pitches input by the user, and then it passes those pitches to the *EasyScore* package to convert the pitches into sheet music.
+
+The profile page displays a user's statistics on different subjects from the diagnostic quiz using *react-chartjs-2* and *chart.js*.
 
 ### React Tree: 
 - App
