@@ -82,6 +82,7 @@ class FlatView extends Component {
         });
         this.setState({ staffNotes, renderStaff: true });
       }
+      console.log('page in prepStaffNotes', page);
     }
 
     handleDone = () => {
@@ -146,8 +147,8 @@ class FlatView extends Component {
 
     goToNext = () => {
       this.props.onSubmit();
-      this.setState({
-        pageNumber: 0,
+      this.setState((prevState) => ({
+        pageNumber: prevState.pageNumber + 1,
         inputAnswers: [],
         indexArray: [],
         correctnessArray: [],
@@ -158,7 +159,7 @@ class FlatView extends Component {
         complete: false,
         reload: true,
         staffNotes: [],
-      });
+      }));
       const staff = document.getElementById('flatScore');
       while (staff.hasChildNodes()) {
         staff.removeChild(staff.lastChild);
