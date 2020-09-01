@@ -232,6 +232,7 @@ class FlatView extends Component {
             <div id="flatStaff">
               <Staff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" nullScoreArray={this.nullScoreArray} />
             </div>
+            <div id="placeholder" />
             <div className="flatAnswerBoxes">{
             this.state.indexArray.map((num) => {
               // console.log('a:', a);
@@ -267,6 +268,7 @@ class FlatView extends Component {
             <div id="flatStaff">
               <Staff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" nullScoreArray={this.nullScoreArray} />
             </div>
+            <div id="placeholder" />
             <div className="flatAnswerBoxes">{
               this.state.indexArray.map((num) => {
                 return (
