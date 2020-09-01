@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { getLesson } from '../../../actions/index';
 import drawStaff from '../../DrawStaff';
-import FlatStaff from './FlatStaff';
+import Staff from './Staff';
 
 function mapStateToProps(reduxState) {
   return {
@@ -30,6 +30,7 @@ class FlatView extends Component {
       complete: false,
       reload: false,
       renderStaff: false,
+      firstStaffRender: true,
     };
   }
 
@@ -171,6 +172,10 @@ class FlatView extends Component {
       }
     }
 
+    nullScoreArray = () => {
+      this.setState({ staffNotes: [], firstStaffRender: false });
+    }
+
     render() {
       // add page for rendering
       console.log('pages:', this.props.pages);
@@ -200,7 +205,7 @@ class FlatView extends Component {
           <div className="FlatView">
             <div className="activityInstructions">{page.activity.instructions}</div>
             <div id="flatStaff">
-              <FlatStaff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" />
+              <Staff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" nullScoreArray={this.nullScoreArray} />
             </div>
             <div className="flatAnswerBoxes">{
             this.state.indexArray.map((num) => {
@@ -232,7 +237,7 @@ class FlatView extends Component {
           <div className="FlatView">
             <div className="activityInstructions">{page.activity.instructions}</div>
             <div id="flatStaff">
-              <FlatStaff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" />
+              <Staff cleftype={page.activity.cleftype} answer={this.state.staffNotes} id="flatStaff" nullScoreArray={this.nullScoreArray} />
             </div>
             <div className="flatAnswerBoxes">{
               this.state.indexArray.map((num) => {
