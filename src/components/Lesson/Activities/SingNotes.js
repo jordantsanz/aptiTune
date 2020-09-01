@@ -73,7 +73,7 @@ class SingNotes extends Component {
     };
   }
 
-  componentDidUpdate() {
+  async componentDidUpdate() {
     if (this.state.firstRender && !this.state.reload) {
       this.firstRender(this.state.pageNumber);
     }
@@ -85,22 +85,53 @@ class SingNotes extends Component {
       const { history } = this.props;
       this.props.getLesson(id, history, false);
       this.firstRender(pageNum);
+
+      stream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
+      // show it to user
+      // this.video.srcObject = stream;
+      // init recording
+      this.mediaRecorder = new MediaRecorder(stream, {
+        mimeType: videoType,
+      });
+      // init data storage for video chunks
+      this.chunks = [];
+      // listen for data from media recorder
+      this.mediaRecorder.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0) {
+          this.chunks.push(e.data);
+        }
+      };
     }
   }
 
   goToNext = () => {
     this.props.onSubmit();
-    this.setState({
-      pageNumber: 0,
+    this.setState((prevState) => ({
+      pageNumber: prevState.pageNumber + 1,
+      correctNotes: false,
+      complete: false,
+      message: '',
+      drawmessage: '',
+      answers: null,
       firstRender: true,
       page: null,
+      recording: false,
+      videos: [],
       correct: false,
       reload: true,
-    });
+    }));
     const staff = document.getElementById('sheetmusic');
     console.log(staff);
     while (staff.hasChildNodes()) {
       staff.removeChild(staff.lastChild);
+    }
+    const staff2 = document.getElementById('yournotes');
+    while (staff2.hasChildNodes()) {
+      staff2.removeChild(staff2.lastChild);
+    }
+    const drawmessage = document.getElementById('drawmessage');
+    while (drawmessage.hasChildNodes()) {
+      drawmessage.removeChild(drawmessage.lastChild);
     }
   }
 
@@ -284,12 +315,21 @@ class SingNotes extends Component {
   firstRender = () => {
     const { pages } = this.props;
     const page = pages[this.state.pageNumber];
+    console.log('Firstrender called with page', page);
     const check = document.getElementById('sheetmusic');
     if (check !== null && page !== null && page !== undefined && this.state.firstRender) {
       this.setState({ firstRender: false, page: this.props.pages[this.state.pageNumber] });
+      // check if staff exists
+      const elem = document.getElementById('sheetmusic');
+      console.log('has child nodes: ', elem.childNodes.length);
+      if (elem.hasChildNodes()) {
+        while (elem.hasChildNodes()) {
+          elem.removeChild(elem.lastChild);
+        }
+      }
+      console.log('Drawing staff in firstREnder');
       drawStaff(page.activity.cleftype, page.activity.correct_answers, 'sheetmusic');
     }
-    return <div className="blank" />;
   }
 
   render() {
