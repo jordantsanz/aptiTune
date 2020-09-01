@@ -191,6 +191,8 @@ closeModal = () => {
     for (let i = 0; i < 4; i++) {
       if (this.props.currentUser.questionsCorrect[i] == 0 && this.props.currentUser.questionsIncorrect[i] == 0) {
         haveData[i] = 1;
+      } else if (this.props.currentUser.questionsCorrect[i] < 0 || this.props.currentUser.questionsIncorrect[i] < 0) {
+        haveData[i] = 1;
       } else {
         haveData[i] = 0;
       }

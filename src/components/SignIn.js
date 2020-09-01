@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/aria-role */
 /* eslint-disable eqeqeq */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
@@ -21,6 +23,7 @@ class SignIn extends Component {
 
   buttonText = () => {
     if (this.state.logging && this.props.error.open === false) {
+      console.log(this.state.logging, this.props.error.open);
       return (
         <div className="loader" />
       );
@@ -29,6 +32,13 @@ class SignIn extends Component {
         <button onClick={this.checkInputs} type="submit" id="login-button"> Log-in </button>
       );
     }
+  }
+
+  switchLogging = () => {
+    console.log('fixit');
+    this.setState({
+      logging: false,
+    });
   }
 
   onInputEmailChange = (event) => {
@@ -107,7 +117,9 @@ class SignIn extends Component {
   render() {
     return (
       <div className="signin-background">
-        <ErrorNotification />
+        <div className="clickyboy" role="click" onClick={this.switchLogging}>
+          <ErrorNotification />
+        </div>
         <h1 className="title" id="log-in-title">Log-in here:</h1>
         <input placeholder="email" onChange={this.onInputEmailChange} className="returnemailinput" id="email-signin" type="input" />
         <input placeholder="password" onChange={this.onInputPasswordChange} className="returnpasswordinput" id="password-signin" type="password" />
