@@ -40,6 +40,7 @@ class Page extends Component {
   }
 
     componentDidMount = () => {
+      console.log('componentDidMount called in page');
       // get userinfo
       this.props.getUserInfo();
 
@@ -58,6 +59,7 @@ class Page extends Component {
       if (this.props.lesson.lesson_type === 'quiz') {
         this.goToNextForQuiz();
       } else {
+        console.log('going to next for lesson');
         this.goToNextForLesson();
       }
     }
@@ -65,14 +67,13 @@ class Page extends Component {
     goToNextForLesson = () => {
       // for lesson module
       console.log('GOTONEXTCALLED');
-      if (this.props.pages.length > this.state.pageNumber + 1) {
-        console.log('got inside');
+      if (this.props.pages.length > this.state.pageNumber + 1) { // go to next lesson
         const local = parseInt(this.state.nextPage, 10);
         localStorage.setItem('next', local.toString());
+        console.log('set next to ', local);
         this.setState((prevState) => ({ pageNumber: prevState.pageNumber + 1 }));
         this.setState((prevState) => ({ nextPage: prevState.nextPage + 1 }));
       } else {
-      // for now, redirect to home, and add this lessonID to completed!
         const id = localStorage.getItem('lesson');
 
         let completedLessons = this.props.currentUser.completed;

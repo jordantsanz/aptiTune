@@ -13,7 +13,7 @@ function mapStateToProps(reduxState) {
   };
 }
 
-class FlatStaff extends Component {
+class Staff extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,6 +34,8 @@ class FlatStaff extends Component {
       return (<div />);
     } else if (this.state.firstRender) {
       this.setFirstRenderToFalse();
+      console.log('nulling score array');
+      this.props.nullScoreArray();
       return (
         <div>
           {drawStaff(this.props.cleftype, this.props.answer, this.props.id)}
@@ -45,4 +47,4 @@ class FlatStaff extends Component {
   }
 }
 
-export default FlatStaff;
+export default Staff;
