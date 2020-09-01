@@ -243,7 +243,8 @@ class SingNotes extends Component {
     let k = 0;
     const { pages } = this.props;
     const page = pages[this.state.pageNumber];
-
+    console.log('Correct Notes: ', page.activity.correct_answers);
+    console.log('User Notes: ', notes);
     while (j < page.activity.correct_answers.length) {
       if (page.activity.correct_answers[j] !== undefined && notes[k] !== undefined) {
         const correctNote = page.activity.correct_answers[j].slice(0, -3);
