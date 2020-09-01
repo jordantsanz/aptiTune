@@ -59,15 +59,24 @@ class HomePageWithoutUser extends Component {
       });
     } else {
       console.log(user);
+      this.setState({
+        logging: true,
+      });
       this.props.signupUser(user, this.props.history);
     }
   }
 
   buttonText = () => {
-    if (this.state.logging && this.props.error.open === false) {
-      return (
-        <div className="loader" />
-      );
+    if (this.props.error !== undefined) {
+      if (this.state.logging && this.props.error.open === false) {
+        return (
+          <div className="loader" />
+        );
+      } else {
+        return (
+          <button onClick={this.checkInputs} type="submit" id="login-button"> Create </button>
+        );
+      }
     } else {
       return (
         <button onClick={this.checkInputs} type="submit" id="login-button"> Create </button>
@@ -190,7 +199,9 @@ class HomePageWithoutUser extends Component {
     return (
       <div className="background-homepage-without-user">
         <div className="inner-background-homepage-without-user">
-          <ErrorNotification onClick={this.switchLogging} />
+          <div className="clickyboy" onClick={this.switchLogging}>
+            <ErrorNotification />
+          </div>
           <div className="homepage-without-user-flex">
             <div className="music-is-hard-section">
               <div className="music-is-hard"> Music is hard. </div>
@@ -331,6 +342,7 @@ class HomePageWithoutUser extends Component {
 function mapStateToProps(reduxState) {
   return {
     authentication: reduxState.auth.authenticated,
+    error: reduxState.error,
   };
 }
 
