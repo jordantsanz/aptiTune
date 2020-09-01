@@ -81,21 +81,8 @@ class FlatView extends Component {
         // eslint-disable-next-line array-callback-return
         page.activity.correct_answers.map((note) => {
           const n = note.toUpperCase();
-          if (n === 'F' || n === 'G' || n === 'A' || n === 'B') {
-            if (page.activity.cleftype === 'treble') {
-              const staffNote = `${n}4/8`;
-              staffNotes = staffNotes.concat([staffNote]);
-            } else {
-              const staffNote = `${n}2/8`;
-              staffNotes = staffNotes.concat([staffNote]);
-            }
-          } else if (page.activity.cleftype === 'treble') {
-            const staffNote = `${n}5/8`;
-            staffNotes = staffNotes.concat([staffNote]);
-          } else {
-            const staffNote = `${n}3/8`;
-            staffNotes = staffNotes.concat([staffNote]);
-          }
+          const staffNote = `${n}/8`;
+          staffNotes = staffNotes.concat([staffNote]);
         });
         this.setState({ staffNotes, renderStaff: true });
         console.log('staff prepped: ', staffNotes);
