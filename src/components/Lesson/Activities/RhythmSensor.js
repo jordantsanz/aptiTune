@@ -371,7 +371,7 @@ class RhythmSensor extends Component {
         } else if (note === '8') {
           array = array.concat(['G4/8']);
         } else if (note === '16') {
-          array = array.concat(['G4/8']);
+          array = array.concat(['G4/16']);
         }
       });
       console.log('scoreArray for pagenum', pageNum, array);
