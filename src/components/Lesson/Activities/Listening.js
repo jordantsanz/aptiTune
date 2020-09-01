@@ -1,3 +1,4 @@
+/* eslint-disable react/no-did-update-set-state */
 /* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -51,6 +52,7 @@ class Listening extends Component {
         const id = localStorage.getItem('lesson');
         const pageNum = localStorage.getItem('next');
         // eslint-disable-next-line react/no-did-update-set-state
+        console.log('Reloaded with pagenum', pageNum);
         this.setState({ pageNumber: pageNum, reload: false });
         const { history } = this.props;
         this.props.getLesson(id, history, false);
@@ -81,8 +83,8 @@ class Listening extends Component {
 
     goToNext = () => {
       this.props.onSubmit();
-      this.setState({
-        pageNumber: 0,
+      this.setState((prevState) => ({
+        pageNumber: prevState.pageNumber + 1,
         correctClicked: false,
         complete: false,
         colorA: '#FDD46A',
@@ -91,7 +93,20 @@ class Listening extends Component {
         colorD: '#FDD46A',
         message: '',
         reload: true,
-      });
+      }));
+      this.removeStaff('choiceButton1');
+      this.removeStaff('choiceButton2');
+      this.removeStaff('choiceButton3');
+      this.removeStaff('choiceButton4');
+    }
+
+    removeStaff = (id) => {
+      const staff = document.getElementById(id);
+      if (staff !== null && staff !== undefined) {
+        while (staff.hasChildNodes()) {
+          staff.removeChild(staff.lastChild);
+        }
+      }
     }
 
     playNotes = async () => {
@@ -115,7 +130,6 @@ class Listening extends Component {
       const { pages } = this.props;
       const page = pages[this.state.pageNumber];
       console.log('page in listening', page);
-      console.log('correct answer:', page.activity.correct_answer);
       //  <iframe title="audio-file" className="audio-file" src={page.activity.audioUrl} />;
       if (page === null || page === undefined) {
         return (

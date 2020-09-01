@@ -164,7 +164,7 @@ class FinishedLesson extends Component {
         const errCount = parseInt(localStorage.getItem('errorCount'), 10);
         console.log('this.props.lesson.pages.length', this.props.lesson.pages.length);
         console.log('numberComplete', this.props.lesson.pages.length - errCount);
-        this.setState({ numberComplete: this.props.lesson.pages.length - errCount, errorCount: errCount });
+        this.setState({ numberComplete: this.props.lesson.pages.length, errorCount: errCount });
         if (errCount === 0) {
           // calculate err/success rates -- 100% success
         } else if (errCount === 1) {
