@@ -111,33 +111,29 @@ class FlatView extends Component {
 
       // parse number from key to check for correctness
       for (let i = 0; i < page.activity.answer_count; i += 1) {
-        console.log(this.state.correctnessArray);
         const parsedArray = [];
-        for (let index = 0; index < this.state.correctnessArray.length; index++) {
-          if (this.state.correctnessArray[index].length > 1) {
-            if (!isNaN(this.state.correctnessArray[index][1])) { // if second thing in string is a number
-              parsedArray[index] = this.state.correctnessArray[index][0];
+        for (let index = 0; index < page.activity.correct_answers.length; index++) {
+          if (page.activity.correct_answers.length > 1) {
+            if (!isNaN(page.activity.correct_answers[index][1])) { // if second thing in string is a number
+              parsedArray[index] = page.activity.correct_answers[index][0];
             } else {
-              const string = this.state.correctnessArray[index][0] + this.state.correctnessArray[index][1];
+              const string = page.activity.correct_answers[index][0] + page.activity.correct_answers[index][1];
               parsedArray[index] = string;
             }
           }
         }
-        let arr = '';
-        if (parsedArray.length > 0) {
-          arr = parsedArray; // put parsedArray here instead of correctness Array
-        } else {
-          arr = this.state.correctnessArray;
-        }
-        const answer = this.state.inputAnswers[i].trim().toLowerCase();
+
+        const arr = this.state.correctnessArray;
+        console.log('parsedArray', parsedArray);
+        const answer = this.state.inputAnswers[i].trim().toUpperCase();
         console.log('answer', answer);
-        if (answer === page.activity.correct_answers[i]) {
+        if (answer === parsedArray[i]) {
           console.log(i, ' is correct');
           arr[i] = '2px solid green';
         } else {
           allCorrect = false;
           arr[i] = '2px solid red';
-          console.log(i, ' is incorrect: ', this.state.inputAnswers[i], '!=', page.activity.correct_answers[i]);
+          console.log(i, ' is incorrect: ', this.state.inputAnswers[i], '!=', parsedArray[i]);
           const tempInputAnswers = this.state.inputAnswers;
           tempInputAnswers[i] = ' ';
           this.setState({ inputAnswers: tempInputAnswers });
