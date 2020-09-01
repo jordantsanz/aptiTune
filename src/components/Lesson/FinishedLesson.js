@@ -57,7 +57,7 @@ class FinishedLesson extends Component {
       // animate histograms
       this.animateHistograms();
     }
-    if (this.props.currentUser.username !== null && !this.state.giveBadgeCalled) {
+    if (this.props.currentUser.username !== null && !this.state.giveBadgeCalled && this.state.processed) {
       this.giveBadge();
     }
     if (this.props.currentUser.username !== null && !this.state.userStatsUpdated && this.props.lesson.lesson_type === 'quiz' && this.state.processed) {
@@ -125,6 +125,7 @@ class FinishedLesson extends Component {
           badges,
         });
       } else {
+        console.log('checking if badge is unique, with finishedquiz', this.state.finishedQuiz);
         let isUnique = true;
         this.props.currentUser.badges.forEach((badge) => {
           if (badge.iconUrl === this.props.lesson.badge.iconUrl) {
@@ -157,6 +158,7 @@ class FinishedLesson extends Component {
       this.setState({ totalQuestions: this.props.pages.length });
 
       const finished = localStorage.getItem('finished');
+      console.log('finished in processresults:', finished);
       if (finished === 'true') {
         this.getActivityCounts(this.props.lesson.pages.length);
         // if they completed the quiz
@@ -164,7 +166,7 @@ class FinishedLesson extends Component {
         const errCount = parseInt(localStorage.getItem('errorCount'), 10);
         console.log('this.props.lesson.pages.length', this.props.lesson.pages.length);
         console.log('numberComplete', this.props.lesson.pages.length - errCount);
-        this.setState({ numberComplete: this.props.lesson.pages.length, errorCount: errCount });
+        this.setState({ numberComplete: this.props.lesson.pages.length, errorCount: errCount, finishedQuiz: true });
         if (errCount === 0) {
           // calculate err/success rates -- 100% success
         } else if (errCount === 1) {
