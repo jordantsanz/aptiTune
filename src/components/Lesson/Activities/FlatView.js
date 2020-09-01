@@ -45,7 +45,6 @@ class FlatView extends Component {
     componentDidMount = () => {
       const id = localStorage.getItem('lesson');
       const pageNum = parseInt(localStorage.getItem('next'), 10);
-      console.log('pageNum in flatview: ', pageNum);
       this.setState({ pageNumber: pageNum });
       const { history } = this.props;
       this.props.getLesson(id, history, pageNum + 1, true);
@@ -54,16 +53,13 @@ class FlatView extends Component {
     componentDidUpdate = () => {
       const { pages } = this.props;
       const page = pages[this.state.pageNumber];
-      console.log('page in flatView', page);
       if (this.state.firstTime && page !== null && page !== undefined) {
         this.initializeStateArrays(page);
         this.prepStaffNotes();
       }
       if (this.state.reload && page !== null && page !== undefined) {
-        console.log('updating for new page');
         const id = localStorage.getItem('lesson');
         const pageNum = parseInt(localStorage.getItem('next'), 10);
-        console.log('pageNum in flatview round 2: ', pageNum);
         const page1 = this.props.pages[pageNum];
         this.initializeStateArrays(page1);
         // eslint-disable-next-line react/no-did-update-set-state
@@ -85,14 +81,12 @@ class FlatView extends Component {
           staffNotes = staffNotes.concat([staffNote]);
         });
         this.setState({ staffNotes, renderStaff: true });
-        console.log('staff prepped: ', staffNotes);
       }
     }
 
     handleDone = () => {
       let allCorrect = true;
       // access page
-      console.log('inputAnswers: ', this.state.inputAnswers);
       const { pages } = this.props;
       const page = pages[this.state.pageNumber];
 
@@ -111,16 +105,12 @@ class FlatView extends Component {
         }
 
         const arr = this.state.correctnessArray;
-        console.log('parsedArray', parsedArray);
         const answer = this.state.inputAnswers[i].trim().toUpperCase();
-        console.log('answer', answer);
         if (answer === parsedArray[i]) {
-          console.log(i, ' is correct');
           arr[i] = '2px solid green';
         } else {
           allCorrect = false;
           arr[i] = '2px solid red';
-          console.log(i, ' is incorrect: ', this.state.inputAnswers[i], '!=', parsedArray[i]);
           const tempInputAnswers = this.state.inputAnswers;
           tempInputAnswers[i] = ' ';
           this.setState({ inputAnswers: tempInputAnswers });
@@ -129,15 +119,11 @@ class FlatView extends Component {
       }
 
       this.setState({ doneClicked: true });
-      console.log('CorrectnessArray: ', this.state.correctnessArray);
 
       if (allCorrect) {
         this.setState({ complete: true });
       } else if (this.props.lessonType === 'quiz') {
-        console.log('Incorrect in quiz');
         this.props.incrementErrorCount();
-      } else {
-        console.log('incorrect with type', this.props.lessonType);
       }
     }
 
@@ -145,7 +131,6 @@ class FlatView extends Component {
       let arr1 = [];
       let arr2 = [];
       let arr3 = [];
-      console.log('page in initializestatearrays', page);
       for (let i = 0; i < page.activity.answer_count; i += 1) {
         const tempArr1 = arr1.concat([i]);
         arr1 = tempArr1;
@@ -154,7 +139,6 @@ class FlatView extends Component {
         const tempArr3 = arr3.concat([' ']);
         arr3 = tempArr3;
       }
-      console.log('arr: ', arr1);
       this.setState({
         indexArray: arr1, correctnessArray: arr2, firstTime: false, inputAnswers: arr3,
       });
@@ -192,7 +176,6 @@ class FlatView extends Component {
       const synth = new Tone.Synth().toDestination();
       const now = Tone.now();
       const answerNotes = page.activity.correct_answers;
-      console.log(answerNotes);
 
       for (let i = 0; i < answerNotes.length; i += 1) {
         const diff = 0.5 * i;
@@ -203,10 +186,8 @@ class FlatView extends Component {
 
     render() {
       // add page for rendering
-      console.log('pages:', this.props.pages);
       const { pages } = this.props;
       const page = pages[this.state.pageNumber];
-      console.log('page in flatView', page);
       // initialize answerCount array
       if (page === null || page === undefined) {
         return (
@@ -234,7 +215,6 @@ class FlatView extends Component {
             </div>
             <div className="flatAnswerBoxes">{
             this.state.indexArray.map((num) => {
-              // console.log('a:', a);
               return (
                 <div key={num}>
                   <input className="flatAnswerBox"
@@ -243,7 +223,6 @@ class FlatView extends Component {
                     onChange={(event) => {
                       const arr = this.state.inputAnswers;
                       arr[num] = event.target.value;
-                      console.log('num :', num, 'changed to', event.target.value);
                       this.setState({ inputAnswers: arr });
                     }}
                   />
@@ -276,7 +255,6 @@ class FlatView extends Component {
                       onChange={(event) => {
                         const arr = this.state.inputAnswers;
                         arr[num] = event.target.value;
-                        console.log('num :', num, 'changed to', event.target.value);
                         this.setState({ inputAnswers: arr });
                       }}
                       maxLength="3"
