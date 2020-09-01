@@ -9,7 +9,6 @@ import {
   faPlay,
 } from '@fortawesome/free-solid-svg-icons';
 import { getLesson } from '../../../actions/index';
-import drawStaff from '../../DrawStaff';
 import Staff from './Staff';
 
 const Tone = require('tone');
