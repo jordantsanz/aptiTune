@@ -86,7 +86,7 @@ class RhythmSensor extends Component {
         const ans = this.makeCorrectnessArray();
         this.setState({ playingAnswer: true });
         const playCount = ans.length;
-        this.playMetronomeClick(ans.length - 1, false);
+        this.playMetronomeClick(4, false);
         let index = 0;
         // this.playMetronomeClick(this.state.page.activity.rhythmPattern.length - 1);
         while (index < playCount) {
@@ -106,6 +106,7 @@ class RhythmSensor extends Component {
     playMetronomeClick = (number, userAttempt) => {
       this.initiateProgress();
       let i = 0;
+      console.log('playing metronome ', number + 4, 'times');
       const v = setInterval(() => {
         if (i === number + 4) {
           if (userAttempt) {
@@ -138,7 +139,7 @@ class RhythmSensor extends Component {
         this.setState({
           firstClick: false, seedTime: t, beginTapping: true, times: [],
         });
-        this.playMetronomeClick(this.state.page.activity.rhythmPattern.length - 1, true);
+        this.playMetronomeClick(4, true);
       }
     }
 
