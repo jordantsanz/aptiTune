@@ -272,7 +272,7 @@ class HomePageWithoutUser extends Component {
                 {({ isVisible }) => (
                   <Spring delay={10} to={{ opacity: isVisible ? 1 : 0 }}>
                     {({ opacity }) => (
-                      <div className="easy-title" style={{ ...empty, opacity }}>Easy, accessible, and fun</div>
+                      <div className="easy-title" style={{ ...empty, opacity }}>Easy, accessible, fun</div>
                     )}
                   </Spring>
                 )}
