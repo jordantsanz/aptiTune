@@ -274,7 +274,7 @@ class FinishedLesson extends Component {
   }
 
   renderRhythmBar = () => {
-    let percentCorrect = ((this.state.rhythmCount - this.state.rhythmErrors) / this.state.rhythmCount) * 100;
+    let percentCorrect = Math.round(((this.state.rhythmCount - this.state.rhythmErrors) / this.state.rhythmCount) * 100);
     if (percentCorrect < 0) {
       percentCorrect = 0;
     }
@@ -297,7 +297,7 @@ class FinishedLesson extends Component {
   }
 
   renderListeningBar = () => {
-    let percentCorrect = ((this.state.listeningCount - this.state.listeningErrors) / this.state.listeningCount) * 100;
+    let percentCorrect = Math.round(((this.state.listeningCount - this.state.listeningErrors) / this.state.listeningCount) * 100);
     if (percentCorrect < 0) {
       percentCorrect = 0;
     }
@@ -320,7 +320,7 @@ class FinishedLesson extends Component {
   }
 
   renderReadingBar = () => {
-    let percentCorrect = ((this.state.flatCount - this.state.flatErrors) / this.state.flatCount) * 100;
+    let percentCorrect = Math.round(((this.state.flatCount - this.state.flatErrors) / this.state.flatCount) * 100);
     if (percentCorrect < 0) {
       percentCorrect = 0;
     }
@@ -343,7 +343,7 @@ class FinishedLesson extends Component {
   }
 
   renderSingingBar = () => {
-    let percentCorrect = ((this.state.singCount - this.state.singErrors) / this.state.singCount) * 100;
+    let percentCorrect = Math.round(((this.state.singCount - this.state.singErrors) / this.state.singCount) * 100);
     if (percentCorrect < 0) {
       percentCorrect = 0;
     }
