@@ -207,14 +207,16 @@ class FinishedLesson extends Component {
     let index = 0;
     while (index < lastQ) {
       const page = this.props.pages[index];
-      if (page.activity_type === 'FlatView') {
-        fCount += 1;
-      } else if (page.activity_type === 'Listening') {
-        lCount += 1;
-      } else if (page.activity_type === 'RhythmSensor') {
-        rCount += 1;
-      } else if (page.activity_type === 'SingNotes') {
-        sCount += 1;
+      if (page !== undefined) {
+        if (page.activity_type === 'FlatView') {
+          fCount += 1;
+        } else if (page.activity_type === 'Listening') {
+          lCount += 1;
+        } else if (page.activity_type === 'RhythmSensor') {
+          rCount += 1;
+        } else if (page.activity_type === 'SingNotes') {
+          sCount += 1;
+        }
       }
       index += 1;
     }

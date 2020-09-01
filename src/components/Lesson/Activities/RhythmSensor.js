@@ -58,28 +58,21 @@ class RhythmSensor extends Component {
     componentDidMount = () => {
       const id = localStorage.getItem('lesson');
       const pageNum = localStorage.getItem('next');
-      console.log('pageNum: ', pageNum);
       this.setState({ pageNumber: pageNum, next: pageNum + 1 });
-      console.log('next ', this.state.next);
       const { history } = this.props;
       this.props.getLesson(id, history, false);
-      console.log('Component mounted in Rhythmsensor');
     }
 
     componentDidUpdate() {
-      console.log('componentDidUpdate called');
       if (this.state.firstRender && !this.state.reload) {
-        console.log('in firstRedner');
         this.firstRender(this.state.pageNumber);
       }
       if (this.state.reload) {
         const id = localStorage.getItem('lesson');
         const pageNum = localStorage.getItem('next');
-        console.log('pageNum: ', pageNum);
         this.setState({ pageNumber: pageNum, reload: false });
         const { history } = this.props;
         this.props.getLesson(id, history, false);
-        console.log('Component remounted in Rhythmsensor');
         this.firstRender(pageNum);
       }
     }
@@ -101,26 +94,20 @@ class RhythmSensor extends Component {
           setTimeout(() => {
           // this.state.tapAudio.pause();
             this.state.tapAudio.play();
-            // console.log('running loop ', index, 'with interval', interval);
             if (interval === ans[ans.length - 1]) {
               this.hideProgress();
             }
           }, interval);
           index += 1;
         }
-        // console.log('exiting loop');
-      } else {
-        console.log('will not make correctness array');
       }
     }
 
     playMetronomeClick = (number, userAttempt) => {
       this.initiateProgress();
       let i = 0;
-      // console.log('playing metronome every ', 1000 / parseFloat(this.state.bps), 'seconds');
       const v = setInterval(() => {
         if (i === number + 4) {
-          // console.log('clearing interval and checking answers');
           if (userAttempt) {
             this.getResults();
           }
@@ -129,7 +116,6 @@ class RhythmSensor extends Component {
           this.state.metronomeAudio.pause();
           this.state.metronomeAudio.play();
           const d = new Date();
-          // console.log('playing metronome at ', d.getTime() - parseInt(this.state.seedTime, 10));
           i += 1;
           if (i < 5 && userAttempt) {
             this.setState({ buttonColor: 'red', countDownNumber: 5 - i });
@@ -157,26 +143,21 @@ class RhythmSensor extends Component {
     }
 
     handleKeyDown = () => {
-      console.log('handleKeyPress called');
       const d = new Date();
       const t = d.getTime();
-      // if (!this.state.firstClick && !this.state.playAnswer) {
       if (this.state.beginTapping) {
         this.state.tapAudio.pause();
         this.state.tapAudio.play();
         const relTime = t - this.state.seedTime;
         const temp = this.state.times;
         this.setState({ times: temp.concat([relTime]) });
-        // console.log('updatetime called with time ', relTime);
         this.setState({ time: t });
       }
     }
 
+    // correctness array gives correct times for space bar to be pressed
     makeCorrectnessArray = () => {
-      console.log('MAKING CORRECTNESS ARRAY for pagenum', this.state.pageNumber, 'and page', this.state.page);
-      // console.log('GagueCorrectness called: activity: ', this.state.page.activity);
       const ansLength = this.state.page.activity.rhythmPattern.length;
-      // console.log('length in mka', ansLength);
       // account for counting in & lag time between click and audio playing
       let cumulativeTime = parseInt(5000 / this.state.bps, 10) + 0;
       let correctAnswers = this.calculateTime(cumulativeTime, null);
@@ -184,20 +165,15 @@ class RhythmSensor extends Component {
       for (let i = 0; i < ansLength - 1; i += 1) {
         const noteVal = parseFloat(this.state.page.activity.rhythmPattern[i], 10);
         const beatVal = parseFloat(this.state.page.activity.beatType, 10);
-        // console.log('noteVal', this.state.page.activity.rhythmPattern[i]);
-        // console.log('beatVal = ', this.state.page.activity.beatType);
         const timeValue = (beatVal / noteVal) / this.state.bps;
-        // console.log('time value: ', timeValue);
         cumulativeTime = parseInt(parseFloat(cumulativeTime) + timeValue * 1000, 10);
         correctAnswers = this.calculateTime(cumulativeTime, correctAnswers);
       }
-      console.log('CORRECT ANSWERS:', correctAnswers);
       this.setState({ correctAnswers });
       return correctAnswers;
     }
 
     calculateTime = (cumulativeTime, correctAnswers) => {
-      // console.log('cumulativeTime: ', cumulativeTime);
       const finalTime = parseInt(cumulativeTime, 10);
       let newAnswers = [];
       if (correctAnswers == null) {
@@ -205,7 +181,6 @@ class RhythmSensor extends Component {
       } else {
         newAnswers = correctAnswers.concat([finalTime]);
       }
-      // console.log('Finaltime: ', finalTime);
       return newAnswers;
     }
 
@@ -223,12 +198,9 @@ class RhythmSensor extends Component {
         correct = false;
       }
       for (let i = 0; i < lengthAns; i += 1) {
-        console.log('in loop ', i);
         if (i === timesLength - 1 && i !== lengthAns - 1) {
-          console.log('TOO FEW ENTRIES');
           break;
         }
-        console.log('ans[i]', parseInt(ans[i], 10));
         const correctAns = parseInt(ans[i], 10);
         const userAns = times[i];
         // account for lag
@@ -239,9 +211,6 @@ class RhythmSensor extends Component {
           console.log('User ans: ', userAns, 'correct ans: ', correctAns);
           correct = false;
         }
-      }
-      if (timesLength > lengthAns) {
-        console.log('too many entries');
       }
       this.setState({ firstClick: true, resultsReady: true, correct });
       // reset if incorrect so they can try again
@@ -267,24 +236,20 @@ class RhythmSensor extends Component {
     hideProgress = () => {
       const elem = document.getElementById('myBar');
       elem.style.width = '0%';
-      // console.log('progress hidden');
       this.setState({ playingAnswer: false });
     }
 
     initiateProgress = () => {
       const elem = document.getElementById('myBar');
-      // console.log('initiating progress with elem', elem);
       elem.style.width = '2%';
     }
 
     showProgress = () => {
       const maxWidth = 90;
-      // console.log('showing progress');
       let i = 0;
       const interval = this.calculateIntervalForProgress();
       const partition = 0;
       const incrementValue = this.calculateIncrementValue(maxWidth);
-      // console.log('interval: ', interval);
       if (i === 0) {
         i = 1;
         const elem = document.getElementById('myBar');
@@ -295,7 +260,6 @@ class RhythmSensor extends Component {
             i = 0;
           } else {
             width += incrementValue / 10;
-            // console.log('width incremented to width:', width);
             elem.style.width = `${width}%`;
           }
         }, interval / 10);
@@ -306,22 +270,17 @@ class RhythmSensor extends Component {
       const beatCount = this.state.page.activity.rhythmPattern.length - 1;
       const lastTime = parseInt(this.state.correctAnswers[beatCount], 10);
       const firstTime = parseInt(this.state.correctAnswers[0], 10);
-      // console.log('BeatCount: ', beatCount);
-      // console.log('LastTime:', lastTime);
       const interval = (lastTime - firstTime) / beatCount;
-      // console.log('interval:', interval);
       return interval;
     }
 
     calculateIncrementValue = (maxWidth) => {
       const beatCount = this.state.page.activity.rhythmPattern.length - 1;
       const incrementValue = maxWidth / (beatCount);
-      // console.log('incrementValue');
       return incrementValue;
     }
 
     goToNext = () => {
-      console.log('gotonext called');
       this.props.onSubmit();
       this.setState({
         pageNumber: 0,
@@ -355,12 +314,10 @@ class RhythmSensor extends Component {
     }
 
     createScoreArray = (pageNum) => {
-      console.log('createScoreArray called');
       const { pages } = this.props;
       const page = pages[pageNum];
       let array = [];
-      // console.log('page in rhythmSensor', page);
-      // console.log('page.activity', page.activity);
+      // format notes for drawStaff()
       page.activity.rhythmPattern.map((note) => {
         if (note === '1') {
           array = array.concat(['G4/w']);
@@ -374,27 +331,19 @@ class RhythmSensor extends Component {
           array = array.concat(['G4/16']);
         }
       });
-      console.log('scoreArray for pagenum', pageNum, array);
       this.setState({ scoreArray: array });
       return array;
     }
 
     firstRender = (pageNum) => {
-      console.log('firstRenderCalled with pagenumber', pageNum);
       const { pages } = this.props;
       const page = pages[pageNum];
-      console.log('page in firstrender', page);
       const next = parseInt(localStorage.getItem('next'), 10);
-      console.log('page:', page);
-      console.log('pages', pages);
       if (page !== null && page !== undefined && page.activity_type === 'RhythmSensor') {
         const { bpm } = page.activity;
-        // console.log('bpm:', bpm);
         const bps = bpm / 60;
         this.setState({ firstRender: false, bps, page });
         this.createScoreArray(pageNum);
-      } else {
-        console.log('failed conditions of firstRender');
       }
     }
 
@@ -403,8 +352,6 @@ class RhythmSensor extends Component {
     }
 
     render() {
-      // console.log('page in listening', page);
-      // console.log('correct answer:', page.activity.correct_answer);
       if (this.state.page === null || this.state.page === undefined) {
         return (
           <div className="rhythmActivity">
