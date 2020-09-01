@@ -512,6 +512,7 @@ font-family: Ubuntu;
 font-style: normal;
 font-weight: bold;
 font-size: 62px;
+
 margin-bottom: 15px;
 line-height: 120.4%;
 /* or 79px */
@@ -748,9 +749,10 @@ transition: 200ms ease all;
 	transition: color 0.3s;
 
 	&:hover {
-		color: #FD966A;
+		color: $pink;
 	}
-    width: 35vw;
+    width: 27vw;
+    padding-left: 3.9vw;
     height: 30vh;
     display: flex !important;
     flex-direction: column;
@@ -777,8 +779,9 @@ transition: 200ms ease all;
     background:#fce1e1;
 }
 
-.badge-div:hover .badge-title, .badge-render-homepage .badge-title, .badge-trophy:hover .badge-title{
-    color: $blue;
+.badge-div:hover .badge-title, .badge-render-homepage:hover .badge-title, .badge-trophy:hover .badge-title{
+    color: $pink;
+    font-weight: bold;
 }
 
 .badge-title{
@@ -808,7 +811,7 @@ line-height: 137.88%;
 text-align: center;
 letter-spacing: 0.05em;
 
-color: #919191;
+color: $pink;
 }
 
 .badge-title-nobadgesyet{
@@ -854,7 +857,7 @@ color: #919191;
 	transition: color 0.3s;
 
 	&:hover {
-		color: #FD966A;
+		color: $pink;
 	}
     width: 53vw;
     height: 40vh;
@@ -1355,7 +1358,7 @@ color: #2D2D2D;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin-left: 12.5vw;
+    margin-left: 16.5vw;
     width: 70%;
 }
 
@@ -1523,7 +1526,6 @@ transition: 200ms ease all;
     align-items: center;
     top: 0;
     width: 100%;
-    height: 300%;
     position: absolute;
 }
 
@@ -2065,13 +2067,20 @@ color: #F18080;
     font-style: normal;
     font-weight: bold;
     text-transform: capitalize;
-    font-size: 26px;
+    font-size: 45px;
     text-align: center;
     height: 5vh;
     position: absolute;
     color: #919191;
-    top: 80vh;
+    top: 113vh;
     left: 17.8vw;
+}
+
+.active{
+    color: $blue;
+    .icon-text{
+        color: $blue;
+    }
 }
 
 #badges-title-profile {
@@ -2095,9 +2104,9 @@ color: #F18080;
 }
 
 .arrow-button-background-right{
-    left: 59vw;
+    left: 69vw;
     top: 28vh;
-    margin-left: 8vw;
+    /* margin-left: 8vw; */
     position: absolute;
     width: 6vw !important;
     height: 6vh !important;
@@ -2141,6 +2150,7 @@ color: #F18080;
     font-family: Montserrat;
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 4vh;
 }
 
 .badge-trophy{
