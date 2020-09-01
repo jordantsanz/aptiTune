@@ -3,8 +3,6 @@
 /* eslint-disable no-restricted-properties */
 /* eslint-disable react/sort-comp */
 /* eslint-disable react/no-access-state-in-setstate */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unused-state */
 /* eslint-disable no-undef */
 /* eslint-disable new-cap */
 import React, { Component } from 'react';
@@ -36,16 +34,12 @@ class SingNotes extends Component {
     super(props);
     this.state = {
       pageNumber: 0,
-      correctNotes: false,
       complete: false,
       message: '',
       drawmessage: '',
-      answers: null,
       firstRender: true,
-      page: null,
       reload: false,
       recording: false,
-      videos: [],
     };
   }
 
@@ -108,16 +102,11 @@ class SingNotes extends Component {
     this.props.onSubmit();
     this.setState((prevState) => ({
       pageNumber: prevState.pageNumber + 1,
-      correctNotes: false,
       complete: false,
       message: '',
       drawmessage: '',
-      answers: null,
       firstRender: true,
-      page: null,
       recording: false,
-      videos: [],
-      correct: false,
       reload: true,
     }));
     const staff = document.getElementById('sheetmusic');
@@ -192,6 +181,7 @@ class SingNotes extends Component {
     const notes = [];
     let done = false;
     // generate video url from blob
+    // eslint-disable-next-line no-unused-vars
     const data = await fetch(URL.createObjectURL(blob))
       .then((result) => {
         result.arrayBuffer()
@@ -283,7 +273,7 @@ class SingNotes extends Component {
       this.setState({ drawmessage: 'This is what you sang:' });
       document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
       drawStaff(page.activity.cleftype, page.activity.correct_answers, 'yournotes');
-      this.setState({ correctNotes: true, complete: true, message: '' });
+      this.setState({ complete: true, message: '' });
     } else if (notes.length === 4 && !correct) {
       this.setState({ drawmessage: 'This is what you sang:' });
       document.getElementById('drawmessage').innerHTML = this.state.drawmessage;
@@ -301,7 +291,6 @@ class SingNotes extends Component {
 
     if (!correct) {
       this.setState({
-        correct: false,
         reload: false,
       });
     }
@@ -318,7 +307,7 @@ class SingNotes extends Component {
     console.log('Firstrender called with page', page);
     const check = document.getElementById('sheetmusic');
     if (check !== null && page !== null && page !== undefined && this.state.firstRender) {
-      this.setState({ firstRender: false, page: this.props.pages[this.state.pageNumber] });
+      this.setState({ firstRender: false });
       // check if staff exists
       const elem = document.getElementById('sheetmusic');
       console.log('has child nodes: ', elem.childNodes.length);
