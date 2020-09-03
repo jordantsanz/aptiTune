@@ -56,7 +56,7 @@ To set-up, simply run `yarn install`.
 ## Deployment
 
 *AptiTune* is live on this site:
-[frontend](http://aptitune.surge.sh/signup)
+[AptiTune](http://aptitune.surge.sh/signup)
 
 ## Gifs - for more gifs, see the 'In Action' Wiki page!
 ![Rhythm exercise](https://media.giphy.com/media/H4mtTSaukfnGIC2VSh/giphy.gif)
