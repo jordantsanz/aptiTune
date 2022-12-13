@@ -53,7 +53,7 @@
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
     "core-js": "3",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jquery": "^3.5.1",
     "lodash.debounce": "^4.0.8",
     "pitchfinder": "^2.3.1",
